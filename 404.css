@@ -4,6 +4,11 @@
     font-family:"UD Digi Kyokasho N-B";
 }
 
+*::selection{
+    color  : #8f7bc6;
+    background-color: #4d3c9f;
+}
+
 #FULL{
     width: 100%;
     height: 100%;
