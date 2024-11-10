@@ -325,9 +325,6 @@ function hex(a,b,c){
     return re;
 }
 
-function ism() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
 document.addEventListener("DOMContentLoaded", function(){
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
         window.location.href = "https://hxx.lol/m";
@@ -457,16 +454,18 @@ async function ent(){
 
 
         Http.onreadystatechange = async function() {
-            await sleep(10);
+           if (inUi){
+               await sleep(10);
 
-            document.getElementById("Title").textContent =  JSON.parse(Http.responseText)["title"];
-            document.getElementById("Content").innerHTML =  JSON.parse(Http.responseText)["content"];
-            document.getElementById("Image").src =  JSON.parse(Http.responseText)["image"];
-            document.getElementById("Image").style.borderWidth = "3px";
-            document.getElementById("Image").style.borderColor =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"222222",1);
+               document.getElementById("Title").textContent =  JSON.parse(Http.responseText)["title"];
+               document.getElementById("Content").innerHTML =  JSON.parse(Http.responseText)["content"];
+               document.getElementById("Image").src =  JSON.parse(Http.responseText)["image"];
+               document.getElementById("Image").style.borderWidth = "3px";
+               document.getElementById("Image").style.borderColor =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"222222",1);
 
 
 
+           }
         }
 
     }
