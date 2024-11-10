@@ -125,7 +125,12 @@ body{
 
 }
 
+
+
 #Page{
+
+    overflow: auto;
+
 
 
     background-color: rgba(102, 51, 153, 0);
@@ -149,7 +154,13 @@ body{
 
     animation: shake 5s infinite ;
 
+
+
+
+
+
 }
+
 
 #Title{
     color: rgba(255, 255, 255, 0.74) !important;
@@ -208,6 +219,8 @@ body{
     padding-left: 40px;
     padding-right: 40px;
 
+    height: auto;
+
 
 
 
@@ -227,7 +240,6 @@ a::before{
 
 h6{
     text-shadow: #000000 0.1em 0.1em 1em;
-
 }
 
 h2{
@@ -328,4 +340,11 @@ h3{
     font-size: 13px;
 
     animation: onceTip 10s ;
+}
+
+h4{
+    color : rgba(255, 255, 255, 0.51);
+    font-size: 18px;
+
+    margin-top: 10px;
 }

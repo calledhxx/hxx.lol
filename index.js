@@ -90,6 +90,16 @@ let Squares = [
         id : "7sf"
 
     },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "534cb5",
+
+        id : "sry"
+
+    },
 ]
 
 let Bubbles = [
@@ -385,7 +395,7 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 
-
+    document.cookie ="hxx = god;";
 
 
 
@@ -492,8 +502,13 @@ async function ent(){
 
         await sleep(100);
         document.getElementById("Page").style.height = "auto";
-        await tweenSize(document.getElementById("Page"),500,500,.1,1);
-        document.getElementById("Page").style.height = "auto";
+        document.getElementById("Page").style.width = "auto";
+
+        await tweenSize(document.getElementById("Page"),
+           500,
+            450
+            ,.1,1);
+
 
         tweenMove(document.getElementById("Page"),window.innerWidth/2,window.innerHeight/2,1,10);
 
@@ -513,9 +528,16 @@ async function ent(){
 
                document.getElementById("Title").textContent =  JSON.parse(Http.responseText)["title"];
                document.getElementById("Content").innerHTML =  JSON.parse(Http.responseText)["content"];
-               document.getElementById("Image").src =  JSON.parse(Http.responseText)["image"];
-               document.getElementById("Image").style.borderWidth = "3px";
-               document.getElementById("Image").style.borderColor =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"222222",1);
+               if (JSON.parse(Http.responseText)["image"]===""){
+                   document.getElementById("Image").src =  "";
+                   document.getElementById("Image").style.borderWidth = "0";
+                   document.getElementById("Image").style.borderColor = "rgba(0,0,0,0)";
+               }else{
+                   document.getElementById("Image").src =  JSON.parse(Http.responseText)["image"];
+                   document.getElementById("Image").style.borderWidth = "3px";
+                   document.getElementById("Image").style.borderColor =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"222222",1);
+
+               }
 
 
 
