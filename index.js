@@ -425,7 +425,7 @@ async function ent(){
 
         document.getElementById("Page").style.backgroundColor = "#" + Squares[MidY*mapSize+MidX].Color;
         document.getElementById("Page").style.borderColor = "#" + hex(Squares[MidY*mapSize+MidX].Color,"222222",-1);
-        document.getElementById("Page").style.color = "#" + hex(Squares[MidY*mapSize+MidX].Color,"443211", 1);
+        document.getElementById("Page").style.color = "#" + hex(Squares[MidY*mapSize+MidX].Color,"311141", 1);
 
         document.getElementById("TopBar").style.backgroundColor =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"112211",-1);
         document.getElementById("TopBar").style.borderWidth =  "0";
