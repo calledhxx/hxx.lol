@@ -3,9 +3,9 @@ let Squares = [
 
         Name:"个人档案",
 
-        Details:"",
+        Details:"Hxx的個人檔案。",
 
-        Image:"",
+        Image:"/f/img/0324.gif",
 
         Page:"/f/profile.json",
 
@@ -19,7 +19,7 @@ let Squares = [
 
         Name:"哀居障号",
 
-        Details:"",
+        Details:"Hxx的哀居帳號。",
 
         Image:"",
 
@@ -32,7 +32,7 @@ let Squares = [
     },
     {
         Name:"低西連結",
-        Details:"",
+        Details:"Hxx的低溪群族。",
         Image:"",
         Page:"",
         Color: "2d6db3",
@@ -42,7 +42,7 @@ let Squares = [
     },
     {
         Name:"Mione",
-        Details:"",
+        Details:"Hxx的項目：程式語言。",
         Image:"",
         Page:"",
         Color: "c65473",
@@ -52,7 +52,7 @@ let Squares = [
     },
     {
         Name:"GitHub",
-        Details:"",
+        Details:"Hxx的GitHub開源庫。",
         Image:"",
         Page:"",
         Color: "a4a4a4",
@@ -62,7 +62,7 @@ let Squares = [
     },
     {
         Name:"Spotify",
-        Details:"",
+        Details:"Hxx的Spotify帳號。",
         Image:"",
         Page:"",
         Color: "63893e",
@@ -72,7 +72,7 @@ let Squares = [
     },
     {
         Name:"Meow",
-        Details:"",
+        Details:"meow meow meow",
         Image:"",
         Page:"/f/meow.json",
         Color: "735e8f",
@@ -82,8 +82,8 @@ let Squares = [
     },
     {
         Name:"7SunFish",
-        Details:"",
-        Image:"",
+        Details:"Hxx的好朋友",
+        Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
         Page:"/f/7sf.json",
         Color: "ffb134",
 
@@ -234,14 +234,55 @@ let a = function(){
                 tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],110,110,1,10);
                 xGen = 120;
 
-                document.getElementsByClassName(Bubbles[y][x])[0].textContent = Squares[y*mapSize + x].Name;
-                document.getElementsByClassName(Bubbles[y][x])[0].style.fontSize = "20px";
+                document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = Squares[y*mapSize + x].Name;
+                document.getElementsByClassName(Bubbles[y][x])[0].children[2].textContent = Squares[y*mapSize + x].Details;
+                document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "20px";
+                document.getElementsByClassName(Bubbles[y][x])[0].children[2].style.fontSize = "13px";
+
+
+
+                if ( Squares[y*mapSize + x].Image === ""){
+
+                }   else{
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[0].src = "";
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.width = "0";
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = Squares[y*mapSize + x].Name;
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "20px";
+
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.position = "absolute";
+
+
+                }
+
 
             }else{
                 tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],50,50,1,10);
                 xGen = 60;
-                document.getElementsByClassName(Bubbles[y][x])[0].textContent = Squares[y*mapSize + x].Name.substring(0,1);
-                document.getElementsByClassName(Bubbles[y][x])[0].style.fontSize = "26px";
+
+                document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = Squares[y*mapSize + x].Name.substring(0,1);
+                document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "26px";
+
+                document.getElementsByClassName(Bubbles[y][x])[0].children[2].textContent = Squares[y*mapSize + x].Details;
+                document.getElementsByClassName(Bubbles[y][x])[0].children[2].style.fontSize = "0";
+
+
+
+                if ( Squares[y*mapSize + x].Image === ""){
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.position = "absolute";
+
+
+                }   else{
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "0";
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[2].style.fontSize = "0";
+
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.width = "90%";
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[0].src = Squares[y*mapSize + x].Image;
+
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.position = "relative";
+
+
+                }
+
 
             }
 
@@ -349,19 +390,32 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     for (let i = 0; i < Squares.length; i++){
-        let div = document.createElement("button");
-
-        div.textContent = Squares[i].Name;
-        div.style.backgroundColor = "#" + Squares[i].Color;
-         div.style.color = "#" + hex(Squares[i].Color,"333333", +1);
-        div.style.borderColor = "#" + hex(Squares[i].Color,"111111", -1);
+        let button = document.createElement("button");
+        let h2 = document.createElement("h2");
+        let h6 = document.createElement("h6");
+        let img = document.createElement("img");
 
 
+        h2.textContent = Squares[i].Name;
+        button.style.backgroundColor = "#" + Squares[i].Color;
+        h2.style.color = "#" + hex(Squares[i].Color,"333333", +1);
+        h6.style.color = "#" + hex(Squares[i].Color,"111111", +1);
+        button.style.borderColor = "#" + hex(Squares[i].Color,"111111", -1);
 
-        div.classList.add("Square");
-        div.classList.add(i);
 
-        document.getElementById("Bubbles").appendChild(div);
+
+        button.classList.add("Square");
+        button.classList.add(i);
+
+        img.classList.add("Icon");
+
+        button.appendChild(img);
+
+        button.appendChild(h2);
+        button.appendChild(h6);
+
+
+        document.getElementById("Bubbles").appendChild(button);
     }
 
 
