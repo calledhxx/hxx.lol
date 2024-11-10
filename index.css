@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
 
-    font-family: "UD Digi Kyokasho N-B", Helvetica, sans-serif;
+    font-family: "UD Digi Kyokasho N-B", Helvetica, "serif";
 
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -184,7 +184,7 @@ body{
 }
 
 #Image{
-    width: 70%;
+    width: 80%;
     height: auto;
 
     margin-right: 50px;

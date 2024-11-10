@@ -11,65 +11,15 @@ let Squares = [
 
         Color: "472791",
 
-        id : "main"
+        id : "hxx"
 
     },
 
-    {
 
-        Name:"哀居障号",
 
-        Details:"Hxx的哀居帳號。",
 
-        Image:"",
 
-        Page:"/f/ig.json",
 
-        Color: "deab34",
-
-        id : "ig"
-
-    },
-    {
-        Name:"低西連結",
-        Details:"Hxx的低溪群族。",
-        Image:"",
-        Page:"/f/dc.json",
-        Color: "2d6db3",
-
-        id : "dc"
-
-    },
-    {
-        Name:"Mione",
-        Details:"Hxx的項目：程式語言。",
-        Image:"",
-        Page:"/f/mione.json",
-        Color: "c65473",
-
-        id : "mione"
-
-    },
-    {
-        Name:"GitHub",
-        Details:"Hxx的GitHub開源庫。",
-        Image:"",
-        Page:"/f/github.json",
-        Color: "a4a4a4",
-
-        id : "github"
-
-    },
-    {
-        Name:"Spotify",
-        Details:"Hxx的Spotify帳號。",
-        Image:"",
-        Page:"/f/spotify.json",
-        Color: "63893e",
-
-        id : "spty"
-
-    },
     {
         Name:"Meow",
         Details:"meow meow meow",
@@ -96,6 +46,36 @@ let Squares = [
         Image:"",
         Page:"/f/sry.json",
         Color: "534cb5",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Zah",
+        Details:"Hxx靈感的泉源。",
+        Image:"/f/img/channels4_profile.jpg",
+        Page:"/f/zah.json",
+        Color: "b4aaff",
+
+        id : "zah"
+
+    },
+    {
+        Name:"ProFish",
+        Details:"7SF的摯友。",
+        Image:"/f/img/32f8f2203ecb889671ddd843e2d737b9.png",
+        Page:"/f/pro.json",
+        Color: "63a06c",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Rop492",
+        Details:"Hxx的最佳拍檔。",
+        Image:"/f/img/d038cfc076d76f82ce655ec080b27e56.png",
+        Page:"/f/rop.json",
+        Color: "6c63a0",
 
         id : "sry"
 
