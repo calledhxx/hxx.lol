@@ -54,7 +54,7 @@ let Squares = [
         Name:"GitHub",
         Details:"Hxx的GitHub開源庫。",
         Image:"",
-        Page:"",
+        Page:"/f/github.json",
         Color: "a4a4a4",
 
         id : "github"
@@ -64,7 +64,7 @@ let Squares = [
         Name:"Spotify",
         Details:"Hxx的Spotify帳號。",
         Image:"",
-        Page:"",
+        Page:"/f/spotify.json",
         Color: "63893e",
 
         id : "spty"
