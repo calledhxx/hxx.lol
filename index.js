@@ -34,7 +34,7 @@ let Squares = [
         Name:"低西連結",
         Details:"Hxx的低溪群族。",
         Image:"",
-        Page:"",
+        Page:"/f/dc.json",
         Color: "2d6db3",
 
         id : "dc"
@@ -44,7 +44,7 @@ let Squares = [
         Name:"Mione",
         Details:"Hxx的項目：程式語言。",
         Image:"",
-        Page:"",
+        Page:"/f/mione.json",
         Color: "c65473",
 
         id : "mione"
