@@ -1,0 +1,279 @@
+*{
+    padding:0;
+    margin:0;
+    font-family:"UD Digi Kyokasho N-B";
+}
+
+
+
+
+body{
+
+    background: linear-gradient(180deg, #221c32, #191525);
+
+
+}
+
+
+
+@keyframes shiny {
+    0%   {
+        color: rgb(196, 196, 196);
+    }
+    25% { color: rgb(196, 196, 196);}
+    50%   {  color:white}
+    75%   {  color:honeydew}
+    100%   {  color: rgb(196, 196, 196);}
+}
+
+@keyframes sh {
+    0%   {
+        color: #8f7bc6;
+    }
+    25% { color: rgb(198, 188, 255);}
+    50%   {  color:  #8f7bc6
+    }
+    75%   {  color:  #8f7bc6
+    }
+    100%   {  color: #8f7bc6}
+}
+
+@keyframes rot {
+    0%   {
+        Transform:rotate(.3deg);
+    }
+    25% { Transform:rotate(0deg);}
+    50%   {  Transform:rotate(-.3deg);}
+    75%   {  Transform:rotate(0deg);}
+    100%   {  Transform:rotate(.3deg);}
+}
+
+*::selection{
+    color  : #8f7bc6;
+    background-color: #4d3c9f;
+}
+
+
+#Page1{
+    width : 100% ;
+    height: auto;
+
+
+    padding: 0 !important;
+    margin:0 !important;
+
+
+}
+
+#Page2{
+    width : 100% ;
+    height: auto;
+
+
+}
+
+#card{
+    width : 650px;
+    padding: 25px !important;
+    animation: rot 5s infinite ease-in-out;
+}
+
+#A {
+    width : 100%;
+    height: auto;
+    margin-top : 69px;
+
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#B{
+
+
+    width : 100%;
+    height: auto;
+    margin-top : 69px;
+    margin-bottom: 100px;
+
+}
+
+.post{
+    height: auto;
+    width: 650px;
+}
+
+.postCase{
+    width: 100%;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.PostTitle{
+    width:100%;
+    height:auto;
+    background: linear-gradient(65deg, #2a1847, #2f2048);
+    border-top-left-radius:18px;
+    border-top-right-radius:18px;
+
+    padding-bottom: 20px;
+    padding-top: 20px;
+
+    box-shadow: 0 0 10px black;
+
+    display:grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.PostLine{
+    width:100%;
+    height:30px;
+    background: linear-gradient(80deg, #120b22, #1e1336);
+
+    border-bottom-left-radius:18px;
+    border-bottom-right-radius:18px;
+
+    display:grid;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 0 10px black;
+
+    margin-bottom: 40px;
+}
+
+.titleTxt{
+
+    color: #8f7bc6;
+    font-size:.9em;
+
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+
+    animation: sh 5s infinite ease-in-out;
+    text-shadow: black 0.1em 0.1em 1em;
+}
+
+.smTxt{
+    color: #c1acde;
+    font-size:.7em;
+    text-shadow: black 0.1em 0.1em 1em;
+}
+
+
+a{
+    color: rgb(196, 196, 196);
+    padding: 10px;
+    text-shadow: black 0.1em 0.1em 1em;
+    animation: shiny 5s infinite linear;
+}
+
+a::before{
+    content : "$"
+
+}
+
+label{
+    color: rgb(201, 201, 201);
+    font-size:0.8em;
+    text-shadow: black 0.1em 0.1em 1em
+}
+.notFullButFull{
+    width:100%;
+    background-color:black;
+    height:50px;
+    padding-top:10px !important;
+    padding-bottom:10px !important;
+}
+
+#top{
+    height:50px;
+    background-color: #ac9aff;
+    border-top-left-radius:18px;
+    border-top-right-radius:18px;
+    display:flex;
+    justify-content: center;
+    box-shadow: 0 0 10px black;
+}
+#meddle{
+    height:auto;
+    background-color: #28213e;
+    box-shadow: 0 0 10px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.MedBox{
+    padding:10px !important;
+    margin: 10px !important;
+
+    width:60%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+#MedBox-Head{
+    padding:80px !important;
+
+    width:100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#Head-title{
+    font-size:2em;
+
+}
+#NotMyHead{
+    width: 250px;
+    height: auto;
+    border-radius: 100%;
+    border: 3px solid rgb(229, 211, 253);
+    margin-right:30px;
+    box-shadow: 0 0 10px black;
+}
+
+#bottom{
+    height:100px;
+    background-color: #1b1433;
+    display:flex;
+
+
+    justify-content: center;
+    box-shadow: 0 0 10px black;
+}
+
+#foot{
+    height:10px;
+    background-color: #120b22;
+    display:flex;
+
+    border-bottom-left-radius:18px;
+    border-bottom-right-radius:18px;
+    justify-content: center;
+    box-shadow: 0 0 10px black;
+}
+
+
+
+
+.bottom-flemBox{
+    display: grid;
+    margin:10px;
+    padding: 20px;
+}
+
+#name{
+    font-size:3em;
+    color: rgb(231, 213, 255);
+    text-shadow: black 0.1em 0.1em 1em
+}
