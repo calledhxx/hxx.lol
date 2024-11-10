@@ -324,7 +324,15 @@ function hex(a,b,c){
 
     return re;
 }
+
+function ism() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
 document.addEventListener("DOMContentLoaded", function(){
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        window.location.href = "https://hxx.lol/m";
+    }
+
     fit = Math.sqrt(Squares.length) - Math.floor(Math.sqrt(Squares.length)) === 0;
 
     mapSize = fit ? Math.sqrt(Squares.length) : Math.floor(Math.sqrt(Squares.length))+1;
@@ -600,3 +608,6 @@ document.addEventListener('mousemove', () => {
 window.addEventListener('resize', function() {
     a();
 });
+
+
+
