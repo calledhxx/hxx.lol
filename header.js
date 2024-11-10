@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("Hello");
     const Div = document.createElement("div");
     const Link = document.createElement("a");
     const C1 = document.createElement("h4");
@@ -31,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
     C1.textContent = " Main page : "
     C1.style = ""
         +"color : rgb(100,100,100);"
-    +"font-size:0.1em;"+" text-shadow: black 0.1em 0.1em 1em"
+        +"font-size:0.1em;"+" text-shadow: black 0.1em 0.1em 1em"
     Link.style = ""
         +"color : rgb(150,150,150);"
         +"font-size:0.1em;"+" text-shadow: black 0.1em 0.1em 1em"
