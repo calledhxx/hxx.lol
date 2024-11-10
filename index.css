@@ -96,6 +96,9 @@ body{
     margin-bottom: 10px;
     margin-right: 10px;
 
+    margin-top: 0;
+    margin-bottom: 0;
+
     display: inline-block;
     width: 50px;
     height: 50px;
@@ -218,4 +221,109 @@ a{
 
 a::before{
     content: "$ ";
+}
+
+h6{
+    text-shadow: #000000 0.1em 0.1em 1em;
+
+}
+
+h2{
+    text-shadow: #000000 0.1em 0.1em 1em;
+
+}
+
+.Icon{
+    margin-top: 3px;
+    z-index : 101;
+    width: 0;
+    height: auto;
+
+    border-radius: 18px;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+
+}
+
+@keyframes onceTip {
+    0%{
+        color : rgba(255, 255, 255, 0.57);
+        transform: translate(-50%,-50%) rotate(-2deg);
+        font-size: 12px;
+
+    }
+    15%{
+        color : rgba(255, 255, 255, 0.84);
+        transform: translate(-50%,-50%) rotate(-1deg);
+
+        font-size: 15px;
+
+
+    }
+    20%{
+        color : rgba(255, 255, 255, 0.57);
+        transform: translate(-50%,-50%) rotate(-2deg);
+        font-size: 12px;
+
+    }
+    25%{
+        color : rgb(255, 255, 255);
+        transform: translate(-50%,-50%) rotate(-0deg);
+        font-size: 15px;
+
+    }
+    30%{
+        color : rgba(255, 255, 255, 0.57);
+        transform: translate(-50%,-50%) rotate(2deg);
+        font-size: 12px;
+
+    }
+    40%{
+        color : rgb(255, 255, 255);
+        transform: translate(-50%,-50%) rotate(1deg);
+        font-size: 15px;
+
+
+    }
+    50%{
+        color : rgba(255, 255, 255, 0.57);
+        transform: translate(-50%,-50%) rotate(-2deg);
+        font-size: 10px;
+
+    }
+    70%{
+        color : rgb(255, 255, 255);
+        transform: translate(-50%,-50%) rotate(1deg);
+        font-size: 15px;
+
+
+    }
+    80%{
+        color : rgba(255, 255, 255, 0.4);
+        transform: translate(-50%,-50%) rotate(0deg);
+        font-size: 12px;
+
+    }
+    95%{
+        color : rgb(255, 255, 255);
+        transform: translate(-50%,-50%)  rotate(0deg);
+        font-size: 15px;
+
+    }
+
+    100%{
+        color : rgba(255, 255, 255, 0);
+        transform: translate(-50%,-50%)  rotate(0deg);
+        font-size: 15px;
+    }
+}
+
+h3{
+    color : rgba(255, 255, 255, 0);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+
+    font-size: 13px;
+
+    animation: onceTip 10s ;
 }
