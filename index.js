@@ -93,8 +93,6 @@ let MidX = 0;
 let fit;
 let mapSize;
 
-let onPhoneBoots=0;
-
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -156,8 +154,8 @@ let a = function(){
     let X = 0;
     let Y = 0;
 
-    let XfirstPix = Math.floor(window.innerWidth/2)-Math.floor((mapSize/2)*55) - onPhoneBoots*70;
-    let YfirstPix = Math.floor(window.innerHeight/2)-Math.floor((mapSize/2)*55) -  onPhoneBoots*70;
+    let XfirstPix = Math.floor(window.innerWidth/2)-Math.floor((mapSize/2)*55);
+    let YfirstPix = Math.floor(window.innerHeight/2)-Math.floor((mapSize/2)*55);
 
     let xGen = 60;
     let yGen = 60;
@@ -196,19 +194,14 @@ let a = function(){
 
             let disY =  (MidX - x === 0 && MidY - y === 0) ? 60 : 0;
             let EasY = 0;
-            //let dbX = (y%2);
 
 
             if (MidY - y <= -1){
-                if (x === MidX || x === MidX+1 ){
+                if (x === MidX || x === MidX+1){
                     //document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "green";
                 }else{
                     EasY =- 60;
                 }
-            }
-
-            if (MidY -y > 0){
-                //EasY = ;
             }
 
 
@@ -218,7 +211,7 @@ let a = function(){
 
 
             tweenMove(document.getElementsByClassName(Bubbles[y][x])[0]
-                , -MidX*55+XfirstPix+X - CX //+ dbX*30
+                , -MidX*55+XfirstPix+X - CX
                 ,-MidY*55+YfirstPix+Y + disY + EasY - CY
                 ,
                 1,
@@ -228,13 +221,13 @@ let a = function(){
 
 
             if (MidX - x === 0 && MidY - y === 0){
-                tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],110+onPhoneBoots*70,110+onPhoneBoots*70,1,10);
-                xGen = 120+onPhoneBoots*50;
+                tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],110,110,1,10);
+                xGen = 120;
 
                 document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = Squares[y*mapSize + x].Name;
                 document.getElementsByClassName(Bubbles[y][x])[0].children[2].textContent = Squares[y*mapSize + x].Details;
-                document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = 20+onPhoneBoots*5+"px";
-                document.getElementsByClassName(Bubbles[y][x])[0].children[2].style.fontSize = 13+onPhoneBoots*24+"px";
+                document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "20px";
+                document.getElementsByClassName(Bubbles[y][x])[0].children[2].style.fontSize = "13px";
 
 
 
@@ -244,7 +237,7 @@ let a = function(){
                     document.getElementsByClassName(Bubbles[y][x])[0].children[0].src = "";
                     document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.width = "0";
                     document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = Squares[y*mapSize + x].Name;
-                    document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = 20+onPhoneBoots*5+"px";
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "20px";
 
                     document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.position = "absolute";
 
@@ -253,11 +246,11 @@ let a = function(){
 
 
             }else{
-                tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],50+onPhoneBoots*40,50+onPhoneBoots*40,1,10);
+                tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],50,50,1,10);
                 xGen = 60;
 
                 document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = Squares[y*mapSize + x].Name.substring(0,1);
-                document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = 26+onPhoneBoots*5+"px";
+                document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "26px";
 
                 document.getElementsByClassName(Bubbles[y][x])[0].children[2].textContent = Squares[y*mapSize + x].Details;
                 document.getElementsByClassName(Bubbles[y][x])[0].children[2].style.fontSize = "0";
@@ -287,10 +280,10 @@ let a = function(){
            // document.getElementsByClassName(Bubbles[y][x])[0].style.left = -MidX*55+XfirstPix+X+"px";
            // document.getElementsByClassName(Bubbles[y][x])[0].style.top = -MidY*55+YfirstPix+Y+"px";
 
-            X = X+xGen+onPhoneBoots*50;
+            X = X+xGen;
         }
 
-        Y = Y+yGen+onPhoneBoots*60;
+        Y = Y+yGen;
     }
 };
 
@@ -365,7 +358,7 @@ function hex(a,b,c){
 
 document.addEventListener("DOMContentLoaded", function(){
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-        onPhoneBoots = 1;
+        window.location.href = "https://hxx.lol/m";
     }
 
     fit = Math.sqrt(Squares.length) - Math.floor(Math.sqrt(Squares.length)) === 0;
@@ -393,8 +386,6 @@ document.addEventListener("DOMContentLoaded", function(){
         let img = document.createElement("img");
 
 
-
-
         h2.textContent = Squares[i].Name;
         button.style.backgroundColor = "#" + Squares[i].Color;
         h2.style.color = "#" + hex(Squares[i].Color,"333333", +1);
@@ -409,9 +400,9 @@ document.addEventListener("DOMContentLoaded", function(){
         img.classList.add("Icon");
 
         button.appendChild(img);
+
         button.appendChild(h2);
         button.appendChild(h6);
-
 
 
         document.getElementById("Bubbles").appendChild(button);
@@ -445,9 +436,9 @@ let inUi = false;
 
 async function ent(){
 
-    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],90+onPhoneBoots*70,90+onPhoneBoots*70,1,10);
+    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],90,90,1,10);
     await sleep(70);
-    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110+onPhoneBoots*70,110+onPhoneBoots*70,1,10);
+    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110,110,1,10);
 
 
 
@@ -672,6 +663,5 @@ document.addEventListener('mousemove', () => {
 window.addEventListener('resize', function() {
     a();
 });
-
 
 
