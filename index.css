@@ -174,48 +174,80 @@ body{
 }
 
 
-#Title{
-    color: rgba(255, 255, 255, 0.74) !important;
+.Title{
+    color: rgba(255, 255, 255, 0.74) ;
 
     text-shadow: #000000 0.1em 0.1em 1em;
-    font-size: 40px;
+    font-size: 50px;
+
+    padding-bottom: 5px;
 }
 
 .Case{
-    margin-top:20px ;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-#Content{
-    font-size: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
 
-    text-shadow: #000000 0.1em 0.1em 1em
-}
+    padding-bottom: 20px;
 
-#Image{
-    width: 80%;
     height: auto;
 
-    margin-right: 50px;
+
+    margin: 40px 40px;
+}
+
+.Content{
+    font-size: 20px;
+
+    text-shadow: #000000 0.1em 0.1em 1em;
+    padding-bottom: 5px;
+}
+
+.ImagesCase{
+    display: flex;
+    overflow-x: auto;
+
+    height: auto;
+    width: 100%;
+
+
+}
+
+.Image{
+    width: auto;
+    height: 280px;
+
+    margin: 20px;
 
     border: 3px solid rgba(69, 35, 108, 0);
     border-radius: 20px;
     background-color: rgba(214, 214, 214, 0);
+    flex: 1;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.52);
 
-    margin-bottom: 30px;
 
     background-color: rgba(255, 255, 255, 0.24);
+}
+
+.LinksCase{
+    margin-top: 20px;
+    display: grid;
+}
+
+.Link{
+    padding-bottom: 10px;
 }
 
 #TopBar{
     height: 50px;
     width: 100%;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 
     border-top-left-radius: 50px;
@@ -223,23 +255,6 @@ body{
     border: 3px solid rgba(69, 35, 108, 0);
 }
 
-.Case{
-    margin-left: 40px;
-    margin-right: 40px;
-
-    padding-left: 40px;
-    padding-right: 40px;
-
-    height: auto;
-
-
-
-
-
-
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
 
 a{
     color: rgba(255, 255, 255, 0.54);
@@ -278,21 +293,74 @@ h4{
 
 ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
 
 }
-
 
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 2px #ffffff;
     background-color: rgba(255, 255, 255, 0.47);
+
+    border-radius: 10px;
+
 }
 
 
 ::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.52);
+    border-radius: 10px;
+
 }
 
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(194, 194, 194, 0.72);
+}
+
+#CloseButton{
+    position: absolute;
+
+    top: -50%;
+    right: 50%;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 100%;
+
+    border: 3px solid rgb(255, 255, 255);
+    text-shadow: rgb(0, 0, 0) 0.1em 0.1em 1em;
+    box-shadow: 0 0 30px rgb(255, 255, 255);
+    background-color: rgb(234, 234, 234);
+
+    font-size: 30px;
+    transform:  translate(-50%,-50%);
+
+    outline: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@keyframes CloseButtonAnim {
+    from{
+        transform:  translate(-50%,-50%) rotate(0deg); ;
+    }
+    to{
+        transform:  translate(-50%,-50%) rotate(-360deg); ;
+    }
+}
+
+#CloseButton:hover{
+    cursor: pointer;
+    animation: forwards CloseButtonAnim .3s ;
+}
+
+#TopBarImg{
+    border-radius: 10px;
+
+    height: 80%;
+    width: auto;
+    margin-right: 10px;
 }

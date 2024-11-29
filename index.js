@@ -7,27 +7,11 @@ let Squares = [
 
         Image:"/f/img/0324.gif",
 
-        Page:"/f/profile.json",
+        Page:"/f/main.json",
 
         Color: "5d3ca9",
 
         id : "hxx"
-
-    },
-
-
-
-
-
-
-    {
-        Name:"Meow",
-        Details:"meow meow meow",
-        Image:"",
-        Page:"/f/meow.json",
-        Color: "844ad3",
-
-        id : "meow"
 
     },
     {
@@ -48,36 +32,6 @@ let Squares = [
         Color: "4e46b8",
 
         id : "sry"
-
-    },
-    {
-        Name:"Zah",
-        Details:"Hxx靈感的泉源。",
-        Image:"/f/img/channels4_profile.jpg",
-        Page:"/f/zah.json",
-        Color: "7263ee",
-
-        id : "zah"
-
-    },
-    {
-        Name:"ProFish",
-        Details:"7SF的摯友。",
-        Image:"/f/img/32f8f2203ecb889671ddd843e2d737b9.png",
-        Page:"/f/pro.json",
-        Color: "3679c5",
-
-        id : "pro"
-
-    },
-    {
-        Name:"Rop492",
-        Details:"Hxx的最佳拍檔。",
-        Image:"/f/img/d038cfc076d76f82ce655ec080b27e56.png",
-        Page:"/f/rop.json",
-        Color: "894b4b",
-
-        id : "rop"
 
     },
 ]
@@ -437,6 +391,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
     a();
 
+    document.getElementById("CloseButton").addEventListener("click", function(event) {
+        if (inUi){}else{return;}
+        ent();
+    });
+
 });
 
 let isHolding = false;
@@ -448,7 +407,7 @@ let inUi = false;
 
 async function ent(){
 
-    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],90,90,1,10);
+    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],96,96,1,10);
     await sleep(70);
     tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110,110,1,10);
 
@@ -461,12 +420,6 @@ async function ent(){
         tweenSize(document.getElementById("Page"),100,0,1,6);
         tweenMove(document.getElementById("Page"),window.innerWidth/2,window.innerHeight,0.000001,1);
 
-        document.getElementById("Title").textContent =  "";
-        document.getElementById("Content").innerHTML =  "";
-        document.getElementById("Image").src =  "";
-        document.getElementById("Image").style.borderWidth = "0";
-        document.getElementById("Image").style.borderColor = "rgba(0,0,0,0)";
-
         document.getElementById("TopBar").style.borderWidth =  "0";
         document.getElementById("TopBar").style.borderColor = "rgba(0,0,0,0)";
 
@@ -474,6 +427,12 @@ async function ent(){
         await sleep(100);
 
         tweenMove(document.getElementById("Page"),0,-100,0.000001,1);
+        tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,-200,2,1);
+
+        let n = document.getElementsByClassName("Case").length;
+        for (let i =0 ;i<n;i++){
+            document.getElementById("Page").removeChild(document.getElementsByClassName("Case")[document.getElementsByClassName("Case").length-1]);
+        }
 
 
     }else{
@@ -490,11 +449,21 @@ async function ent(){
         document.getElementById("Page").style.boxShadow = "0 0 30px #"+hex(Squares[MidY*mapSize+MidX].Color,"111111", +1);
         document.getElementById("TopBar").style.boxShadow =  "0 0 30px #"+hex(Squares[MidY*mapSize+MidX].Color,"112211",-1);
 
+        document.getElementById("TopBarText").style.color =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"311141", 1);
+
+
+
+        document.getElementById("TopBarImg").src = Squares[MidY*mapSize+MidX].Image;
+        document.getElementById("TopBarText").textContent = Squares[MidY*mapSize+MidX].Name;
+
 
 
 
 
         tweenMove(document.getElementById("Page"),window.innerWidth/2,window.innerHeight,0.000001,1);
+        await tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,-200,0.000001,1);
+
+        tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,100,4,1);
 
 
         await sleep(100);
@@ -519,25 +488,83 @@ async function ent(){
         Http.send();
 
 
-        Http.onreadystatechange = async function() {
+        Http.onload = async function() {
             if (inUi){
                 await sleep(10);
 
-                document.getElementById("Title").textContent =  JSON.parse(Http.responseText)["title"];
-                document.getElementById("Content").innerHTML =  JSON.parse(Http.responseText)["content"];
-                if (JSON.parse(Http.responseText)["image"]===""){
-                    document.getElementById("Image").src =  "";
-                    document.getElementById("Image").style.borderWidth = "0";
-                    document.getElementById("Image").style.borderColor = "rgba(0,0,0,0)";
-                }else{
-                    document.getElementById("Image").src =  JSON.parse(Http.responseText)["image"];
-                    document.getElementById("Image").style.borderWidth = "3px";
-                    document.getElementById("Image").style.borderColor =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"222222",1);
+                let Data = JSON.parse(Http.responseText);
+                console.log(Data);
+                for (let i = 0;i<Data.length;i++){
+                    let CaseE = document.createElement('div');
+                    CaseE.classList.add("Case");
 
+                    let Title = Data[i]["Title"];
+                    let TitleE = document.createElement('h1');
+                    TitleE.textContent = Data[i]["Title"];
+                    TitleE.classList.add("Title");
+                    TitleE.style.color = "#" + hex(Squares[MidX+MidY*mapSize].Color,"444444", +1);
+                    CaseE.appendChild(TitleE);
+
+
+
+                    let Content = Data[i]["Content"];
+                    let ContentE = document.createElement('h6');
+                    ContentE.textContent = Data[i]["Content"];
+                    ContentE.classList.add("Content");
+                    ContentE.style.color = "#" + hex(Squares[MidX+MidY*mapSize].Color,"222222", +1);
+                    CaseE.appendChild(ContentE);
+
+
+                    let Images = Data[i]["Images"];
+
+                    if (Images){
+                        let ImagesCaseE = document.createElement('div');
+                        ImagesCaseE.classList.add("ImagesCase");
+
+
+                        for (let ImageIndex = 0 ;ImageIndex<Images.length; ImageIndex++){
+                            let ImageE = document.createElement('img');
+                            ImageE.classList.add("Image");
+                            ImageE.src = Images[ImageIndex]["Image"];
+                            ImageE.alt = Images[ImageIndex]["Text"];
+                            ImageE.style.borderColor = "#" + hex(Squares[MidX+MidY*mapSize].Color,"222222", +1);
+
+
+
+
+                            ImagesCaseE.appendChild(ImageE);
+
+                        }
+                        CaseE.appendChild(ImagesCaseE);
+                    }
+
+                    let Links = Data[i]["Links"];
+
+
+                    if (Images){
+                        let LinksCaseE = document.createElement('div');
+                        LinksCaseE.classList.add("LinksCase");
+
+
+                        for (let LinksIndex = 0 ;LinksIndex<Links.length; LinksIndex++){
+                            let LinkE = document.createElement('a');
+                            LinkE.classList.add("Link");
+                            LinkE.href = Links[LinksIndex]["Link"];
+                            LinkE.text = Links[LinksIndex]["Text"];
+                            LinkE.style.color = "#" + hex(Squares[MidX+MidY*mapSize].Color,"444444", +1);
+
+
+
+
+                            LinksCaseE.appendChild(LinkE);
+
+                        }
+                        CaseE.appendChild(LinksCaseE);
+                    }
+
+
+                    document.getElementById("Page").appendChild(CaseE);
                 }
-
-
-
             }
         }
 
@@ -594,6 +621,7 @@ document.addEventListener("keydown", function(event) {
 
 });
 document.addEventListener("keypress", function(event) {
+    if (inUi) return;
 
     if (event.key === "Enter") {
         ent()
@@ -602,6 +630,7 @@ document.addEventListener("keypress", function(event) {
 });
 
 document.addEventListener('mousedown', () => {
+    if (inUi) return;
 
 
     isHolding = true;
@@ -612,10 +641,12 @@ document.addEventListener('mousedown', () => {
 let moved = false;
 
 document.addEventListener('mouseup', () => {
+    if (inUi) return;
 
 
     isHolding = false;
     if (moved){}else{
+        console.log("aaa");
         ent();
     }
     moved = false;
@@ -625,6 +656,7 @@ document.addEventListener('mouseup', () => {
 
 
 document.addEventListener('mousemove', () => {
+    if (inUi) return;
 
 
 
@@ -676,6 +708,8 @@ document.addEventListener('mousemove', () => {
     }
 
 })
+
+
 
 window.addEventListener('resize', function() {
     a();
