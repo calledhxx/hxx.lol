@@ -9,7 +9,7 @@ let Squares = [
 
         Page:"/f/profile.json",
 
-        Color: "735caa",
+        Color: "5d3ca9",
 
         id : "hxx"
 
@@ -25,7 +25,7 @@ let Squares = [
         Details:"meow meow meow",
         Image:"",
         Page:"/f/meow.json",
-        Color: "c69dff",
+        Color: "844ad3",
 
         id : "meow"
 
@@ -35,7 +35,7 @@ let Squares = [
         Details:"Hxx的好朋友",
         Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
         Page:"/f/7sf.json",
-        Color: "ffb134",
+        Color: "c1842b",
 
         id : "7sf"
 
@@ -45,7 +45,7 @@ let Squares = [
         Details:"獻給你，朋友。",
         Image:"",
         Page:"/f/sry.json",
-        Color: "534cb5",
+        Color: "4e46b8",
 
         id : "sry"
 
@@ -55,7 +55,7 @@ let Squares = [
         Details:"Hxx靈感的泉源。",
         Image:"/f/img/channels4_profile.jpg",
         Page:"/f/zah.json",
-        Color: "b4aaff",
+        Color: "7263ee",
 
         id : "zah"
 
@@ -65,7 +65,7 @@ let Squares = [
         Details:"7SF的摯友。",
         Image:"/f/img/32f8f2203ecb889671ddd843e2d737b9.png",
         Page:"/f/pro.json",
-        Color: "65dc75",
+        Color: "3679c5",
 
         id : "pro"
 
@@ -75,7 +75,7 @@ let Squares = [
         Details:"Hxx的最佳拍檔。",
         Image:"/f/img/d038cfc076d76f82ce655ec080b27e56.png",
         Page:"/f/rop.json",
-        Color: "9eb9ff",
+        Color: "894b4b",
 
         id : "rop"
 
@@ -178,15 +178,15 @@ let a = function(){
 
 
             if (MidX - x === 0){
-              //  document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "red";
+                //  document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "red";
 
             }else{
 
                 if (MidY - y === 0){
-                   // document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "blue";
+                    // document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "blue";
 
                 }else{
-                   // document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "red";
+                    // document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "red";
                 }
 
             }
@@ -277,8 +277,8 @@ let a = function(){
             }
 
 
-           // document.getElementsByClassName(Bubbles[y][x])[0].style.left = -MidX*55+XfirstPix+X+"px";
-           // document.getElementsByClassName(Bubbles[y][x])[0].style.top = -MidY*55+YfirstPix+Y+"px";
+            // document.getElementsByClassName(Bubbles[y][x])[0].style.left = -MidX*55+XfirstPix+X+"px";
+            // document.getElementsByClassName(Bubbles[y][x])[0].style.top = -MidY*55+YfirstPix+Y+"px";
 
             X = X+xGen;
         }
@@ -309,11 +309,11 @@ function hex(a,b,c){
 
 
     let abc = function(v){
-       for (let i = 0;i<str.length;i++){
-           if (str[i] === v){
-               return i;
-           }
-       }
+        for (let i = 0;i<str.length;i++){
+            if (str[i] === v){
+                return i;
+            }
+        }
     }
 
     let Red = 0;
@@ -391,6 +391,18 @@ document.addEventListener("DOMContentLoaded", function(){
         h2.style.color = "#" + hex(Squares[i].Color,"333333", +1);
         h6.style.color = "#" + hex(Squares[i].Color,"111111", +1);
         button.style.borderColor = "#" + hex(Squares[i].Color,"111111", -1);
+
+        button.style.boxShadow = "0 0 10px #"+hex(Squares[i].Color,"111111", +1);
+
+
+
+        button.style.left = window.innerWidth/2+"px";
+        button.style.top = window.innerHeight/2+"px";
+
+        button.style.width =  "50px";
+        button.style.height = "50px";
+
+
 
 
 
@@ -475,6 +487,11 @@ async function ent(){
         document.getElementById("TopBar").style.borderWidth =  "0";
         document.getElementById("TopBar").style.borderColor =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"112211",-1);
 
+        document.getElementById("Page").style.boxShadow = "0 0 30px #"+hex(Squares[MidY*mapSize+MidX].Color,"111111", +1);
+        document.getElementById("TopBar").style.boxShadow =  "0 0 30px #"+hex(Squares[MidY*mapSize+MidX].Color,"112211",-1);
+
+
+
 
 
         tweenMove(document.getElementById("Page"),window.innerWidth/2,window.innerHeight,0.000001,1);
@@ -485,8 +502,8 @@ async function ent(){
         document.getElementById("Page").style.width = "auto";
 
         await tweenSize(document.getElementById("Page"),
-           500,
-            450
+            500,
+            500
             ,.1,1);
 
 
@@ -503,25 +520,25 @@ async function ent(){
 
 
         Http.onreadystatechange = async function() {
-           if (inUi){
-               await sleep(10);
+            if (inUi){
+                await sleep(10);
 
-               document.getElementById("Title").textContent =  JSON.parse(Http.responseText)["title"];
-               document.getElementById("Content").innerHTML =  JSON.parse(Http.responseText)["content"];
-               if (JSON.parse(Http.responseText)["image"]===""){
-                   document.getElementById("Image").src =  "";
-                   document.getElementById("Image").style.borderWidth = "0";
-                   document.getElementById("Image").style.borderColor = "rgba(0,0,0,0)";
-               }else{
-                   document.getElementById("Image").src =  JSON.parse(Http.responseText)["image"];
-                   document.getElementById("Image").style.borderWidth = "3px";
-                   document.getElementById("Image").style.borderColor =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"222222",1);
+                document.getElementById("Title").textContent =  JSON.parse(Http.responseText)["title"];
+                document.getElementById("Content").innerHTML =  JSON.parse(Http.responseText)["content"];
+                if (JSON.parse(Http.responseText)["image"]===""){
+                    document.getElementById("Image").src =  "";
+                    document.getElementById("Image").style.borderWidth = "0";
+                    document.getElementById("Image").style.borderColor = "rgba(0,0,0,0)";
+                }else{
+                    document.getElementById("Image").src =  JSON.parse(Http.responseText)["image"];
+                    document.getElementById("Image").style.borderWidth = "3px";
+                    document.getElementById("Image").style.borderColor =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"222222",1);
 
-               }
+                }
 
 
 
-           }
+            }
         }
 
     }
@@ -663,5 +680,4 @@ document.addEventListener('mousemove', () => {
 window.addEventListener('resize', function() {
     a();
 });
-
 
