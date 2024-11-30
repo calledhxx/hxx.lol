@@ -659,8 +659,16 @@ async function ent(){
 
         tweenMove(document.getElementById("Page"),window.innerWidth/2,window.innerHeight/2,1,10);
 
+        let LoadCase =  document.createElement('div');
+        let LoadBox =  document.createElement('div');
+
+        LoadCase.classList.add("Case");
+        LoadBox.classList.add("LoadBox");
 
 
+
+        LoadCase.appendChild(LoadBox);
+        document.getElementById("Page").appendChild(LoadCase);
 
 
         const Http = new XMLHttpRequest();
@@ -670,6 +678,7 @@ async function ent(){
 
 
         Http.onload = async function() {
+            document.getElementById("Page").removeChild(LoadCase);
             if (inUi){
                 await sleep(10);
 
