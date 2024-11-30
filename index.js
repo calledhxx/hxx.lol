@@ -677,7 +677,11 @@ async function ent(){
         tweenMove(document.getElementById("Card"),window.innerWidth/2,window.innerHeight/2,1,10);
 
         let LoadCase =  document.createElement('div');
-        let LoadBox =  document.createElement('div');
+        let LoadBox =  document.createElement('h1');
+        LoadBox.textContent = "🧋";
+        LoadCase.style.display = "flex";
+        LoadCase.style.justifyContent = "center";
+        LoadCase.style.alignItems = "center";
 
         LoadCase.classList.add("Case");
         LoadBox.classList.add("LoadBox");
@@ -696,6 +700,7 @@ async function ent(){
 
         Http.onload = async function() {
             document.getElementById("Page").removeChild(LoadCase);
+
             if (inUi){
                 await sleep(10);
 
