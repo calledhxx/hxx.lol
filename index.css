@@ -74,42 +74,10 @@ body{
     background: linear-gradient(80deg, #38144a, #23184a);
 }
 
-@keyframes BackGroundAnim {
-    0%{
-        opacity: 0.03;
-        background-size: 27%;
-        transform: rotate(0deg) translate(-50%, -50%);
-
-    }
-    25%{
-        opacity: 0.05;
-        background-size: 31%;
-        transform: rotate(-1deg) translate(-51%, -50%);
-
-    }
-    50%{
-        opacity: 0.04;
-        background-size: 30%;
-        transform: rotate(0deg) translate(-50%, -51%);
-
-    }
-    75%{
-        opacity: 0.01;
-        background-size: 31%;
-        transform: rotate(1deg) translate(-51%, -50%);
-
-    }
-    100%{
-        opacity: 0.03;
-        background-size: 27%;
-        transform: rotate(0deg) translate(-50%, -50%);
-
-    }
-}
-
 #BackGround{
 
     filter : blur(3px);
+
 
 
     position: absolute;
@@ -119,12 +87,12 @@ body{
     background-image: url("BackGround.png");
     background-repeat: repeat;
     background-position: center center;
-    background-size: 10%;
+    background-size: 30%;
     z-index: -1;
 
     opacity: 0.03;
 
-    animation: BackGroundAnim 5s infinite ease-in-out;
+    transform: translate(-50%, -50%);
 
     top: 50%;
     left: 50%;
