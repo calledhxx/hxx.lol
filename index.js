@@ -1,3 +1,5 @@
+//CALLEDHXX Nov/2024
+
 let Squares = [
     {
 
@@ -34,7 +36,7 @@ let Squares = [
         id : "sry"
 
     },
-   
+
 ]
 
 let Bubbles = [
@@ -597,11 +599,11 @@ async function ent(){
     }else{
         inUi = true;
 
-        document.getElementById("Page").style.backgroundColor = "#" + SqrData.Color;
+        document.getElementById("Page").style.backgroundColor = "#" + SqrData.Color+"AA";
         document.getElementById("Page").style.borderColor = "#" + hex(SqrData.Color,"222222",-1);
         document.getElementById("Page").style.color = "#" + hex(SqrData.Color,"311141", 1);
 
-        document.getElementById("TopBar").style.backgroundColor =  "#" + hex(SqrData.Color,"112211",-1);
+        document.getElementById("TopBar").style.backgroundColor =  "#" + hex(SqrData.Color,"112211",-1)+"EA";
         document.getElementById("TopBar").style.borderWidth =  "0";
         document.getElementById("TopBar").style.borderColor =  "#" + hex(SqrData.Color,"112211",-1);
 

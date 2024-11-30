@@ -141,6 +141,7 @@ body{
 
     overflow: auto;
 
+    backdrop-filter: blur(20px);
 
 
     background-color: rgba(102, 51, 153, 0);
@@ -298,23 +299,27 @@ h4{
 }
 
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 2px #ffffff;
-    background-color: rgba(255, 255, 255, 0.47);
+    box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.55);
+    background-color: rgba(255, 255, 255, 0.21);
 
     border-radius: 10px;
+    backdrop-filter: blur(20px);
 
 }
 
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.52);
+    background: rgba(255, 255, 255, 0.24);
     border-radius: 10px;
+    backdrop-filter: blur(20px);
 
 }
 
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(194, 194, 194, 0.72);
+    background: rgba(194, 194, 194, 0.64);
+    backdrop-filter: blur(20px);
+
 }
 
 #CloseButton{
