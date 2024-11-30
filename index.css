@@ -77,41 +77,44 @@ body{
 @keyframes BackGroundAnim {
     0%{
         opacity: 0.03;
-        background-size: 25%;
-        transform: rotate(-3deg) translate(-50%, -50%);
+        background-size: 27%;
+        transform: rotate(0deg) translate(-50%, -50%);
 
     }
     25%{
         opacity: 0.05;
-        background-size: 26%;
-        transform: rotate(-2deg) translate(-51%, -50%);
+        background-size: 31%;
+        transform: rotate(-1deg) translate(-51%, -50%);
 
     }
     50%{
         opacity: 0.04;
-        background-size: 25%;
-        transform: rotate(2deg) translate(-50%, -51%);
+        background-size: 30%;
+        transform: rotate(0deg) translate(-50%, -51%);
 
     }
     75%{
         opacity: 0.01;
-        background-size: 24%;
+        background-size: 31%;
         transform: rotate(1deg) translate(-51%, -50%);
 
     }
     100%{
         opacity: 0.03;
-        background-size: 25%;
-        transform: rotate(-3deg) translate(-50%, -50%);
+        background-size: 27%;
+        transform: rotate(0deg) translate(-50%, -50%);
 
     }
 }
 
 #BackGround{
 
+    filter : blur(3px);
+
+
     position: absolute;
-    width: 200%;
-    height: 400vh;
+    width: 100%;
+    height: 100vh;
 
     background-image: url("BackGround.png");
     background-repeat: repeat;
