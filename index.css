@@ -86,7 +86,7 @@ body{
 
     background-image: url("BackGround.png");
     background-repeat: repeat;
-    background-position: center center;
+    background-position: 0 0;
     background-size: 30%;
     z-index: -1;
 

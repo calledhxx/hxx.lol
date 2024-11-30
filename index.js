@@ -128,6 +128,32 @@ async  function tweenSize(obj,toX,toY,sec,lag){
 
 }
 
+async  function tweenPos(obj,toX,toY,sec,lag){
+    let perSecX = (toX-obj.style.backgroundPositionX.substring(0,obj.style.backgroundPositionX.length-2))/(sec*10);
+    let perSecY = (toY-obj.style.backgroundPositionY.substring(0,obj.style.backgroundPositionY.length-2))/(sec*10);
+
+    let X =  Number(obj.style.backgroundPositionX.substring(0,obj.style.backgroundPositionX.length-2));
+    let Y = Number(obj.style.backgroundPositionY.substring(0,obj.style.backgroundPositionY.length-2));
+
+
+    for (let i = 0;i<(10*sec);i++){
+
+        obj.style.backgroundPositionX = X+perSecX+"px";
+        obj.style.backgroundPositionY = Y+perSecY+"px";
+
+        await sleep(lag);
+
+
+        X =  Number(obj.style.backgroundPositionX.substring(0,obj.style.backgroundPositionX.length-2));
+        Y = Number(obj.style.backgroundPositionY.substring(0,obj.style.backgroundPositionY.length-2));
+    }
+
+    obj.style.backgroundPositionX = toX+"px";
+    obj.style.backgroundPositionY = toY+"px";
+
+
+}
+
 let Oy = 0;
 
 let LastMidX = 0;
@@ -284,6 +310,14 @@ let a = function(){
         creatBubble(LimSquares["Moved100"]);
     }
 
+
+
+
+    //
+
+    //
+
+    tweenPos(document.getElementById("BackGround"),-MidX*20,-MidY*20,3,.1);
 
 
 
@@ -622,6 +656,17 @@ async function ent(){
         }
 
 
+        async function _blur(){
+            for (let i = 10;i>3;i--){
+                document.getElementById("BackGround").style.filter = "blur("+i+"px)";
+                await sleep(50);
+            }
+
+        }
+        _blur();
+
+
+
     }else{
         inUi = true;
 
@@ -648,6 +693,9 @@ async function ent(){
             '🫠','🤔','🥸','💪','💩','📖','😶‍🌫️','🤐','🙄','😯','😪','🐟'
         ]
         document.getElementById("CloseButton").textContent = Emojis[Math.floor(Math.random()*Emojis.length)];
+
+
+
 
 
 
@@ -690,6 +738,14 @@ async function ent(){
 
         LoadCase.appendChild(LoadBox);
         document.getElementById("Page").appendChild(LoadCase);
+
+        async function _blur(){
+            for (let i = 3;i<10;i++){
+                document.getElementById("BackGround").style.filter = "blur("+i+"px)";
+                await sleep(50);
+            }
+        }
+        _blur();
 
 
         const Http = new XMLHttpRequest();
