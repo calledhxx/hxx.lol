@@ -34,6 +34,17 @@ let Squares = [
         id : "sry"
 
     },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "4e46b8",
+
+        id : "sry"
+
+    },
+
 ]
 
 let Bubbles = [
@@ -44,7 +55,6 @@ let Bubbles = [
 let MidY = 0;
 let MidX = 0;
 
-let fit;
 let mapSize;
 
 function sleep(ms) {
@@ -104,6 +114,27 @@ async  function tweenSize(obj,toX,toY,sec,lag){
 
 let Oy = 0;
 
+let LastMidX = 0;
+let LastMidY = 0;
+
+let LimSquares = {
+    "Moved100" : {
+
+        Name:"100 Moveds!",
+
+        Details:"致上最高的敬禮",
+
+        Image:"",
+
+        Page:"/f/m100.json",
+
+        Color: "a93c74",
+
+        id : "m100"
+
+    }
+}
+
 let a = function(){
     let X = 0;
     let Y = 0;
@@ -116,6 +147,123 @@ let a = function(){
 
     let CX = Math.floor(MidX/mapSize*30);
     let CY = Math.floor(MidY/mapSize*30);
+
+
+    //
+    let moved = document.cookie.replace(
+        /(?:(?:^|.*;\s*)moved\s*\=\s*([^;]*).*$)|^.*$/,
+        "$1",
+    );
+
+    if (Math.abs(MidX - LastMidX)){
+        document.cookie = "moved="+(Number(moved)+1)+";";
+    }
+    if (Math.abs(MidY - LastMidY)){
+        document.cookie = "moved="+(Number(moved)+1)+";";
+    }
+
+
+
+    if (Number(moved)>=100 && !document.getElementById("bubble_m100")){
+        let BubblesTotal= 0;
+        for (let _y =0;_y<Bubbles.length; _y++){
+            for (let _x=0;_x<Bubbles[_y].length; _x++) BubblesTotal++ ;
+        }
+
+        let fit = Math.sqrt(BubblesTotal+1) - Math.floor(Math.sqrt(BubblesTotal+1)) === 0;
+
+        let NewMapSize = fit ? Math.sqrt(BubblesTotal+1) : Math.floor(Math.sqrt(BubblesTotal+1))+1;
+
+        let newBubbles = [];
+        console.log(Bubbles);
+
+
+        for (let i = 0; i <NewMapSize; i++) {
+            newBubbles[i] = [];
+        }
+
+        console.log(mapSize,NewMapSize);
+
+        for (let Y = 0; Y < NewMapSize; Y++){
+            for (let X = 0; X < NewMapSize; X++){
+                if (BubblesTotal<=Y*2+X) break;
+                let v = 0;
+                for (let yy = 0; yy < mapSize; yy++) {
+                    for (let xx = 0; xx < mapSize; xx++) {
+                        if (Y*NewMapSize+X === yy*mapSize+xx){
+                            v = Bubbles[yy][xx];
+                            break;
+                        }
+                    }
+                }
+                newBubbles[Y][X] = v;
+            }
+        }
+
+        Bubbles = newBubbles;
+        mapSize = NewMapSize;
+
+        console.log(newBubbles);
+
+
+
+
+        let button = document.createElement("button");
+        let h2 = document.createElement("h2");
+        let h6 = document.createElement("h6");
+        let img = document.createElement("img");
+
+
+        h2.textContent = LimSquares["Moved100"].Name;
+        button.style.backgroundColor = "#" + LimSquares["Moved100"].Color;
+        h2.style.color = "#" + hex(LimSquares["Moved100"].Color,"333333", +1);
+        h6.style.color = "#" + hex(LimSquares["Moved100"].Color,"111111", +1);
+        button.style.borderColor = "#" + hex(LimSquares["Moved100"].Color,"111111", -1);
+
+        button.style.boxShadow = "0 0 10px #"+hex(LimSquares["Moved100"].Color,"111111", +1);
+
+
+
+
+
+        button.style.left = window.innerWidth/2+"px";
+        button.style.top = window.innerHeight/2+"px";
+
+        button.style.width =  "50px";
+        button.style.height = "50px";
+
+        button.id = "bubble_"+LimSquares["Moved100"].id;
+
+        button.classList.add("Square");
+
+        button.classList.add(BubblesTotal);
+
+        img.classList.add("Icon");
+
+        button.appendChild(img);
+
+        button.appendChild(h2);
+        button.appendChild(h6);
+
+        document.getElementById("Bubbles").appendChild(button);
+
+        for (let Y = 0; Y < mapSize; Y++) {
+            for (let X = 0; X < mapSize; X++) {
+                if (Y === 0 && X === 0){}else{
+                    if (Bubbles[Y][X] === 0){
+                        Bubbles[Y][X] = BubblesTotal;
+                    }
+                }
+            }
+        }
+
+
+    }
+
+
+
+
+    //
 
 
     for (let y = 0;y<Bubbles.length;y++) {
@@ -148,6 +296,10 @@ let a = function(){
 
             let disY =  (MidX - x === 0 && MidY - y === 0) ? 60 : 0;
             let EasY = 0;
+            
+            let SqrData = Squares[y*mapSize + x];
+
+            if(!SqrData) SqrData = getLim(y,x);
 
 
             if (MidY - y <= -1){
@@ -178,19 +330,19 @@ let a = function(){
                 tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],110,110,1,10);
                 xGen = 120;
 
-                document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = Squares[y*mapSize + x].Name;
-                document.getElementsByClassName(Bubbles[y][x])[0].children[2].textContent = Squares[y*mapSize + x].Details;
+                document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = SqrData.Name;
+                document.getElementsByClassName(Bubbles[y][x])[0].children[2].textContent = SqrData.Details;
                 document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "20px";
                 document.getElementsByClassName(Bubbles[y][x])[0].children[2].style.fontSize = "13px";
 
 
 
-                if ( Squares[y*mapSize + x].Image === ""){
+                if ( SqrData.Image === ""){
 
                 }   else{
                     document.getElementsByClassName(Bubbles[y][x])[0].children[0].src = "";
                     document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.width = "0";
-                    document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = Squares[y*mapSize + x].Name;
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = SqrData.Name;
                     document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "20px";
 
                     document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.position = "absolute";
@@ -203,15 +355,15 @@ let a = function(){
                 tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],50,50,1,10);
                 xGen = 60;
 
-                document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = Squares[y*mapSize + x].Name.substring(0,1);
+                document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = SqrData.Name.substring(0,1);
                 document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "26px";
 
-                document.getElementsByClassName(Bubbles[y][x])[0].children[2].textContent = Squares[y*mapSize + x].Details;
+                document.getElementsByClassName(Bubbles[y][x])[0].children[2].textContent = SqrData.Details;
                 document.getElementsByClassName(Bubbles[y][x])[0].children[2].style.fontSize = "0";
 
 
 
-                if ( Squares[y*mapSize + x].Image === ""){
+                if ( SqrData.Image === ""){
                     document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.position = "absolute";
 
 
@@ -220,7 +372,7 @@ let a = function(){
                     document.getElementsByClassName(Bubbles[y][x])[0].children[2].style.fontSize = "0";
 
                     document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.width = "90%";
-                    document.getElementsByClassName(Bubbles[y][x])[0].children[0].src = Squares[y*mapSize + x].Image;
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[0].src = SqrData.Image;
 
                     document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.position = "relative";
 
@@ -239,6 +391,9 @@ let a = function(){
 
         Y = Y+yGen;
     }
+
+    LastMidX = MidX;
+    LastMidY = MidY;
 };
 
 function hex(a,b,c){
@@ -315,7 +470,7 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location.href = "https://hxx.lol/m";
     }
 
-    fit = Math.sqrt(Squares.length) - Math.floor(Math.sqrt(Squares.length)) === 0;
+    let fit = Math.sqrt(Squares.length) - Math.floor(Math.sqrt(Squares.length)) === 0;
 
     mapSize = fit ? Math.sqrt(Squares.length) : Math.floor(Math.sqrt(Squares.length))+1;
 
@@ -329,9 +484,9 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 
-    document.cookie ="hxx = god;";
-
-
+    if (document.cookie === ""){
+        document.cookie = "moved=0;";
+    }
 
     for (let i = 0; i < Squares.length; i++){
         let button = document.createElement("button");
@@ -356,9 +511,7 @@ document.addEventListener("DOMContentLoaded", function(){
         button.style.width =  "50px";
         button.style.height = "50px";
 
-
-
-
+        button.id = "bubble_"+Squares[i].id;
 
         button.classList.add("Square");
         button.classList.add(i);
@@ -392,8 +545,8 @@ document.addEventListener("DOMContentLoaded", function(){
     a();
 
     document.getElementById("CloseButton").addEventListener("click", function(event) {
-        if (inUi){}else{return;}
-        ent();
+        if (inUi)  ent();
+
     });
 
 });
@@ -405,13 +558,20 @@ let OYPix = 0;
 
 let inUi = false;
 
+function getLim(_x,_y){
+    if (document.getElementsByClassName(Bubbles[_y][_x])[0].id === "bubble_m100") return LimSquares["Moved100"];
+}
+
 async function ent(){
 
     tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],96,96,1,10);
     await sleep(70);
     tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110,110,1,10);
+    
+    
+    let SqrData = Squares[MidY*mapSize+MidX];
 
-
+    if(!SqrData) SqrData = getLim(MidY,MidX);
 
 
     if (inUi){
@@ -438,23 +598,34 @@ async function ent(){
     }else{
         inUi = true;
 
-        document.getElementById("Page").style.backgroundColor = "#" + Squares[MidY*mapSize+MidX].Color;
-        document.getElementById("Page").style.borderColor = "#" + hex(Squares[MidY*mapSize+MidX].Color,"222222",-1);
-        document.getElementById("Page").style.color = "#" + hex(Squares[MidY*mapSize+MidX].Color,"311141", 1);
+        document.getElementById("Page").style.backgroundColor = "#" + SqrData.Color;
+        document.getElementById("Page").style.borderColor = "#" + hex(SqrData.Color,"222222",-1);
+        document.getElementById("Page").style.color = "#" + hex(SqrData.Color,"311141", 1);
 
-        document.getElementById("TopBar").style.backgroundColor =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"112211",-1);
+        document.getElementById("TopBar").style.backgroundColor =  "#" + hex(SqrData.Color,"112211",-1);
         document.getElementById("TopBar").style.borderWidth =  "0";
-        document.getElementById("TopBar").style.borderColor =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"112211",-1);
+        document.getElementById("TopBar").style.borderColor =  "#" + hex(SqrData.Color,"112211",-1);
 
-        document.getElementById("Page").style.boxShadow = "0 0 30px #"+hex(Squares[MidY*mapSize+MidX].Color,"111111", +1);
-        document.getElementById("TopBar").style.boxShadow =  "0 0 30px #"+hex(Squares[MidY*mapSize+MidX].Color,"112211",-1);
+        document.getElementById("Page").style.boxShadow = "0 0 30px #"+hex(SqrData.Color,"111111", +1);
+        document.getElementById("TopBar").style.boxShadow =  "0 0 30px #"+hex(SqrData.Color,"112211",-1);
 
-        document.getElementById("TopBarText").style.color =  "#" + hex(Squares[MidY*mapSize+MidX].Color,"311141", 1);
+        document.getElementById("TopBarText").style.color =  "#" + hex(SqrData.Color,"311141", 1);
+
+
+        document.getElementById("CloseButton").style.border =  "3px solid  #" + hex(SqrData.Color,"311141", +1);
+        document.getElementById("CloseButton").style.boxShadow =  "0 0 30px   #" + hex(SqrData.Color,"311141", 1);
+        document.getElementById("CloseButton").style.backgroundColor =  "#" + SqrData.Color;
+
+        let Emojis = [
+            '🫠','🤔','🥸'
+        ]
+        console.log(Math.floor(Math.random()*Emojis.length));
+        document.getElementById("CloseButton").textContent = Emojis[Math.floor(Math.random()*Emojis.length)];
 
 
 
-        document.getElementById("TopBarImg").src = Squares[MidY*mapSize+MidX].Image;
-        document.getElementById("TopBarText").textContent = Squares[MidY*mapSize+MidX].Name;
+        document.getElementById("TopBarImg").src = SqrData.Image;
+        document.getElementById("TopBarText").textContent = SqrData.Name;
 
 
 
@@ -483,7 +654,7 @@ async function ent(){
 
 
         const Http = new XMLHttpRequest();
-        const url= Squares[MidY*mapSize+MidX].Page;
+        const url= SqrData.Page;
         Http.open("GET", url);
         Http.send();
 
@@ -502,7 +673,7 @@ async function ent(){
                     let TitleE = document.createElement('h1');
                     TitleE.textContent = Data[i]["Title"];
                     TitleE.classList.add("Title");
-                    TitleE.style.color = "#" + hex(Squares[MidX+MidY*mapSize].Color,"444444", +1);
+                    TitleE.style.color = "#" + hex(SqrData.Color,"444444", +1);
                     CaseE.appendChild(TitleE);
 
 
@@ -511,7 +682,7 @@ async function ent(){
                     let ContentE = document.createElement('h6');
                     ContentE.textContent = Data[i]["Content"];
                     ContentE.classList.add("Content");
-                    ContentE.style.color = "#" + hex(Squares[MidX+MidY*mapSize].Color,"222222", +1);
+                    ContentE.style.color = "#" + hex(SqrData.Color,"222222", +1);
                     CaseE.appendChild(ContentE);
 
 
@@ -527,7 +698,7 @@ async function ent(){
                             ImageE.classList.add("Image");
                             ImageE.src = Images[ImageIndex]["Image"];
                             ImageE.alt = Images[ImageIndex]["Text"];
-                            ImageE.style.borderColor = "#" + hex(Squares[MidX+MidY*mapSize].Color,"222222", +1);
+                            ImageE.style.borderColor = "#" + hex(SqrData.Color,"222222", +1);
 
 
 
@@ -551,7 +722,7 @@ async function ent(){
                             LinkE.classList.add("Link");
                             LinkE.href = Links[LinksIndex]["Link"];
                             LinkE.text = Links[LinksIndex]["Text"];
-                            LinkE.style.color = "#" + hex(Squares[MidX+MidY*mapSize].Color,"444444", +1);
+                            LinkE.style.color = "#" + hex(SqrData.Color,"444444", +1);
 
 
 

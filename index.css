@@ -328,10 +328,10 @@ h4{
 
     border-radius: 100%;
 
-    border: 3px solid rgb(255, 255, 255);
-    text-shadow: rgb(0, 0, 0) 0.1em 0.1em 1em;
-    box-shadow: 0 0 30px rgb(255, 255, 255);
-    background-color: rgb(234, 234, 234);
+    border: 3px solid #A32D5C;
+    text-shadow: #000000 0.1em 0.1em 1em;
+    box-shadow: 0 0 30px #A01E61;
+    background-color: #B8216B;
 
     font-size: 30px;
     transform:  translate(-50%,-50%);
@@ -341,6 +341,8 @@ h4{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    cursor: pointer;
 }
 
 @keyframes CloseButtonAnim {
