@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
 
-    font-family: "UD Digi Kyokasho N-B", Helvetica, "serif";
+    font-family: "UD Digi Kyokasho N-B", "system-ui", "serif";
 
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -137,7 +137,7 @@ body{
 
 
 #Page{
-    overflow: auto;
+    overflow-y: scroll;
     width: 100%;
     height: 100%;
 }
@@ -340,8 +340,8 @@ h4{
     top: -50%;
     right: 50%;
 
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
 
     border-radius: 100%;
 
