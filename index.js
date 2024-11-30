@@ -9,7 +9,7 @@ let Squares = [
 
         Image:"/f/img/0324.gif",
 
-        Page:"/f/main.json",
+        Card:"/f/main.json",
 
         Color: "5d3ca9",
 
@@ -20,7 +20,7 @@ let Squares = [
         Name:"7SunFish",
         Details:"Hxx的好朋友",
         Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
-        Page:"/f/7sf.json",
+        Card:"/f/7sf.json",
         Color: "c1842b",
 
         id : "7sf"
@@ -30,7 +30,7 @@ let Squares = [
         Name:"我所對不起的你",
         Details:"獻給你，朋友。",
         Image:"",
-        Page:"/f/sry.json",
+        Card:"/f/sry.json",
         Color: "4e46b8",
 
         id : "sry"
@@ -40,7 +40,7 @@ let Squares = [
         Name:"Uzi特寫",
         Details:"Uzi的特寫照外流。",
         Image:"/f/img/IMG_9089.jpg",
-        Page:"/f/uzi.json",
+        Card:"/f/uzi.json",
         Color: "7946b8",
 
         id : "uzi"
@@ -127,7 +127,7 @@ let LimSquares = {
 
         Image:"",
 
-        Page:"/f/m100.json",
+        Card:"/f/m100.json",
 
         Color: "a93c74",
 
@@ -147,13 +147,11 @@ let creatBubble = function(BubbleSqr){
     let NewMapSize = fit ? Math.sqrt(BubblesTotal+1) : Math.floor(Math.sqrt(BubblesTotal+1))+1;
 
     let newBubbles = [];
-    console.log(Bubbles);
 
     for (let i = 0; i <NewMapSize; i++) {
         newBubbles[i] = [];
     }
 
-    console.log(mapSize,NewMapSize);
 
     for (let Y = 0; Y < NewMapSize; Y++){
         for (let X = 0; X < NewMapSize; X++){
@@ -174,7 +172,6 @@ let creatBubble = function(BubbleSqr){
     Bubbles = newBubbles;
     mapSize = NewMapSize;
 
-    console.log(newBubbles);
 
 
 
@@ -306,7 +303,7 @@ let a = function(){
 
             let disY =  (MidX - x === 0 && MidY - y === 0) ? 60 : 0;
             let EasY = 0;
-            
+
             let SqrData = Squares[y*mapSize + x];
 
             if(!SqrData) SqrData = getLim(y,x);
@@ -577,8 +574,8 @@ async function ent(){
     tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],96,96,1,10);
     await sleep(70);
     tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110,110,1,10);
-    
-    
+
+
     let SqrData = Squares[MidY*mapSize+MidX];
 
     if(!SqrData) SqrData = getLim(MidY,MidX);
@@ -587,8 +584,8 @@ async function ent(){
     if (inUi){
         inUi = false;
 
-        tweenSize(document.getElementById("Page"),100,0,1,6);
-        tweenMove(document.getElementById("Page"),window.innerWidth/2,window.innerHeight,0.000001,1);
+        tweenSize(document.getElementById("Card"),100,0,1,6);
+        tweenMove(document.getElementById("Card"),window.innerWidth/2,window.innerHeight,0.000001,1);
 
         document.getElementById("TopBar").style.borderWidth =  "0";
         document.getElementById("TopBar").style.borderColor = "rgba(0,0,0,0)";
@@ -596,7 +593,7 @@ async function ent(){
 
         await sleep(100);
 
-        tweenMove(document.getElementById("Page"),0,-100,0.000001,1);
+        tweenMove(document.getElementById("Card"),0,-100,0.000001,1);
         tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,-200,2,1);
 
         let n = document.getElementsByClassName("Case").length;
@@ -608,16 +605,17 @@ async function ent(){
     }else{
         inUi = true;
 
-        document.getElementById("Page").style.backgroundColor = "#" + SqrData.Color+"AA";
-        document.getElementById("Page").style.borderColor = "#" + hex(SqrData.Color,"222222",-1);
-        document.getElementById("Page").style.color = "#" + hex(SqrData.Color,"311141", 1);
+        document.getElementById("Card").style.backgroundColor = "#" + SqrData.Color+"AA";
+        document.getElementById("Card").style.borderColor = "#" + hex(SqrData.Color,"222222",-1);
+        document.getElementById("Card").style.color = "#" + hex(SqrData.Color,"311141", 1);
 
-        document.getElementById("TopBar").style.backgroundColor =  "#" + hex(SqrData.Color,"112211",-1)+"EA";
-        document.getElementById("TopBar").style.borderWidth =  "0";
-        document.getElementById("TopBar").style.borderColor =  "#" + hex(SqrData.Color,"112211",-1);
+        document.getElementById("TopBar").style.backgroundColor =  "#" + hex(SqrData.Color,"112211",-1)+"7A";
+        document.getElementById("TopBar").style.borderWidth =  "3px";
+        document.getElementById("TopBar").style.borderColor =  "#" + hex(SqrData.Color,"111111",-1);
 
-        document.getElementById("Page").style.boxShadow = "0 0 30px #"+hex(SqrData.Color,"111111", +1);
-        document.getElementById("TopBar").style.boxShadow =  "0 0 30px #"+hex(SqrData.Color,"112211",-1);
+
+        document.getElementById("Card").style.boxShadow = "0 0 30px #"+hex(SqrData.Color,"111111", +1);
+        document.getElementById("TopBar").style.boxShadow =  "0 0 30px #"+hex(SqrData.Color,"333333",+1);
 
         document.getElementById("TopBarText").style.color =  "#" + hex(SqrData.Color,"311141", 1);
 
@@ -627,9 +625,8 @@ async function ent(){
         document.getElementById("CloseButton").style.backgroundColor =  "#" + SqrData.Color+"EA";
 
         let Emojis = [
-            '🫠','🤔','🥸','💪','💩','📖','😶‍🌫️','🤐','🙄','😯','😪'
+            '🫠','🤔','🥸','💪','💩','📖','😶‍🌫️','🤐','🙄','😯','😪','🐟'
         ]
-        console.log(Math.floor(Math.random()*Emojis.length));
         document.getElementById("CloseButton").textContent = Emojis[Math.floor(Math.random()*Emojis.length)];
 
 
@@ -641,23 +638,23 @@ async function ent(){
 
 
 
-        tweenMove(document.getElementById("Page"),window.innerWidth/2,window.innerHeight,0.000001,1);
+        tweenMove(document.getElementById("Card"),window.innerWidth/2,window.innerHeight,0.000001,1);
         await tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,-200,0.000001,1);
 
         tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,100,4,1);
 
 
         await sleep(100);
-        document.getElementById("Page").style.height = "auto";
-        document.getElementById("Page").style.width = "auto";
+        document.getElementById("Card").style.height = "auto";
+        document.getElementById("Card").style.width = "auto";
 
-        await tweenSize(document.getElementById("Page"),
+        await tweenSize(document.getElementById("Card"),
             500,
             500
             ,.1,1);
 
 
-        tweenMove(document.getElementById("Page"),window.innerWidth/2,window.innerHeight/2,1,10);
+        tweenMove(document.getElementById("Card"),window.innerWidth/2,window.innerHeight/2,1,10);
 
         let LoadCase =  document.createElement('div');
         let LoadBox =  document.createElement('div');
@@ -672,7 +669,7 @@ async function ent(){
 
 
         const Http = new XMLHttpRequest();
-        const url= SqrData.Page;
+        const url= SqrData.Card;
         Http.open("GET", url);
         Http.send();
 
@@ -683,9 +680,10 @@ async function ent(){
                 await sleep(10);
 
                 let Data = JSON.parse(Http.responseText);
-                console.log(Data);
                 for (let i = 0;i<Data.length;i++){
+
                     let CaseE = document.createElement('div');
+                    if (i === 0) CaseE.style.paddingTop="30px";
                     CaseE.classList.add("Case");
 
                     let Title = Data[i]["Title"];
@@ -846,7 +844,6 @@ document.addEventListener('mouseup', () => {
 
     isHolding = false;
     if (moved){}else{
-        console.log("aaa");
         ent();
     }
     moved = false;
