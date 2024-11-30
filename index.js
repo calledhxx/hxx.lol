@@ -36,7 +36,16 @@ let Squares = [
         id : "sry"
 
     },
+    {
+        Name:"Uzi特寫",
+        Details:"Uzi的特寫照外流。",
+        Image:"/f/img/IMG_9089.jpg",
+        Page:"/f/uzi.json",
+        Color: "7946b8",
 
+        id : "sry"
+
+    },
 ]
 
 let Bubbles = [
@@ -615,10 +624,10 @@ async function ent(){
 
         document.getElementById("CloseButton").style.border =  "3px solid  #" + hex(SqrData.Color,"311141", +1);
         document.getElementById("CloseButton").style.boxShadow =  "0 0 30px   #" + hex(SqrData.Color,"311141", 1);
-        document.getElementById("CloseButton").style.backgroundColor =  "#" + SqrData.Color;
+        document.getElementById("CloseButton").style.backgroundColor =  "#" + SqrData.Color+"EA";
 
         let Emojis = [
-            '🫠','🤔','🥸'
+            '🫠','🤔','🥸','💪','💩','📖','😶‍🌫️','🤐','🙄','😯','😪'
         ]
         console.log(Math.floor(Math.random()*Emojis.length));
         document.getElementById("CloseButton").textContent = Emojis[Math.floor(Math.random()*Emojis.length)];
@@ -733,6 +742,16 @@ async function ent(){
                         }
                         CaseE.appendChild(LinksCaseE);
                     }
+
+                    let Line = Data[i]["Line"];
+
+                    if (Line){
+                        let LineE = document.createElement('div');
+                        LineE.classList.add("Line");
+                        LineE.style.backgroundColor = "#" + hex(SqrData.Color,"222222", +1);
+                        CaseE.appendChild(LineE);
+                    }
+
 
 
                     document.getElementById("Page").appendChild(CaseE);
