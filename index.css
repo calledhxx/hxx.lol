@@ -67,11 +67,66 @@ html{
 
 body{
 
-    background: linear-gradient(80deg, #38144a, #23184a);
 
 
     height: 100vh;
     width: 100%;
+    background: linear-gradient(80deg, #38144a, #23184a);
+}
+
+@keyframes BackGroundAnim {
+    0%{
+        opacity: 0.03;
+        background-size: 25%;
+        transform: rotate(-3deg) translate(-50%, -50%);
+
+    }
+    25%{
+        opacity: 0.05;
+        background-size: 26%;
+        transform: rotate(-2deg) translate(-51%, -50%);
+
+    }
+    50%{
+        opacity: 0.04;
+        background-size: 25%;
+        transform: rotate(2deg) translate(-50%, -51%);
+
+    }
+    75%{
+        opacity: 0.01;
+        background-size: 24%;
+        transform: rotate(1deg) translate(-51%, -50%);
+
+    }
+    100%{
+        opacity: 0.03;
+        background-size: 25%;
+        transform: rotate(-3deg) translate(-50%, -50%);
+
+    }
+}
+
+#BackGround{
+
+    position: absolute;
+    width: 200%;
+    height: 400vh;
+
+    background-image: url("BackGround.png");
+    background-repeat: repeat;
+    background-position: center center;
+    background-size: 10%;
+    z-index: -1;
+
+    opacity: 0.03;
+
+    animation: BackGroundAnim 5s infinite ease-in-out;
+
+    top: 50%;
+    left: 50%;
+
+
 }
 
 #Main{
