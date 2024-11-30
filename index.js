@@ -43,7 +43,7 @@ let Squares = [
         Page:"/f/uzi.json",
         Color: "7946b8",
 
-        id : "sry"
+        id : "uzi"
 
     },
 ]
@@ -541,7 +541,7 @@ document.addEventListener("DOMContentLoaded", function(){
     //document.getElementsByClassName(Bubbles[y][x])[0].style.left = -MidX*55+XfirstPix+X+"px";
     //document.getElementsByClassName(Bubbles[y][x])[0].style.top = -MidY*55+YfirstPix+Y+"px";
 
-    let parts = new URLSearchParams(  window.location.href);
+    let parts = new URLSearchParams(  window.location.search);
 
     for (let i = 0;i<Squares.length;i++){
         if (parts.get('bubble')){} else break;
