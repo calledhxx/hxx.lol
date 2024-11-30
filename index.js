@@ -34,17 +34,7 @@ let Squares = [
         id : "sry"
 
     },
-    {
-        Name:"我所對不起的你",
-        Details:"獻給你，朋友。",
-        Image:"",
-        Page:"/f/sry.json",
-        Color: "4e46b8",
-
-        id : "sry"
-
-    },
-
+   
 ]
 
 let Bubbles = [
@@ -135,6 +125,107 @@ let LimSquares = {
     }
 }
 
+let creatBubble = function(BubbleSqr){
+    let BubblesTotal= 0;
+    for (let _y =0;_y<Bubbles.length; _y++){
+        for (let _x=0;_x<Bubbles[_y].length; _x++) BubblesTotal++ ;
+    }
+
+    let fit = Math.sqrt(BubblesTotal+1) - Math.floor(Math.sqrt(BubblesTotal+1)) === 0;
+
+    let NewMapSize = fit ? Math.sqrt(BubblesTotal+1) : Math.floor(Math.sqrt(BubblesTotal+1))+1;
+
+    let newBubbles = [];
+    console.log(Bubbles);
+
+    for (let i = 0; i <NewMapSize; i++) {
+        newBubbles[i] = [];
+    }
+
+    console.log(mapSize,NewMapSize);
+
+    for (let Y = 0; Y < NewMapSize; Y++){
+        for (let X = 0; X < NewMapSize; X++){
+            if (BubblesTotal<=Y*2+X) break;
+            let v = 0;
+            for (let yy = 0; yy < mapSize; yy++) {
+                for (let xx = 0; xx < mapSize; xx++) {
+                    if (Y*NewMapSize+X === yy*mapSize+xx){
+                        v = Bubbles[yy][xx];
+                        break;
+                    }
+                }
+            }
+            newBubbles[Y][X] = v;
+        }
+    }
+
+    Bubbles = newBubbles;
+    mapSize = NewMapSize;
+
+    console.log(newBubbles);
+
+
+
+
+    let button = document.createElement("button");
+    let h2 = document.createElement("h2");
+    let h6 = document.createElement("h6");
+    let img = document.createElement("img");
+
+
+    h2.textContent =BubbleSqr.Name;
+    button.style.backgroundColor = "#" + BubbleSqr.Color;
+    h2.style.color = "#" + hex(BubbleSqr.Color,"333333", +1);
+    h6.style.color = "#" + hex(BubbleSqr.Color,"111111", +1);
+    button.style.borderColor = "#" + hex(BubbleSqr.Color,"111111", -1);
+
+    button.style.boxShadow = "0 0 10px #"+hex(BubbleSqr.Color,"111111", +1);
+
+
+
+
+
+    button.style.left = window.innerWidth/2+"px";
+    button.style.top = window.innerHeight/2+"px";
+
+    button.style.width =  "50px";
+    button.style.height = "50px";
+
+    button.id = "bubble_"+BubbleSqr.id;
+
+    button.classList.add("Square");
+
+    button.classList.add(BubblesTotal);
+
+    img.classList.add("Icon");
+
+    button.appendChild(img);
+
+    button.appendChild(h2);
+    button.appendChild(h6);
+
+    document.getElementById("Bubbles").appendChild(button);
+
+    let db = 0;
+    for (let Y = 0; Y < mapSize; Y++) {
+        for (let X = 0; X < mapSize; X++) {
+            if (Y === 0 && X === 0){}else{
+                if (Bubbles[Y][X]){}else {
+                    Bubbles[Y][X] = BubblesTotal;
+                    db = 1;
+                    break;
+                }
+            }
+        }
+        if (db){
+            break;
+        }
+    }
+
+
+}
+
 let a = function(){
     let X = 0;
     let Y = 0;
@@ -165,99 +256,7 @@ let a = function(){
 
 
     if (Number(moved)>=100 && !document.getElementById("bubble_m100")){
-        let BubblesTotal= 0;
-        for (let _y =0;_y<Bubbles.length; _y++){
-            for (let _x=0;_x<Bubbles[_y].length; _x++) BubblesTotal++ ;
-        }
-
-        let fit = Math.sqrt(BubblesTotal+1) - Math.floor(Math.sqrt(BubblesTotal+1)) === 0;
-
-        let NewMapSize = fit ? Math.sqrt(BubblesTotal+1) : Math.floor(Math.sqrt(BubblesTotal+1))+1;
-
-        let newBubbles = [];
-        console.log(Bubbles);
-
-
-        for (let i = 0; i <NewMapSize; i++) {
-            newBubbles[i] = [];
-        }
-
-        console.log(mapSize,NewMapSize);
-
-        for (let Y = 0; Y < NewMapSize; Y++){
-            for (let X = 0; X < NewMapSize; X++){
-                if (BubblesTotal<=Y*2+X) break;
-                let v = 0;
-                for (let yy = 0; yy < mapSize; yy++) {
-                    for (let xx = 0; xx < mapSize; xx++) {
-                        if (Y*NewMapSize+X === yy*mapSize+xx){
-                            v = Bubbles[yy][xx];
-                            break;
-                        }
-                    }
-                }
-                newBubbles[Y][X] = v;
-            }
-        }
-
-        Bubbles = newBubbles;
-        mapSize = NewMapSize;
-
-        console.log(newBubbles);
-
-
-
-
-        let button = document.createElement("button");
-        let h2 = document.createElement("h2");
-        let h6 = document.createElement("h6");
-        let img = document.createElement("img");
-
-
-        h2.textContent = LimSquares["Moved100"].Name;
-        button.style.backgroundColor = "#" + LimSquares["Moved100"].Color;
-        h2.style.color = "#" + hex(LimSquares["Moved100"].Color,"333333", +1);
-        h6.style.color = "#" + hex(LimSquares["Moved100"].Color,"111111", +1);
-        button.style.borderColor = "#" + hex(LimSquares["Moved100"].Color,"111111", -1);
-
-        button.style.boxShadow = "0 0 10px #"+hex(LimSquares["Moved100"].Color,"111111", +1);
-
-
-
-
-
-        button.style.left = window.innerWidth/2+"px";
-        button.style.top = window.innerHeight/2+"px";
-
-        button.style.width =  "50px";
-        button.style.height = "50px";
-
-        button.id = "bubble_"+LimSquares["Moved100"].id;
-
-        button.classList.add("Square");
-
-        button.classList.add(BubblesTotal);
-
-        img.classList.add("Icon");
-
-        button.appendChild(img);
-
-        button.appendChild(h2);
-        button.appendChild(h6);
-
-        document.getElementById("Bubbles").appendChild(button);
-
-        for (let Y = 0; Y < mapSize; Y++) {
-            for (let X = 0; X < mapSize; X++) {
-                if (Y === 0 && X === 0){}else{
-                    if (Bubbles[Y][X] === 0){
-                        Bubbles[Y][X] = BubblesTotal;
-                    }
-                }
-            }
-        }
-
-
+        creatBubble(LimSquares["Moved100"]);
     }
 
 
