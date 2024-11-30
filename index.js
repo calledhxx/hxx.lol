@@ -3,13 +3,28 @@
 let Squares = [
     {
 
+        Name:"歡迎光臨",
+
+        Details:"按下 Enter 繼續。",
+
+        Image:"",
+
+        Page:"/f/welcome.json",
+
+        Color: "3ca98a",
+
+        id : ""
+
+    },
+    {
+
         Name:"个人档案",
 
         Details:"Hxx的個人檔案。",
 
         Image:"/f/img/0324.gif",
 
-        Card:"/f/main.json",
+        Page:"/f/main.json",
 
         Color: "5d3ca9",
 
@@ -20,7 +35,7 @@ let Squares = [
         Name:"7SunFish",
         Details:"Hxx的好朋友",
         Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
-        Card:"/f/7sf.json",
+        Page:"/f/7sf.json",
         Color: "c1842b",
 
         id : "7sf"
@@ -30,7 +45,7 @@ let Squares = [
         Name:"我所對不起的你",
         Details:"獻給你，朋友。",
         Image:"",
-        Card:"/f/sry.json",
+        Page:"/f/sry.json",
         Color: "4e46b8",
 
         id : "sry"
@@ -40,7 +55,7 @@ let Squares = [
         Name:"Uzi特寫",
         Details:"Uzi的特寫照外流。",
         Image:"/f/img/IMG_9089.jpg",
-        Card:"/f/uzi.json",
+        Page:"/f/uzi.json",
         Color: "7946b8",
 
         id : "uzi"
@@ -127,7 +142,7 @@ let LimSquares = {
 
         Image:"",
 
-        Card:"/f/m100.json",
+        Page:"/f/m100.json",
 
         Color: "a93c74",
 
@@ -168,6 +183,8 @@ let creatBubble = function(BubbleSqr){
             newBubbles[Y][X] = v;
         }
     }
+
+    console.log(Bubbles,newBubbles);
 
     Bubbles = newBubbles;
     mapSize = NewMapSize;
@@ -306,7 +323,9 @@ let a = function(){
 
             let SqrData = Squares[y*mapSize + x];
 
-            if(!SqrData) SqrData = getLim(y,x);
+            if(!SqrData) SqrData = getLim(x,y);
+
+            if (SqrData){}else{break;}
 
 
             if (MidY - y <= -1){
@@ -566,6 +585,7 @@ let OYPix = 0;
 let inUi = false;
 
 function getLim(_x,_y){
+    if (Bubbles[_y][_x]){}else{return 0;};
     if (document.getElementsByClassName(Bubbles[_y][_x])[0].id === "bubble_m100") return LimSquares["Moved100"];
 }
 
@@ -578,7 +598,7 @@ async function ent(){
 
     let SqrData = Squares[MidY*mapSize+MidX];
 
-    if(!SqrData) SqrData = getLim(MidY,MidX);
+    if(!SqrData) SqrData = getLim(MidX,MidY);
 
 
     if (inUi){
@@ -669,7 +689,7 @@ async function ent(){
 
 
         const Http = new XMLHttpRequest();
-        const url= SqrData.Card;
+        const url= SqrData.Page;
         Http.open("GET", url);
         Http.send();
 
