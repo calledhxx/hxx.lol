@@ -611,10 +611,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 
-let isHolding = false;
 
-let OXPix = 0;
-let OYPix = 0;
 
 let inUi = false;
 
@@ -908,81 +905,72 @@ document.addEventListener("keypress", function(event) {
 
 });
 
-document.addEventListener('mousedown', () => {
-    if (inUi) return;
 
-
-    isHolding = true;
-    OYPix =  window.event.clientY;
-    OXPix =  window.event.clientX;
-});
-
-let moved = false;
 
 document.addEventListener('mouseup', () => {
     if (inUi) return;
-
-
-    isHolding = false;
-    if (moved){}else{
-        ent();
-    }
-    moved = false;
-
+    ent();
 });
 
 
+let X0 = 0;
+let Y0 = 0;
 
-document.addEventListener('mousemove', () => {
+document.addEventListener('mousemove', (m) => {
     if (inUi) return;
 
+    if (X0&&Y0){}else{
+        X0 = m.clientX;
+        Y0 = m.clientY;
+     }
 
 
-    if (isHolding) {
-        if (Math.floor(Math.abs((OXPix - window.event.clientX)/80))>0){
-            let db = (OXPix - window.event.clientX)/80>0;
-
-            let IF = db ? (MidX+1<=mapSize-1 && (typeof Bubbles[MidY][MidX+1] === "number")): (MidX-1 >= 0 && (typeof Bubbles[MidY][MidX-1] === "number"));
+    if (Math.abs(m.clientX - X0  ) > 50){
+        let db =  X0-m.clientX > 0;
+        let IF = db?(MidX+1<mapSize ? (typeof  Bubbles[MidY][MidX+1]) === "number":false): (MidX-1>=0 ? (typeof  Bubbles[MidY][MidX-1]) === "number" : false);
 
 
-            if (IF ){
-                moved = true;
-                if (db){
-                    MidX += 1;
-
-                }else{
-                    MidX += -1;
-                }
+        if (IF){
+            if (db){
+                MidX=MidX+1;
             }else{
-                return;
-            }
+                MidX=MidX-1;
 
-
-            a();
-            OXPix =  window.event.clientX;
-        }
-        if (Math.floor(Math.abs((OYPix - window.event.clientY)/80))>0){
-            let db = (OYPix - window.event.clientY)/80>0;
-
-            let IF = db ? (MidY+1<=mapSize-1 && (typeof Bubbles[MidY+1][MidX] === "number")) : (MidY-1 >= 0 && (typeof Bubbles[MidY-1][MidX] === "number"));
-
-            if (IF ){
-                moved = true;
-                if (db) {
-                    MidY += 1;
-
-                } else {
-                    MidY += -1;
-                }
-
-            }else{
-                return;
             }
 
             a();
 
-            OYPix =  window.event.clientY;
+        }else{
+
         }
+        X0 = m.clientX;
+
+
+    }
+
+    console.log(m.clientY,Y0);
+    if (Math.abs(m.clientY -Y0) > 50){
+        let db =  Y0-m.clientY > 0;
+        let IF = db?(MidY+1<mapSize ? (typeof  Bubbles[MidY+1][MidX]) === "number":false): (MidY-1>=0 ? (typeof  Bubbles[MidY-1][MidX]) === "number" : false);
+
+        console.log(db);
+
+        if (IF){
+            if (db){
+                MidY=MidY+1;
+            }else{
+                MidY=MidY-1;
+
+            }
+
+            a();
+
+
+        }else{
+
+        }
+        Y0 = m.clientY;
+
     }
 
 })
