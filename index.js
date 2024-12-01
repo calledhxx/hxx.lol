@@ -917,7 +917,12 @@ let X0 = 0;
 let Y0 = 0;
 
 document.addEventListener('mousemove', (m) => {
-    if (inUi) return;
+    if (inUi){
+        X0 = m.clientX;
+        Y0 = m.clientY;
+
+        return;
+    }
 
     if (X0&&Y0){}else{
         X0 = m.clientX;
@@ -939,8 +944,6 @@ document.addEventListener('mousemove', (m) => {
             }
 
             a();
-
-        }else{
 
         }
         X0 = m.clientX;
@@ -965,8 +968,6 @@ document.addEventListener('mousemove', (m) => {
 
             a();
 
-
-        }else{
 
         }
         Y0 = m.clientY;
