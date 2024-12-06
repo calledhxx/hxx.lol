@@ -635,6 +635,8 @@ async function ent(){
     if (inUi){
         inUi = false;
 
+
+
         tweenSize(document.getElementById("Card"),100,0,1,6);
         tweenMove(document.getElementById("Card"),window.innerWidth/2,window.innerHeight,0.000001,1);
 
@@ -667,6 +669,8 @@ async function ent(){
     }else{
         inUi = true;
 
+
+
         document.getElementById("Card").style.backgroundColor = "#" + SqrData.Color+"AA";
         document.getElementById("Card").style.borderColor = "#" + hex(SqrData.Color,"222222",-1);
         document.getElementById("Card").style.color = "#" + hex(SqrData.Color,"311141", 1);
@@ -685,6 +689,7 @@ async function ent(){
         document.getElementById("CloseButton").style.border =  "3px solid  #" + hex(SqrData.Color,"311141", +1);
         document.getElementById("CloseButton").style.boxShadow =  "0 0 30px   #" + hex(SqrData.Color,"311141", 1);
         document.getElementById("CloseButton").style.backgroundColor =  "#" + SqrData.Color+"EA";
+
 
         let Emojis = [
             '🫠','🤔','🥸','💪','💩','📖','😶‍🌫️','🤐','🙄','😯','😪','🐟'
@@ -906,10 +911,25 @@ document.addEventListener("keypress", function(event) {
 });
 
 
+let hasBeenMoved = false;
+let isHolding = false;
 
-document.addEventListener('mouseup', () => {
+document.addEventListener('mousedown', (m) => {
     if (inUi) return;
-    ent();
+
+    isHolding = true;
+    hasBeenMoved = false;
+
+    X0 = m.clientX;
+    Y0 = m.clientY;
+
+    console.log( m.clientX, m.clientY);
+});
+document.addEventListener('mouseup', (m) => {
+    if (inUi) return;
+    isHolding = false;
+
+    if (!hasBeenMoved) ent();
 });
 
 
@@ -917,62 +937,68 @@ let X0 = 0;
 let Y0 = 0;
 
 document.addEventListener('mousemove', (m) => {
-    if (inUi){
-        X0 = m.clientX;
-        Y0 = m.clientY;
+    if (isHolding){
+        if (inUi){
+            X0 = m.clientX;
+            Y0 = m.clientY;
 
-        return;
-    }
-
-    if (X0&&Y0){}else{
-        X0 = m.clientX;
-        Y0 = m.clientY;
-     }
-
-
-    if (Math.abs(m.clientX - X0  ) > 50){
-        let db =  X0-m.clientX > 0;
-        let IF = db?(MidX+1<mapSize ? (typeof  Bubbles[MidY][MidX+1]) === "number":false): (MidX-1>=0 ? (typeof  Bubbles[MidY][MidX-1]) === "number" : false);
-
-
-        if (IF){
-            if (db){
-                MidX=MidX+1;
-            }else{
-                MidX=MidX-1;
-
-            }
-
-            a();
-
+            return;
         }
-        X0 = m.clientX;
+
+        if (X0&&Y0){}else{
+            X0 = m.clientX;
+            Y0 = m.clientY;
+        }
 
 
-    }
+        if (Math.abs(m.clientX - X0  ) > 75){
+            let db =  X0-m.clientX > 0;
+            let IF = db?(MidX+1<mapSize ? (typeof  Bubbles[MidY][MidX+1]) === "number":false): (MidX-1>=0 ? (typeof  Bubbles[MidY][MidX-1]) === "number" : false);
 
-    console.log(m.clientY,Y0);
-    if (Math.abs(m.clientY -Y0) > 50){
-        let db =  Y0-m.clientY > 0;
-        let IF = db?(MidY+1<mapSize ? (typeof  Bubbles[MidY+1][MidX]) === "number":false): (MidY-1>=0 ? (typeof  Bubbles[MidY-1][MidX]) === "number" : false);
 
-        console.log(db);
+            if (IF){
+                hasBeenMoved = true;
 
-        if (IF){
-            if (db){
-                MidY=MidY+1;
-            }else{
-                MidY=MidY-1;
+                if (db){
+                    MidX=MidX+1;
+                }else{
+                    MidX=MidX-1;
+
+                }
+
+                a();
 
             }
-
-            a();
+            X0 = m.clientX;
 
 
         }
-        Y0 = m.clientY;
 
+        console.log(m.clientY,Y0);
+        if (Math.abs(m.clientY -Y0) > 75){
+            let db =  Y0-m.clientY > 0;
+            let IF = db?(MidY+1<mapSize ? (typeof  Bubbles[MidY+1][MidX]) === "number":false): (MidY-1>=0 ? (typeof  Bubbles[MidY-1][MidX]) === "number" : false);
+
+            console.log(db);
+
+            if (IF){
+                hasBeenMoved = true;
+                if (db){
+                    MidY=MidY+1;
+                }else{
+                    MidY=MidY-1;
+
+                }
+
+                a();
+
+
+            }
+            Y0 = m.clientY;
+
+        }
     }
+
 
 })
 
