@@ -101,7 +101,7 @@ async function MessageIt(Title,Reason){
     if (Title&&Reason){
         let AMessageCase = document.createElement("button");
         AMessageCase.classList.add("AMessageCase");
-        await tweenMsgMove(AMessageCase,-300,1,1);
+        tweenMsgMove(AMessageCase,-300,1,1);
 
 
         let MessageTouchBox = document.createElement("div");
@@ -124,6 +124,7 @@ async function MessageIt(Title,Reason){
 
 
 
+
         document.getElementById("MessagesCase").appendChild(AMessageCase);
         AMessageCase.appendChild(MessageTouchBox);
         AMessageCase.appendChild(MessageImage);
@@ -140,7 +141,9 @@ async function MessageIt(Title,Reason){
 
 
 
-        await sleep(100);
+        await sleep(300);
+        await tweenMsgMove(AMessageCase,0,1,1);
+
     }
 
 
