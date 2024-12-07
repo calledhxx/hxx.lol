@@ -525,13 +525,11 @@ h4{
 
 #MessagesCase{
     position: absolute;
-    transform: translate(-50%,-50%);
-    top: 80%;
-    left : 50%;
-
+    top: 85%;
+    right : 0;
     background-color: rgba(214, 214, 214, 0);
-    width: 600px;
-    height: 200px;
+    width: 430px;
+    height: 130px;
 
 
 }
@@ -539,13 +537,16 @@ h4{
 .AMessageCase{
     position: absolute;
 
+    left:50%;
+
     bottom: -300px;
 
     background-color: rgba(255, 147, 64, 0.4);
-    width: 594px;
-    height: 170px;
+    width: 100%;
+    height: 100%;
 
-    border-radius: 40px;
+    border-radius: 40px 0 0 40px;
+
     border: 3px solid rgba(174, 97, 55, 0.6);
     box-shadow: 0 0 30px #ffad54;
 
@@ -554,7 +555,7 @@ h4{
 
     backdrop-filter: blur(5px);
 
-    transform: rotate3d(5, 5, 5, 3deg);
+    transform: rotate3d(5, 5, 5, 3deg) translate(-50%,-50%);
 
     color: #d6d6d6;
     text-shadow: rgb(0, 0, 0) 0 0  1em;
@@ -591,9 +592,9 @@ h4{
 
 .MessageContent1{
 
-    margin: 20px;
+    margin: 10px;
 
-    font-size: 50px;
+    font-size: 28px;
 
 
 
@@ -602,8 +603,9 @@ h4{
 .MessageContent2{
 
 
+    font-size: 18px;
 
-    margin: 20px 20px 20px 20px;
+    margin: 10px 10px 10px 10px;
 
 }
 

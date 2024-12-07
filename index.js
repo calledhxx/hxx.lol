@@ -1122,7 +1122,7 @@ document.addEventListener('mousemove', (m) => {
             let _Y = (MouseY - PosBoxY )-SizeBoxY_P2;
 
             for (let i = 0;i<   document.getElementById("MessagesCase").children.length;i++){
-                document.getElementById("MessagesCase").children[i].style.transform = "rotate3d("+(_X/SizeBoxX_P2*7)+" ,"+(_Y/SizeBoxY_P2*7)+ ","+((_X/SizeBoxX_P2)*(_Y/SizeBoxY_P2))+",18deg)";
+                document.getElementById("MessagesCase").children[i].style.transform = "rotate3d("+(_X/SizeBoxX_P2*7)+" ,"+(_Y/SizeBoxY_P2*7)+ ","+((_X/SizeBoxX_P2)*(_Y/SizeBoxY_P2))+",18deg) translate(-50%,-50%)";
             }
 
         }
