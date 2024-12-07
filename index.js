@@ -61,6 +61,7 @@ let Squares = [
         id : "uzi"
 
     },
+
 ]
 
 let Bubbles = [
@@ -77,15 +78,95 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async  function tweenMove(obj,toX,toY,sec,lag){
+async  function tweenMsgMove(obj,toY,sec,lag){
+    let perSecY = (toY-obj.style.bottom.substring(0,obj.style.bottom.length-2))/(sec*10);
+
+    let Y = Number(obj.style.bottom.substring(0,obj.style.bottom.length-2));
+
+    for (let i = 0;i<(10*sec);i++){
+
+        obj.style.bottom = Y+perSecY+"px";
+
+        await sleep(lag);
+
+
+        Y = Number(obj.style.bottom.substring(0,obj.style.bottom.length-2));
+    }
+
+    obj.style.bottom = toY+"px";
+}
+
+function MessageIt(Title,Reason){
+
+    if (Title&&Reason){
+        let AMessageCase = document.createElement("button");
+        AMessageCase.classList.add("AMessageCase");
+
+        let MessageTouchBox = document.createElement("div");
+        MessageTouchBox.classList.add("MessageTouchBox");
+
+        let MessageImage = document.createElement("img");
+        MessageImage.classList.add("MessageImage");
+        MessageImage.src = "path248.png";
+
+        let MessageContentCase = document.createElement("div");
+        MessageContentCase.classList.add("MessageContentCase");
+
+        let MessageContent1 = document.createElement("h1");
+        MessageContent1.classList.add("MessageContent1");
+        MessageContent1.textContent = Title;
+
+        let MessageContent2 = document.createElement("h2");
+        MessageContent2.classList.add("MessageContent2");
+        MessageContent2.textContent = Reason;
+
+
+
+        document.getElementById("MessagesCase").appendChild(AMessageCase);
+        AMessageCase.appendChild(MessageTouchBox);
+        AMessageCase.appendChild(MessageImage);
+        AMessageCase.appendChild(MessageContentCase);
+        MessageContentCase.appendChild(MessageContent1);
+        MessageContentCase.appendChild(MessageContent2);
+
+        AMessageCase.addEventListener("click", async function(){
+            await tweenMsgMove(AMessageCase,-500,3,1);
+            AMessageCase.remove();
+            MessageIt();
+            
+        })
+    }
+
+
+
+
+    let papa = document.getElementById("MessagesCase").children;
+    //Number(papa[i].id.substring(0,papa[i].id.length-4))
+    for (let i = 0;i<papa.length;i++){
+        let Index = papa.length - i - 1;
+        tweenMsgMove(papa[Index],20*(papa.length - i - 1),1,1);
+        papa[Index].style.zIndex = 100+i;
+    }
+
+
+
+}
+
+let tweenMoveIndex = 0;
+let tweenMoveObj;
+async  function tweenMove(obj,toX,toY,sec,lag,moveOut){
+    tweenMoveObj = obj;
+    tweenMoveIndex++;
     let perSecX = (toX-obj.style.left.substring(0,obj.style.left.length-2))/(sec*10);
     let perSecY = (toY-obj.style.top.substring(0,obj.style.top.length-2))/(sec*10);
 
     let X =  Number(obj.style.left.substring(0,obj.style.left.length-2));
     let Y = Number(obj.style.top.substring(0,obj.style.top.length-2));
 
+    let LastTMI = tweenMoveIndex;
 
     for (let i = 0;i<(10*sec);i++){
+        if (moveOut) if (LastTMI!== tweenMoveIndex) if(obj === tweenMoveObj) {console.log("stop Move");return;}
 
         obj.style.left = X+perSecX+"px";
         obj.style.top = Y+perSecY+"px";
@@ -102,15 +183,24 @@ async  function tweenMove(obj,toX,toY,sec,lag){
 
 }
 
-async  function tweenSize(obj,toX,toY,sec,lag){
+let tweenSizeIndex = 0;
+let tweenSizeObj;
+
+async  function tweenSize(obj,toX,toY,sec,lag,sizeOut){
+    tweenSizeObj = obj;
+    tweenSizeIndex++;
     let perSecX = (toX-obj.style.width.substring(0,obj.style.width.length-2))/(sec*10);
     let perSecY = (toY-obj.style.height.substring(0,obj.style.height.length-2))/(sec*10);
 
     let X =  Number(obj.style.width.substring(0,obj.style.width.length-2));
     let Y = Number(obj.style.height.substring(0,obj.style.height.length-2));
 
+    let LastTSI = tweenSizeIndex;
+
 
     for (let i = 0;i<(10*sec);i++){
+        if (sizeOut) if (LastTSI!== tweenSizeIndex)  if(obj === tweenSizeIndex)  {console.log("stop Size");return;}
+
 
         obj.style.width = X+perSecX+"px";
         obj.style.height = Y+perSecY+"px";
@@ -308,6 +398,7 @@ let a = function(){
 
     if (Number(moved)>=100 && !document.getElementById("bubble_m100")){
         creatBubble(LimSquares["Moved100"]);
+        MessageIt("好像有東西？","有神秘泡泡出來了，趕緊找找！");
     }
 
 
@@ -381,13 +472,13 @@ let a = function(){
                 ,-MidY*55+YfirstPix+Y + disY + EasY - CY
                 ,
                 1,
-                6)
+                6,true)
 
 
 
 
             if (MidX - x === 0 && MidY - y === 0){
-                tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],110,110,1,10);
+                tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],110,110,1,10,true);
                 xGen = 120;
 
                 document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = SqrData.Name;
@@ -412,7 +503,7 @@ let a = function(){
 
 
             }else{
-                tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],50,50,1,10);
+                tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],50,50,1,10,true);
                 xGen = 60;
 
                 document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = SqrData.Name.substring(0,1);
@@ -591,23 +682,29 @@ document.addEventListener("DOMContentLoaded", function(){
     //document.getElementsByClassName(Bubbles[y][x])[0].style.left = -MidX*55+XfirstPix+X+"px";
     //document.getElementsByClassName(Bubbles[y][x])[0].style.top = -MidY*55+YfirstPix+Y+"px";
 
-    let parts = new URLSearchParams(  window.location.search);
 
-    for (let i = 0;i<Squares.length;i++){
-        if (parts.get('bubble')){} else break;
-        if (Squares[i].id.toLowerCase() === parts.get('bubble').toLowerCase()){
-            MidY = Math.floor(i/mapSize);
-            MidX = i%mapSize;
-        }
-    }
 
 
     a();
 
     document.getElementById("CloseButton").addEventListener("click", function(event) {
         if (inUi)  ent();
-
     });
+
+    let parts = new URLSearchParams(  window.location.search);
+    let Found = 0;
+    for (let i = 0;i<Squares.length;i++){
+        if (parts.get('bubble')){} else {Found= 1;break;}
+        if (Squares[i].id.toLowerCase() === parts.get('bubble').toLowerCase()){
+            MidY = Math.floor(i/mapSize);
+            MidX = i%mapSize;
+            Found = 1;
+        }
+    }
+
+    if(Found){}else{
+        MessageIt("找不到泡泡。","鴨鴨說他很不好意思，他找不到你想要的泡泡。🤔")
+    }
 
 });
 
@@ -622,9 +719,9 @@ function getLim(_x,_y){
 
 async function ent(){
 
-    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],96,96,1,10);
+    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],96,96,1,10,true);
     await sleep(70);
-    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110,110,1,10);
+    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110,110,1,10,true);
 
 
     let SqrData = Squares[MidY*mapSize+MidX];
@@ -929,7 +1026,7 @@ document.addEventListener('mouseup', (m) => {
     if (inUi) return;
     isHolding = false;
 
-    if (!hasBeenMoved) ent();
+    if (!hasBeenMoved)  if (m.target.classList[0] !== "MessageTouchBox") ent();
 });
 
 
@@ -937,6 +1034,7 @@ let X0 = 0;
 let Y0 = 0;
 
 document.addEventListener('mousemove', (m) => {
+
     if (isHolding){
         if (inUi){
             X0 = m.clientX;
@@ -995,6 +1093,25 @@ document.addEventListener('mousemove', (m) => {
 
             }
             Y0 = m.clientY;
+
+        }
+    }else{
+        if (m.target.classList[0] === "MessageTouchBox"){
+            let SizeBoxX_P2 =m.target.getBoundingClientRect().width/2;
+            let SizeBoxY_P2 =m.target.getBoundingClientRect().height/2;
+
+            let PosBoxX =m.target.getBoundingClientRect().left;
+            let PosBoxY =m.target.getBoundingClientRect().top;
+
+            let MouseX = m.clientX;
+            let MouseY = m.clientY;
+
+            let _X = ( MouseX -PosBoxX )-SizeBoxX_P2;
+            let _Y = (MouseY - PosBoxY )-SizeBoxY_P2;
+
+            for (let i = 0;i<   document.getElementById("MessagesCase").children.length;i++){
+                document.getElementById("MessagesCase").children[i].style.transform = "rotate3d("+(_X/SizeBoxX_P2*7)+" ,"+(_Y/SizeBoxY_P2*7)+ ","+((_X/SizeBoxX_P2)*(_Y/SizeBoxY_P2))+",18deg)";
+            }
 
         }
     }
