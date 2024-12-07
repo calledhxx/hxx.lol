@@ -101,7 +101,9 @@ async function MessageIt(Title,Reason){
     if (Title&&Reason){
         let AMessageCase = document.createElement("button");
         AMessageCase.classList.add("AMessageCase");
-        await tweenMsgMove(AMessageCase,-300,1,1);
+       await tweenMsgMove(AMessageCase,-300,1,1);
+        await sleep(100);
+
 
 
         let MessageTouchBox = document.createElement("div");
@@ -123,7 +125,6 @@ async function MessageIt(Title,Reason){
         MessageContent2.textContent = Reason;
 
 
-        await sleep(300);
 
 
         document.getElementById("MessagesCase").appendChild(AMessageCase);
@@ -134,10 +135,10 @@ async function MessageIt(Title,Reason){
         MessageContentCase.appendChild(MessageContent2);
 
         AMessageCase.addEventListener("click", async function(){
-            await tweenMsgMove(AMessageCase,-500,3,1);
+            tweenMsgMove(AMessageCase,-500,3,1);
+            await sleep(100);
             AMessageCase.remove();
             MessageIt();
-
         })
 
 
@@ -153,7 +154,9 @@ async function MessageIt(Title,Reason){
     //Number(papa[i].id.substring(0,papa[i].id.length-4))
     for (let i = 0;i<papa.length;i++){
         let Index = papa.length - i - 1;
-        await tweenMsgMove(papa[Index],20*(papa.length - i - 1),1,1);
+        tweenMsgMove(papa[Index],20*(papa.length - i - 1),1,1);
+        await sleep(10);
+
         papa[Index].style.zIndex = 100+i;
     }
 
@@ -775,7 +778,7 @@ async function ent(){
     }else{
         inUi = true;
 
-
+        if (SqrData.id === "7sf") MessageIt("太陽魚！","太陽魚是Hxx最好的好友。Hxx對我的愛都轉移到了他身上啊！！！😭")
 
         document.getElementById("Card").style.backgroundColor = "#" + SqrData.Color+"AA";
         document.getElementById("Card").style.borderColor = "#" + hex(SqrData.Color,"222222",-1);
