@@ -96,11 +96,13 @@ async  function tweenMsgMove(obj,toY,sec,lag){
     obj.style.bottom = toY+"px";
 }
 
-function MessageIt(Title,Reason){
+async function MessageIt(Title,Reason){
 
     if (Title&&Reason){
         let AMessageCase = document.createElement("button");
         AMessageCase.classList.add("AMessageCase");
+        await tweenMsgMove(AMessageCase,-300,1,1);
+
 
         let MessageTouchBox = document.createElement("div");
         MessageTouchBox.classList.add("MessageTouchBox");
@@ -133,8 +135,12 @@ function MessageIt(Title,Reason){
             await tweenMsgMove(AMessageCase,-500,3,1);
             AMessageCase.remove();
             MessageIt();
-            
+
         })
+
+
+
+        await sleep(100);
     }
 
 
@@ -144,7 +150,7 @@ function MessageIt(Title,Reason){
     //Number(papa[i].id.substring(0,papa[i].id.length-4))
     for (let i = 0;i<papa.length;i++){
         let Index = papa.length - i - 1;
-        tweenMsgMove(papa[Index],20*(papa.length - i - 1),1,1);
+        await tweenMsgMove(papa[Index],20*(papa.length - i - 1),1,1);
         papa[Index].style.zIndex = 100+i;
     }
 
