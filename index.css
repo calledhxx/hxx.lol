@@ -526,7 +526,7 @@ h4{
 #MessagesCase{
     position: absolute;
     transform: translate(-50%,-50%);
-    top: 80%;
+    top: 85%;
     left : 50%;
 
     background-color: rgba(214, 214, 214, 0);
@@ -534,13 +534,12 @@ h4{
     height: 200px;
 
 
-    z-index: 101;
 }
 
 .AMessageCase{
     position: absolute;
 
-    bottom: 0;
+    bottom: -300px;
 
     background-color: rgba(255, 147, 64, 0.4);
     width: 594px;
