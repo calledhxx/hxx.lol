@@ -1037,10 +1037,38 @@ document.addEventListener('mousedown', (m) => {
     console.log( m.clientX, m.clientY);
 });
 document.addEventListener('mouseup', (m) => {
-    if (inUi) return;
+
     isHolding = false;
 
-    if (!hasBeenMoved)  if (m.target.classList[0] !== "MessageTouchBox") ent();
+    if (!hasBeenMoved)  {
+        if (m.target.classList[0] !== "MessageTouchBox")
+        {
+            let sa = function(zzz){
+
+                if (zzz) {
+                    if(zzz.id === "body")return false;
+                }else{
+                    return false;
+                }
+
+                if (zzz.id === "Card" ||zzz.id === "CloseButton"){
+
+                    return true;
+                }else{
+
+                    return sa( zzz.parentElement);
+                }
+            }
+            if (sa( m.target)){
+
+            }else{
+
+                ent();
+            }
+        }
+
+    }
+
 });
 
 
