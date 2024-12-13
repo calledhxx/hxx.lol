@@ -697,7 +697,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 
-    a();
+
 
     document.getElementById("CloseButton").addEventListener("click", function(event) {
         if (inUi)  ent();
@@ -715,9 +715,10 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
     if(Found){}else{
-        MessageIt("找不到泡泡。","鴨鴨說他很不好意思，他找不到你想要的泡泡。🤔")
+        MessageIt("找不到泡泡。","鴨鴨說他很不好意思，他找不到你想要的泡泡。🤔");
     }
 
+    a();
 });
 
 
