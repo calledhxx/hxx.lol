@@ -778,7 +778,8 @@ async function ent(){
     }else{
         inUi = true;
 
-        if (SqrData.id === "7sf") MessageIt("太陽魚！","太陽魚是Hxx最好的好友。Hxx對我的愛都轉移到了他身上啊！！！😭")
+        if (SqrData.id === "7sf") MessageIt("太陽魚！","太陽魚是Hxx最好的好友。Hxx對我的愛都轉移到了他身上啊！！！😭");
+        if (SqrData.id === "m100") MessageIt("100次移動！","恭喜完成100次移動！😗");
 
         document.getElementById("Card").style.backgroundColor = "#" + SqrData.Color+"AA";
         document.getElementById("Card").style.borderColor = "#" + hex(SqrData.Color,"222222",-1);
