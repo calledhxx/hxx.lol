@@ -78,6 +78,15 @@ let Squares = [
         Color: "d94646",
 
         id : "flong"
+    },
+    {
+        Name:"Minecraft",
+        Details:"Hxx的遊玩Minecraft的紀錄。",
+        Image:"/f/img/minecraft.png",
+        Page:"/f/minecraft.json",
+        Color: "85471d",
+
+        id : "minecraft"
     }
 ]
 
@@ -802,9 +811,10 @@ async function ent(){
 
         if (SqrData.id === "7sf") MessageIt("太陽魚！","太陽魚是Hxx最好的好友。Hxx對我的愛都轉移到了他身上啊！！！😭");
         if (SqrData.id === "m100") MessageIt("100次移動！","恭喜完成100次移動！😗");
+        if (SqrData.id === "minecraft") MessageIt("Minecraft！","話說你玩過Minecraft嗎？ 如果有，你可以想盡辦法聯繫到Hxx並與他共玩！");
 
         document.getElementById("Card").style.backgroundColor = "#" + SqrData.Color+"AA";
-        document.getElementById("Card").style.borderColor = "#" + hex(SqrData.Color,"222222",-1);
+        document.getElementById("Card").style.borderColor = "#" + hex(SqrData.Color,"111111",-1);
         document.getElementById("Card").style.color = "#" + hex(SqrData.Color,"311141", 1);
 
         document.getElementById("TopBar").style.backgroundColor =  "#" + hex(SqrData.Color,"112211",-1)+"7A";
