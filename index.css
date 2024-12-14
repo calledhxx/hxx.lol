@@ -4,13 +4,20 @@
 
     font-family: "UD Digi Kyokasho N-B", "system-ui", "serif";
 
-    -moz-user-select: none;
+   -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     -khtml-user-select: none;
     user-select: none;
 
 
+
+
+}
+
+*::selection{
+    color: rgb(255, 255, 255);
+    background: rgb(113, 65, 255);
 }
 
 @keyframes bubble {
@@ -20,18 +27,28 @@
 
     20%{
         transform: translate(0%,-100%) rotate(0deg);
+
+
     }
     40%{
         transform:  translate(0%,-100%)rotate(2deg);
+
+
     }
     60%{
         transform:translate(0%,-100%) rotate(0deg);
+
+
     }
     80%{
         transform: translate(0%,-100%) rotate(0deg);
+
+
     }
     100%{
         transform: translate(0%,-100%) rotate(-3deg);
+
+
     }
 }
 
@@ -157,6 +174,7 @@ body{
 
 
     text-shadow: rgba(0, 0, 0, 1) 0.1em 0.1em 1em;
+
 
 
 
@@ -374,6 +392,8 @@ h4{
 
     border-radius: 100%;
 
+    z-index: 101;
+
     border: 3px solid #A32D5C;
     text-shadow: #000000 0.1em 0.1em 1em;
     box-shadow: 0 0 30px #A01E61;
@@ -571,7 +591,7 @@ h4{
     from{
         background-color: rgba(255, 147, 64, 0.4);
         border: 3px solid rgba(174, 97, 55, 0.6);
-        box-shadow: 0 0 30px #ffad54;
+        box-shadow: 0 0 30px  #ffad54;
         color: #d6d6d6;
 
         width: 100%;

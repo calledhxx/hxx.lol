@@ -61,7 +61,24 @@ let Squares = [
         id : "uzi"
 
     },
+    {
+        Name:"散文集：短",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/fshort.json",
+        Color: "4699d9",
 
+        id : "fshort"
+    },
+    {
+        Name:"散文集：長",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/flong.json",
+        Color: "d94646",
+
+        id : "flong"
+    }
 ]
 
 let Bubbles = [
@@ -333,7 +350,8 @@ let creatBubble = function(BubbleSqr){
     h6.style.color = "#" + hex(BubbleSqr.Color,"111111", +1);
     button.style.borderColor = "#" + hex(BubbleSqr.Color,"111111", -1);
 
-    button.style.boxShadow = "0 0 10px #"+hex(BubbleSqr.Color,"111111", +1);
+    button.style.boxShadow = " 0 0 30px 3px #"+hex(BubbleSqr.Color,"111111", +1);
+
 
 
 
@@ -664,7 +682,7 @@ document.addEventListener("DOMContentLoaded", function(){
         h6.style.color = "#" + hex(Squares[i].Color,"111111", +1);
         button.style.borderColor = "#" + hex(Squares[i].Color,"111111", -1);
 
-        button.style.boxShadow = "0 0 10px #"+hex(Squares[i].Color,"111111", +1);
+        button.style.boxShadow = "0 0  30px 3px  #"+hex(Squares[i].Color,"111111", +1);
 
 
 
@@ -756,7 +774,10 @@ async function ent(){
 
         await sleep(100);
 
-        tweenMove(document.getElementById("Card"),0,-100,0.000001,1);
+        document.getElementById("TopBarImg").src = "";
+        document.getElementById("TopBarText").textContent = "";
+
+        tweenMove(document.getElementById("Card"),0,-300,0.000001,1);
         tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,-200,2,1);
 
         let n = document.getElementsByClassName("Case").length;
@@ -791,7 +812,7 @@ async function ent(){
         document.getElementById("TopBar").style.borderColor =  "#" + hex(SqrData.Color,"111111",-1);
 
 
-        document.getElementById("Card").style.boxShadow = "0 0 30px #"+hex(SqrData.Color,"111111", +1);
+        document.getElementById("Card").style.boxShadow = "0 0 300px 30px #"+hex(SqrData.Color,"111111", +1);
         document.getElementById("TopBar").style.boxShadow =  "0 0 30px #"+hex(SqrData.Color,"333333",+1);
 
         document.getElementById("TopBarText").style.color =  "#" + hex(SqrData.Color,"311141", 1);
