@@ -85,6 +85,7 @@ let Bubbles = [
 
 ];
 
+let onPhone = 0;
 
 let MidY = 0;
 let MidX = 0;
@@ -450,30 +451,37 @@ let a = function(){
         for (let x = 0; x < Bubbles[y].length; x++) {
 
             if (MidY - y === 0){
-                yGen = 120;
+                yGen = 120+onPhone*50;
             }else{
-                yGen = 60;
+                yGen = 60+onPhone*50;
             }
 
 
-
+            let beefX = 0;
+            let beefY = 0;
 
             if (MidX - x === 0){
-                //  document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "red";
+                // document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "red";
 
             }else{
 
                 if (MidY - y === 0){
-                    // document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "blue";
+                     //document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "blue";
 
+                    beefY = onPhone*-30;
+                    if(MidX-x>=1){
+                        beefX = onPhone;
+                    }else{
+                        beefX = onPhone*-20;
+                    }
                 }else{
-                    // document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "red";
+                   //  document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "red";
                 }
 
             }
 
 
-            let disY =  (MidX - x === 0 && MidY - y === 0) ? 60 : 0;
+            let disY =  (MidX - x === 0 && MidY - y === 0) ? 60+onPhone*10 : 0;
             let EasY = 0;
 
             let SqrData = Squares[y*mapSize + x];
@@ -485,9 +493,9 @@ let a = function(){
 
             if (MidY - y <= -1){
                 if (x === MidX || x === MidX+1){
-                    //document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "green";
+                   // document.getElementsByClassName(Bubbles[y][x])[0].style.backgroundColor = "green";
                 }else{
-                    EasY =- 60;
+                    EasY =- 60-onPhone*40;
                 }
             }
 
@@ -498,8 +506,8 @@ let a = function(){
 
 
             tweenMove(document.getElementsByClassName(Bubbles[y][x])[0]
-                , -MidX*55+XfirstPix+X - CX
-                ,-MidY*55+YfirstPix+Y + disY + EasY - CY
+                , -MidX*55+XfirstPix+X - CX -onPhone*50 + beefX
+                ,-MidY*55+YfirstPix+Y + disY + EasY - CY -onPhone*50 + beefY
                 ,
                 1,
                 6,true)
@@ -508,13 +516,13 @@ let a = function(){
 
 
             if (MidX - x === 0 && MidY - y === 0){
-                tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],110,110,1,10,true);
-                xGen = 120;
+                tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],110+onPhone*70,110+onPhone*70,1,10,true);
+                xGen = 120+onPhone*120;
 
                 document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = SqrData.Name;
                 document.getElementsByClassName(Bubbles[y][x])[0].children[2].textContent = SqrData.Details;
-                document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "20px";
-                document.getElementsByClassName(Bubbles[y][x])[0].children[2].style.fontSize = "13px";
+                document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = String(20+onPhone*20)+"px";
+                document.getElementsByClassName(Bubbles[y][x])[0].children[2].style.fontSize =  String(13+onPhone*10)+"px";
 
 
 
@@ -524,7 +532,7 @@ let a = function(){
                     document.getElementsByClassName(Bubbles[y][x])[0].children[0].src = "";
                     document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.width = "0";
                     document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = SqrData.Name;
-                    document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "20px";
+                    document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = String(20+onPhone*20)+"px";
 
                     document.getElementsByClassName(Bubbles[y][x])[0].children[0].style.position = "absolute";
 
@@ -533,11 +541,11 @@ let a = function(){
 
 
             }else{
-                tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],50,50,1,10,true);
-                xGen = 60;
+                tweenSize(document.getElementsByClassName(Bubbles[y][x])[0],50+onPhone*30,50+onPhone*30,1,10,true);
+                xGen = 60+onPhone*50;
 
                 document.getElementsByClassName(Bubbles[y][x])[0].children[1].textContent = SqrData.Name.substring(0,1);
-                document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize = "26px";
+                document.getElementsByClassName(Bubbles[y][x])[0].children[1].style.fontSize =String(28+onPhone*20)+"px";
 
                 document.getElementsByClassName(Bubbles[y][x])[0].children[2].textContent = SqrData.Details;
                 document.getElementsByClassName(Bubbles[y][x])[0].children[2].style.fontSize = "0";
@@ -648,7 +656,22 @@ function hex(a,b,c){
 
 document.addEventListener("DOMContentLoaded", function(){
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-        window.location.href = "https://hxx.lol/m";
+        onPhone = 1;
+       // window.location.href = "https://hxx.lol/m";
+        document.addEventListener('touchstart', DOWNEVENT);
+
+        document.addEventListener('touchend', UPEVENT);
+
+        document.addEventListener('touchmove', MOVEEVENT);
+    }else{
+        document.addEventListener('mousedown',DOWNEVENT);
+
+        document.addEventListener('mouseup', UPEVENT);
+
+        document.addEventListener('mousemove', MOVEEVENT);
+
+
+
     }
 
     let fit = Math.sqrt(Squares.length) - Math.floor(Math.sqrt(Squares.length)) === 0;
@@ -737,6 +760,8 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
     a();
+
+    MessageIt("Cookie！","ㄇ");
 });
 
 
@@ -750,9 +775,9 @@ function getLim(_x,_y){
 
 async function ent(){
 
-    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],96,96,1,10,true);
+    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],96+onPhone*50,96+onPhone*50,1,10,true);
     await sleep(70);
-    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110,110,1,10,true);
+    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110+onPhone*60,110+onPhone*60,1,10,true);
 
 
     let SqrData = Squares[MidY*mapSize+MidX];
@@ -803,6 +828,8 @@ async function ent(){
         if (SqrData.id === "7sf") MessageIt("太陽魚！","太陽魚是Hxx最好的好友。Hxx對我的愛都轉移到了他身上啊！！！😭");
         if (SqrData.id === "m100") MessageIt("100次移動！","恭喜完成100次移動！😗");
 
+
+
         document.getElementById("Card").style.backgroundColor = "#" + SqrData.Color+"AA";
         document.getElementById("Card").style.borderColor = "#" + hex(SqrData.Color,"222222",-1);
         document.getElementById("Card").style.color = "#" + hex(SqrData.Color,"311141", 1);
@@ -841,9 +868,15 @@ async function ent(){
 
 
         tweenMove(document.getElementById("Card"),window.innerWidth/2,window.innerHeight,0.000001,1);
+
         await tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,-200,0.000001,1);
 
-        tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,100,4,1);
+
+        tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,100+onPhone*60,4,1);
+        tweenSize(document.getElementById("CloseButton"),55+onPhone*55,55+onPhone*55,2,1);
+
+        document.getElementById("CloseButton").style.fontSize = String(30+onPhone*30)+"px";
+
 
 
         await sleep(100);
@@ -851,8 +884,8 @@ async function ent(){
         document.getElementById("Card").style.width = "auto";
 
         await tweenSize(document.getElementById("Card"),
-            500,
-            500
+            500+onPhone*200,
+            500+onPhone*300
             ,.1,1);
 
 
@@ -1046,18 +1079,27 @@ document.addEventListener("keypress", function(event) {
 let hasBeenMoved = false;
 let isHolding = false;
 
-document.addEventListener('mousedown', (m) => {
+function DOWNEVENT(m){
+    let t = onPhone?m.touches[0]:m;
+
+    console.log("in");
+
     if (inUi) return;
 
     isHolding = true;
     hasBeenMoved = false;
 
-    X0 = m.clientX;
-    Y0 = m.clientY;
+    X0 = t.clientX;
+    Y0 = t.clientY;
 
-    console.log( m.clientX, m.clientY);
-});
-document.addEventListener('mouseup', (m) => {
+
+}
+
+
+
+
+function UPEVENT(m){
+    let t = onPhone?m.touches[0]:m;
 
     isHolding = false;
 
@@ -1090,30 +1132,35 @@ document.addEventListener('mouseup', (m) => {
 
     }
 
-});
+
+}
+
+
 
 
 let X0 = 0;
 let Y0 = 0;
 
-document.addEventListener('mousemove', (m) => {
+function MOVEEVENT(m){
+    let t = onPhone?m.touches[0]:m;
+
 
     if (isHolding){
         if (inUi){
-            X0 = m.clientX;
-            Y0 = m.clientY;
+            X0 = t.clientX;
+            Y0 = t.clientY;
 
             return;
         }
 
         if (X0&&Y0){}else{
-            X0 = m.clientX;
-            Y0 = m.clientY;
+            X0 = t.clientX;
+            Y0 = t.clientY;
         }
 
 
-        if (Math.abs(m.clientX - X0  ) > 75){
-            let db =  X0-m.clientX > 0;
+        if (Math.abs(t.clientX - X0  ) > 75){
+            let db =  X0-t.clientX > 0;
             let IF = db?(MidX+1<mapSize ? (typeof  Bubbles[MidY][MidX+1]) === "number":false): (MidX-1>=0 ? (typeof  Bubbles[MidY][MidX-1]) === "number" : false);
 
 
@@ -1130,14 +1177,14 @@ document.addEventListener('mousemove', (m) => {
                 a();
 
             }
-            X0 = m.clientX;
+            X0 = t.clientX;
 
 
         }
 
-        console.log(m.clientY,Y0);
-        if (Math.abs(m.clientY -Y0) > 75){
-            let db =  Y0-m.clientY > 0;
+        console.log(t.clientY,Y0);
+        if (Math.abs(t.clientY -Y0) > 75){
+            let db =  Y0-t.clientY > 0;
             let IF = db?(MidY+1<mapSize ? (typeof  Bubbles[MidY+1][MidX]) === "number":false): (MidY-1>=0 ? (typeof  Bubbles[MidY-1][MidX]) === "number" : false);
 
             console.log(db);
@@ -1155,7 +1202,7 @@ document.addEventListener('mousemove', (m) => {
 
 
             }
-            Y0 = m.clientY;
+            Y0 = t.clientY;
 
         }
     }else{
@@ -1166,8 +1213,8 @@ document.addEventListener('mousemove', (m) => {
             let PosBoxX =m.target.getBoundingClientRect().left;
             let PosBoxY =m.target.getBoundingClientRect().top;
 
-            let MouseX = m.clientX;
-            let MouseY = m.clientY;
+            let MouseX = t.clientX;
+            let MouseY = t.clientY;
 
             let _X = ( MouseX -PosBoxX )-SizeBoxX_P2;
             let _Y = (MouseY - PosBoxY )-SizeBoxY_P2;
@@ -1180,7 +1227,8 @@ document.addEventListener('mousemove', (m) => {
     }
 
 
-})
+}
+
 
 
 
