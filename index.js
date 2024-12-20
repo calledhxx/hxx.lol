@@ -727,7 +727,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     document.getElementById("CloseButton").addEventListener("click", function(event) {
-        if (inUi)  ent(!inUi);
+        if (inUi)  ent();
     });
 
     let parts = new URLSearchParams(  window.location.search);
@@ -757,8 +757,25 @@ function getLim(_x,_y){
     if (document.getElementsByClassName(Bubbles[_y][_x])[0].id === "bubble_m100") return LimSquares["Moved100"];
 }
 
-async function ent(a){
+let lastTimeEnt = new Date().getTime();
 
+async function ent(a){
+    if(a){
+        console.log(a,inUi);
+        if(inUi){
+            tweenMove(document.getElementById("Card"),window.innerWidth/2,window.innerHeight/2,1,1);
+            tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,100,1,1);
+
+        }
+        return;
+    }
+
+
+    if (((new Date().getTime()) - lastTimeEnt)>=150){
+        lastTimeEnt= new Date().getTime();
+    }else{
+        return;
+    }
 
 
 
@@ -767,7 +784,9 @@ async function ent(a){
     if(!SqrData) SqrData = getLim(MidX,MidY);
 
 
-    if (!a){
+
+
+    if (inUi){
         inUi = false;
 
 
@@ -1049,7 +1068,7 @@ document.addEventListener("keypress", function(event) {
     if (inUi) return;
 
     if (event.key === "Enter") {
-        ent(!inUi)
+        ent()
     }
 
 });
@@ -1096,7 +1115,7 @@ document.addEventListener('mouseup', (m) => {
 
             }else{
 
-                ent(!inUi);
+                ent();
             }
         }
 
@@ -1198,5 +1217,5 @@ document.addEventListener('mousemove', (m) => {
 
 window.addEventListener('resize', function() {
     a();
-    ent(inUi);
+    ent(true);
 });
