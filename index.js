@@ -727,7 +727,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     document.getElementById("CloseButton").addEventListener("click", function(event) {
-        if (inUi)  ent();
+        if (inUi)  ent(!inUi);
     });
 
     let parts = new URLSearchParams(  window.location.search);
@@ -757,11 +757,9 @@ function getLim(_x,_y){
     if (document.getElementsByClassName(Bubbles[_y][_x])[0].id === "bubble_m100") return LimSquares["Moved100"];
 }
 
-async function ent(){
+async function ent(a){
 
-    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],96,96,1,10,true);
-    await sleep(70);
-    tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110,110,1,10,true);
+
 
 
     let SqrData = Squares[MidY*mapSize+MidX];
@@ -769,7 +767,7 @@ async function ent(){
     if(!SqrData) SqrData = getLim(MidX,MidY);
 
 
-    if (inUi){
+    if (!a){
         inUi = false;
 
 
@@ -808,6 +806,10 @@ async function ent(){
 
     }else{
         inUi = true;
+
+        tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],96,96,1,10,true);
+        await sleep(70);
+        tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110,110,1,10,true);
 
         if (SqrData.id === "7sf") MessageIt("太陽魚！","太陽魚是Hxx最好的好友。Hxx對我的愛都轉移到了他身上啊！！！😭");
         if (SqrData.id === "m100") MessageIt("100次移動！","恭喜完成100次移動！😗");
@@ -1047,7 +1049,7 @@ document.addEventListener("keypress", function(event) {
     if (inUi) return;
 
     if (event.key === "Enter") {
-        ent()
+        ent(!inUi)
     }
 
 });
@@ -1094,7 +1096,7 @@ document.addEventListener('mouseup', (m) => {
 
             }else{
 
-                ent();
+                ent(!inUi);
             }
         }
 
@@ -1196,4 +1198,5 @@ document.addEventListener('mousemove', (m) => {
 
 window.addEventListener('resize', function() {
     a();
+    ent(inUi);
 });
