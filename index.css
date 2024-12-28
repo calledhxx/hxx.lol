@@ -20,59 +20,8 @@
     background: rgb(113, 65, 255);
 }
 
-@keyframes bubble {
-    0%{
-        transform:  translate(0,-100%) rotate(-3deg);
-    }
-
-    20%{
-        transform: translate(0%,-100%) rotate(0deg);
 
 
-    }
-    40%{
-        transform:  translate(0%,-100%)rotate(2deg);
-
-
-    }
-    60%{
-        transform:translate(0%,-100%) rotate(0deg);
-
-
-    }
-    80%{
-        transform: translate(0%,-100%) rotate(0deg);
-
-
-    }
-    100%{
-        transform: translate(0%,-100%) rotate(-3deg);
-
-
-    }
-}
-
-@keyframes shake {
-    0%{
-        transform:  translate(-50%,-50%) rotate(-0.5deg);
-    }
-
-    20%{
-        transform: translate(-50%,-50%)  rotate(0deg);
-    }
-    40%{
-        transform:  translate(-50%,-50%) rotate(.5deg);
-    }
-    60%{
-        transform: translate(-50%,-50%)  rotate(0deg);
-    }
-    80%{
-        transform:  translate(-50%,-50%) rotate(0deg);
-    }
-    100%{
-        transform:  translate(-50%,-50%) rotate(-.5deg);
-    }
-}
 
 html{
 
@@ -89,12 +38,11 @@ body{
 
     height: 100vh;
     width: 100%;
-    background: linear-gradient(180deg, #220e39, #340b26);
+    background: linear-gradient(180deg, #1d112a, #150b28);
 }
 
 #BackGround{
 
-    filter : blur(3px);
 
 
 
@@ -164,7 +112,6 @@ body{
     left: 100%;
     top: 50%;
 
-    animation: bubble 5s infinite ;
 
     border-radius: 25%;
     border: 2px solid #d6d6d6;
@@ -213,8 +160,7 @@ body{
     box-shadow: 0 0 30px rgba(0, 0, 0, 1);
 
 
-    animation: shake 5s infinite ;
-
+    transform: translate(-50%, -50%);
 
 
 
@@ -258,7 +204,7 @@ body{
     overflow-x: auto;
 
     height: auto;
-    width: 100%;
+    width: auto;
 
 
 }
@@ -272,13 +218,11 @@ body{
     border: 3px solid rgba(69, 35, 108, 0);
     border-radius: 20px;
     background-color: rgba(214, 214, 214, 0);
-    flex: 1;
     flex-shrink: 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 
 
 
-    background-color: rgba(255, 255, 255, 0.24);
 }
 
 .LinksCase{
@@ -379,51 +323,7 @@ h4{
 
 }
 
-#CloseButton{
-    backdrop-filter: blur(20px);
 
-    position: absolute;
-
-    top: -50%;
-    right: 50%;
-
-    width: 55px;
-    height: 55px;
-
-    border-radius: 100%;
-
-    z-index: 101;
-
-    border: 3px solid #A32D5C;
-    text-shadow: #000000 0.1em 0.1em 1em;
-    box-shadow: 0 0 30px #A01E61;
-    background-color: #B8216B;
-
-    font-size: 30px;
-    transform:  translate(-50%,-50%);
-
-    outline: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    cursor: pointer;
-}
-
-@keyframes CloseButtonAnim {
-    from{
-        transform:  translate(-50%,-50%) rotate(0deg); ;
-    }
-    to{
-        transform:  translate(-50%,-50%) rotate(-360deg); ;
-    }
-}
-
-#CloseButton:hover{
-    cursor: pointer;
-    animation: forwards CloseButtonAnim .3s ;
-}
 
 #TopBarImg{
     border-radius: 10px;

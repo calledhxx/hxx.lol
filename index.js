@@ -87,6 +87,963 @@ let Squares = [
         Color: "85471d",
 
         id : "minecraft"
+    },
+    {
+
+        Name:"歡迎光臨",
+
+        Details:"按下 Enter 繼續。",
+
+        Image:"",
+
+        Page:"/f/welcome.json",
+
+        Color: "3ca98a",
+
+        id : ""
+
+    },
+    {
+
+        Name:"个人档案",
+
+        Details:"Hxx的個人檔案。",
+
+        Image:"/f/img/0324.gif",
+
+        Page:"/f/main.json",
+
+        Color: "5d3ca9",
+
+        id : "hxx"
+
+    },
+    {
+        Name:"7SunFish",
+        Details:"Hxx的好朋友",
+        Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
+        Page:"/f/7sf.json",
+        Color: "c1842b",
+
+        id : "7sf"
+
+    },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "4e46b8",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Uzi特寫",
+        Details:"Uzi的特寫照外流。",
+        Image:"/f/img/IMG_9089.jpg",
+        Page:"/f/uzi.json",
+        Color: "7946b8",
+
+        id : "uzi"
+
+    },
+    {
+        Name:"散文集：短",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/fshort.json",
+        Color: "4699d9",
+
+        id : "fshort"
+    },
+    {
+        Name:"散文集：長",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/flong.json",
+        Color: "d94646",
+
+        id : "flong"
+    },
+    {
+        Name:"Minecraft",
+        Details:"Hxx的遊玩Minecraft的紀錄。",
+        Image:"/f/img/minecraft.png",
+        Page:"/f/minecraft.json",
+        Color: "85471d",
+
+        id : "minecraft"
+    },
+    {
+
+        Name:"歡迎光臨",
+
+        Details:"按下 Enter 繼續。",
+
+        Image:"",
+
+        Page:"/f/welcome.json",
+
+        Color: "3ca98a",
+
+        id : ""
+
+    },
+    {
+
+        Name:"个人档案",
+
+        Details:"Hxx的個人檔案。",
+
+        Image:"/f/img/0324.gif",
+
+        Page:"/f/main.json",
+
+        Color: "5d3ca9",
+
+        id : "hxx"
+
+    },
+    {
+        Name:"7SunFish",
+        Details:"Hxx的好朋友",
+        Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
+        Page:"/f/7sf.json",
+        Color: "c1842b",
+
+        id : "7sf"
+
+    },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "4e46b8",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Uzi特寫",
+        Details:"Uzi的特寫照外流。",
+        Image:"/f/img/IMG_9089.jpg",
+        Page:"/f/uzi.json",
+        Color: "7946b8",
+
+        id : "uzi"
+
+    },
+    {
+        Name:"散文集：短",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/fshort.json",
+        Color: "4699d9",
+
+        id : "fshort"
+    },
+    {
+        Name:"散文集：長",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/flong.json",
+        Color: "d94646",
+
+        id : "flong"
+    },
+    {
+        Name:"Minecraft",
+        Details:"Hxx的遊玩Minecraft的紀錄。",
+        Image:"/f/img/minecraft.png",
+        Page:"/f/minecraft.json",
+        Color: "85471d",
+
+        id : "minecraft"
+    },
+    {
+
+        Name:"歡迎光臨",
+
+        Details:"按下 Enter 繼續。",
+
+        Image:"",
+
+        Page:"/f/welcome.json",
+
+        Color: "3ca98a",
+
+        id : ""
+
+    },
+    {
+
+        Name:"个人档案",
+
+        Details:"Hxx的個人檔案。",
+
+        Image:"/f/img/0324.gif",
+
+        Page:"/f/main.json",
+
+        Color: "5d3ca9",
+
+        id : "hxx"
+
+    },
+    {
+        Name:"7SunFish",
+        Details:"Hxx的好朋友",
+        Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
+        Page:"/f/7sf.json",
+        Color: "c1842b",
+
+        id : "7sf"
+
+    },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "4e46b8",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Uzi特寫",
+        Details:"Uzi的特寫照外流。",
+        Image:"/f/img/IMG_9089.jpg",
+        Page:"/f/uzi.json",
+        Color: "7946b8",
+
+        id : "uzi"
+
+    },
+    {
+        Name:"散文集：短",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/fshort.json",
+        Color: "4699d9",
+
+        id : "fshort"
+    },
+    {
+        Name:"散文集：長",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/flong.json",
+        Color: "d94646",
+
+        id : "flong"
+    },
+    {
+        Name:"Minecraft",
+        Details:"Hxx的遊玩Minecraft的紀錄。",
+        Image:"/f/img/minecraft.png",
+        Page:"/f/minecraft.json",
+        Color: "85471d",
+
+        id : "minecraft"
+    },
+    {
+
+        Name:"歡迎光臨",
+
+        Details:"按下 Enter 繼續。",
+
+        Image:"",
+
+        Page:"/f/welcome.json",
+
+        Color: "3ca98a",
+
+        id : ""
+
+    },
+    {
+
+        Name:"个人档案",
+
+        Details:"Hxx的個人檔案。",
+
+        Image:"/f/img/0324.gif",
+
+        Page:"/f/main.json",
+
+        Color: "5d3ca9",
+
+        id : "hxx"
+
+    },
+    {
+        Name:"7SunFish",
+        Details:"Hxx的好朋友",
+        Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
+        Page:"/f/7sf.json",
+        Color: "c1842b",
+
+        id : "7sf"
+
+    },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "4e46b8",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Uzi特寫",
+        Details:"Uzi的特寫照外流。",
+        Image:"/f/img/IMG_9089.jpg",
+        Page:"/f/uzi.json",
+        Color: "7946b8",
+
+        id : "uzi"
+
+    },
+    {
+        Name:"散文集：短",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/fshort.json",
+        Color: "4699d9",
+
+        id : "fshort"
+    },
+    {
+        Name:"散文集：長",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/flong.json",
+        Color: "d94646",
+
+        id : "flong"
+    },
+    {
+        Name:"Minecraft",
+        Details:"Hxx的遊玩Minecraft的紀錄。",
+        Image:"/f/img/minecraft.png",
+        Page:"/f/minecraft.json",
+        Color: "85471d",
+
+        id : "minecraft"
+    },
+    {
+
+        Name:"歡迎光臨",
+
+        Details:"按下 Enter 繼續。",
+
+        Image:"",
+
+        Page:"/f/welcome.json",
+
+        Color: "3ca98a",
+
+        id : ""
+
+    },
+    {
+
+        Name:"个人档案",
+
+        Details:"Hxx的個人檔案。",
+
+        Image:"/f/img/0324.gif",
+
+        Page:"/f/main.json",
+
+        Color: "5d3ca9",
+
+        id : "hxx"
+
+    },
+    {
+        Name:"7SunFish",
+        Details:"Hxx的好朋友",
+        Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
+        Page:"/f/7sf.json",
+        Color: "c1842b",
+
+        id : "7sf"
+
+    },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "4e46b8",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Uzi特寫",
+        Details:"Uzi的特寫照外流。",
+        Image:"/f/img/IMG_9089.jpg",
+        Page:"/f/uzi.json",
+        Color: "7946b8",
+
+        id : "uzi"
+
+    },
+    {
+        Name:"散文集：短",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/fshort.json",
+        Color: "4699d9",
+
+        id : "fshort"
+    },
+    {
+        Name:"散文集：長",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/flong.json",
+        Color: "d94646",
+
+        id : "flong"
+    },
+    {
+        Name:"Minecraft",
+        Details:"Hxx的遊玩Minecraft的紀錄。",
+        Image:"/f/img/minecraft.png",
+        Page:"/f/minecraft.json",
+        Color: "85471d",
+
+        id : "minecraft"
+    },
+    {
+
+        Name:"歡迎光臨",
+
+        Details:"按下 Enter 繼續。",
+
+        Image:"",
+
+        Page:"/f/welcome.json",
+
+        Color: "3ca98a",
+
+        id : ""
+
+    },
+    {
+
+        Name:"个人档案",
+
+        Details:"Hxx的個人檔案。",
+
+        Image:"/f/img/0324.gif",
+
+        Page:"/f/main.json",
+
+        Color: "5d3ca9",
+
+        id : "hxx"
+
+    },
+    {
+        Name:"7SunFish",
+        Details:"Hxx的好朋友",
+        Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
+        Page:"/f/7sf.json",
+        Color: "c1842b",
+
+        id : "7sf"
+
+    },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "4e46b8",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Uzi特寫",
+        Details:"Uzi的特寫照外流。",
+        Image:"/f/img/IMG_9089.jpg",
+        Page:"/f/uzi.json",
+        Color: "7946b8",
+
+        id : "uzi"
+
+    },
+    {
+        Name:"散文集：短",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/fshort.json",
+        Color: "4699d9",
+
+        id : "fshort"
+    },
+    {
+        Name:"散文集：長",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/flong.json",
+        Color: "d94646",
+
+        id : "flong"
+    },
+    {
+        Name:"Minecraft",
+        Details:"Hxx的遊玩Minecraft的紀錄。",
+        Image:"/f/img/minecraft.png",
+        Page:"/f/minecraft.json",
+        Color: "85471d",
+
+        id : "minecraft"
+    },
+    {
+
+        Name:"歡迎光臨",
+
+        Details:"按下 Enter 繼續。",
+
+        Image:"",
+
+        Page:"/f/welcome.json",
+
+        Color: "3ca98a",
+
+        id : ""
+
+    },
+    {
+
+        Name:"个人档案",
+
+        Details:"Hxx的個人檔案。",
+
+        Image:"/f/img/0324.gif",
+
+        Page:"/f/main.json",
+
+        Color: "5d3ca9",
+
+        id : "hxx"
+
+    },
+    {
+        Name:"7SunFish",
+        Details:"Hxx的好朋友",
+        Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
+        Page:"/f/7sf.json",
+        Color: "c1842b",
+
+        id : "7sf"
+
+    },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "4e46b8",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Uzi特寫",
+        Details:"Uzi的特寫照外流。",
+        Image:"/f/img/IMG_9089.jpg",
+        Page:"/f/uzi.json",
+        Color: "7946b8",
+
+        id : "uzi"
+
+    },
+    {
+        Name:"散文集：短",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/fshort.json",
+        Color: "4699d9",
+
+        id : "fshort"
+    },
+    {
+        Name:"散文集：長",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/flong.json",
+        Color: "d94646",
+
+        id : "flong"
+    },
+    {
+        Name:"Minecraft",
+        Details:"Hxx的遊玩Minecraft的紀錄。",
+        Image:"/f/img/minecraft.png",
+        Page:"/f/minecraft.json",
+        Color: "85471d",
+
+        id : "minecraft"
+    },
+    {
+
+        Name:"歡迎光臨",
+
+        Details:"按下 Enter 繼續。",
+
+        Image:"",
+
+        Page:"/f/welcome.json",
+
+        Color: "3ca98a",
+
+        id : ""
+
+    },
+    {
+
+        Name:"个人档案",
+
+        Details:"Hxx的個人檔案。",
+
+        Image:"/f/img/0324.gif",
+
+        Page:"/f/main.json",
+
+        Color: "5d3ca9",
+
+        id : "hxx"
+
+    },
+    {
+        Name:"7SunFish",
+        Details:"Hxx的好朋友",
+        Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
+        Page:"/f/7sf.json",
+        Color: "c1842b",
+
+        id : "7sf"
+
+    },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "4e46b8",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Uzi特寫",
+        Details:"Uzi的特寫照外流。",
+        Image:"/f/img/IMG_9089.jpg",
+        Page:"/f/uzi.json",
+        Color: "7946b8",
+
+        id : "uzi"
+
+    },
+    {
+        Name:"散文集：短",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/fshort.json",
+        Color: "4699d9",
+
+        id : "fshort"
+    },
+    {
+        Name:"散文集：長",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/flong.json",
+        Color: "d94646",
+
+        id : "flong"
+    },
+    {
+        Name:"Minecraft",
+        Details:"Hxx的遊玩Minecraft的紀錄。",
+        Image:"/f/img/minecraft.png",
+        Page:"/f/minecraft.json",
+        Color: "85471d",
+
+        id : "minecraft"
+    },
+    {
+
+        Name:"歡迎光臨",
+
+        Details:"按下 Enter 繼續。",
+
+        Image:"",
+
+        Page:"/f/welcome.json",
+
+        Color: "3ca98a",
+
+        id : ""
+
+    },
+    {
+
+        Name:"个人档案",
+
+        Details:"Hxx的個人檔案。",
+
+        Image:"/f/img/0324.gif",
+
+        Page:"/f/main.json",
+
+        Color: "5d3ca9",
+
+        id : "hxx"
+
+    },
+    {
+        Name:"7SunFish",
+        Details:"Hxx的好朋友",
+        Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
+        Page:"/f/7sf.json",
+        Color: "c1842b",
+
+        id : "7sf"
+
+    },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "4e46b8",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Uzi特寫",
+        Details:"Uzi的特寫照外流。",
+        Image:"/f/img/IMG_9089.jpg",
+        Page:"/f/uzi.json",
+        Color: "7946b8",
+
+        id : "uzi"
+
+    },
+    {
+        Name:"散文集：短",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/fshort.json",
+        Color: "4699d9",
+
+        id : "fshort"
+    },
+    {
+        Name:"散文集：長",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/flong.json",
+        Color: "d94646",
+
+        id : "flong"
+    },
+    {
+        Name:"Minecraft",
+        Details:"Hxx的遊玩Minecraft的紀錄。",
+        Image:"/f/img/minecraft.png",
+        Page:"/f/minecraft.json",
+        Color: "85471d",
+
+        id : "minecraft"
+    },
+    {
+
+        Name:"歡迎光臨",
+
+        Details:"按下 Enter 繼續。",
+
+        Image:"",
+
+        Page:"/f/welcome.json",
+
+        Color: "3ca98a",
+
+        id : ""
+
+    },
+    {
+
+        Name:"个人档案",
+
+        Details:"Hxx的個人檔案。",
+
+        Image:"/f/img/0324.gif",
+
+        Page:"/f/main.json",
+
+        Color: "5d3ca9",
+
+        id : "hxx"
+
+    },
+    {
+        Name:"7SunFish",
+        Details:"Hxx的好朋友",
+        Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
+        Page:"/f/7sf.json",
+        Color: "c1842b",
+
+        id : "7sf"
+
+    },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "4e46b8",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Uzi特寫",
+        Details:"Uzi的特寫照外流。",
+        Image:"/f/img/IMG_9089.jpg",
+        Page:"/f/uzi.json",
+        Color: "7946b8",
+
+        id : "uzi"
+
+    },
+    {
+        Name:"散文集：短",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/fshort.json",
+        Color: "4699d9",
+
+        id : "fshort"
+    },
+    {
+        Name:"散文集：長",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/flong.json",
+        Color: "d94646",
+
+        id : "flong"
+    },
+    {
+        Name:"Minecraft",
+        Details:"Hxx的遊玩Minecraft的紀錄。",
+        Image:"/f/img/minecraft.png",
+        Page:"/f/minecraft.json",
+        Color: "85471d",
+
+        id : "minecraft"
+    },
+    {
+
+        Name:"歡迎光臨",
+
+        Details:"按下 Enter 繼續。",
+
+        Image:"",
+
+        Page:"/f/welcome.json",
+
+        Color: "3ca98a",
+
+        id : ""
+
+    },
+    {
+
+        Name:"个人档案",
+
+        Details:"Hxx的個人檔案。",
+
+        Image:"/f/img/0324.gif",
+
+        Page:"/f/main.json",
+
+        Color: "5d3ca9",
+
+        id : "hxx"
+
+    },
+    {
+        Name:"7SunFish",
+        Details:"Hxx的好朋友",
+        Image:"/f/img/a9a72e835d8a6266b636180a30014def.png",
+        Page:"/f/7sf.json",
+        Color: "c1842b",
+
+        id : "7sf"
+
+    },
+    {
+        Name:"我所對不起的你",
+        Details:"獻給你，朋友。",
+        Image:"",
+        Page:"/f/sry.json",
+        Color: "4e46b8",
+
+        id : "sry"
+
+    },
+    {
+        Name:"Uzi特寫",
+        Details:"Uzi的特寫照外流。",
+        Image:"/f/img/IMG_9089.jpg",
+        Page:"/f/uzi.json",
+        Color: "7946b8",
+
+        id : "uzi"
+
+    },
+    {
+        Name:"散文集：短",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/fshort.json",
+        Color: "4699d9",
+
+        id : "fshort"
+    },
+    {
+        Name:"散文集：長",
+        Details:"Hxx的個人散文專輯。",
+        Image:"",
+        Page:"/f/flong.json",
+        Color: "d94646",
+
+        id : "flong"
+    },
+    {
+        Name:"Minecraft",
+        Details:"Hxx的遊玩Minecraft的紀錄。",
+        Image:"/f/img/minecraft.png",
+        Page:"/f/minecraft.json",
+        Color: "85471d",
+
+        id : "minecraft"
     }
 ]
 
@@ -410,8 +1367,8 @@ let a = function(){
     let X = 0;
     let Y = 0;
 
-    let XfirstPix = Math.floor(window.innerWidth/2)-Math.floor((mapSize/2)*55);
-    let YfirstPix = Math.floor(window.innerHeight/2)-Math.floor((mapSize/2)*55);
+    let XfirstPix = Math.floor(window.innerWidth/2)-110;//-Math.floor((mapSize/2)*55);
+    let YfirstPix = Math.floor(window.innerHeight/2)-110;//-Math.floor((mapSize/2)*55);
 
     let xGen = 60;
     let yGen = 60;
@@ -726,9 +1683,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 
-    document.getElementById("CloseButton").addEventListener("click", function(event) {
-        if (inUi)  ent();
-    });
+
 
     let parts = new URLSearchParams(  window.location.search);
     let Found = 0;
@@ -764,14 +1719,13 @@ async function ent(a){
         console.log(a,inUi);
         if(inUi){
             tweenMove(document.getElementById("Card"),window.innerWidth/2,window.innerHeight/2,1,1);
-            tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,100,1,1);
 
         }
         return;
     }
 
 
-    if (((new Date().getTime()) - lastTimeEnt)>=150){
+    if (((new Date().getTime()) - lastTimeEnt)>=200){
         lastTimeEnt= new Date().getTime();
     }else{
         return;
@@ -804,7 +1758,6 @@ async function ent(a){
         document.getElementById("TopBarText").textContent = "";
 
         tweenMove(document.getElementById("Card"),0,-300,0.000001,1);
-        tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,-200,2,1);
 
         let n = document.getElementsByClassName("Case").length;
         for (let i =0 ;i<n;i++){
@@ -813,8 +1766,8 @@ async function ent(a){
 
 
         async function _blur(){
-            for (let i = 10;i>3;i--){
-                document.getElementById("BackGround").style.filter = "blur("+i+"px)";
+            for (let i = 10;i>0;i--){
+                document.getElementById("BackGround").style.filter = "blur("+String(i-1)+"px)";
                 await sleep(50);
             }
 
@@ -826,9 +1779,9 @@ async function ent(a){
     }else{
         inUi = true;
 
-        tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],96,96,1,10,true);
+         tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],96,96,1,10,true);
         await sleep(70);
-        tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110,110,1,10,true);
+         tweenSize(document.getElementsByClassName(Bubbles[MidY][MidX])[0],110,110,1,10,true);
 
         if (SqrData.id === "7sf") MessageIt("太陽魚！","太陽魚是Hxx最好的好友。Hxx對我的愛都轉移到了他身上啊！！！😭");
         if (SqrData.id === "m100") MessageIt("100次移動！","恭喜完成100次移動！😗");
@@ -849,15 +1802,12 @@ async function ent(a){
         document.getElementById("TopBarText").style.color =  "#" + hex(SqrData.Color,"311141", 1);
 
 
-        document.getElementById("CloseButton").style.border =  "3px solid  #" + hex(SqrData.Color,"311141", +1);
-        document.getElementById("CloseButton").style.boxShadow =  "0 0 30px   #" + hex(SqrData.Color,"311141", 1);
-        document.getElementById("CloseButton").style.backgroundColor =  "#" + SqrData.Color+"EA";
+
 
 
         let Emojis = [
             '🫠','🤔','🥸','💪','💩','📖','😶‍🌫️','🤐','🙄','😯','😪','🐟'
         ]
-        document.getElementById("CloseButton").textContent = Emojis[Math.floor(Math.random()*Emojis.length)];
 
 
 
@@ -872,17 +1822,15 @@ async function ent(a){
 
 
         tweenMove(document.getElementById("Card"),window.innerWidth/2,window.innerHeight,0.000001,1);
-        await tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,-200,0.000001,1);
 
-        tweenMove(document.getElementById("CloseButton"),window.innerWidth/2,100,4,1);
+        await sleep(50);
 
 
-        await sleep(100);
         document.getElementById("Card").style.height = "auto";
         document.getElementById("Card").style.width = "auto";
 
-        await tweenSize(document.getElementById("Card"),
-            500,
+         tweenSize(document.getElementById("Card"),
+            700,
             500
             ,.1,1);
 
@@ -905,8 +1853,8 @@ async function ent(a){
         document.getElementById("Page").appendChild(LoadCase);
 
         async function _blur(){
-            for (let i = 3;i<10;i++){
-                document.getElementById("BackGround").style.filter = "blur("+i+"px)";
+            for (let i = 0;i<10;i++){
+                document.getElementById("BackGround").style.filter = "blur("+String(i+1)+"px)";
                 await sleep(50);
             }
         }
@@ -1103,7 +2051,7 @@ document.addEventListener('mouseup', (m) => {
                     return false;
                 }
 
-                if (zzz.id === "Card" ||zzz.id === "CloseButton"){
+                if (zzz.id === "Card" ){
 
                     return true;
                 }else{
