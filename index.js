@@ -1,4 +1,4 @@
-let CubeSideSize = 225;
+let CubeSideSize = 220;
 
 
 function sleep(ms) {
@@ -36,6 +36,68 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
     }
 
+    let buttons = [
+        {
+            "Side": 1,
+            "Chunk": 1,
+        },
+        {
+            "Side": 1,
+            "Chunk": 2,
+        },
+        {
+            "Side": 1,
+            "Chunk": 3,
+        },
+        {
+            "Side": 1,
+            "Chunk": 4,
+        },
+        {
+            "Side": 2,
+            "Chunk": 1,
+        }
+    ];
+
+    let buttonElements = [];
+
+    for (let i = 0; i < buttons.length; i++) {
+        let newOne = document.createElement("div");
+        newOne.classList.add("button");
+
+        let newFrontSide = document.createElement("div");
+        let newBackSide = document.createElement("div");
+        let newRightSide = document.createElement("div");
+        let newLeftSide = document.createElement("div");
+        let newTopSide = document.createElement("div");
+        let newBottomSide = document.createElement("div");
+
+        newFrontSide.classList.add("buttonFrontSide");
+        newBackSide.classList.add("buttonBackSide");
+        newTopSide.classList.add("buttonTopSide");
+        newBottomSide.classList.add("buttonBottomSide");
+        newLeftSide.classList.add("buttonLeftSide");
+        newRightSide.classList.add("buttonRightSide");
+
+        newOne.appendChild(newFrontSide);
+        newOne.appendChild(newBackSide);
+        newOne.appendChild(newRightSide);
+        newOne.appendChild(newLeftSide);
+        newOne.appendChild(newTopSide);
+        newOne.appendChild(newBottomSide);
+
+        newRightSide.appendChild(document.createElement("div"));
+        newLeftSide.appendChild(document.createElement("div"));
+        newTopSide.appendChild(document.createElement("div"));
+        newBottomSide.appendChild(document.createElement("div"));
+
+        document.body.appendChild(newOne);
+
+        buttonElements[buttonElements.length] = newOne;
+    }
+
+
+
     function moving(xMoved, yMoved) {
 
 
@@ -49,6 +111,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             (Math.abs((yMoved-90)%360)>180) ? 180-(Math.abs((yMoved-90)%360)-180) : Math.abs((yMoved-90)%360);
         let YtoFXnFZDeg =
             (Math.abs(y360Moved)>180) ? 180-(Math.abs(y360Moved)-180) : Math.abs(y360Moved);
+
+        let FVisible = false,RVisible = false,LVisible = false,TVisible = false,BVisible = false,BackVisible = false;
 
 
 
@@ -65,9 +129,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
         ){
             document.getElementById("passZFront").style.opacity = "1";
             document.getElementById("passZBack").style.opacity = "0";
+            FVisible = true;
+            BackVisible = false;
         }else {
             document.getElementById("passZFront").style.opacity = "0";
             document.getElementById("passZBack").style.opacity = "1";
+            FVisible = false;
+            BackVisible = true;
         }
 
 
@@ -83,9 +151,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
         ){
             document.getElementById("passXFront").style.opacity = "1";
             document.getElementById("passXBack").style.opacity = "0";
+            LVisible = true;
+            RVisible = false;
         }else {
             document.getElementById("passXFront").style.opacity = "0";
             document.getElementById("passXBack").style.opacity = "1";
+            LVisible = false;
+            RVisible = true;
         }
 
 
@@ -102,10 +174,169 @@ document.addEventListener("DOMContentLoaded",  async function () {
         ){
             document.getElementById("passYFront").style.opacity = "1";
             document.getElementById("passYBack").style.opacity = "0";
+            BVisible = true;
+            TVisible = false;
         }else {
             document.getElementById("passYFront").style.opacity = "0";
             document.getElementById("passYBack").style.opacity = "1";
+            BVisible = false;
+            TVisible = true;
         }
+
+
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+
+        for (let i = 0; i<buttonElements.length;i++){
+            let addX =  0,addY = 0,addZ = -110-12;
+            let addDegX = 0,addDegY = 0;
+            let db = false;
+
+
+            switch (buttons[i].Side){
+                case 1:{ //f
+                    addDegX = 0;
+                    db = FVisible;
+                    break;
+                }
+                case 2:{ // r
+                    addDegX = 90;
+                    db = RVisible;
+
+                    break;
+                }
+                case 3:{ // back
+                    addDegX = 180;
+                    db = BackVisible;
+
+                    break;
+                }
+                case 4:{ // l
+                    addDegX = 270;
+                    db = LVisible;
+
+                    break;
+                }
+                case 5:{ // t
+                    addDegY = 90;
+                    db = TVisible;
+
+                    break;
+                }
+                case 6:{ //bottom
+                    addDegY = 270;
+                    db = BVisible;
+
+                    break;
+                }
+            }
+
+            switch (buttons[i].Chunk){
+                case 1:{
+                    addX = -55;
+                    addY = -55;
+                    break;
+                }
+                case 2:{
+                    addX = 55;
+                    addY = -55;
+                    break;
+                }
+                case 3:{
+                    addX = -55;
+                    addY = 55;
+                    break;
+                }
+                case 4:{
+                    addX = 55;
+                    addY = 55;
+                    break;
+                }
+            }
+
+            xMoved += addDegX;
+            yMoved += addDegY;
+
+            x360Moved = (xMoved%360);
+            y360Moved = (yMoved%360);
+
+            toFZDeg = (Math.abs(x360Moved)>180) ? 180-(Math.abs(x360Moved)-180) : Math.abs(x360Moved);
+            toFXDeg =
+                (Math.abs((xMoved-90)%360)>180) ? 180-(Math.abs((xMoved-90)%360)-180) : Math.abs((xMoved-90)%360);
+            toFYDeg =
+                (Math.abs((yMoved-90)%360)>180) ? 180-(Math.abs((yMoved-90)%360)-180) : Math.abs((yMoved-90)%360);
+            YtoFXnFZDeg =
+                (Math.abs(y360Moved)>180) ? 180-(Math.abs(y360Moved)-180) : Math.abs(y360Moved);
+
+            buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.transform =
+                `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+12)}px)`;
+
+            buttonElements[i].getElementsByClassName("buttonBackSide")[0].style.transform =
+                `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved+180)}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String(addZ+12)}px)`;
+
+
+            if(
+                YtoFXnFZDeg < 90 ? toFZDeg < 90 : toFZDeg > 90
+            ){
+
+
+                buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.opacity = "1";
+                // document.getElementsByClassName("buttonBackSide")[0].style.opacity = "0";
+            }else {
+                buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.opacity = "0";
+                // document.getElementsByClassName("buttonBackSide")[0].style.opacity = "1";
+            }
+
+
+            buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.transform =
+                `rotateX(${yMoved}deg) rotateY(${xMoved+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+40)}px)`;
+
+            buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.transform =
+                `rotateX(${yMoved}deg) rotateY(${xMoved-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + 40)}px)`;
+
+            if(
+                YtoFXnFZDeg < 90 ? toFXDeg < 90 : toFXDeg > 90
+            ){
+                buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.opacity = "1";
+                buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.opacity = "0";
+            }else {
+                buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.opacity = "0";
+                buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.opacity = "1";
+            }
+
+            buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.transform =
+                `rotateX(${yMoved+90}deg) rotateZ(${-xMoved}deg) translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String(-addY+40)}px)`;
+
+            buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.transform =
+                `rotateX(${yMoved-90}deg) rotateZ(${xMoved}deg) translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String(addY+40)}px)`;
+
+            if(
+                toFYDeg < 90
+            ){
+                buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.opacity = "1";
+                buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.opacity = "0";
+            }else {
+                buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.opacity = "0";
+                buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.opacity = "1";
+            }
+
+
+
+            if (db){
+                buttonElements[i].style.opacity = "1";
+            }else {
+                buttonElements[i].style.opacity = "0";
+            }
+        }
+
+
 
     }
 
@@ -159,8 +390,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let Mmoving = function(x,y){
         if(!Holding) return;
 
-        xMoved = (x - xStartScreen)/4 + xLastMoved;
-        yMoved = (-y +   yStartScreen)/4 + yLastMoved;
+        xMoved = (x - xStartScreen)/3 + xLastMoved;
+        yMoved = (-y +   yStartScreen)/3 + yLastMoved;
 
         moving(xMoved, yMoved);
     }
