@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Chunk": 4,
             "Color":"#bac5a3",
             "depth":24,
-            "Icon": "./img/IMG_20250408_223421_737.webp"
+            "Icon": "./img/IMG_20250408_223421_737.jpg"
         },
         {
             "Side": 2,
