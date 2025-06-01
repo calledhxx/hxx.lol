@@ -67,9 +67,9 @@ function hex(a,b,c){
     let re = "";
 
 
-    re = re + (str[ Math.floor(Red/16)] ? str[Math.floor(Red/16)] : "f")  +  (str[Red%16] ? str[Red%16] : "f");
-    re = re + (str[ Math.floor(Green/16)] ? str[Math.floor(Green/16)] : "f")  +  (str[Green%16] ? str[Green%16] : "f");
-    re = re + (str[ Math.floor(Blue/16)] ? str[Math.floor(Blue/16)] : "f")  +  (str[Blue%16] ? str[Blue%16] : "f");
+    re = re + (str[ Math.floor(Red/16)] ? str[Math.floor(Red/16)] : (c > 0 ? "f" : "0"))  +  (str[Red%16] ? str[Red%16] : (c > 0 ? "f" : "0"));
+    re = re + (str[ Math.floor(Green/16)] ? str[Math.floor(Green/16)] : (c > 0 ? "f" : "0"))  +  (str[Green%16] ? str[Green%16] : (c > 0 ? "f" : "0"));
+    re = re + (str[ Math.floor(Blue/16)] ? str[Math.floor(Blue/16)] : (c > 0 ? "f" : "0"))  +  (str[Blue%16] ? str[Blue%16] : (c > 0 ? "f" : "0"));
 
     return re;
 }
@@ -95,30 +95,23 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         {
             "Side": 1,
-            "Chunk": 4,
-            "Color":"#cd416b",
-            "depth":24,
-            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png"
-
-        },
-
-        {
-            "Side": 1,
             "Chunk": 2,
-            "Color":"#ffffff",
+            "Color":"#e4e4e4",
             "depth":24,
-            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png"
+            "Icon": "./img/32f8f2203ecb889671ddd843e2d737b9.png"
 
         },
 
         {
             "Side": 1,
-            "Chunk": 3,
-            "Color":"#2ad37f",
+            "Chunk": 4,
+            "Color":"#7441cd",
             "depth":24,
-            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png"
+            "Icon": "./img/160889760.png"
 
-        }
+        },
+
+
     ];
 
     let buttonElements = [];
@@ -138,7 +131,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let frontIcon = document.createElement("img");
         frontIcon.src = buttons[i].Icon;
 
-        frontIcon.style.borderColor = hex(buttons[i].Color,"202020",-1);
+        frontIcon.style.borderColor = hex(buttons[i].Color,"252525",-1);
 
         newFrontSide.classList.add("buttonFrontSide");
         newBackSide.classList.add("buttonBackSide");
@@ -617,8 +610,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
             buttons[Number(e.id)].depth = 6;
 
 
+            e.getElementsByClassName("buttonBackSide")[0].style.boxShadow =
+                "black 0 0 5px 1px"
 
-            e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
+
+                e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
                 e.getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
                     e.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
                         e.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(e.id)].depth)+"px";
@@ -627,6 +623,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
             await sleep(100);
 
             buttons[Number(e.id)].depth = 24;
+
+            e.getElementsByClassName("buttonBackSide")[0].style.boxShadow =
+                "black 0 0 10px 2px"
 
             e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
                 e.getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
