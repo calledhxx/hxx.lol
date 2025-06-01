@@ -440,7 +440,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 (Math.abs(y360Moved)>180) ? 180-(Math.abs(y360Moved)-180) : Math.abs(y360Moved);
 
 
-            if(toFXDeg > 90){
+            console.log(YtoFXnFZDeg);
+
+            if(YtoFXnFZDeg < 90 ? toFXDeg > 90 : toFXDeg < 90){
                 if(buttons[i].Chunk%2===1){
                     buttonElements[i].style.zIndex = String(Number(buttonElements[i].style.zIndex) - 1);
                 }
