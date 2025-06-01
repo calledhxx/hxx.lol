@@ -1,0 +1,129 @@
+*{
+    margin: 0;
+    padding: 0;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+
+    -webkit-user-drag: none; /* Safari, Chrome */
+    -moz-user-drag: none;  /* Firefox */
+    -ms-user-drag: none;   /* IE 10+ */
+    user-drag: none;       /* 通用 */
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    background: repeating-radial-gradient(#ffffff, #dddddd, #b3b3b3, #959595);
+
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    position: fixed;
+}
+
+
+
+#box{
+    transform: translate(-50%, -50%);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 225px;
+    height: 225px;
+
+
+}
+
+.pass{
+    width: 225px;
+    height: 225px;
+
+    position: absolute;
+    top: 0; left: 0;
+
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /*background-image: url("./chunk.png");*/
+    /*box-shadow: #ffffff 0 0 1px 1px inset;*/
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+
+#passZFront{
+    transform: rotateX(0deg) rotateY(180deg);
+
+
+    z-index: 3;
+
+}
+
+#passZBack{
+    transform: rotateX(0deg) rotateY(0deg) ;
+
+
+
+    z-index: 0;
+}
+
+
+#passXFront{
+    transform: rotateX(0deg) rotateY(90deg) ;
+
+
+
+    z-index: 0;
+
+
+}
+
+#passXBack{
+    transform: rotateX(0deg) rotateY(270deg);
+
+
+    z-index: 0;
+
+
+}
+
+#passYFront{
+    transform: rotateX(90deg) rotateY(0deg);
+
+
+
+    z-index: 0;
+
+}
+
+#passYBack{
+    transform: rotateX(270deg) rotateY(0deg);
+
+
+    z-index: 0;
+
+}
+
+.chunk{
+    width: 50%;
+    height: 50%;
+    flex-shrink: 0;
+}
+
+.blackChunk{
+    background: #000000;
+}
+
+.whiteChunk{
+    background: #ffffff;
+}
