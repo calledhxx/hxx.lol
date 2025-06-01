@@ -161,6 +161,19 @@ body{
     height: 80px;
 }
 
+.buttonFrontSide img{
+    width: 85%;
+    height: 85%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 20px;
+    border: 2px solid #000000;
+}
+
 .buttonBackSide{
     /*background: deeppink;*/
     /*transform: rotateX(0deg) rotateY(180deg) translateX(0) translateY(0) translateZ(40px);*/

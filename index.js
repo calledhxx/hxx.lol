@@ -6,6 +6,74 @@ function sleep(ms) {
 }
 
 
+function hex(a,b,c){
+    if(a.substring(0,1) === "#") a = a.substring(1,7)
+    if(b.substring(0,1) === "#") b = b.substring(1,7)
+
+    let str = [
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+    ];
+
+
+    let abc = function(v){
+        for (let i = 0;i<str.length;i++){
+            if (str[i] === v){
+                return i;
+            }
+        }
+    }
+
+    let Red = 0;
+    let Green = 0;
+    let Blue = 0;
+
+
+
+    Red = Red + abc(a.substring(0,1))*16;
+    Red = Red + abc(a.substring(1,2));
+
+    Green = Green +  abc(a.substring(2,3))*16;
+    Green = Green + abc(a.substring(3,4));
+
+    Blue = Blue + abc(a.substring(4,5))*16;
+    Blue = Blue + abc(a.substring(5,6));
+
+
+    Red = Red +  c * abc(b.substring(0,1))*16;
+    Red = Red +  c * abc(b.substring(1,2));
+
+    Green = Green +   c*abc(b.substring(2,3))*16;
+    Green = Green +  c*abc(b.substring(3,4));
+
+    Blue = Blue +  c*abc(b.substring(4,5))*16;
+    Blue = Blue +  c*abc(b.substring(5,6));
+
+
+    let re = "";
+
+
+    re = re + (str[ Math.floor(Red/16)] ? str[Math.floor(Red/16)] : "f")  +  (str[Red%16] ? str[Red%16] : "f");
+    re = re + (str[ Math.floor(Green/16)] ? str[Math.floor(Green/16)] : "f")  +  (str[Green%16] ? str[Green%16] : "f");
+    re = re + (str[ Math.floor(Blue/16)] ? str[Math.floor(Blue/16)] : "f")  +  (str[Blue%16] ? str[Blue%16] : "f");
+
+    return re;
+}
+
 document.addEventListener("DOMContentLoaded",  async function () {
 
     let xLastMoved = 0,yLastMoved = 0;
@@ -20,15 +88,36 @@ document.addEventListener("DOMContentLoaded",  async function () {
         {
             "Side": 1,
             "Chunk": 1,
-            "Color":"#ffa400",
-            "depth":24
+            "Color":"#e8a428",
+            "depth":24,
+            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png"
         },
 
         {
             "Side": 1,
             "Chunk": 4,
             "Color":"#cd416b",
-            "depth":24
+            "depth":24,
+            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png"
+
+        },
+
+        {
+            "Side": 1,
+            "Chunk": 2,
+            "Color":"#ffffff",
+            "depth":24,
+            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png"
+
+        },
+
+        {
+            "Side": 1,
+            "Chunk": 3,
+            "Color":"#2ad37f",
+            "depth":24,
+            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png"
+
         }
     ];
 
@@ -45,6 +134,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let newTopSide = document.createElement("div");
         let newBottomSide = document.createElement("div");
 
+
+        let frontIcon = document.createElement("img");
+        frontIcon.src = buttons[i].Icon;
+
+        frontIcon.style.borderColor = hex(buttons[i].Color,"202020",-1);
+
         newFrontSide.classList.add("buttonFrontSide");
         newBackSide.classList.add("buttonBackSide");
         newTopSide.classList.add("buttonTopSide");
@@ -58,6 +153,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         newOne.appendChild(newLeftSide);
         newOne.appendChild(newTopSide);
         newOne.appendChild(newBottomSide);
+
+        newFrontSide.appendChild(frontIcon);
 
         newRightSide.appendChild(document.createElement("div"));
         newLeftSide.appendChild(document.createElement("div"));
