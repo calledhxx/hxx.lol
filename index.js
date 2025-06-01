@@ -14,48 +14,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let Holding = 0;
 
-    TweenUp(true);
 
-    function TweenUp(db){
-        if(db){
-            document.getElementById("passZFront").style.transition =
-                document.getElementById("passZBack").style.transition =
-                    document.getElementById("passZBack").style.transition =
-                        document.getElementById("passXFront").style.transition =
-                            document.getElementById("passXBack").style.transition =
-                                document.getElementById("passYFront").style.transition =
-                                    document.getElementById("passYBack").style.transition = "all .1s ease-in-out";
-        }else{
-            document.getElementById("passZFront").style.transition =
-                document.getElementById("passZBack").style.transition =
-                    document.getElementById("passZBack").style.transition =
-                        document.getElementById("passXFront").style.transition =
-                            document.getElementById("passXBack").style.transition =
-                                document.getElementById("passYFront").style.transition =
-                                    document.getElementById("passYBack").style.transition = "";
-        }
-    }
 
     let buttons = [
         {
             "Side": 1,
             "Chunk": 1,
+            "Color":"#ffa400",
         },
-        {
-            "Side": 1,
-            "Chunk": 2,
-        },
-        {
-            "Side": 1,
-            "Chunk": 3,
-        },
+
         {
             "Side": 1,
             "Chunk": 4,
-        },
-        {
-            "Side": 2,
-            "Chunk": 1,
+            "Color":"#63cd41",
         }
     ];
 
@@ -91,12 +62,51 @@ document.addEventListener("DOMContentLoaded",  async function () {
         newTopSide.appendChild(document.createElement("div"));
         newBottomSide.appendChild(document.createElement("div"));
 
+        let pads = [
+            newRightSide.children[0],
+            newLeftSide.children[0],
+            newTopSide.children[0],
+            newBottomSide.children[0],
+            newFrontSide
+        ]
+
+        for (let j = 0; j < pads.length; j++) {
+            pads[j].style.backgroundColor = buttons[i].Color;
+        }
+
         document.body.appendChild(newOne);
 
         buttonElements[buttonElements.length] = newOne;
     }
 
 
+
+    function TweenUp(db){
+        if(db){
+            document.getElementById("passZFront").style.transition =
+                document.getElementById("passZBack").style.transition =
+                    document.getElementById("passZBack").style.transition =
+                        document.getElementById("passXFront").style.transition =
+                            document.getElementById("passXBack").style.transition =
+                                document.getElementById("passYFront").style.transition =
+                                    document.getElementById("passYBack").style.transition = "all .1s ease-in-out";
+
+
+
+        }else{
+            document.getElementById("passZFront").style.transition =
+                document.getElementById("passZBack").style.transition =
+                    document.getElementById("passZBack").style.transition =
+                        document.getElementById("passXFront").style.transition =
+                            document.getElementById("passXBack").style.transition =
+                                document.getElementById("passYFront").style.transition =
+                                    document.getElementById("passYBack").style.transition = "";
+        }
+
+        for (let i = 0;i<buttonElements.length; i++)
+            for (let j = 0; j<buttonElements[i].children.length; j++)
+                buttonElements[i].children[j].style.transition =document.getElementById("passZFront").style.transition
+    }
 
     function moving(xMoved, yMoved) {
 
@@ -200,6 +210,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let db = false;
 
 
+
+
+
             switch (buttons[i].Side){
                 case 1:{ //f
                     addDegX = 0;
@@ -238,6 +251,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
             }
 
+            if (db){
+                buttonElements[i].style.zIndex = "5";
+            }else {
+                buttonElements[i].style.zIndex = "-1";
+            }
+
+
+
             switch (buttons[i].Chunk){
                 case 1:{
                     addX = -55;
@@ -267,13 +288,40 @@ document.addEventListener("DOMContentLoaded",  async function () {
             x360Moved = (xMoved%360);
             y360Moved = (yMoved%360);
 
+
             toFZDeg = (Math.abs(x360Moved)>180) ? 180-(Math.abs(x360Moved)-180) : Math.abs(x360Moved);
+
+
             toFXDeg =
                 (Math.abs((xMoved-90)%360)>180) ? 180-(Math.abs((xMoved-90)%360)-180) : Math.abs((xMoved-90)%360);
             toFYDeg =
                 (Math.abs((yMoved-90)%360)>180) ? 180-(Math.abs((yMoved-90)%360)-180) : Math.abs((yMoved-90)%360);
             YtoFXnFZDeg =
                 (Math.abs(y360Moved)>180) ? 180-(Math.abs(y360Moved)-180) : Math.abs(y360Moved);
+
+
+            if(toFXDeg > 90){
+                if(buttons[i].Chunk%2===1){
+                    buttonElements[i].style.zIndex = String(Number(buttonElements[i].style.zIndex) - 1);
+                }
+            }else{
+                if(buttons[i].Chunk%2!==1){
+                    buttonElements[i].style.zIndex = String(Number(buttonElements[i].style.zIndex) - 1);
+                }
+            }
+
+
+            if(toFYDeg > 90){
+                if(buttons[i].Chunk>2){
+                    buttonElements[i].style.zIndex = String(Number(buttonElements[i].style.zIndex) - 1);
+                }
+            }else{
+                if(buttons[i].Chunk<=2){
+                    buttonElements[i].style.zIndex = String(Number(buttonElements[i].style.zIndex) - 1);
+                }
+            }
+
+            console.log(toFXDeg,toFYDeg);
 
             buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.transform =
                 `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+12)}px)`;
@@ -329,16 +377,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
 
-            if (db){
-                buttonElements[i].style.opacity = "1";
-            }else {
-                buttonElements[i].style.opacity = "0";
-            }
+
         }
 
 
 
     }
+
+    TweenUp(true);
 
     moving(0,0);
 
