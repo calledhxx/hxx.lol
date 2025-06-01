@@ -34,15 +34,13 @@ body{
     top: 50%;
     left: 50%;
 
-    width: 225px;
-    height: 225px;
-
-
+    width: 220px;
+    height: 220px;
 }
 
 .pass{
-    width: 225px;
-    height: 225px;
+    width: 220px;
+    height: 220px;
 
     position: absolute;
     top: 0; left: 0;
@@ -56,6 +54,25 @@ body{
 
     display: flex;
     flex-wrap: wrap;
+}
+
+
+.chunk{
+    width: 50%;
+    height: 50%;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blackChunk{
+    background: #000000;
+}
+
+.whiteChunk{
+    background: #ffffff;
 }
 
 
@@ -114,16 +131,124 @@ body{
 
 }
 
-.chunk{
-    width: 50%;
-    height: 50%;
-    flex-shrink: 0;
+
+
+
+.button{
+    top: 50%;
+    left: 50%;
+
+    width: 80px;
+    height: 80px;
+
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+
+    transition: all 100ms ease-in-out;
 }
 
-.blackChunk{
-    background: #000000;
+.button div{
+    position: absolute;
 }
 
-.whiteChunk{
-    background: #ffffff;
+.buttonFrontSide{
+    /*transform: rotateX(0deg) rotateY(0deg) translateX(0) translateY(0) translateZ(40px);*/
+    background: red;
+
+    width: 80px;
+    height: 80px;
 }
+
+.buttonBackSide{
+    /*background: deeppink;*/
+    /*transform: rotateX(0deg) rotateY(180deg) translateX(0) translateY(0) translateZ(40px);*/
+
+    width: 80px;
+    height: 80px;
+
+    box-shadow: black 0 0 10px 2px;
+
+    z-index: -1;
+}
+
+.buttonRightSide{
+    /*transform: rotateX(0deg) rotateY(90deg) translateX(0) translateY(0) translateZ(40px);*/
+
+    width: 80px;
+    height: 80px;
+}
+
+.buttonRightSide div{
+    background: blue;
+
+    width: 24px;
+    height: 80px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.buttonLeftSide{
+    /*transform: rotateX(0deg) rotateY(-90deg) translateX(0) translateY(0) translateZ(40px);*/
+
+    width: 80px;
+    height: 80px;
+}
+
+.buttonLeftSide div{
+    background: green;
+
+    width: 24px;
+    height: 80px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+.buttonTopSide{
+    /*transform: rotateX(90deg) rotateY(0deg) translateX(0) translateY(0px) translateZ(40px);*/
+
+    width: 80px;
+    height: 80px;
+}
+
+.buttonTopSide div{
+    background: yellow;
+
+    width: 80px;
+    height: 24px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.buttonBottomSide{
+    /*transform: rotateX(-90deg) rotateY(0deg) translateX(0) translateY(0px) translateZ(40px);*/
+
+    width: 80px;
+    height: 80px;
+}
+
+.buttonBottomSide div{
+    background: orange;
+
+    width: 80px;
+    height: 24px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
