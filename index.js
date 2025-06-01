@@ -112,8 +112,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
 
         for (let i = 0;i<buttonElements.length; i++)
-            for (let j = 0; j<buttonElements[i].children.length; j++)
-                buttonElements[i].children[j].style.transition =document.getElementById("passZFront").style.transition
+            for (let j = 0; j<buttonElements[i].children.length; j++) {
+                buttonElements[i].children[j].style.transition =document.getElementById("passZFront").style.transition;
+                for (let  c= 0; c<buttonElements[i].children[j].children.length; c++)
+                    buttonElements[i].children[j].children[c].style.transition = document.getElementById("passZFront").style.transition;
+
+            }
     }
 
     function moving(xMoved, yMoved) {
@@ -512,11 +516,24 @@ document.addEventListener("DOMContentLoaded",  async function () {
             TweenUp(true);
 
             buttons[Number(e.id)].depth = 6;
-            console.log(xLastMoved,yLastMoved)
+
+
+
+            e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
+                e.getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
+                    e.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
+                        e.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(e.id)].depth)+"px";
+
             moving(xLastMoved,yLastMoved);
             await sleep(100);
 
             buttons[Number(e.id)].depth = 24;
+
+            e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
+                e.getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
+                    e.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
+                        e.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(e.id)].depth)+"px";
+
             moving(xLastMoved,yLastMoved);
 
             TweenUp(false);
