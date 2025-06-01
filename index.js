@@ -110,23 +110,37 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Icon": "./img/160889760.png"
 
         },
+        {
+            "Side": 1,
+            "Chunk": 3,
+            "Color":"#e4e4e4",
+            "depth":24,
+            "Icon": "./img/3cefb2f1f8b976328364daafe647af0d.png"
+        },
 
 
 
         {
             "Side": 2,
             "Chunk": 1,
-            "Color":"#28b5e8",
+            "Color":"#0a85b1",
             "depth":24,
             "Icon": "./img/52929faad24d847a8c75de0d10dd082e.png"
         },
 
         {
             "Side": 2,
-            "Chunk": 2,
-            "Color":"#28b5e8",
+            "Chunk": 4,
+            "Color":"#0b87af",
             "depth":24,
-            "Icon": "./img/52929faad24d847a8c75de0d10dd082e.png"
+            "Icon": "./img/b5e403d11dfed3329ed8a275f9313f7f.png"
+        },
+        {
+            "Side": 2,
+            "Chunk": 3,
+            "Color":"#e4804a",
+            "depth":24,
+            "Icon": "./img/148810bbcbcc4db37d2ec8188a8a6399.png"
         },
 
 
