@@ -422,6 +422,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let startMove = function (x,y)
     {
+
         Holding = true;
 
         TweenUp(false);
@@ -455,6 +456,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     document.addEventListener("mousedown", function (m) {
         if(LockHolding) return;
+
         startMove(m.clientX,m.clientY);
     });
 
@@ -536,7 +538,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             moving(xLastMoved,yLastMoved);
 
+            await sleep(100);
+
+
             TweenUp(false);
+
+            await sleep(100);
+
 
             LockHolding = false;
         };
