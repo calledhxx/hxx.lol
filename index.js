@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let Holding = 0;
 
-
+    let LockHolding = 0;
 
     let buttons = [
         {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         {
             "Side": 1,
             "Chunk": 4,
-            "Color":"#63cd41",
+            "Color":"#cd416b",
         }
     ];
 
@@ -208,10 +208,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let addX =  0,addY = 0,addZ = -110-12;
             let addDegX = 0,addDegY = 0;
             let db = false;
-
-
-
-
 
             switch (buttons[i].Side){
                 case 1:{ //f
@@ -443,22 +439,71 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
     document.addEventListener("mousedown", function (m) {
+        if(LockHolding) return;
         startMove(m.clientX,m.clientY);
     });
 
     document.addEventListener("touchstart", function (m) {
+        if(LockHolding) return;
+        if(m.touches.length !== 1) return;
+
         startMove(m.touches[0].clientX,m.touches[0].clientY);
     });
 
-    document.addEventListener("mouseup", endMove);
+    document.addEventListener("mouseup", function ( ){
+        if(LockHolding) return;
+        endMove();
+    });
 
-    document.addEventListener("touchend", endMove);
+    document.addEventListener("touchend", function ( ){
+        if(LockHolding) return;
+        if(m.touches.length !== 1) return;
+
+        endMove();
+    });
 
     document.addEventListener("mousemove", function (m) {
+        if(LockHolding) return;
         Mmoving(m.clientX,m.clientY);
     });
 
     document.addEventListener("touchmove", function (m) {
+        if(LockHolding) return;
+        if(m.touches.length !== 1) return;
+
         Mmoving(m.touches[0].clientX,m.touches[0].clientY);
     });
+
+    function retIfParentMatch(e,id,cname,notFirst){
+        if (e === document.body) return false;
+
+        if(id){
+            if(e.id === id){
+                if(notFirst) return false;
+                return e;
+            }else{
+                return retIfParentMatch(e.parentElement, id,cname);
+            }
+        }else{
+            if(e.className === cname){
+                if(notFirst) return false;
+                return e;
+            }else{
+                return retIfParentMatch(e.parentElement, id,cname);
+            }
+        }
+    }
+
+    document.addEventListener("click", async function (m) {
+        let e = retIfParentMatch(m.target,0,"button",true);
+
+        if(e){
+            LockHolding = true;
+            TweenUp(true);
+
+            e.getElementsByClassName("buttonFrontSide")[0].style.transform = ""
+            await sleep(100);
+            TweenUp(false);
+        };
+    })
 });
