@@ -112,6 +112,24 @@ document.addEventListener("DOMContentLoaded",  async function () {
         },
 
 
+
+        {
+            "Side": 2,
+            "Chunk": 1,
+            "Color":"#28b5e8",
+            "depth":24,
+            "Icon": "./img/52929faad24d847a8c75de0d10dd082e.png"
+        },
+
+        {
+            "Side": 2,
+            "Chunk": 2,
+            "Color":"#28b5e8",
+            "depth":24,
+            "Icon": "./img/52929faad24d847a8c75de0d10dd082e.png"
+        },
+
+
     ];
 
     let buttonElements = [];
@@ -306,6 +324,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
         //
         //
 
+
+        let orgXMoved = xMoved,orgYMoved = yMoved;
+
         for (let i = 0; i<buttonElements.length;i++){
             let addX =  0,addY = 0,addZ = -110-(buttons[i].depth/2);
             let addDegX = 0,addDegY = 0;
@@ -320,6 +341,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 case 2:{ // r
                     addDegX = 90;
                     db = RVisible;
+
 
                     break;
                 }
@@ -354,7 +376,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }else {
                 buttonElements[i].style.zIndex = "-1";
             }
-
 
 
             switch (buttons[i].Chunk){
@@ -419,7 +440,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
             }
 
-            console.log(toFXDeg,toFYDeg);
 
             buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.transform =
                 `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`;
@@ -475,7 +495,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
 
-
+            xMoved = orgXMoved;
+            yMoved = orgYMoved;
         }
 
 
