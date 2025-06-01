@@ -494,16 +494,25 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
     }
 
-    document.addEventListener("click", async function (m) {
-        let e = retIfParentMatch(m.target,0,"button",true);
-
-        if(e){
-            LockHolding = true;
-            TweenUp(true);
-
-            e.getElementsByClassName("buttonFrontSide")[0].style.transform = ""
-            await sleep(100);
-            TweenUp(false);
-        };
-    })
+    // document.addEventListener("click", async function (m) {
+    //     let e = retIfParentMatch(m.target,0,"button",true);
+    //
+    //     if(e){
+    //         LockHolding = true;
+    //         TweenUp(true);
+    //
+    //         e.getElementsByClassName("buttonRightSide")[0].children[0].style.width =
+    //             e.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
+    //                 e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
+    //                     e.getElementsByClassName("buttonBottomSide")[0].children[0].style.height = "10px";
+    //         await sleep(100);
+    //         e.getElementsByClassName("buttonRightSide")[0].children[0].style.width =
+    //             e.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
+    //                 e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
+    //                     e.getElementsByClassName("buttonBottomSide")[0].children[0].style.height = "24px";
+    //         TweenUp(false);
+    //
+    //         LockHolding = false;
+    //     };
+    // })
 });
