@@ -21,12 +21,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 1,
             "Chunk": 1,
             "Color":"#ffa400",
+            "depth":24
         },
 
         {
             "Side": 1,
             "Chunk": 4,
             "Color":"#cd416b",
+            "depth":24
         }
     ];
 
@@ -74,8 +76,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
             pads[j].style.backgroundColor = buttons[i].Color;
         }
 
+        newRightSide.children[0].style.width = String(buttons[i].depth)+"px";
+        newLeftSide.children[0].style.width = String(buttons[i].depth)+"px";
+        newTopSide.children[0].style.height = String(buttons[i].depth)+"px";
+        newBottomSide.children[0].style.height = String(buttons[i].depth)+"px";
+
         document.body.appendChild(newOne);
 
+        newOne.id = String(i);
         buttonElements[buttonElements.length] = newOne;
     }
 
@@ -205,7 +213,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         //
 
         for (let i = 0; i<buttonElements.length;i++){
-            let addX =  0,addY = 0,addZ = -110-12;
+            let addX =  0,addY = 0,addZ = -110-(buttons[i].depth/2);
             let addDegX = 0,addDegY = 0;
             let db = false;
 
@@ -320,10 +328,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
             console.log(toFXDeg,toFYDeg);
 
             buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.transform =
-                `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+12)}px)`;
+                `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`;
 
             buttonElements[i].getElementsByClassName("buttonBackSide")[0].style.transform =
-                `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved+180)}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String(addZ+12)}px)`;
+                `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved+180)}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String(addZ+buttons[i].depth/2)}px)`;
 
 
             if(
@@ -397,13 +405,16 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     moving(-375,-10);
     await sleep(120);
-    xLastMoved = -375;
-    yLastMoved = -10;
-
-
-
 
     let xMoved = 0,yMoved = 0;
+
+
+    xLastMoved = xMoved =  -375;
+    yLastMoved = yMoved = -10;
+
+
+
+
 
     let startMove = function (x,y)
     {
@@ -445,7 +456,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     document.addEventListener("touchstart", function (m) {
         if(LockHolding) return;
-        if(m.touches.length !== 1) return;
+         
 
         startMove(m.touches[0].clientX,m.touches[0].clientY);
     });
@@ -457,7 +468,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     document.addEventListener("touchend", function ( ){
         if(LockHolding) return;
-        if(m.touches.length !== 1) return;
 
         endMove();
     });
@@ -469,7 +479,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     document.addEventListener("touchmove", function (m) {
         if(LockHolding) return;
-        if(m.touches.length !== 1) return;
+         
 
         Mmoving(m.touches[0].clientX,m.touches[0].clientY);
     });
@@ -494,25 +504,24 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
     }
 
-    // document.addEventListener("click", async function (m) {
-    //     let e = retIfParentMatch(m.target,0,"button",true);
-    //
-    //     if(e){
-    //         LockHolding = true;
-    //         TweenUp(true);
-    //
-    //         e.getElementsByClassName("buttonRightSide")[0].children[0].style.width =
-    //             e.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
-    //                 e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
-    //                     e.getElementsByClassName("buttonBottomSide")[0].children[0].style.height = "10px";
-    //         await sleep(100);
-    //         e.getElementsByClassName("buttonRightSide")[0].children[0].style.width =
-    //             e.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
-    //                 e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
-    //                     e.getElementsByClassName("buttonBottomSide")[0].children[0].style.height = "24px";
-    //         TweenUp(false);
-    //
-    //         LockHolding = false;
-    //     };
-    // })
+    document.addEventListener("click", async function (m) {
+        let e = retIfParentMatch(m.target,0,"button",true);
+
+        if(e){
+            LockHolding = true;
+            TweenUp(true);
+
+            buttons[Number(e.id)].depth = 6;
+            console.log(xLastMoved,yLastMoved)
+            moving(xLastMoved,yLastMoved);
+            await sleep(100);
+
+            buttons[Number(e.id)].depth = 24;
+            moving(xLastMoved,yLastMoved);
+
+            TweenUp(false);
+
+            LockHolding = false;
+        };
+    })
 });
