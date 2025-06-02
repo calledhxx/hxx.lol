@@ -712,7 +712,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     });
 
     function retIfParentMatch(e,id,cname,notFirst){
-        if (e === document.parentElement) return false;
+        if (!e.parentElement) return false;
 
         if(id){
             if(e ? (e.id === id) : false){
