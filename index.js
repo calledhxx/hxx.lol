@@ -102,6 +102,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         },
 
+
+
+
         {
             "Side": 1,
             "Chunk": 4,
@@ -112,6 +115,23 @@ document.addEventListener("DOMContentLoaded",  async function () {
         },
         {
             "Side": 1,
+            "Chunk": 3,
+            "Color":"#e4e4e4",
+            "depth":24,
+            "Icon": "./img/3cefb2f1f8b976328364daafe647af0d.png"
+        },
+
+
+        {
+            "Side": 6,
+            "Chunk": 4,
+            "Color":"#7441cd",
+            "depth":24,
+            "Icon": "./img/160889760.png"
+
+        },
+        {
+            "Side": 5,
             "Chunk": 3,
             "Color":"#e4e4e4",
             "depth":24,
@@ -393,7 +413,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
             if (db){
-                buttonElements[i].style.zIndex = "5";
+                buttonElements[i].style.zIndex = "3";
+
             }else {
                 buttonElements[i].style.zIndex = "-1";
             }
@@ -440,9 +461,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 (Math.abs(y360Moved)>180) ? 180-(Math.abs(y360Moved)-180) : Math.abs(y360Moved);
 
 
-            console.log(YtoFXnFZDeg);
-
-            if(YtoFXnFZDeg < 90 ? toFXDeg > 90 : toFXDeg < 90){
+            if(buttons[i].Side < 5 ?
+                (YtoFXnFZDeg < 90 ? toFXDeg > 90 : toFXDeg < 90)
+                :
+                (toFYDeg < 90 ? toFXDeg > 90 : toFXDeg < 90)
+            ){
                 if(buttons[i].Chunk%2===1){
                     buttonElements[i].style.zIndex = String(Number(buttonElements[i].style.zIndex) - 1);
                 }
@@ -452,8 +475,18 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
             }
 
+            if (buttons[i].Side >= 5) console.log(
+              Math.floor(toFZDeg)  ,
+                Math.floor(toFXDeg),
+                    Math.floor(toFYDeg),
+                        Math.floor(YtoFXnFZDeg)
+            )
 
-            if(toFYDeg > 90){
+            if(buttons[i].Side < 5 ?
+                toFYDeg > 90
+                :
+                (toFYDeg < 90 ? toFZDeg > 90 : toFZDeg < 90)
+            ){
                 if(buttons[i].Chunk>2){
                     buttonElements[i].style.zIndex = String(Number(buttonElements[i].style.zIndex) - 1);
                 }
@@ -464,34 +497,82 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
 
+
             buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.transform =
-                `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`;
+                buttons[i].Side < 5 ? `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`
+                    : `rotateX(${String(yMoved)}deg) rotateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(-xMoved))}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`
 
             buttonElements[i].getElementsByClassName("buttonBackSide")[0].style.transform =
-                `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved+180)}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String(addZ+buttons[i].depth/2)}px)`;
+                buttons[i].Side < 5 ? `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved+180)}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String(addZ+buttons[i].depth/2)}px)`
+                    : `rotateX(${String(yMoved+180)}deg) rotateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(xMoved+180))}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String((addZ+buttons[i].depth/2))}px)`
+            ;
 
 
-            if(
-                YtoFXnFZDeg < 90 ? toFZDeg < 90 : toFZDeg > 90
-            ){
+            // if(
+            //
+            //         YtoFXnFZDeg < 90 ? toFZDeg < 90 : toFZDeg > 90
+            //
+            // ){
+            //     buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.opacity = "1";
+            //     // document.getElementsByClassName("buttonBackSide")[0].style.opacity = "0";
+            // }else {
+            //     buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.opacity = "0";
+            //     // document.getElementsByClassName("buttonBackSide")[0].style.opacity = "1";
+            // }
 
 
-                buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.opacity = "1";
-                // document.getElementsByClassName("buttonBackSide")[0].style.opacity = "0";
-            }else {
-                buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.opacity = "0";
-                // document.getElementsByClassName("buttonBackSide")[0].style.opacity = "1";
-            }
+
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
+            //!!! sid 6 left right re-changed
 
 
             buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.transform =
-                `rotateX(${yMoved}deg) rotateY(${xMoved+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+40)}px)`;
+                buttons[i].Side < 5 ? `rotateX(${yMoved}deg) rotateY(${xMoved+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+40)}px)`
+
+                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${(-xMoved-270)}deg) rotateZ(270deg) translateX(${String(addZ)}px)  translateY(${String((buttons[i].Side === 6 ? -1 : 1 )*addY)}px) translateZ(${String(addX+(buttons[i].Side === 6 ? -1 : 1 )*40)}px)`
+
 
             buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.transform =
-                `rotateX(${yMoved}deg) rotateY(${xMoved-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + 40)}px)`;
+                buttons[i].Side < 5  ? `rotateX(${yMoved}deg) rotateY(${xMoved-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + 40)}px)`
+                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${-xMoved-90}deg) rotateZ(90deg) translateX(${String(-addZ)}px)  translateY(${String((buttons[i].Side === 6 ? -1 : 1 )*addY)}px) translateZ(${String(-addX + (buttons[i].Side === 6 ? -1 : 1 )*40 )}px)`;
 
             if(
-                YtoFXnFZDeg < 90 ? toFXDeg < 90 : toFXDeg > 90
+                buttons[i].Side < 5 ?
+                    (YtoFXnFZDeg < 90  ? toFXDeg < 90 : toFXDeg > 90)
+                    :
+                    (toFYDeg < 90  ? toFXDeg < 90 : toFXDeg > 90)
             ){
                 buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.opacity = "1";
                 buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.opacity = "0";
@@ -501,19 +582,27 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
             buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.transform =
-                `rotateX(${yMoved+90}deg) rotateZ(${-xMoved}deg) translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String(-addY+40)}px)`;
+                buttons[i].Side < 5 ? `rotateX(${yMoved+90}deg) rotateZ(${-xMoved}deg) translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String(-addY+40)}px)`
+                    :`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${-xMoved}deg)  translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(-addY+40))}px)`;
 
             buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.transform =
-                `rotateX(${yMoved-90}deg) rotateZ(${xMoved}deg) translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String(addY+40)}px)`;
+                buttons[i].Side < 5 ? `rotateX(${yMoved-90}deg) rotateZ(${xMoved}deg) translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String(addY+40)}px)`
+                    :`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved-90)}deg) rotateY(${xMoved}deg)  translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(addY+40))}px)`;
 
             if(
-                toFYDeg < 90
+                buttons[i].Side < 5?
+                    (toFYDeg < 90)
+                    :
+                    (toFZDeg < 90  ? toFYDeg < 90 : toFYDeg > 90)
             ){
                 buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.opacity = "1";
                 buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.opacity = "0";
+
             }else {
                 buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.opacity = "0";
                 buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.opacity = "1";
+
+
             }
 
 
@@ -549,8 +638,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     xLastMoved = xMoved =  -375;
     yLastMoved = yMoved = -10;
-
-
 
 
 
@@ -625,17 +712,17 @@ document.addEventListener("DOMContentLoaded",  async function () {
     });
 
     function retIfParentMatch(e,id,cname,notFirst){
-        if (e === document.body) return false;
+        if (e === document.parentElement) return false;
 
         if(id){
-            if(e.id === id){
+            if(e ? (e.id === id) : false){
                 if(notFirst) return false;
                 return e;
             }else{
                 return retIfParentMatch(e.parentElement, id,cname);
             }
         }else{
-            if(e.className === cname){
+            if(e ? (e.className === cname) : false){
                 if(notFirst) return false;
                 return e;
             }else{
@@ -644,8 +731,17 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
     }
 
+
+
     document.addEventListener("click", async function (m) {
-        let e = retIfParentMatch(m.target,0,"button",true);
+        let e = false;
+        let els = document.elementsFromPoint(m.clientX,m.clientY);
+
+        for (let i = 0; i < els.length; i++) {
+            e = retIfParentMatch(els[i],0,"button",true);
+            if(e) break;
+        }
+
 
         if(e){
             LockHolding = true;
