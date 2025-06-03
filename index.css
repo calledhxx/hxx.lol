@@ -8,11 +8,12 @@
     -khtml-user-select: none;
     user-select: none;
 
-    -webkit-user-drag: none; /* Safari, Chrome */
-    -moz-user-drag: none;  /* Firefox */
-    -ms-user-drag: none;   /* IE 10+ */
-    user-drag: none;       /* 通用 */
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+    -ms-user-drag: none;
+    user-drag: none;
 }
+
 
 body{
     height: 100vh;
@@ -147,12 +148,30 @@ body{
 
     z-index: -100;
 
+    font-size: 15px;
+
+
 }
 
 .button div{
     position: absolute;
     cursor: pointer;
 
+}
+
+.button div div{
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    cursor: pointer;
+    writing-mode:vertical-rl;
+
+
+    text-shadow: black 0 0 10px;
 }
 
 .buttonFrontSide{
@@ -164,7 +183,7 @@ body{
 
 }
 
-.buttonFrontSide img{
+.buttonFrontSide div{
     width: 85%;
     height: 85%;
 
@@ -175,6 +194,22 @@ body{
 
     border-radius: 20px;
     border: 2px solid #000000;
+}
+
+.buttonFrontSide img{
+    width: 90%;
+    height: 90%;
+
+    overflow: hidden;
+    border-radius: 50%;
+
+    border: 2px solid #000000;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
 
 .buttonBackSide{
