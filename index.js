@@ -97,7 +97,17 @@ document.addEventListener("DOMContentLoaded",  async function () {
         {
             "Side": 6,
             "Chunk": 1,
-            "Color":"#e8a428",
+            "Color":"#512509",
+            "depth":24,
+            "Icon": null,
+            "Name":"太陽魚",
+            "Tag":"Sunfish"
+        },
+
+        {
+            "Side": 5,
+            "Chunk": 1,
+            "Color":"#72a830",
             "depth":24,
             "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
             "Name":"太陽魚",
@@ -106,8 +116,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         {
             "Side": 5,
-            "Chunk": 1,
-            "Color":"#e8a428",
+            "Chunk": 4,
+            "Color":"#cf4343",
             "depth":24,
             "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
             "Name":"太陽魚",
@@ -206,9 +216,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         let frontMain = document.createElement("div");
+        let frontTitle = document.createElement("h1");
 
         let frontIcon = document.createElement("img");
-        frontIcon.src = buttons[i].Icon;
+
+        if(buttons[i].Icon)
+            frontIcon.src = buttons[i].Icon;
+        else
+            frontTitle.textContent = buttons[i].Name.substring(0, 1);
+
 
         frontMain.style.borderColor = hex(buttons[i].Color,"252525",-1);
         frontMain.style.backgroundColor = hex(buttons[i].Color,"181818",-1);
@@ -221,8 +237,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         newLeftSide.classList.add("buttonLeftSide");
         newRightSide.classList.add("buttonRightSide");
 
-
-
         newOne.appendChild(newFrontSide);
         newOne.appendChild(newBackSide);
         newOne.appendChild(newRightSide);
@@ -232,6 +246,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         newFrontSide.appendChild(frontMain);
         frontMain.appendChild(frontIcon);
+        frontMain.appendChild(frontTitle);
+
+
 
         newRightSide.appendChild(document.createElement("div"));
         newLeftSide.appendChild(document.createElement("div"));
@@ -271,7 +288,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
 
-    function TweenUp(db){
+    function TweenUp(db,smoothSec){
+        smoothSec = smoothSec ? smoothSec : 0.1;
         if(db){
             document.getElementById("passZFront").style.transition =
                 document.getElementById("passZBack").style.transition =
@@ -279,7 +297,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         document.getElementById("passXFront").style.transition =
                             document.getElementById("passXBack").style.transition =
                                 document.getElementById("passYFront").style.transition =
-                                    document.getElementById("passYBack").style.transition = "all .1s ease-in-out";
+                                    document.getElementById("passYBack").style.transition = `all ${smoothSec}s ease-in-out`;
 
 
 
@@ -562,8 +580,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 buttons[i].Side < 5  ? `rotateX(${yMoved}deg) rotateY(${xMoved-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + 40)}px)`
                     : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${-xMoved-90}deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(-addX + 40 )}px)`;
 
-            if(buttons[i].Side  === 5 ) console.log("TOP",Math.floor(toFZDeg),Math.floor(toFXDeg),Math.floor(toFYDeg),Math.floor(YtoFXnFZDeg));
-            if(buttons[i].Side  === 6 )console.log("BOM",Math.floor(toFZDeg),Math.floor(toFXDeg),Math.floor(toFYDeg),Math.floor(YtoFXnFZDeg));
 
             if(
                 buttons[i].Side < 5 ?
@@ -636,7 +652,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     xLastMoved = xMoved =  -375;
     yLastMoved = yMoved = -10;
 
-
+    let startAt = 0;
 
     let mouseOnButtons = [];
 
@@ -680,20 +696,50 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             xStartScreen = x;
             yStartScreen = y;
+
+            startAt = Date.now();
         }
 
 
     }
 
     let endMove = async function (){
-        console.log(mouseOnButtons);
         if(Holding){
             Holding = false;
 
-            TweenUp(true);
+            let totalMs = Date.now() - startAt;
 
-            xLastMoved = xMoved;
+            let toX =(xMoved - xLastMoved)/(totalMs/200);
+            let toY = (yMoved - yLastMoved)/(totalMs/200);
+
+            let dbX = (xMoved - xLastMoved) > 0;
+            let dbY = (yMoved - yLastMoved) > 0;
+
+
             yLastMoved = yMoved;
+            xLastMoved = xMoved;
+
+            moving(xLastMoved,yLastMoved);
+
+
+            for (let index = 0;;index++){
+
+                if(dbX ? toX > 0 : toX < 0) toX= dbX ? toX-2 : toX+2; else toX = 0;
+                if(dbY ? toY > 0 : toY < 0)  toY= dbY ? toY-2 : toY+2; else toY = 0;
+
+                if(
+                    ((dbX ? toX <= 0 : toX >= 0) && (dbY ? toY <= 0 : toY >= 0)) ||
+                    Holding
+                ) break;
+
+                await moving(xLastMoved+toX/50,yLastMoved+toY/50);
+
+                xLastMoved = xLastMoved+toX/50;
+                yLastMoved = yLastMoved+toY/50;
+
+                await sleep(10);
+            }
+
         }else{
             for (let i in mouseOnButtons){
                 if(!mouseOnButtons[i]) continue;
