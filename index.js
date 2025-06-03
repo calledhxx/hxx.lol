@@ -82,7 +82,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let Holding = 0;
 
-    let LockHolding = 0;
 
     let buttons = [
         {
@@ -475,12 +474,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
             }
 
-            if (buttons[i].Side >= 5) console.log(
-              Math.floor(toFZDeg)  ,
-                Math.floor(toFXDeg),
-                    Math.floor(toFYDeg),
-                        Math.floor(YtoFXnFZDeg)
-            )
+
 
             if(buttons[i].Side < 5 ?
                 toFYDeg > 90
@@ -641,24 +635,83 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
 
-    let startMove = function (x,y)
+    let mouseOnButtons = [];
+
+    let startMove = async function (x,y)
     {
 
-        Holding = true;
+        let e = false;
+        let els = document.elementsFromPoint(x,y);
 
-        TweenUp(false);
+        for (let i = 0; i < els.length; i++) {
+            e = retIfParentMatch(els[i],0,"button",true);
+            if(e) break;
+        }
 
-        xStartScreen = x;
-        yStartScreen = y;
+        if(e){
+            if( mouseOnButtons[e.id]) return;
+            mouseOnButtons[e.id] = e;
+
+            TweenUp(true);
+
+            buttons[Number(e.id)].depth = 6;
+
+
+            e.getElementsByClassName("buttonBackSide")[0].style.boxShadow =
+                "black 0 0 5px 1px"
+
+
+            e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
+                e.getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
+                    e.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
+                        e.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(e.id)].depth)+"px";
+
+            moving(xLastMoved,yLastMoved);
+        }else{
+            Holding = true;
+
+            TweenUp(false);
+
+            xStartScreen = x;
+            yStartScreen = y;
+        }
+
+
     }
 
-    let endMove = function (){
-        Holding = false;
+    let endMove = async function (){
+        console.log(mouseOnButtons);
+        if(Holding){
+            Holding = false;
 
-        TweenUp(true);
+            TweenUp(true);
 
-        xLastMoved = xMoved;
-        yLastMoved = yMoved;
+            xLastMoved = xMoved;
+            yLastMoved = yMoved;
+        }else{
+            for (let i in mouseOnButtons){
+                if(!mouseOnButtons[i]) continue;
+                buttons[Number(mouseOnButtons[i].id)].depth = 24;
+
+                mouseOnButtons[i] .getElementsByClassName("buttonBackSide")[0].style.boxShadow =
+                    "black 0 0 10px 2px"
+
+                mouseOnButtons[i] .getElementsByClassName("buttonTopSide")[0].children[0].style.height =
+                    mouseOnButtons[i] .getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
+                        mouseOnButtons[i] .getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
+                            mouseOnButtons[i] .getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(mouseOnButtons[i] .id)].depth)+"px";
+
+                moving(xLastMoved,yLastMoved);
+
+                await sleep(100);
+
+
+                TweenUp(false);
+
+                mouseOnButtons[i] = null;
+            }
+        }
+
 
         // moving((Math.floor((xMoved-45)/90)+1)*90,(Math.floor((yMoved-45)/90)+1)*90) ;
         //
@@ -667,7 +720,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
     let Mmoving = function(x,y){
-        if(!Holding) return;
+
 
         xMoved = (x - xStartScreen)/3 + xLastMoved;
         yMoved = (-y +   yStartScreen)/3 + yLastMoved;
@@ -676,37 +729,33 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
     document.addEventListener("mousedown", function (m) {
-        if(LockHolding) return;
 
         startMove(m.clientX,m.clientY);
     });
 
     document.addEventListener("touchstart", function (m) {
-        if(LockHolding) return;
-         
+
 
         startMove(m.touches[0].clientX,m.touches[0].clientY);
     });
 
     document.addEventListener("mouseup", function ( ){
-        if(LockHolding) return;
         endMove();
     });
 
     document.addEventListener("touchend", function ( ){
-        if(LockHolding) return;
 
         endMove();
     });
 
     document.addEventListener("mousemove", function (m) {
-        if(LockHolding) return;
+        if(!Holding) return;
+
         Mmoving(m.clientX,m.clientY);
     });
 
     document.addEventListener("touchmove", function (m) {
-        if(LockHolding) return;
-         
+        if(!Holding) return;
 
         Mmoving(m.touches[0].clientX,m.touches[0].clientY);
     });
@@ -733,56 +782,5 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
 
-    document.addEventListener("click", async function (m) {
-        let e = false;
-        let els = document.elementsFromPoint(m.clientX,m.clientY);
 
-        for (let i = 0; i < els.length; i++) {
-            e = retIfParentMatch(els[i],0,"button",true);
-            if(e) break;
-        }
-
-
-        if(e){
-            LockHolding = true;
-            TweenUp(true);
-
-            buttons[Number(e.id)].depth = 6;
-
-
-            e.getElementsByClassName("buttonBackSide")[0].style.boxShadow =
-                "black 0 0 5px 1px"
-
-
-                e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
-                e.getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
-                    e.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
-                        e.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(e.id)].depth)+"px";
-
-            moving(xLastMoved,yLastMoved);
-            await sleep(100);
-
-            buttons[Number(e.id)].depth = 24;
-
-            e.getElementsByClassName("buttonBackSide")[0].style.boxShadow =
-                "black 0 0 10px 2px"
-
-            e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
-                e.getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
-                    e.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
-                        e.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(e.id)].depth)+"px";
-
-            moving(xLastMoved,yLastMoved);
-
-            await sleep(100);
-
-
-            TweenUp(false);
-
-            await sleep(100);
-
-
-            LockHolding = false;
-        };
-    })
 });
