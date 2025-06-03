@@ -89,15 +89,40 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Chunk": 1,
             "Color":"#e8a428",
             "depth":24,
-            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png"
+            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
+            "Name":"太陽魚",
+            "Tag":"Sunfish"
         },
+
+        {
+            "Side": 6,
+            "Chunk": 1,
+            "Color":"#e8a428",
+            "depth":24,
+            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
+            "Name":"太陽魚",
+            "Tag":"Sunfish"
+        },
+
+        {
+            "Side": 5,
+            "Chunk": 1,
+            "Color":"#e8a428",
+            "depth":24,
+            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
+            "Name":"太陽魚",
+            "Tag":"Sunfish"
+        },
+
 
         {
             "Side": 1,
             "Chunk": 2,
             "Color":"#e4e4e4",
             "depth":24,
-            "Icon": "./img/32f8f2203ecb889671ddd843e2d737b9.png"
+            "Icon": "./img/32f8f2203ecb889671ddd843e2d737b9.png",
+            "Name":"破魚大帝",
+            "Tag":"ProFish"
 
         },
 
@@ -109,7 +134,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Chunk": 4,
             "Color":"#7441cd",
             "depth":24,
-            "Icon": "./img/160889760.png"
+            "Icon": "./img/160889760.png",
+            "Name":"黃太妃",
+            "Tag":"Hxx"
 
         },
         {
@@ -117,26 +144,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Chunk": 3,
             "Color":"#e4e4e4",
             "depth":24,
-            "Icon": "./img/3cefb2f1f8b976328364daafe647af0d.png"
+            "Icon": "./img/3cefb2f1f8b976328364daafe647af0d.png",
+            "Name":"彭搭特",
+            "Tag":"DrPon"
         },
-
-
-        {
-            "Side": 6,
-            "Chunk": 4,
-            "Color":"#7441cd",
-            "depth":24,
-            "Icon": "./img/160889760.png"
-
-        },
-        {
-            "Side": 5,
-            "Chunk": 3,
-            "Color":"#e4e4e4",
-            "depth":24,
-            "Icon": "./img/3cefb2f1f8b976328364daafe647af0d.png"
-        },
-
 
 
         {
@@ -144,7 +155,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Chunk": 1,
             "Color":"#0a85b1",
             "depth":24,
-            "Icon": "./img/52929faad24d847a8c75de0d10dd082e.png"
+            "Icon": "./img/52929faad24d847a8c75de0d10dd082e.png",
+            "Name":"JD大臣",
+            "Tag":"JD"
         },
 
         {
@@ -152,21 +165,27 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Chunk": 4,
             "Color":"#bac5a3",
             "depth":24,
-            "Icon": "./img/IMG_20250408_223421_737.jpg"
+            "Icon": "./img/IMG_20250408_223421_737.jpg",
+            "Name":"Weason",
+            "Tag":"Weason"
         },
         {
             "Side": 2,
             "Chunk": 3,
             "Color":"#fa7965",
             "depth":24,
-            "Icon": "./img/148810bbcbcc4db37d2ec8188a8a6399.png"
+            "Icon": "./img/148810bbcbcc4db37d2ec8188a8a6399.png",
+            "Name":"Ira Nomas",
+            "Tag":"ironman"
         },
         {
             "Side": 2,
             "Chunk": 2,
             "Color":"#202020",
             "depth":24,
-            "Icon": "./img/62993182ae16f24ad926f01f9bafa892.png"
+            "Icon": "./img/62993182ae16f24ad926f01f9bafa892.png",
+            "Name":"水泥人",
+            "Tag":"Dummy"
         },
 
 
@@ -186,10 +205,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let newBottomSide = document.createElement("div");
 
 
+        let frontMain = document.createElement("div");
+
         let frontIcon = document.createElement("img");
         frontIcon.src = buttons[i].Icon;
 
-        frontIcon.style.borderColor = hex(buttons[i].Color,"252525",-1);
+        frontMain.style.borderColor = hex(buttons[i].Color,"252525",-1);
+        frontMain.style.backgroundColor = hex(buttons[i].Color,"181818",-1);
+        frontIcon.style.borderColor = hex(buttons[i].Color,"404040",-1);
 
         newFrontSide.classList.add("buttonFrontSide");
         newBackSide.classList.add("buttonBackSide");
@@ -198,6 +221,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         newLeftSide.classList.add("buttonLeftSide");
         newRightSide.classList.add("buttonRightSide");
 
+
+
         newOne.appendChild(newFrontSide);
         newOne.appendChild(newBackSide);
         newOne.appendChild(newRightSide);
@@ -205,12 +230,21 @@ document.addEventListener("DOMContentLoaded",  async function () {
         newOne.appendChild(newTopSide);
         newOne.appendChild(newBottomSide);
 
-        newFrontSide.appendChild(frontIcon);
+        newFrontSide.appendChild(frontMain);
+        frontMain.appendChild(frontIcon);
 
         newRightSide.appendChild(document.createElement("div"));
         newLeftSide.appendChild(document.createElement("div"));
         newTopSide.appendChild(document.createElement("div"));
         newBottomSide.appendChild(document.createElement("div"));
+
+
+        newTopSide.children[0].textContent = " • ";
+        newBottomSide.children[0].textContent = " • ";
+        newLeftSide.children[0].textContent = buttons[i].Name;
+        newRightSide.children[0].textContent = buttons[i].Tag;
+
+        newOne.style.color = hex(buttons[i].Color,"121212",1);
 
         let pads = [
             newRightSide.children[0],
@@ -516,57 +550,26 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
 
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
-            //!!! sid 6 left right re-changed
 
 
             buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.transform =
                 buttons[i].Side < 5 ? `rotateX(${yMoved}deg) rotateY(${xMoved+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+40)}px)`
 
-                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${(-xMoved-270)}deg) rotateZ(270deg) translateX(${String(addZ)}px)  translateY(${String((buttons[i].Side === 6 ? -1 : 1 )*addY)}px) translateZ(${String(addX+(buttons[i].Side === 6 ? -1 : 1 )*40)}px)`
+                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${(-xMoved-270)}deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${String(addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(addX+40)}px)`
 
 
             buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.transform =
                 buttons[i].Side < 5  ? `rotateX(${yMoved}deg) rotateY(${xMoved-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + 40)}px)`
-                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${-xMoved-90}deg) rotateZ(90deg) translateX(${String(-addZ)}px)  translateY(${String((buttons[i].Side === 6 ? -1 : 1 )*addY)}px) translateZ(${String(-addX + (buttons[i].Side === 6 ? -1 : 1 )*40 )}px)`;
+                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${-xMoved-90}deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(-addX + 40 )}px)`;
+
+            if(buttons[i].Side  === 5 ) console.log("TOP",Math.floor(toFZDeg),Math.floor(toFXDeg),Math.floor(toFYDeg),Math.floor(YtoFXnFZDeg));
+            if(buttons[i].Side  === 6 )console.log("BOM",Math.floor(toFZDeg),Math.floor(toFXDeg),Math.floor(toFYDeg),Math.floor(YtoFXnFZDeg));
 
             if(
                 buttons[i].Side < 5 ?
                     (YtoFXnFZDeg < 90  ? toFXDeg < 90 : toFXDeg > 90)
                     :
-                    (toFYDeg < 90  ? toFXDeg < 90 : toFXDeg > 90)
+                    (toFYDeg < 90  ? (buttons[i].Side  !== 6 ? toFXDeg < 90 :  toFXDeg > 90) : (buttons[i].Side  !== 6 ? toFXDeg > 90 :  toFXDeg < 90))
             ){
                 buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.opacity = "1";
                 buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.opacity = "0";
@@ -652,6 +655,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if( mouseOnButtons[e.id]) return;
             mouseOnButtons[e.id] = e;
 
+            e.style.fontSize = "0px";
+
+
             TweenUp(true);
 
             buttons[Number(e.id)].depth = 6;
@@ -692,6 +698,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             for (let i in mouseOnButtons){
                 if(!mouseOnButtons[i]) continue;
                 buttons[Number(mouseOnButtons[i].id)].depth = 24;
+
+                mouseOnButtons[i].style.fontSize = "15px";
 
                 mouseOnButtons[i] .getElementsByClassName("buttonBackSide")[0].style.boxShadow =
                     "black 0 0 10px 2px"
