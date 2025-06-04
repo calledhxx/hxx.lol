@@ -575,7 +575,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.transform =
                 buttons[i].Side < 5 ? `rotateX(${yMoved}deg) rotateY(${xMoved+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+40)}px)`
-
                     : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${(-xMoved-270)}deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${String(addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(addX+40)}px)`
 
 
@@ -702,6 +701,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
             xStartScreen = x;
             yStartScreen = y;
 
+            xMoved = (x - xStartScreen)/3 + xLastMoved;
+            yMoved = (-y +   yStartScreen)/3 + yLastMoved;
+
             startAt = Date.now();
         }
 
@@ -726,11 +728,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             moving(xLastMoved,yLastMoved);
 
-
             for (let index = 0;;index++){
 
                 if(dbX ? toX > 0 : toX < 0) toX= dbX ? toX-2 : toX+2; else toX = 0;
                 if(dbY ? toY > 0 : toY < 0)  toY= dbY ? toY-2 : toY+2; else toY = 0;
+
 
                 if(
                     ((dbX ? toX <= 0 : toX >= 0) && (dbY ? toY <= 0 : toY >= 0)) ||
@@ -742,8 +744,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 xLastMoved = xLastMoved+toX/50;
                 yLastMoved = yLastMoved+toY/50;
 
-                await sleep(10);
+                await sleep(1);
             }
+
+
 
         }else{
             Pushing = false;

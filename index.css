@@ -20,7 +20,7 @@
 body{
     height: 100vh;
     width: 100vw;
-    background: repeating-radial-gradient(#ffffff, #dddddd, #b3b3b3, #959595);
+    background: repeating-radial-gradient(#58318c, #4b3783, #35367c, #3b3471);
 
     overflow-y: hidden;
     overflow-x: hidden;
@@ -71,11 +71,11 @@ body{
 }
 
 .blackChunk{
-    background: #000000;
+    background: #202020;
 }
 
 .whiteChunk{
-    background: #ffffff;
+    background: #cfcfcf;
 }
 
 
