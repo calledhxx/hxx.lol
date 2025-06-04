@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let xStartScreen = 0,yStartScreen = 0;
 
     let Holding = 0;
+    let Pushing = 0;
 
 
     let buttons = [
@@ -668,8 +669,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
 
         if(e){
-            if( mouseOnButtons[e.id]) return;
+            if(mouseOnButtons[e.id]) return;
             mouseOnButtons[e.id] = e;
+
+            Pushing = true;
 
             e.style.fontSize = "0px";
 
@@ -729,7 +732,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 if(
                     ((dbX ? toX <= 0 : toX >= 0) && (dbY ? toY <= 0 : toY >= 0)) ||
-                    Holding
+                    Holding || Pushing
                 ) break;
 
                 await moving(xLastMoved+toX/50,yLastMoved+toY/50);
@@ -741,6 +744,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
         }else{
+            Pushing = false;
             for (let i in mouseOnButtons){
                 if(!mouseOnButtons[i]) continue;
                 buttons[Number(mouseOnButtons[i].id)].depth = 24;
@@ -774,8 +778,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
     let Mmoving = function(x,y){
-
-
         xMoved = (x - xStartScreen)/3 + xLastMoved;
         yMoved = (-y +   yStartScreen)/3 + yLastMoved;
 
