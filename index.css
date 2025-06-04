@@ -328,7 +328,7 @@ body{
 
 #DynamicBubbleBase{
     position: absolute;
-    top: 5%;
+    top: 40px;
     left: 50%;
     transform: translateX(-50%);
 
@@ -363,12 +363,12 @@ body{
     top:0;
     right:0;
 
-    transition: all 530ms ease-out;
+    transition: all 200ms ease-out;
 
     animation: rainbowH1 2s infinite;
 
     border: #b6b6b6 2px solid;
-    border-radius: 50%;
+    border-radius: 100%;
     background: #e4e4e4;
 
     backdrop-filter: blur(10px);
@@ -381,13 +381,14 @@ body{
         color: #ff0000;
         background: rgba(255, 0, 0, 0.5);
         border-color: #ff0000;
-
+        box-shadow: 0 0 20px 2px #ff0000;
     }
 
     34%{
         color: #ffff00;
         background: rgba(255, 255, 0, 0.5);
         border-color: #ffff00;
+        box-shadow: 0 0 20px 2px #ffff00;
 
     }
 
@@ -395,6 +396,7 @@ body{
         color: #00ff00;
         background: rgba(0, 255, 0, 0.5);
         border-color: #00ff00;
+        box-shadow: 0 0 20px 2px #00ff00;
 
     }
 
@@ -402,6 +404,7 @@ body{
         color: #00ffff;
         background: rgba(0, 255, 255, 0.5);
         border-color: #00ffff;
+        box-shadow: 0 0 20px 2px #00ffff;
 
     }
 
@@ -409,6 +412,7 @@ body{
         color: #0000ff;
         background: rgba(0, 0, 255, 0.5);
         border-color: #0000ff;
+        box-shadow: 0 0 20px 2px #0000ff;
 
     }
 
@@ -416,6 +420,7 @@ body{
         color: #ff00ff;
         background: rgba(255, 0, 255, 0.5);
         border-color: #ff00ff;
+        box-shadow: 0 0 20px 2px #ff00ff;
 
     }
 }
@@ -423,7 +428,7 @@ body{
 @media (max-width: 900px){
     #DynamicBubbleBase{
 
-        width: 390px;
+        width: 350px;
 
     }
 }
@@ -431,7 +436,7 @@ body{
 @media (max-width: 420px){
     #DynamicBubbleBase{
 
-        width: 350px;
+        width: 300px;
 
     }
 }
@@ -452,11 +457,13 @@ body{
     background: #e4e4e4;
 
 
-    box-shadow: 0 0 40px 5px #515151;
+    box-shadow: 0 0 40px 5px #838383;
 
     transition: all 210ms cubic-bezier(0, 0.6, 0.1, 1);
 
     z-index: 1;
+
+    cursor: pointer;
 }
 
 .DynamicBubbleBackground{

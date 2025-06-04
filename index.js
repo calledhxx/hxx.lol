@@ -5,6 +5,19 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+let blockObjs = [
+    {
+        "id":"box",
+        "class":null,
+        "return":0
+    },
+    {
+        "id":"DynamicBubbleBase",
+        "class":null,
+        "return":1
+    }
+];
+
 
 function hex(a,b,c){
     if(a.substring(0,1) === "#") a = a.substring(1,7)
@@ -664,8 +677,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let e = false;
         let els = document.elementsFromPoint(x,y);
 
+        let IfFindBlockObj = function(ifHasToRETURN){
+            for (let i = 0;i<blockObjs.length;i++)
+                if(blockObjs[i].return === ifHasToRETURN)
+                    if (retIfParentMatch(els[i],blockObjs[i].id,blockObjs[i].class,false)) return true;
+
+
+            return false;
+        }
+
         for (let i = 0; i < els.length; i++) {
-            if(retIfParentMatch(els[i],"box",0,false)) break;
+            if(IfFindBlockObj(1)) return;
+            if(IfFindBlockObj(0)) break;
+
 
             e = retIfParentMatch(els[i],0,"button",true);
             if(e) break;
@@ -695,7 +719,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         e.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(e.id)].depth)+"px";
 
             moving(xLastMoved,yLastMoved);
-        }else{
+        }else if(!Holding && !Pushing){
             Holding = true;
 
             TweenUp(false);
@@ -751,7 +775,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
 
-        }else{
+        }else if(Pushing){
             Pushing = false;
             for (let i in mouseOnButtons){
                 if(!mouseOnButtons[i]) continue;
@@ -776,6 +800,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 mouseOnButtons[i] = null;
             }
+
+            CreateDynamicBubbles();
         }
 
 
@@ -878,10 +904,15 @@ async function CreateDynamicBubbles(){
         Base.getElementsByTagName("h1")[0].style.opacity = "1";
 
         setTimeout(async function(){
+            Base.style.top = "50px"
+
             Base.getElementsByTagName("h1")[0].style.width =
                 Base.getElementsByTagName("h1")[0].style.height =
-                    "20px";
+                    "38px";
             await sleep(100);
+
+            Base.style.top = "40px"
+
             Base.getElementsByTagName("h1")[0].innerText = `${DynamicBubbles.length}`;
 
             Base.getElementsByTagName("h1")[0].style.width =
@@ -889,9 +920,6 @@ async function CreateDynamicBubbles(){
                     "50px";
         },0)
     }else {
-
-
-
         Base.getElementsByTagName("h1")[0].innerText = '';
         Base.getElementsByTagName("h1")[0].style.opacity = "0";
 
