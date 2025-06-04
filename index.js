@@ -304,7 +304,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         document.getElementById("passXFront").style.transition =
                             document.getElementById("passXBack").style.transition =
                                 document.getElementById("passYFront").style.transition =
-                                    document.getElementById("passYBack").style.transition = `all ${smoothSec}s ease-in-out`;
+                                    document.getElementById("passYBack").style.transition = `all ${smoothSec}s ease-out`;
 
 
 
@@ -665,6 +665,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let els = document.elementsFromPoint(x,y);
 
         for (let i = 0; i < els.length; i++) {
+            if(retIfParentMatch(els[i],"box",0,false)) break;
+
             e = retIfParentMatch(els[i],0,"button",true);
             if(e) break;
         }
@@ -822,6 +824,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         Mmoving(m.touches[0].clientX,m.touches[0].clientY);
     });
 
+
     function retIfParentMatch(e,id,cname,notFirst){
         if (!e.parentElement) return false;
 
@@ -845,4 +848,60 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
 
+
 });
+
+let DynamicBubbles = [];
+
+async function CreateDynamicBubbles(){
+    let Base = document.getElementById("DynamicBubbleBase");
+
+    let newBubble = document.createElement("div");
+    let newBackground = document.createElement("div");
+    newBubble.classList.add("DynamicBubble");
+    newBackground.classList.add("DynamicBubbleBackground");
+
+    DynamicBubbles.push(newBubble);
+
+    newBubble.appendChild(newBackground);
+    Base.appendChild(newBubble);
+
+    if(DynamicBubbles.length > 3){
+        for (let i = 1; i < DynamicBubbles.length; i++)
+            DynamicBubbles[i].style.opacity = "0";
+
+        DynamicBubbles[0].style.width = "100%";
+        DynamicBubbles[0].style.top = "0%";
+
+
+
+        Base.getElementsByTagName("h1")[0].style.opacity = "1";
+
+        setTimeout(async function(){
+            Base.getElementsByTagName("h1")[0].style.width =
+                Base.getElementsByTagName("h1")[0].style.height =
+                    "20px";
+            await sleep(100);
+            Base.getElementsByTagName("h1")[0].innerText = `${DynamicBubbles.length}`;
+
+            Base.getElementsByTagName("h1")[0].style.width =
+                Base.getElementsByTagName("h1")[0].style.height =
+                    "50px";
+        },0)
+    }else {
+
+
+
+        Base.getElementsByTagName("h1")[0].innerText = '';
+        Base.getElementsByTagName("h1")[0].style.opacity = "0";
+
+
+        await sleep(100);
+
+        for (let i = 0; i < DynamicBubbles.length; i++) {
+            DynamicBubbles[i].style.top = `${5 * (DynamicBubbles.length - i - 1)}%`;
+            DynamicBubbles[i].style.width = `${100 - 5 * (DynamicBubbles.length - i - 1)}%`;
+            DynamicBubbles[i].style.opacity = "1";
+        }
+    }
+};
