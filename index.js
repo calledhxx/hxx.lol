@@ -217,19 +217,26 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         let frontMain = document.createElement("div");
-        let frontTitle = document.createElement("h1");
 
-        let frontIcon = document.createElement("img");
 
         if(buttons[i].Icon)
+        {
+            let frontIcon = document.createElement("img");
+            frontIcon.style.borderColor = hex(buttons[i].Color,"404040",-1);
             frontIcon.src = buttons[i].Icon;
+            frontMain.appendChild(frontIcon);
+        }
         else
+        {
+            let frontTitle = document.createElement("h1");
+            frontTitle.style.borderColor = hex(buttons[i].Color,"404040",-1);
             frontTitle.textContent = buttons[i].Name.substring(0, 1);
+            frontMain.appendChild(frontTitle);
+        }
 
 
         frontMain.style.borderColor = hex(buttons[i].Color,"252525",-1);
         frontMain.style.backgroundColor = hex(buttons[i].Color,"181818",-1);
-        frontIcon.style.borderColor = hex(buttons[i].Color,"404040",-1);
 
         newFrontSide.classList.add("buttonFrontSide");
         newBackSide.classList.add("buttonBackSide");
@@ -246,8 +253,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         newOne.appendChild(newBottomSide);
 
         newFrontSide.appendChild(frontMain);
-        frontMain.appendChild(frontIcon);
-        frontMain.appendChild(frontTitle);
+
 
 
 
@@ -567,10 +573,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             //     // document.getElementsByClassName("buttonBackSide")[0].style.opacity = "1";
             // }
 
-
-
-
-
             buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.transform =
                 buttons[i].Side < 5 ? `rotateX(${yMoved}deg) rotateY(${xMoved+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+40)}px)`
 
@@ -579,7 +581,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.transform =
                 buttons[i].Side < 5  ? `rotateX(${yMoved}deg) rotateY(${xMoved-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + 40)}px)`
-                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${-xMoved-90}deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(-addX + 40 )}px)`;
+                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${-xMoved-90 }deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(-addX + 40 )}px)`;
 
 
             if(
