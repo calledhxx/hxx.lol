@@ -724,6 +724,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             TweenUp(false);
 
+            console.log("la");
+
             xStartScreen = x;
             yStartScreen = y;
 
@@ -735,6 +737,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
     }
+
+    let lastToX = 0;
+    let lastToY = 0;
+
+    let lastDbX = -1;
+    let lastDbY = -1;
 
     let endMove = async function (){
         if(Holding){
@@ -748,11 +756,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let dbX = (xMoved - xLastMoved) > 0;
             let dbY = (yMoved - yLastMoved) > 0;
 
+            if(lastDbX===dbX && lastToX !== 0 && Math.abs(lastToX) < Math.abs(toX)) toX += lastToX;
+            if(lastDbY===dbY && lastToY !==0 && Math.abs(lastToY) < Math.abs(toY)) toY+=lastToY;
 
-            yLastMoved = yMoved;
+            lastToX = toX;
+            lastToY = toY;
+
+            lastDbX = dbX;
+            lastDbY = dbY;
+
             xLastMoved = xMoved;
+            yLastMoved = yMoved;
 
-            moving(xLastMoved,yLastMoved);
+            moving(xMoved,yMoved);
 
             for (let index = 0;;index++){
 
@@ -765,17 +781,17 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     Holding || Pushing
                 ) break;
 
-                await moving(xLastMoved+toX/50,yLastMoved+toY/50);
+                await moving(xMoved+toX/50,yMoved+toY/50);
 
-                xLastMoved = xLastMoved+toX/50;
-                yLastMoved = yLastMoved+toY/50;
+                xLastMoved = xMoved = xMoved+toX/50;
+                yLastMoved = yMoved = yMoved+toY/50;
 
                 await sleep(1);
             }
 
 
-
         }else if(Pushing){
+            console.log("click");
             Pushing = false;
             for (let i in mouseOnButtons){
                 if(!mouseOnButtons[i]) continue;
@@ -833,10 +849,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
         endMove();
     });
 
-    document.addEventListener("touchend", function ( ){
-
-        endMove();
-    });
+    // document.addEventListener("touchend", function ( ){
+    //     endMove();
+    // });
 
     document.addEventListener("mousemove", function (m) {
         if(!Holding) return;
@@ -872,9 +887,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
 
+    document.addEventListener("click", function (m) {
 
-
-
+    })
 });
 
 let DynamicBubbles = [];
@@ -893,37 +908,27 @@ async function CreateDynamicBubbles(){
     Base.appendChild(newBubble);
 
     if(DynamicBubbles.length > 3){
-        for (let i = 1; i < DynamicBubbles.length; i++)
+        for (let i = 4; i < DynamicBubbles.length; i++)
             DynamicBubbles[i].style.opacity = "0";
 
-        DynamicBubbles[0].style.width = "100%";
-        DynamicBubbles[0].style.top = "0%";
-
-
-
-        Base.getElementsByTagName("h1")[0].style.opacity = "1";
-
         setTimeout(async function(){
-            Base.style.top = "50px"
-
-            Base.getElementsByTagName("h1")[0].style.width =
-                Base.getElementsByTagName("h1")[0].style.height =
-                    "38px";
-            await sleep(100);
-
             Base.style.top = "40px"
+            await sleep(100);
+            Base.style.top = "30px"
 
-            Base.getElementsByTagName("h1")[0].innerText = `${DynamicBubbles.length}`;
-
-            Base.getElementsByTagName("h1")[0].style.width =
-                Base.getElementsByTagName("h1")[0].style.height =
-                    "50px";
         },0)
+
+        await sleep(100);
+
+        for (let i = 0; i < 4; i++) {
+            DynamicBubbles[i].style.top = `${3 * (4 - i - 1)}%`;
+            DynamicBubbles[i].style.width = `${100 - 5 * (4 - i - 1)}%`;
+            DynamicBubbles[i].style.opacity = "1";
+        }
+
+
+
     }else {
-        Base.getElementsByTagName("h1")[0].innerText = '';
-        Base.getElementsByTagName("h1")[0].style.opacity = "0";
-
-
         await sleep(100);
 
         for (let i = 0; i < DynamicBubbles.length; i++) {
