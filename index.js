@@ -819,8 +819,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             await CreateDynamicBubbles("Page",[
                 {
-                    "Title":"Hxx",
-                    "Content":""
+                    "Title":"太陽魚",
+                    "Content":"這是一尾有高智商的翻車魚，俗名太陽魚。名稱中的7是指第七代傳人。同時他也是陪伴了我三年之久的動物，我很捨不得吃，導致他皮肉豐厚，重量來到了1,000公噸，可賣好幾億阿！"
                 }
             ]);
         }
@@ -947,6 +947,9 @@ async function CreateDynamicBubbles(BubbleType,Content){
     let newBubbleFrame = document.createElement("div");
     newBubbleFrame.classList.add("DynamicBubbleFrame");
 
+    let newBubbleFrameBottomBar = document.createElement("div");
+    newBubbleFrameBottomBar.classList.add("DynamicBubbleFrameBottomBar");
+
     switch (BubbleType){
     case "Notification": {
             newBubble.classList.add("NotificationBubble")
@@ -995,6 +998,7 @@ async function CreateDynamicBubbles(BubbleType,Content){
 
     DynamicBubbles.push(newBubble);
 
+    newBubbleFrame.appendChild(newBubbleFrameBottomBar);
     newBubble.appendChild(newBubbleTypeTitle);
     newBubble.appendChild(newBubbleFrame);
     Base.appendChild(newBubble);

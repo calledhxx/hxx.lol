@@ -388,22 +388,12 @@ body{
     overflow: hidden;
 }
 
-.DynamicBubble:after{
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    border-radius: 40px;
-    box-shadow: 0 0 30px 5px inset #E4E4E4CC;
 
-}
 
 
 
 .DynamicBubbleTypeTitle{
-    width: 100%;
+    width: calc(100% - 20px);
     height: 20px;
     font-size: 24px;
 
@@ -411,7 +401,7 @@ body{
     justify-content: left;
     align-items: start;
 
-    margin-left: 20px;
+    padding-left: 20px;
     margin-top: 10px;
     margin-bottom: 20px;
 
@@ -428,8 +418,9 @@ body{
 }
 
 .DynamicBubbleFrame *{
-    margin-left: 10px;
-    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: calc(100% - 20px);
 }
 
 .DynamicBubbleFrameTitle{
@@ -437,10 +428,22 @@ body{
     color: #474747;
 
     margin-top: 10px;
+
+    word-wrap: break-word;
+    white-space:pre-wrap;
 }
 
 .DynamicBubbleFrameContent{
-    font-size: 20px;
+    font-size: 18px;
     color: #5c5c5c;
 
+}
+
+.DynamicBubbleFrameBottomBar{
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(228, 228, 228) 100%);
 }
