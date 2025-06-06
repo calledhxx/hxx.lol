@@ -817,7 +817,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 mouseOnButtons[i] = null;
             }
 
-            CreateDynamicBubbles("Notification");
+            await CreateDynamicBubbles("Page",[
+                {
+                    "Title":"Hxx",
+                    "Content":""
+                }
+            ]);
         }
 
 
@@ -904,7 +909,7 @@ async function TidyUpDynamicBubbles(){
     let Base = document.getElementById("DynamicBubbleBase");
 
     if(DynamicBubbles.length > 3){
-        for (let i = 4; i < DynamicBubbles.length; i++)
+        for (let i = 0; i < DynamicBubbles.length; i++)
             DynamicBubbles[i].style.opacity = "0";
 
         setTimeout(async function(){
@@ -916,22 +921,17 @@ async function TidyUpDynamicBubbles(){
 
         await sleep(100);
 
-        for (let i = 0; i < 4; i++) {
-            DynamicBubbles[i].style.top = `${5 * (4 - i - 1)}%`;
-            DynamicBubbles[i].style.width = `${100 - 5 * (4 - i - 1)}%`;
-            DynamicBubbles[i].style.opacity = "1";
-        }
-
 
 
     }else {
         await sleep(100);
+    }
 
-        for (let i = 0; i < DynamicBubbles.length; i++) {
-            DynamicBubbles[i].style.top = `${8 * (DynamicBubbles.length - i - 1)}%`;
-            DynamicBubbles[i].style.width = `${100 - 5 * (DynamicBubbles.length - i - 1)}%`;
-            DynamicBubbles[i].style.opacity = "1";
-        }
+    for (let i = DynamicBubbles.length-1; i > DynamicBubbles.length-5; i--) {
+        if(!DynamicBubbles[i]) break;
+        DynamicBubbles[i].style.top = `${8 * (DynamicBubbles.length-1-i)}`;
+        DynamicBubbles[i].style.width = `${100 - 5 * (DynamicBubbles.length-1-i)}%`;
+        DynamicBubbles[i].style.opacity = `${1 - 0.25*(DynamicBubbles.length-1-i)}`;
     }
 };
 
@@ -941,23 +941,66 @@ async function CreateDynamicBubbles(BubbleType,Content){
     let newBubble = document.createElement("div");
     newBubble.classList.add("DynamicBubble");
 
-    setTimeout(async function(){
-        switch (BubbleType){
-            case "Notification": {
-                newBubble.classList.add("NotificationBubble")
-                break;
-            }
-            case "Page":{
-                newBubble.classList.add("PageBubble")
-                break;
-            }
-        }
-    },120)
+    let newBubbleTypeTitle = document.createElement("h1");
+    newBubbleTypeTitle.classList.add("DynamicBubbleTypeTitle");
 
+    let newBubbleFrame = document.createElement("div");
+    newBubbleFrame.classList.add("DynamicBubbleFrame");
+
+    switch (BubbleType){
+    case "Notification": {
+            newBubble.classList.add("NotificationBubble")
+            newBubbleTypeTitle.innerText = BubbleType;
+            break;
+        }
+    case "Page":{
+            newBubble.classList.add("PageBubble")
+            newBubbleTypeTitle.innerText = BubbleType;
+            break;
+        }
+    }
+
+    for(let SectionIndex = 0;SectionIndex<Content.length; SectionIndex++){
+        let newSection = document.createElement("div");
+        newSection.classList.add("DynamicBubbleFrameSection");
+
+        for(let index in Content[SectionIndex]){
+            let newDOM;
+
+            switch(index){
+                case"Title":{
+                    newDOM = document.createElement("h1");
+                    newDOM.classList.add("DynamicBubbleFrameTitle");
+                    newDOM.innerText = Content[SectionIndex][index];
+                    break;
+                }
+
+                case"Content":{
+                    newDOM = document.createElement("h6");
+                    newDOM.classList.add("DynamicBubbleFrameContent");
+                    newDOM.innerText = Content[SectionIndex][index];
+                    break;
+                }
+
+                default:{
+                    //...
+                }
+            }
+
+            newSection.appendChild(newDOM);
+        }
+
+        newBubbleFrame.appendChild(newSection);
+    }
 
     DynamicBubbles.push(newBubble);
 
+    newBubble.appendChild(newBubbleTypeTitle);
+    newBubble.appendChild(newBubbleFrame);
     Base.appendChild(newBubble);
 
+
+
     await TidyUpDynamicBubbles();
+
 };
