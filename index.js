@@ -692,6 +692,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(IfFindBlockObj(0)) break;
 
 
+
             e = retIfParentMatch(els[i],0,"button",true);
             if(e) break;
         }
@@ -816,7 +817,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 mouseOnButtons[i] = null;
             }
 
-            CreateDynamicBubbles();
+            CreateDynamicBubbles("Notification");
         }
 
 
@@ -907,8 +908,8 @@ async function TidyUpDynamicBubbles(){
             DynamicBubbles[i].style.opacity = "0";
 
         setTimeout(async function(){
-            Base.style.top = "40px"
-            await sleep(100);
+            Base.style.top = "50px"
+            await sleep(120);
             Base.style.top = "30px"
 
         },0)
@@ -916,7 +917,7 @@ async function TidyUpDynamicBubbles(){
         await sleep(100);
 
         for (let i = 0; i < 4; i++) {
-            DynamicBubbles[i].style.top = `${3 * (4 - i - 1)}%`;
+            DynamicBubbles[i].style.top = `${5 * (4 - i - 1)}%`;
             DynamicBubbles[i].style.width = `${100 - 5 * (4 - i - 1)}%`;
             DynamicBubbles[i].style.opacity = "1";
         }
@@ -927,24 +928,35 @@ async function TidyUpDynamicBubbles(){
         await sleep(100);
 
         for (let i = 0; i < DynamicBubbles.length; i++) {
-            DynamicBubbles[i].style.top = `${5 * (DynamicBubbles.length - i - 1)}%`;
+            DynamicBubbles[i].style.top = `${8 * (DynamicBubbles.length - i - 1)}%`;
             DynamicBubbles[i].style.width = `${100 - 5 * (DynamicBubbles.length - i - 1)}%`;
             DynamicBubbles[i].style.opacity = "1";
         }
     }
 };
 
-async function CreateDynamicBubbles(){
+async function CreateDynamicBubbles(BubbleType,Content){
     let Base = document.getElementById("DynamicBubbleBase");
 
     let newBubble = document.createElement("div");
-    let newBackground = document.createElement("div");
     newBubble.classList.add("DynamicBubble");
-    newBackground.classList.add("DynamicBubbleBackground");
+
+    setTimeout(async function(){
+        switch (BubbleType){
+            case "Notification": {
+                newBubble.classList.add("NotificationBubble")
+                break;
+            }
+            case "Page":{
+                newBubble.classList.add("PageBubble")
+                break;
+            }
+        }
+    },120)
+
 
     DynamicBubbles.push(newBubble);
 
-    newBubble.appendChild(newBackground);
     Base.appendChild(newBubble);
 
     await TidyUpDynamicBubbles();
