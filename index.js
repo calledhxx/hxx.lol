@@ -87,6 +87,7 @@ function hex(a,b,c){
     return re;
 }
 
+
 document.addEventListener("DOMContentLoaded",  async function () {
 
     let xLastMoved = 0,yLastMoved = 0;
@@ -97,13 +98,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let Pushing = 0;
 
 
-
     let buttons = [
         {
             "Side": 1,
             "Chunk": 1,
             "Color":"#e8a428",
-            "depth":24,
+            "depth":44,
             "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
             "Name":"太陽魚",
             "Tag":"Sunfish"
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 1,
             "Chunk": 2,
             "Color":"#e4e4e4",
-            "depth":24,
+            "depth":38,
             "Icon": "./img/32f8f2203ecb889671ddd843e2d737b9.png",
             "Name":"破魚大帝",
             "Tag":"ProFish"
@@ -152,13 +152,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
         },
 
 
-
-
         {
             "Side": 1,
             "Chunk": 4,
             "Color":"#7441cd",
-            "depth":24,
+            "depth":48,
             "Icon": "./img/160889760.png",
             "Name":"黃太妃",
             "Tag":"Hxx"
@@ -168,7 +166,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 1,
             "Chunk": 3,
             "Color":"#e4e4e4",
-            "depth":24,
+            "depth":20,
             "Icon": "./img/3cefb2f1f8b976328364daafe647af0d.png",
             "Name":"彭搭特",
             "Tag":"DrPon"
@@ -179,7 +177,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 2,
             "Chunk": 1,
             "Color":"#0a85b1",
-            "depth":24,
+            "depth":26,
             "Icon": "./img/52929faad24d847a8c75de0d10dd082e.png",
             "Name":"JD大臣",
             "Tag":"JD"
@@ -189,7 +187,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 2,
             "Chunk": 4,
             "Color":"#bac5a3",
-            "depth":24,
+            "depth":34,
             "Icon": "./img/IMG_20250408_223421_737.jpg",
             "Name":"Weason",
             "Tag":"Weason"
@@ -198,7 +196,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 2,
             "Chunk": 3,
             "Color":"#fa7965",
-            "depth":24,
+            "depth":36,
             "Icon": "./img/148810bbcbcc4db37d2ec8188a8a6399.png",
             "Name":"Ira Nomas",
             "Tag":"ironman"
@@ -207,13 +205,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 2,
             "Chunk": 2,
             "Color":"#202020",
-            "depth":24,
+            "depth":20,
             "Icon": "./img/62993182ae16f24ad926f01f9bafa892.png",
             "Name":"水泥人",
             "Tag":"Dummy"
         },
-
-
     ];
 
     let buttonElements = [];
@@ -671,6 +667,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let startAt = 0;
 
     let mouseOnButtons = [];
+    let depthOfButtons = {};
 
     let startMove = async function (x,y)
     {
@@ -708,6 +705,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             TweenUp(true);
 
+            depthOfButtons[e.id] =  buttons[Number(e.id)].depth;
             buttons[Number(e.id)].depth = 6;
 
 
@@ -795,7 +793,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             Pushing = false;
             for (let i in mouseOnButtons){
                 if(!mouseOnButtons[i]) continue;
-                buttons[Number(mouseOnButtons[i].id)].depth = 24;
+                buttons[Number(mouseOnButtons[i].id)].depth = depthOfButtons[mouseOnButtons[i].id];
 
                 mouseOnButtons[i].style.fontSize = "15px";
 
@@ -921,11 +919,12 @@ async function TidyUpDynamicBubbles(){
 
         await sleep(100);
 
-
-
     }else {
         await sleep(100);
+
     }
+
+
 
     for (let i = DynamicBubbles.length-1; i > DynamicBubbles.length-5; i--) {
         if(!DynamicBubbles[i]) break;
@@ -933,13 +932,19 @@ async function TidyUpDynamicBubbles(){
         DynamicBubbles[i].style.width = `${100 - 5 * (DynamicBubbles.length-1-i)}%`;
         DynamicBubbles[i].style.opacity = `${1 - 0.25*(DynamicBubbles.length-1-i)}`;
     }
+
 };
+
+function FullViewBubble(){
+    
+}
 
 async function CreateDynamicBubbles(BubbleType,Content){
     let Base = document.getElementById("DynamicBubbleBase");
 
     let newBubble = document.createElement("div");
     newBubble.classList.add("DynamicBubble");
+
 
     let newBubbleTypeTitle = document.createElement("h1");
     newBubbleTypeTitle.classList.add("DynamicBubbleTypeTitle");
@@ -951,13 +956,15 @@ async function CreateDynamicBubbles(BubbleType,Content){
     newBubbleFrameBottomBar.classList.add("DynamicBubbleFrameBottomBar");
 
     switch (BubbleType){
-    case "Notification": {
-            newBubble.classList.add("NotificationBubble")
+        case "Notification": {
+            newBubble.classList.add("NotificationBubble");
+            newBubble.style.height = "120px";
             newBubbleTypeTitle.innerText = BubbleType;
             break;
         }
-    case "Page":{
+        case "Page":{
             newBubble.classList.add("PageBubble")
+            newBubble.style.height = "160px";
             newBubbleTypeTitle.innerText = BubbleType;
             break;
         }
