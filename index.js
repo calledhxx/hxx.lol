@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 1,
             "Chunk": 1,
             "Color":"#e8a428",
-            "depth":44,
+            "depth":24,
             "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
             "Name":"太陽魚",
             "Tag":"Sunfish"
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 1,
             "Chunk": 2,
             "Color":"#e4e4e4",
-            "depth":38,
+            "depth":24,
             "Icon": "./img/32f8f2203ecb889671ddd843e2d737b9.png",
             "Name":"破魚大帝",
             "Tag":"ProFish"
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 1,
             "Chunk": 4,
             "Color":"#7441cd",
-            "depth":48,
+            "depth":24,
             "Icon": "./img/160889760.png",
             "Name":"黃太妃",
             "Tag":"Hxx"
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 1,
             "Chunk": 3,
             "Color":"#e4e4e4",
-            "depth":20,
+            "depth":24,
             "Icon": "./img/3cefb2f1f8b976328364daafe647af0d.png",
             "Name":"彭搭特",
             "Tag":"DrPon"
@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 2,
             "Chunk": 1,
             "Color":"#0a85b1",
-            "depth":26,
+            "depth":24,
             "Icon": "./img/52929faad24d847a8c75de0d10dd082e.png",
             "Name":"JD大臣",
             "Tag":"JD"
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 2,
             "Chunk": 4,
             "Color":"#bac5a3",
-            "depth":34,
+            "depth":24,
             "Icon": "./img/IMG_20250408_223421_737.jpg",
             "Name":"Weason",
             "Tag":"Weason"
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 2,
             "Chunk": 3,
             "Color":"#fa7965",
-            "depth":36,
+            "depth":24,
             "Icon": "./img/148810bbcbcc4db37d2ec8188a8a6399.png",
             "Name":"Ira Nomas",
             "Tag":"ironman"
@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Side": 2,
             "Chunk": 2,
             "Color":"#202020",
-            "depth":20,
+            "depth":24,
             "Icon": "./img/62993182ae16f24ad926f01f9bafa892.png",
             "Name":"水泥人",
             "Tag":"Dummy"
@@ -640,20 +640,20 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     }
 
-    TweenUp(true);
+    TweenUp(true,.1);
 
     moving(0,0);
 
-    await sleep(1000);
+    await sleep(400);
+    moving(0,-10);
+    await sleep(400);
+    moving(-15,-10);
+    await sleep(400);
 
-    moving(-90,-10);
-    await sleep(100);
-    moving(-180,-10);
-    await sleep(100);
-    moving(-270,-10);
-    await sleep(100);
-    moving(-360,-10);
-    await sleep(100);
+    for (let i = 0; i < 4; i++){
+        moving(-90*(i+1),-10);
+        await sleep(100);
+    }
 
     moving(-375,-10);
     await sleep(120);
@@ -669,54 +669,62 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let mouseOnButtons = [];
     let depthOfButtons = {};
 
-    let startMove = async function (x,y)
-    {
+    let StartAtElement;
 
-        let e = false;
-        let els = document.elementsFromPoint(x,y);
+    function getFinalElementWitchAtPoint(x,y){
+        let FinalElement = false;
+        let ElementsWitchAtPoint = document.elementsFromPoint(x,y);
 
         let IfFindBlockObj = function(ifHasToRETURN){
             for (let i = 0;i<blockObjs.length;i++)
                 if(blockObjs[i].return === ifHasToRETURN)
-                    if (retIfParentMatch(els[i],blockObjs[i].id,blockObjs[i].class,false)) return true;
+                    if (retIfParentMatch(ElementsWitchAtPoint[i],blockObjs[i].id,blockObjs[i].class,false)) return true;
 
 
             return false;
         }
 
-        for (let i = 0; i < els.length; i++) {
+        for (let i = 0; i < ElementsWitchAtPoint.length; i++) {
             if(IfFindBlockObj(1)) return;
             if(IfFindBlockObj(0)) break;
 
-
-
-            e = retIfParentMatch(els[i],0,"button",true);
-            if(e) break;
+            FinalElement = retIfParentMatch(ElementsWitchAtPoint[i],0,"button",true);
+            if(FinalElement) break;
         }
 
-        if(e){
-            if(mouseOnButtons[e.id]) return;
-            mouseOnButtons[e.id] = e;
+        return FinalElement;
+    }
+
+    let startMove = async function (x,y)
+    {
+        if(Date.now() - startAt < 140) return;
+
+        let FinalElement = getFinalElementWitchAtPoint(x,y);
+
+        if(FinalElement){
+            if(mouseOnButtons[FinalElement.id]) return;
+            StartAtElement = FinalElement;
+            mouseOnButtons[FinalElement.id] = FinalElement;
 
             Pushing = true;
 
-            e.style.fontSize = "0px";
+            FinalElement.style.fontSize = "0px";
 
 
             TweenUp(true);
 
-            depthOfButtons[e.id] =  buttons[Number(e.id)].depth;
-            buttons[Number(e.id)].depth = 6;
+            depthOfButtons[FinalElement.id] =  buttons[Number(FinalElement.id)].depth;
+            buttons[Number(FinalElement.id)].depth = 6;
 
 
-            e.getElementsByClassName("buttonBackSide")[0].style.boxShadow =
+            FinalElement.getElementsByClassName("buttonBackSide")[0].style.boxShadow =
                 "black 0 0 5px 1px"
 
 
-            e.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
-                e.getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
-                    e.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
-                        e.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(e.id)].depth)+"px";
+            FinalElement.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
+                FinalElement.getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
+                    FinalElement.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
+                        FinalElement.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(FinalElement.id)].depth)+"px";
 
             moving(xLastMoved,yLastMoved);
         }else if(!Holding && !Pushing){
@@ -743,11 +751,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let lastDbX = -1;
     let lastDbY = -1;
 
-    let endMove = async function (){
+    let endMove = async function (x,y){
         if(Holding){
             Holding = false;
 
             let totalMs = Date.now() - startAt;
+
 
             let toX =(xMoved - xLastMoved)/(totalMs/200);
             let toY = (yMoved - yLastMoved)/(totalMs/200);
@@ -791,6 +800,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         }else if(Pushing){
             Pushing = false;
+
             for (let i in mouseOnButtons){
                 if(!mouseOnButtons[i]) continue;
                 buttons[Number(mouseOnButtons[i].id)].depth = depthOfButtons[mouseOnButtons[i].id];
@@ -815,12 +825,29 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 mouseOnButtons[i] = null;
             }
 
-            await CreateDynamicBubbles("Page",[
-                {
-                    "Title":"太陽魚",
-                    "Content":"這是一尾有高智商的翻車魚，俗名太陽魚。名稱中的7是指第七代傳人。同時他也是陪伴了我三年之久的動物，我很捨不得吃，導致他皮肉豐厚，重量來到了1,000公噸，可賣好幾億阿！"
-                }
-            ]);
+            let FinalElement = getFinalElementWitchAtPoint(x,y);
+
+
+            if(FinalElement === StartAtElement){
+                await CreateDynamicBubbles("Page",[
+                    {
+                        "Title":"太陽魚",
+                        "Content":"這是一尾有高智商的翻車魚，俗名太陽魚。名稱中的7是指第七代傳人。同時他也是陪伴了我三年之久的動物，我很捨不得吃，導致他皮肉豐厚，重量來到了1,000公噸，可賣好幾億阿！",
+                    },
+                    {
+                        "Content":"這是一尾有高智商的翻車魚，俗名太陽魚。名稱中的7是指第七代傳人。同時他也是陪伴了我三年之久的動物，我很捨不得吃，導致他皮肉豐厚，重量來到了1,000公噸，可賣好幾億阿！",
+                    },
+                    {
+                        "Content":"這是一尾有高智商的翻車魚，俗名太陽魚。名稱中的7是指第七代傳人。同時他也是陪伴了我三年之久的動物，我很捨不得吃，導致他皮肉豐厚，重量來到了1,000公噸，可賣好幾億阿！",
+                    },
+                    {
+                        "Content":"這是一尾有高智商的翻車魚，俗名太陽魚。名稱中的7是指第七代傳人。同時他也是陪伴了我三年之久的動物，我很捨不得吃，導致他皮肉豐厚，重量來到了1,000公噸，可賣好幾億阿！",
+                    },
+                    {
+                        "Content":"這是一尾有高智商的翻車魚，俗名太陽魚。名稱中的7是指第七代傳人。同時他也是陪伴了我三年之久的動物，我很捨不得吃，導致他皮肉豐厚，重量來到了1,000公噸，可賣好幾億阿！",
+                    }
+                ]);
+            }
         }
 
 
@@ -854,10 +881,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
         return check;
     };
 
-    if(checkIfMobile()) document.addEventListener("touchend", function ( ){
-        endMove();
-    }); else document.addEventListener("mouseup", function ( ){
-        endMove();
+    if(checkIfMobile()) document.addEventListener("touchend", function (m ){
+        endMove(m.touches[0].clientX,m.touches[0].clientY);
+    }); else document.addEventListener("mouseup", function (m ){
+        endMove(m.clientX,m.clientY);
     });
 
 
@@ -895,10 +922,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
     }
 
-
-    document.addEventListener("click", function (m) {
-
-    })
 });
 
 let DynamicBubbles = [];
@@ -931,12 +954,16 @@ async function TidyUpDynamicBubbles(){
         DynamicBubbles[i].style.top = `${8 * (DynamicBubbles.length-1-i)}`;
         DynamicBubbles[i].style.width = `${100 - 5 * (DynamicBubbles.length-1-i)}%`;
         DynamicBubbles[i].style.opacity = `${1 - 0.25*(DynamicBubbles.length-1-i)}`;
+
+        if(i !== DynamicBubbles.length-1){
+            DynamicBubbles[i].style.height = "120px";
+        }
     }
 
 };
 
 function FullViewBubble(){
-    
+
 }
 
 async function CreateDynamicBubbles(BubbleType,Content){
@@ -957,15 +984,21 @@ async function CreateDynamicBubbles(BubbleType,Content){
 
     switch (BubbleType){
         case "Notification": {
-            newBubble.classList.add("NotificationBubble");
-            newBubble.style.height = "120px";
-            newBubbleTypeTitle.innerText = BubbleType;
+            newBubbleTypeTitle.innerText = "A Notification";
+
+            setTimeout(async function(){
+                newBubble.classList.add("NotificationBubble");
+                newBubble.style.height = "120px";
+            },280);
             break;
         }
         case "Page":{
-            newBubble.classList.add("PageBubble")
-            newBubble.style.height = "160px";
-            newBubbleTypeTitle.innerText = BubbleType;
+            newBubbleTypeTitle.innerText = "A Page";
+
+            setTimeout(async function(){
+                newBubble.classList.add("PageBubble")
+                newBubble.style.height = "330px";
+            },280);
             break;
         }
     }
