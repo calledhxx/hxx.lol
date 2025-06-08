@@ -364,6 +364,7 @@ body{
     width: 30%; /*100%*/
     min-height: 120px;
     max-height: calc(100vh - 60px);
+    height: 120px;
 
     /*border: #b6b6b6 2px solid;*/
     border-radius: 40px;
@@ -376,7 +377,7 @@ body{
     border: 2px solid #c3c3c3;
     box-shadow: 0 0 40px 5px #c6c6c6;
 
-    transition: all 210ms cubic-bezier(0, 0.6, 0.1, 1);
+    transition: all 270ms cubic-bezier(0, 0.6, 0.1, 1);
 
     z-index: 1;
 
@@ -446,4 +447,12 @@ body{
     bottom: 0;
     left: 0;
     background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(228, 228, 228) 100%);
+}
+
+.NotificationBubble{
+    min-height: 120px;
+}
+
+.PageBubble{
+    min-height: 240px;
 }
