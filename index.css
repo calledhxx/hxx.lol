@@ -369,7 +369,7 @@ body{
     /*border: #b6b6b6 2px solid;*/
     border-radius: 40px;
 
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(0);
     top: 100vh;
     left: 50%;
 
