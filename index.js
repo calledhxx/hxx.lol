@@ -677,7 +677,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let StartAtElement;
 
     function getFinalElementWitchAtPoint(x,y){
-        let FinalElement = false;
+        let FinalElement = null;
         let ElementsWitchAtPoint = document.elementsFromPoint(x,y);
 
         let IfFindBlockObj = function(ifHasToRETURN){
@@ -691,7 +691,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         for (let i = 0; i < ElementsWitchAtPoint.length; i++) {
             if(IfFindBlockObj(1)) return -1;
-            if(IfFindBlockObj(0)) break;
+            if(IfFindBlockObj(0)) return 1;
 
             FinalElement = retIfParentMatch(ElementsWitchAtPoint[i],0,"button",true);
             if(FinalElement) break;
@@ -706,7 +706,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         let FinalElement = getFinalElementWitchAtPoint(x,y);
 
-        if(FinalElement && FinalElement !== -1){
+        if(FinalElement && FinalElement !== -1 && FinalElement !== 1){
             if(mouseOnButtons[FinalElement.id]) return;
             StartAtElement = FinalElement;
             mouseOnButtons[FinalElement.id] = FinalElement;
