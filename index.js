@@ -11,21 +11,6 @@ function checkIfMobile() {
     return check;
 };
 
-let blockObjs = [
-    {
-        "id":"box",
-        "class":null,
-        "return":0,
-        "FirstInclude":true
-
-    },
-    {
-        "id":"DynamicBubbleBase",
-        "class":null,
-        "return":1,
-        "FirstInclude":false
-    }
-];
 
 
 function hex(a,b,c){
@@ -691,36 +676,41 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let StartAtElement;
 
     function getFinalElementWitchAtPoint(x,y){
-        let FinalElement = null;
+        let FinalInfo = {
+            "Button":0,
+            "Bubble":0,
+            "Rotating":0,
+        };
+
         let ElementsWitchAtPoint = document.elementsFromPoint(x,y);
 
-        let IfFindBlockObj = function(ifHasToRETURN){
-            for (let i = 0;i<blockObjs.length;i++)
-                if(blockObjs[i].return === ifHasToRETURN)
-                    if (retIfParentMatch(ElementsWitchAtPoint[i],blockObjs[i].id,blockObjs[i].class,blockObjs[i].FirstInclude)) return true;
-
-
-            return false;
-        }
-
         for (let i = 0; i < ElementsWitchAtPoint.length; i++) {
-            if(IfFindBlockObj(1)) return -1;
-            if(IfFindBlockObj(0)) return 1;
+            let CheckButton = retIfParentMatch(ElementsWitchAtPoint[i],0,"button");
+            if(CheckButton.SearchTimes === 1) continue;
+            FinalInfo.Button = CheckButton.Parent;
 
-            FinalElement = retIfParentMatch(ElementsWitchAtPoint[i],0,"button",true);
-            if(FinalElement) break;
+            let CheckBubble = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubble");
+            FinalInfo.Bubble = CheckBubble.Parent;
+
+            if(retIfParentMatch(ElementsWitchAtPoint[i],"box",0,true)) break;
         }
 
-        return FinalElement;
+        if(!FinalInfo.Button && !FinalInfo.Bubble && !FinalInfo.Rotating){
+            FinalInfo.Rotating = true;
+        }
+
+        return FinalInfo;
     }
 
     let startMove = async function (x,y)
     {
         if(Date.now() - startAt < 140) return;
 
-        let FinalElement = getFinalElementWitchAtPoint(x,y);
+        let FinalInfo = getFinalElementWitchAtPoint(x,y);
 
-        if(FinalElement && FinalElement !== -1 && FinalElement !== 1){
+        if(FinalInfo.Button){
+            let FinalElement = FinalInfo.Button;
+
             if(mouseOnButtons[FinalElement.id]) return;
             StartAtElement = FinalElement;
             mouseOnButtons[FinalElement.id] = FinalElement;
@@ -748,7 +738,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         FinalElement.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(FinalElement.id)].depth)+"px";
 
             moving(xLastMoved,yLastMoved);
-        }else if(!Holding && !Pushing && FinalElement !== -1){
+        }else if(!Holding && !Pushing && FinalInfo.Rotating){
             Holding = true;
 
             TweenUp(false);
@@ -846,7 +836,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 mouseOnButtons[i] = null;
             }
 
-            let FinalElement = getFinalElementWitchAtPoint(x,y);
+            let FinalInfo = getFinalElementWitchAtPoint(x,y);
+            let FinalElement = FinalInfo.Button;
 
 
             if(FinalElement === StartAtElement){
@@ -929,24 +920,33 @@ document.addEventListener("DOMContentLoaded",  async function () {
     });
 
 
-    function retIfParentMatch(e,id,cname,notFirst){
-        if (!e.parentElement) return false;
+    function retIfParentMatch(e,id,cname,info){
+        if(!info)
+            info = {
+                "SearchTimes":0,
+                "Parent":0,
+            };
+
+        if (!e.parentElement) return info;
+
+        info.SearchTimes++;
 
         if(id){
             if(e ? (e.id === id) : false){
-                if(notFirst) return false;
-                return e;
+                info.Parent = e;
+                return info;
             }else{
-                return retIfParentMatch(e.parentElement, id,cname);
+                return retIfParentMatch(e.parentElement, id,cname,info);
             }
         }else{
             if(e ? (e.classList.contains(cname)) : false){
-                if(notFirst) return false;
-                return e;
+                info.Parent = e;
+                return info;
             }else{
-                return retIfParentMatch(e.parentElement, id,cname);
+                return retIfParentMatch(e.parentElement, id,cname,info);
             }
         }
+
     }
 
 });
