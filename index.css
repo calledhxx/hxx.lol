@@ -14,6 +14,8 @@
     user-drag: none;
 
     font-family: "Yu Gothic UI Semibold", "UD Digi Kyokasho N-B", sans-serif;
+
+    overflow: hidden;
 }
 
 
