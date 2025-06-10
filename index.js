@@ -881,18 +881,20 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
             TweenUp(false);
+
+            mouseOnButtons[i] = null;
         }
 
-        mouseOnButtons = {};
 
         for (let i in mouseOnBubbles){
             if(!mouseOnBubbles[i]) continue;
 
             mouseOnBubbles[i].style.backgroundColor = "rgba(228, 228, 228, 0.4)";
             mouseOnBubbles[i].style.borderColor = "rgba(207, 207, 207, 0.4)";
+
+            mouseOnBubbles[i] = null;
         }
 
-        mouseOnBubbles = {};
         // moving((Math.floor((xMoved-45)/90)+1)*90,(Math.floor((yMoved-45)/90)+1)*90) ;
         //
         // xLastMoved = (Math.floor((xMoved-45)/90)+1)*90;
