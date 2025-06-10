@@ -1,5 +1,5 @@
 let CubeSideSize = 220;
-
+let HTTPService = new XMLHttpRequest();
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -15,12 +15,15 @@ let blockObjs = [
     {
         "id":"box",
         "class":null,
-        "return":0
+        "return":0,
+        "FirstInclude":true
+
     },
     {
         "id":"DynamicBubbleBase",
         "class":null,
-        "return":1
+        "return":1,
+        "FirstInclude":false
     }
 ];
 
@@ -112,7 +115,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "depth":24,
             "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
             "Name":"太陽魚",
-            "Tag":"Sunfish"
+            "Tag":"Sunfish",
+            "Page":""
         },
 
         {
@@ -122,7 +126,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "depth":24,
             "Icon": null,
             "Name":"太陽魚",
-            "Tag":"Sunfish"
+            "Tag":"Sunfish",
+            "Page":""
         },
 
         {
@@ -132,7 +137,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "depth":24,
             "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
             "Name":"太陽魚",
-            "Tag":"Sunfish"
+            "Tag":"Sunfish",
+            "Page":""
         },
 
         {
@@ -142,7 +148,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "depth":24,
             "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
             "Name":"太陽魚",
-            "Tag":"Sunfish"
+            "Tag":"Sunfish",
+            "Page":""
         },
 
 
@@ -153,7 +160,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "depth":24,
             "Icon": "./img/32f8f2203ecb889671ddd843e2d737b9.png",
             "Name":"破魚大帝",
-            "Tag":"ProFish"
+            "Tag":"ProFish",
+            "Page":""
 
         },
 
@@ -165,7 +173,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "depth":24,
             "Icon": "./img/160889760.png",
             "Name":"黃太妃",
-            "Tag":"Hxx"
+            "Tag":"Hxx",
+            "Page":"./page/Hxx.JSON"
 
         },
         {
@@ -175,7 +184,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "depth":24,
             "Icon": "./img/3cefb2f1f8b976328364daafe647af0d.png",
             "Name":"彭搭特",
-            "Tag":"DrPon"
+            "Tag":"DrPon",
+            "Page":""
         },
 
 
@@ -186,7 +196,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "depth":24,
             "Icon": "./img/52929faad24d847a8c75de0d10dd082e.png",
             "Name":"JD大臣",
-            "Tag":"JD"
+            "Tag":"JD",
+            "Page":""
         },
 
         {
@@ -196,7 +207,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "depth":24,
             "Icon": "./img/IMG_20250408_223421_737.jpg",
             "Name":"Weason",
-            "Tag":"Weason"
+            "Tag":"Weason",
+            "Page":""
         },
         {
             "Side": 2,
@@ -205,7 +217,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "depth":24,
             "Icon": "./img/148810bbcbcc4db37d2ec8188a8a6399.png",
             "Name":"Ira Nomas",
-            "Tag":"ironman"
+            "Tag":"ironman",
+            "Page":""
         },
         {
             "Side": 2,
@@ -214,7 +227,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "depth":24,
             "Icon": "./img/62993182ae16f24ad926f01f9bafa892.png",
             "Name":"水泥人",
-            "Tag":"Dummy"
+            "Tag":"Dummy",
+            "Page":""
         },
     ];
 
@@ -683,7 +697,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let IfFindBlockObj = function(ifHasToRETURN){
             for (let i = 0;i<blockObjs.length;i++)
                 if(blockObjs[i].return === ifHasToRETURN)
-                    if (retIfParentMatch(ElementsWitchAtPoint[i],blockObjs[i].id,blockObjs[i].class,false)) return true;
+                    if (retIfParentMatch(ElementsWitchAtPoint[i],blockObjs[i].id,blockObjs[i].class,blockObjs[i].FirstInclude)) return true;
 
 
             return false;
@@ -836,24 +850,31 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
             if(FinalElement === StartAtElement){
-                await CreateDynamicBubbles("Page",[
-                    {
-                        "Title":"太陽魚",
-                        "Content":"這是一尾有高智商的翻車魚，俗名太陽魚。名稱中的7是指第七代傳人。同時他也是陪伴了我三年之久的動物，我很捨不得吃，導致他皮肉豐厚，重量來到了1,000公噸，可賣好幾億阿！",
-                    },
-                    {
-                        "Content":"這是一尾有高智商的翻車魚，俗名太陽魚。名稱中的7是指第七代傳人。同時他也是陪伴了我三年之久的動物，我很捨不得吃，導致他皮肉豐厚，重量來到了1,000公噸，可賣好幾億阿！",
-                    },
-                    {
-                        "Content":"這是一尾有高智商的翻車魚，俗名太陽魚。名稱中的7是指第七代傳人。同時他也是陪伴了我三年之久的動物，我很捨不得吃，導致他皮肉豐厚，重量來到了1,000公噸，可賣好幾億阿！",
-                    },
-                    {
-                        "Content":"這是一尾有高智商的翻車魚，俗名太陽魚。名稱中的7是指第七代傳人。同時他也是陪伴了我三年之久的動物，我很捨不得吃，導致他皮肉豐厚，重量來到了1,000公噸，可賣好幾億阿！",
-                    },
-                    {
-                        "Content":"這是一尾有高智商的翻車魚，俗名太陽魚。名稱中的7是指第七代傳人。同時他也是陪伴了我三年之久的動物，我很捨不得吃，導致他皮肉豐厚，重量來到了1,000公噸，可賣好幾億阿！",
-                    }
-                ]);
+                HTTPService.open("GET",buttons[FinalElement.id].Page);
+                HTTPService.send();
+
+                let waitUntilLoad = function (){
+                    return new Promise(function (resolve, reject) {
+                        HTTPService.addEventListener("loadend",function (){
+                            resolve(HTTPService.response);
+                        })
+                        HTTPService.addEventListener("error", (err) => {
+                            reject(err);
+                        });
+                    });
+                }
+
+                let type,content;
+
+                try {
+                    type = "Page";
+                    content = JSON.parse(await waitUntilLoad());
+                } catch (err) {
+                    type = "Notification";
+                    content = [{"Title":"未知錯誤🤔","Content":`您所點擊的按鈕 : ${buttons[FinalElement.id].Name}，觸發了錯誤訊息，但無法從之提取錯誤原因。`},{"Content":"您可以向 me@hxx.lol 發送回饋或是重新嘗試，還請多多見諒！"}];
+                }
+                await CreateDynamicBubbles(type,content);
+
             }
         }
 
@@ -988,13 +1009,18 @@ async function CreateDynamicBubbles(BubbleType,Content){
     let newBubbleFrameBottomBar = document.createElement("div");
     newBubbleFrameBottomBar.classList.add("DynamicBubbleFrameBottomBar");
 
+    let myIndex = DynamicBubbles.length;
+
     switch (BubbleType){
         case "Notification": {
             newBubbleTypeTitle.innerText = "A Notification";
 
             setTimeout(async function(){
                 newBubble.classList.add("NotificationBubble");
-                newBubble.style.height = "120px";
+
+                if(myIndex === DynamicBubbles.length-1){
+                    newBubble.style.height = "120px";
+                }
             },280);
             break;
         }
@@ -1003,7 +1029,10 @@ async function CreateDynamicBubbles(BubbleType,Content){
 
             setTimeout(async function(){
                 newBubble.classList.add("PageBubble")
-                newBubble.style.height = "330px";
+
+                if(myIndex === DynamicBubbles.length-1){
+                    newBubble.style.height = "330px";
+                }
             },280);
             break;
         }
