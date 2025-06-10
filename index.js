@@ -718,6 +718,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         let FinalInfo = getFinalElementWitchAtPoint(x,y);
 
+        console.log("start");
+
 
         if(FinalInfo.Button){
             let FinalElement = FinalInfo.Button;
@@ -861,6 +863,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }
 
+        if(FinalInfo.Bubble){
+
+        }
+
         for (let i in mouseOnButtons){
             if(!mouseOnButtons[i]) continue;
             buttons[Number(mouseOnButtons[i].id)].depth = 24;
@@ -885,6 +891,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             mouseOnButtons[i] = null;
         }
 
+        console.log("end");
 
         for (let i in mouseOnBubbles){
             if(!mouseOnBubbles[i]) continue;
@@ -894,11 +901,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             mouseOnBubbles[i] = null;
         }
-
-        // moving((Math.floor((xMoved-45)/90)+1)*90,(Math.floor((yMoved-45)/90)+1)*90) ;
-        //
-        // xLastMoved = (Math.floor((xMoved-45)/90)+1)*90;
-        // yLastMoved = (Math.floor((yMoved-45)/90)+1)*90;
     }
 
     let ToStableValue = checkIfMobile() ? 3 : 5;
@@ -910,38 +912,43 @@ document.addEventListener("DOMContentLoaded",  async function () {
         moving(xMoved, yMoved);
     }
 
-    document.addEventListener("mousedown", function (m) {
-
-        startMove(m.clientX,m.clientY);
-    });
-
-    document.addEventListener("touchstart", function (m) {
-
-
-        startMove(m.touches[0].clientX,m.touches[0].clientY);
-    });
 
 
 
-    if(checkIfMobile()) document.addEventListener("touchend", function (m ){
-        endMove(m.changedTouches[0].clientX,m.changedTouches[0].clientY);
-    }); else document.addEventListener("mouseup", function (m ){
-        endMove(m.clientX,m.clientY);
-    });
 
 
 
-    document.addEventListener("mousemove", function (m) {
-        if(!Holding) return;
+    if(checkIfMobile()) {
+        document.addEventListener("touchend", function (m ){
+            endMove(m.changedTouches[0].clientX,m.changedTouches[0].clientY);
+        })
+        document.addEventListener("touchstart", function (m) {
+            startMove(m.touches[0].clientX,m.touches[0].clientY);
+        });
+        document.addEventListener("touchmove", function (m) {
+            if(!Holding) return;
 
-        Mmoving(m.clientX,m.clientY);
-    });
+            Mmoving(m.touches[0].clientX,m.touches[0].clientY);
+        });
+    }else {
+        document.addEventListener("mouseup", function (m ){
+            endMove(m.clientX,m.clientY);
+        });
+        document.addEventListener("mousedown", function (m) {
+            startMove(m.clientX,m.clientY);
+        });
+        document.addEventListener("mousemove", function (m) {
+            if(!Holding) return;
 
-    document.addEventListener("touchmove", function (m) {
-        if(!Holding) return;
+            Mmoving(m.clientX,m.clientY);
+        });
+    }
 
-        Mmoving(m.touches[0].clientX,m.touches[0].clientY);
-    });
+
+
+
+
+
 
 
     function retIfParentMatch(e,id,cname,info){
