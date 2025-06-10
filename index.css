@@ -15,7 +15,6 @@
 
     font-family: "Yu Gothic UI Semibold", "UD Digi Kyokasho N-B", sans-serif;
 
-    overflow: hidden;
 }
 
 
@@ -24,10 +23,12 @@ body{
     width: 100vw;
     background: repeating-radial-gradient(#ffffff, #d3d3d3, #9a9a9a, #737373);
 
-    overflow-y: hidden;
-    overflow-x: hidden;
+
 
     position: fixed;
+
+    overflow: hidden;
+
 }
 
 
