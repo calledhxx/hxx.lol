@@ -657,11 +657,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
     await sleep(400);
 
     for (let i = 0; i < 4; i++){
-        moving(-90*(i+1),-10);
+        moving(-90*(i+1) - 15,-10);
         await sleep(100);
     }
 
-    moving(-375,-10);
     await sleep(120);
 
     let xMoved = 0,yMoved = 0;
@@ -691,7 +690,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
 
         for (let i = 0; i < ElementsWitchAtPoint.length; i++) {
-            if(IfFindBlockObj(1)) return;
+            if(IfFindBlockObj(1)) return -1;
             if(IfFindBlockObj(0)) break;
 
             FinalElement = retIfParentMatch(ElementsWitchAtPoint[i],0,"button",true);
@@ -707,12 +706,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         let FinalElement = getFinalElementWitchAtPoint(x,y);
 
-        if(FinalElement){
+        if(FinalElement && FinalElement !== -1){
             if(mouseOnButtons[FinalElement.id]) return;
             StartAtElement = FinalElement;
             mouseOnButtons[FinalElement.id] = FinalElement;
 
             Pushing = true;
+
+
 
             FinalElement.style.fontSize = "0px";
 
@@ -733,7 +734,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         FinalElement.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(FinalElement.id)].depth)+"px";
 
             moving(xLastMoved,yLastMoved);
-        }else if(!Holding && !Pushing){
+        }else if(!Holding && !Pushing && FinalElement !== -1){
             Holding = true;
 
             TweenUp(false);
@@ -918,7 +919,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 return retIfParentMatch(e.parentElement, id,cname);
             }
         }else{
-            if(e ? (e.className === cname) : false){
+            if(e ? (e.classList.contains(cname)) : false){
                 if(notFirst) return false;
                 return e;
             }else{
