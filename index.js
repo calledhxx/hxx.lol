@@ -671,7 +671,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let startAt = 0;
 
     let mouseOnButtons = [];
-    let depthOfButtons = {};
+    let mouseOnBubbles = [];
+
 
     let StartAtElement;
 
@@ -686,18 +687,27 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         for (let i = 0; i < ElementsWitchAtPoint.length; i++) {
             let CheckButton = retIfParentMatch(ElementsWitchAtPoint[i],0,"button");
+
             if(CheckButton.SearchTimes === 1) continue;
-            FinalInfo.Button = CheckButton.Parent;
+
+            if(CheckButton.Parent){
+                FinalInfo.Button = CheckButton.Parent;
+                break
+            }
 
             let CheckBubble = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubble");
-            FinalInfo.Bubble = CheckBubble.Parent;
+
+            if(CheckBubble.Parent){
+                FinalInfo.Bubble = CheckBubble.Parent;
+                break
+            }
 
             if(retIfParentMatch(ElementsWitchAtPoint[i],"box",0,true)) break;
         }
 
-        if(!FinalInfo.Button && !FinalInfo.Bubble && !FinalInfo.Rotating){
+        if(!FinalInfo.Button && !FinalInfo.Bubble && !FinalInfo.Rotating)
             FinalInfo.Rotating = true;
-        }
+
 
         return FinalInfo;
     }
@@ -708,10 +718,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         let FinalInfo = getFinalElementWitchAtPoint(x,y);
 
+
         if(FinalInfo.Button){
             let FinalElement = FinalInfo.Button;
 
             if(mouseOnButtons[FinalElement.id]) return;
+
             StartAtElement = FinalElement;
             mouseOnButtons[FinalElement.id] = FinalElement;
 
@@ -724,7 +736,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             TweenUp(true);
 
-            depthOfButtons[FinalElement.id] =  buttons[Number(FinalElement.id)].depth;
             buttons[Number(FinalElement.id)].depth = 6;
 
 
@@ -751,8 +762,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
             yMoved = (-y +   yStartScreen)/3 + yLastMoved;
 
             startAt = Date.now();
-        }
+        } else if(FinalInfo.Bubble){
+            FinalInfo.Bubble.style.backgroundColor = "rgba(228, 228, 228, 0.7)";
+            FinalInfo.Bubble.style.borderColor = "rgba(207,207,207,0.6)";
 
+            mouseOnBubbles[mouseOnBubbles.length] = StartAtElement = FinalInfo.Bubble;
+        }
 
     }
 
@@ -763,6 +778,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let lastDbY = -1;
 
     let endMove = async function (x,y){
+        let FinalInfo = getFinalElementWitchAtPoint(x,y);
+
+
         if(Holding){
             Holding = false;
 
@@ -812,33 +830,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }else if(Pushing){
             Pushing = false;
 
-            for (let i in mouseOnButtons){
-                if(!mouseOnButtons[i]) continue;
-                buttons[Number(mouseOnButtons[i].id)].depth = depthOfButtons[mouseOnButtons[i].id];
-
-                mouseOnButtons[i].style.fontSize = "15px";
-
-                mouseOnButtons[i] .getElementsByClassName("buttonBackSide")[0].style.boxShadow =
-                    "black 0 0 10px 2px"
-
-                mouseOnButtons[i] .getElementsByClassName("buttonTopSide")[0].children[0].style.height =
-                    mouseOnButtons[i] .getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
-                        mouseOnButtons[i] .getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
-                            mouseOnButtons[i] .getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(mouseOnButtons[i] .id)].depth)+"px";
-
-                moving(xLastMoved,yLastMoved);
-
-                await sleep(100);
-
-
-                TweenUp(false);
-
-                mouseOnButtons[i] = null;
-            }
-
-            let FinalInfo = getFinalElementWitchAtPoint(x,y);
             let FinalElement = FinalInfo.Button;
-
 
             if(FinalElement === StartAtElement){
                 HTTPService.open("GET",buttons[FinalElement.id].Page);
@@ -869,7 +861,38 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }
 
+        for (let i in mouseOnButtons){
+            if(!mouseOnButtons[i]) continue;
+            buttons[Number(mouseOnButtons[i].id)].depth = 24;
 
+            mouseOnButtons[i].style.fontSize = "15px";
+
+            mouseOnButtons[i] .getElementsByClassName("buttonBackSide")[0].style.boxShadow =
+                "black 0 0 10px 2px"
+
+            mouseOnButtons[i] .getElementsByClassName("buttonTopSide")[0].children[0].style.height =
+                mouseOnButtons[i] .getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
+                    mouseOnButtons[i] .getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
+                        mouseOnButtons[i] .getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(mouseOnButtons[i] .id)].depth)+"px";
+
+            moving(xLastMoved,yLastMoved);
+
+            await sleep(100);
+
+
+            TweenUp(false);
+        }
+
+        mouseOnButtons = {};
+
+        for (let i in mouseOnBubbles){
+            if(!mouseOnBubbles[i]) continue;
+
+            mouseOnBubbles[i].style.backgroundColor = "rgba(228, 228, 228, 0.4)";
+            mouseOnBubbles[i].style.borderColor = "rgba(207, 207, 207, 0.4)";
+        }
+
+        mouseOnBubbles = {};
         // moving((Math.floor((xMoved-45)/90)+1)*90,(Math.floor((yMoved-45)/90)+1)*90) ;
         //
         // xLastMoved = (Math.floor((xMoved-45)/90)+1)*90;
@@ -899,7 +922,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
     if(checkIfMobile()) document.addEventListener("touchend", function (m ){
-        console.log(m.changedTouches);
         endMove(m.changedTouches[0].clientX,m.changedTouches[0].clientY);
     }); else document.addEventListener("mouseup", function (m ){
         endMove(m.clientX,m.clientY);
