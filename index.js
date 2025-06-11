@@ -1066,7 +1066,6 @@ async function TidyUpDynamicBubbles(){
         DynamicBubbles[i].style.top = `${8 * (DynamicBubbles.length-1-i)}`;
         DynamicBubbles[i].style.width = `${100 - 5 * (DynamicBubbles.length-1-i)}%`;
         DynamicBubbles[i].style.opacity = `${1 - 0.25*(DynamicBubbles.length-1-i)}`;
-        DynamicBubbles[i].style.overflowY = "hidden";
 
 
         if(i !== DynamicBubbles.length-1){
@@ -1281,14 +1280,12 @@ function PullUpMainBubble(MainIndex){
     ClickOnBubble.style.top = "0";
     ClickOnBubble.style.opacity = "1";
 
-    ClickOnBubble.style.overflowY = "auto";
 
     for (let i = 0;i<DynamicBubbles.length;i++){
         if(i !== MainIndex)
         {
             DynamicBubbles[i].style.opacity = "0";
             DynamicBubbles[i].style.width = "0";
-            DynamicBubbles[i].style.overflowY = "hidden";
         }
     }
 }
