@@ -21,7 +21,7 @@
 body{
     height: 100vh;
     width: 100vw;
-    background: repeating-radial-gradient(#ffffff, #d3d3d3, #9a9a9a, #737373);
+    background: #e3e3e3;
 
     overflow: hidden;
     position: absolute;
@@ -389,7 +389,16 @@ body{
 
 
 
+.DynamicBubble::after{
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
 
+    box-shadow: rgba(255, 255, 255, 0.55) 0 0 20px 10px inset;
+}
 
 
 .DynamicBubbleTypeTitle{
