@@ -372,7 +372,7 @@ body{
     top: 100vh;
     left: 50%;
 
-    background: rgba(228, 228, 228, 0.4);
+    background: rgba(228, 228, 228, 0.5);
     border: 3px solid rgba(207, 207, 207, 0.4);
     box-shadow: 0 0 40px 5px #c6c6c6;
 
@@ -434,7 +434,7 @@ body{
     padding-right: 20px;
     width: calc(100% - 20px - 20px);
 
-    text-shadow: rgba(255, 255, 255, 0.53) 0 0 10px;
+    text-shadow: rgba(255, 255, 255, 0.8) 0 0 30px;
 }
 
 .DynamicBubbleFrameTitle{
@@ -446,14 +446,14 @@ body{
     word-wrap: break-word;
     white-space:pre-wrap;
 
-    text-shadow: rgba(255, 255, 255, 0.53) 0 0 10px;
+    text-shadow: rgba(255, 255, 255, 0.8) 0 0 30px;
 }
 
 .DynamicBubbleFrameContent{
     font-size: 18px;
     color: #5c5c5c;
 
-    text-shadow: rgba(255, 255, 255, 0.53) 0 0 10px;
+    text-shadow: rgba(255, 255, 255, 0.8) 0 0 30px;
 }
 
 
