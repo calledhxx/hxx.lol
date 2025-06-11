@@ -713,13 +713,17 @@ document.addEventListener("DOMContentLoaded",  async function () {
         return FinalInfo;
     }
 
-    let BubbleStartYPoint = 0;
 
     let startMove = async function (x,y)
     {
-        if(Date.now() - startAt < 140) return;
+        if(Date.now() - startAt < 160) return;
+
+        xStartScreen = x;
+        yStartScreen = y;
 
         let FinalInfo = getFinalElementWitchAtPoint(x,y);
+
+        startAt = Date.now();
 
         if(FinalInfo.Button){
             let FinalElement = FinalInfo.Button;
@@ -751,19 +755,18 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         FinalElement.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(FinalElement.id)].depth)+"px";
 
             moving(xLastMoved,yLastMoved);
+
+
         }else if(!Holding && !Pushing && FinalInfo.Rotating){
             Holding = true;
 
             TweenUp(false);
 
 
-            xStartScreen = x;
-            yStartScreen = y;
 
             xMoved = (x - xStartScreen)/3 + xLastMoved;
             yMoved = (-y +   yStartScreen)/3 + yLastMoved;
 
-            startAt = Date.now();
         } else if(FinalInfo.Bubble){
             FinalInfo.Bubble.style.backgroundColor = "rgba(228, 228, 228, 0.7)";
             FinalInfo.Bubble.style.borderColor = "rgba(207,207,207,0.6)";
@@ -771,9 +774,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
             mouseOnBubbles[mouseOnBubbles.length] = StartAtElement = FinalInfo.Bubble;
-
-            if(PullUpInfo.MainPullUpIndex)
-                BubbleStartYPoint = y;
         }
     }
 
@@ -866,7 +866,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             }
         }else if(FinalInfo.Bubble){
-            let ClickOnIndex = 0;
+            let ClickOnIndex = false;
 
             for(let i = 0;i<DynamicBubbles.length;i++)
                 if(DynamicBubbles[i] === FinalInfo.Bubble){
@@ -874,9 +874,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     break;
                 }
 
+            if(ClickOnIndex === false) return;
+
             if(PullUpInfo.MainPullUpIndex !== false){
-                if(BubbleStartYPoint - y  >= 100){
-                    await TidyUpDynamicBubbles();
+                if(Math.abs(yStartScreen - y)  >= 100){
+                    await ClearBubble(PullUpInfo.MainPullUpIndex);
                 }
             }else if(FinalInfo.Bubble === StartAtElement){
                 if(!PullUpInfo.PullUpType)
@@ -885,7 +887,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 {
                     if(ClickOnIndex !== PullUpInfo.ChoseToPullUpIndex){
                         await PullUpDynamicBubbles(ClickOnIndex);
+                    }else{
+                        PullUpMainBubble(ClickOnIndex);
                     }
+                }else if(PullUpInfo.PullUpType === 2){
+                    PullUpDynamicBubbles(ClickOnIndex);
                     PullUpMainBubble(ClickOnIndex);
                 }
             }
@@ -1270,4 +1276,22 @@ function PullUpMainBubble(MainIndex){
             DynamicBubbles[i].style.width = "0";
         }
     }
+}
+
+async function ClearBubble(MainIndex){
+    let toDel = DynamicBubbles[MainIndex];
+    DynamicBubbles.splice(MainIndex,1);
+
+    setTimeout(async function(){
+        toDel.style.opacity = "0";
+        toDel.style.height = "0";
+        toDel.style.minHeight = "0";
+        await sleep(210);
+        toDel.remove();
+
+    },120);
+
+    resetPullUpInfo();
+    await TidyUpDynamicBubbles();
+    await PullUpDynamicBubbles(DynamicBubbles.length-1);
 }
