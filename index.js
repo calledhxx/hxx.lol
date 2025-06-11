@@ -943,13 +943,21 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             Mmoving(m.clientX,m.clientY);
         });
+        let Accumulation = 0;
         document.addEventListener("wheel",function (m){
             if(MainPullUpBubbleIndex !== false){
-                let index = MainPullUpBubbleIndex + (m.deltaY>0 ? 1 : -1);
+                Accumulation += m.deltaY;
 
-                if(index >= 0 && index<DynamicBubbles.length){
-                    MainPullUpBubbleIndex = index;
-                    PullUpDynamicBubbles(MainPullUpBubbleIndex);
+                if(Math.abs(Accumulation)>= 100){
+
+                    let index = MainPullUpBubbleIndex + (Accumulation>0 ? 1 : -1);
+
+                    Accumulation = 0;
+
+                    if(index >= 0 && index<DynamicBubbles.length){
+                        MainPullUpBubbleIndex = index;
+                        PullUpDynamicBubbles(MainPullUpBubbleIndex);
+                    }
                 }
             }
         })
