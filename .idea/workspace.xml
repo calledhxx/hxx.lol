@@ -5,78 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d57fe96b-7e11-4fc9-9596-6dafe5dbf177" name="Changes" comment="hxx.lol">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/0324.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/148810bbcbcc4db37d2ec8188a8a6399.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/160889760.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/30DAY-AvatarHeadshot-B09700E8CC1523FFF131C8C38EE670E0-Jpeg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/32f8f2203ecb889671ddd843e2d737b9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/3cefb2f1f8b976328364daafe647af0d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/472251371_1958482787984978_4486094969075713892_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/472562154_578862491593902_4960175299312110464_n (1) - 複製.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/472562154_578862491593902_4960175299312110464_n (1).jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/52929faad24d847a8c75de0d10dd082e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/62993182ae16f24ad926f01f9bafa892.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_0243.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_0249.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_0456.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_1610.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_1809.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_20250408_223421_737.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_20250408_223421_737.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_4931.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_4932.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_4933.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_4934.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_4935.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_4945.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9089.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9453 - 複製.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9453.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9454.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9455.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9456.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9457.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9458.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9459.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9684 - 複製.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9684.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9685.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_9687.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_E8875.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/Roblox_Logo_2022.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/SESE0646.GIF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/a9a72e835d8a6266b636180a30014def.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/b5e403d11dfed3329ed8a275f9313f7f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/b61b860c0f4a8433ed296e4063f70ece.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/minecraft.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/received_709731930274063.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2024-11-29 232214.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2024-11-29 232218.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2024-11-29 232221.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2024-12-07 211549.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2024-12-08 084932.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2024-12-08 101735.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2024-12-22 090836.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2024-12-22 091330.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2024-12-22 091406.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2024-12-22 110415.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2024-12-22 110433.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2024-12-28 093341.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2025-01-17 211534.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2025-01-24 164159.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2025-01-24 164301.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2025-01-24 164325.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2025-01-24 164556.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2025-01-24 175504.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2025-01-27 203611.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2025-01-27 204557.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2025-01-27 210312.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2025-01-27 210704.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/螢幕擷取畫面 2025-01-27 211234.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page/Hxx.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/page/Hxx.JSON" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,23 +112,7 @@
       <workItem from="1749440115861" duration="3196000" />
       <workItem from="1749462417538" duration="4000" />
       <workItem from="1749534026383" duration="23821000" />
-      <workItem from="1749610682129" duration="12620000" />
-    </task>
-    <task id="LOCAL-00007" summary="hxx.lol">
-      <option name="closed" value="true" />
-      <created>1748775481856</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1748775481856</updated>
-    </task>
-    <task id="LOCAL-00008" summary="hxx.lol">
-      <option name="closed" value="true" />
-      <created>1748776103158</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1748776103158</updated>
+      <workItem from="1749610682129" duration="13102000" />
     </task>
     <task id="LOCAL-00009" summary="hxx.lol">
       <option name="closed" value="true" />
@@ -577,7 +490,23 @@
       <option name="project" value="LOCAL" />
       <updated>1749622835937</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="hxx.lol">
+      <option name="closed" value="true" />
+      <created>1749630773680</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1749630773680</updated>
+    </task>
+    <task id="LOCAL-00057" summary="hxx.lol">
+      <option name="closed" value="true" />
+      <created>1749630787421</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1749630787421</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

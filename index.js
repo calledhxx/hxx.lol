@@ -21,6 +21,17 @@ let buttons = [
         "Name":"黃太妃",
         "Tag":"Hxx",
         "Page":"./page/Hxx.JSON"
+    },
+
+    {
+        "Side": 1,
+        "Chunk": 4,
+        "Color":"#aa33d1",
+        "depth":24,
+        "Icon": "./img/IMG_0590.GIF",
+        "Name":"黃太妃",
+        "Tag":"Hxx",
+        "Page":"./page/Hxx.JSON"
     }
 ];
 
