@@ -81,6 +81,11 @@ function hex(a,b,c){
     return re;
 }
 
+let PullUpInfo = {
+    "PullUpType": false,
+    "ChoseToPullUpIndex": false,
+    "MainPullUpIndex": false,
+};
 
 document.addEventListener("DOMContentLoaded",  async function () {
 
@@ -90,6 +95,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let Holding = 0;
     let Pushing = 0;
+    
 
 
     let buttons = [
@@ -668,7 +674,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let mouseOnButtons = [];
     let mouseOnBubbles = [];
 
-    let MainPullUpBubbleIndex = false;
 
     let StartAtElement;
 
@@ -708,13 +713,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
         return FinalInfo;
     }
 
+    let BubbleStartYPoint = 0;
+
     let startMove = async function (x,y)
     {
         if(Date.now() - startAt < 140) return;
 
         let FinalInfo = getFinalElementWitchAtPoint(x,y);
-
-
 
         if(FinalInfo.Button){
             let FinalElement = FinalInfo.Button;
@@ -766,8 +771,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
             mouseOnBubbles[mouseOnBubbles.length] = StartAtElement = FinalInfo.Bubble;
-        }
 
+            if(PullUpInfo.MainPullUpIndex)
+                BubbleStartYPoint = y;
+        }
     }
 
     let lastToX = 0;
@@ -858,18 +865,32 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 await CreateDynamicBubbles(type,content);
 
             }
-        }else if(FinalInfo.Bubble === StartAtElement){
+        }else if(FinalInfo.Bubble){
+            let ClickOnIndex = 0;
 
             for(let i = 0;i<DynamicBubbles.length;i++)
                 if(DynamicBubbles[i] === FinalInfo.Bubble){
-                    MainPullUpBubbleIndex = i
+                    ClickOnIndex = i
                     break;
                 }
 
-            PullUpDynamicBubbles(MainPullUpBubbleIndex);
-
-
+            if(PullUpInfo.MainPullUpIndex !== false){
+                if(BubbleStartYPoint - y  >= 100){
+                    await TidyUpDynamicBubbles();
+                }
+            }else if(FinalInfo.Bubble === StartAtElement){
+                if(!PullUpInfo.PullUpType)
+                    PullUpDynamicBubbles(ClickOnIndex);
+                else if(PullUpInfo.PullUpType === 3)
+                {
+                    if(ClickOnIndex !== PullUpInfo.ChoseToPullUpIndex){
+                        await PullUpDynamicBubbles(ClickOnIndex);
+                    }
+                    PullUpMainBubble(ClickOnIndex);
+                }
+            }
         }
+
 
 
 
@@ -939,24 +960,24 @@ document.addEventListener("DOMContentLoaded",  async function () {
             startMove(m.clientX,m.clientY);
         });
         document.addEventListener("mousemove", function (m) {
+
             if(!Holding) return;
 
             Mmoving(m.clientX,m.clientY);
         });
         let Accumulation = 0;
         document.addEventListener("wheel",function (m){
-            if(MainPullUpBubbleIndex !== false){
+            if(!PullUpInfo.MainPullUpIndex && PullUpInfo.PullUpType === 3){
                 Accumulation += m.deltaY;
 
                 if(Math.abs(Accumulation)>= 100){
 
-                    let index = MainPullUpBubbleIndex + (Accumulation>0 ? 1 : -1);
+                    let index = PullUpInfo.ChoseToPullUpIndex + (Accumulation>0 ? 1 : -1);
 
                     Accumulation = 0;
 
                     if(index >= 0 && index<DynamicBubbles.length){
-                        MainPullUpBubbleIndex = index;
-                        PullUpDynamicBubbles(MainPullUpBubbleIndex);
+                        PullUpDynamicBubbles(index);
                     }
                 }
             }
@@ -997,6 +1018,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 let DynamicBubbles = [];
 
 async function TidyUpDynamicBubbles(){
+    resetPullUpInfo();
+
     let Base = document.getElementById("DynamicBubbleBase");
 
     if(DynamicBubbles.length > 3){
@@ -1027,16 +1050,26 @@ async function TidyUpDynamicBubbles(){
 
         if(i !== DynamicBubbles.length-1){
             DynamicBubbles[i].style.height = "120px";
+        }else{
+            if(DynamicBubbles[i].classList.contains("NotificationBubble"))
+                DynamicBubbles[i].style.height = "120px";
+            else if(DynamicBubbles[i].classList.contains("PageBubble"))
+                DynamicBubbles[i].style.height = "330px";
+
         }
     }
 
 };
 
-function FullViewBubble(){
-
+function resetPullUpInfo(){
+    PullUpInfo.ChoseToPullUpIndex = false;
+    PullUpInfo.MainPullUpIndex = false;
+    PullUpInfo.PullUpType = 0;
 }
 
 async function CreateDynamicBubbles(BubbleType,Content){
+    resetPullUpInfo();
+
     let Base = document.getElementById("DynamicBubbleBase");
 
     let newBubble = document.createElement("div");
@@ -1124,15 +1157,17 @@ async function CreateDynamicBubbles(BubbleType,Content){
 
 
     await TidyUpDynamicBubbles();
-
 };
 
 function PullUpDynamicBubbles(MainIndex){
-    let ClickOnBubble = DynamicBubbles[MainIndex];
+    PullUpInfo.ChoseToPullUpIndex = MainIndex;
 
     if(DynamicBubbles.length === 1){
-        ClickOnBubble.style.height = "calc(100vh - 60px)";
+        PullUpInfo.PullUpType = 1;
+        PullUpMainBubble(MainIndex);
     }else if(DynamicBubbles.length <= 3){
+        PullUpInfo.PullUpType = 2;
+
         let Accumulation = 0;
 
         for (let i = 0; i < DynamicBubbles.length; i++){
@@ -1152,6 +1187,7 @@ function PullUpDynamicBubbles(MainIndex){
             Accumulation += mixHeight+20;
         }
     }else if(DynamicBubbles.length >= 4){
+        PullUpInfo.PullUpType = 3;
 
         for (let i = 0; i < DynamicBubbles.length; i++){
             let mixHeight = 0;
@@ -1213,6 +1249,25 @@ function PullUpDynamicBubbles(MainIndex){
             DynamicBubbles[i].style.top = `${400 + Accumulation}px`
 
             LastMixHeight = mixHeight;
+        }
+    }
+}
+
+function PullUpMainBubble(MainIndex){
+
+    let ClickOnBubble = DynamicBubbles[MainIndex];
+
+    PullUpInfo.MainPullUpIndex = MainIndex;
+
+    ClickOnBubble.style.height = "calc(100vh - 60px)";
+    ClickOnBubble.style.top = "0";
+    ClickOnBubble.style.opacity = "1";
+
+    for (let i = 0;i<DynamicBubbles.length;i++){
+        if(i !== MainIndex)
+        {
+            DynamicBubbles[i].style.opacity = "0";
+            DynamicBubbles[i].style.width = "0";
         }
     }
 }
