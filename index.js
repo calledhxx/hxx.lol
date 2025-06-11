@@ -12,7 +12,13 @@ function checkIfMobile() {
 };
 
 let buttons = [
-    {
+    null,
+
+
+];
+
+if((new Date().getSeconds())%2)
+    buttons[0] =  {
         "Side": 1,
         "Chunk": 1,
         "Color":"#d13333",
@@ -21,11 +27,11 @@ let buttons = [
         "Name":"黃太妃",
         "Tag":"Hxx",
         "Page":"./page/Hxx.JSON"
-    },
-
-    {
+    }
+else
+    buttons[0] =   {
         "Side": 1,
-        "Chunk": 4,
+        "Chunk": 1,
         "Color":"#aa33d1",
         "depth":24,
         "Icon": "./img/IMG_0590.GIF",
@@ -33,7 +39,6 @@ let buttons = [
         "Tag":"Hxx",
         "Page":"./page/Hxx.JSON"
     }
-];
 
 function hex(a,b,c){
     if(a.substring(0,1) === "#") a = a.substring(1,7)
