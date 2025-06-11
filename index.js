@@ -95,7 +95,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let Holding = 0;
     let Pushing = 0;
-    
+    let Pulling = 0;
+
 
 
     let buttons = [
@@ -763,17 +764,17 @@ document.addEventListener("DOMContentLoaded",  async function () {
             TweenUp(false);
 
 
-
             xMoved = (x - xStartScreen)/3 + xLastMoved;
             yMoved = (-y +   yStartScreen)/3 + yLastMoved;
 
-        } else if(FinalInfo.Bubble){
+        } else if(FinalInfo.Bubble && !Pulling){
             FinalInfo.Bubble.style.backgroundColor = "rgba(228, 228, 228, 0.7)";
             FinalInfo.Bubble.style.borderColor = "rgba(207,207,207,0.6)";
             FinalInfo.Bubble.style.transform = "translateX(-50%) translateY(10px)";
 
-
             mouseOnBubbles[mouseOnBubbles.length] = StartAtElement = FinalInfo.Bubble;
+
+            Pulling = true;
         }
     }
 
@@ -865,19 +866,23 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 await CreateDynamicBubbles(type,content);
 
             }
-        }else if(FinalInfo.Bubble){
+        }else if(Pulling){
+            Pulling = false;
             let ClickOnIndex = false;
 
-            for(let i = 0;i<DynamicBubbles.length;i++)
-                if(DynamicBubbles[i] === FinalInfo.Bubble){
-                    ClickOnIndex = i
-                    break;
-                }
+            if(FinalInfo.Bubble){
+                for(let i = 0;i<DynamicBubbles.length;i++)
+                    if(DynamicBubbles[i] === FinalInfo.Bubble){
+                        ClickOnIndex = i
+                        break;
+                    }
 
-            if(ClickOnIndex === false) return;
+                if(ClickOnIndex === false) return;
+            }
+
 
             if(PullUpInfo.MainPullUpIndex !== false){
-                if(Math.abs(yStartScreen - y)  >= 100){
+                if(yStartScreen - y  >= 100){
                     await ClearBubble(PullUpInfo.MainPullUpIndex);
                 }
             }else if(FinalInfo.Bubble === StartAtElement){
@@ -938,11 +943,21 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let ToStableValue = checkIfMobile() ? 3 : 5;
 
-    let Mmoving = function(x,y){
-        xMoved = (x - xStartScreen)/ToStableValue + xLastMoved;
-        yMoved = (-y +   yStartScreen)/ToStableValue + yLastMoved;
+    let fingerMoving = function(x,y){
+        if(Holding){
+            xMoved = (x - xStartScreen)/ToStableValue + xLastMoved;
+            yMoved = (-y +   yStartScreen)/ToStableValue + yLastMoved;
 
-        moving(xMoved, yMoved);
+            moving(xMoved, yMoved);
+        }else if(!Pushing && Pulling){
+            if(StartAtElement === DynamicBubbles[PullUpInfo.MainPullUpIndex] && StartAtElement){
+                if(yStartScreen - y  >= 100)
+                    StartAtElement.style.top = "-100px";
+                else
+                    StartAtElement.style.top = "0px"
+
+            }
+        }
     }
 
 
@@ -954,9 +969,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             startMove(m.touches[0].clientX,m.touches[0].clientY);
         });
         document.addEventListener("touchmove", function (m) {
-            if(!Holding) return;
 
-            Mmoving(m.touches[0].clientX,m.touches[0].clientY);
+            fingerMoving(m.touches[0].clientX,m.touches[0].clientY);
         });
     }else {
         document.addEventListener("mouseup", function (m ){
@@ -967,9 +981,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         });
         document.addEventListener("mousemove", function (m) {
 
-            if(!Holding) return;
 
-            Mmoving(m.clientX,m.clientY);
+            fingerMoving(m.clientX,m.clientY);
         });
         let Accumulation = 0;
         document.addEventListener("wheel",function (m){
