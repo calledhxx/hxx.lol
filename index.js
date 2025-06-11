@@ -986,7 +986,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         });
         let Accumulation = 0;
         document.addEventListener("wheel",function (m){
-            if(!PullUpInfo.MainPullUpIndex && PullUpInfo.PullUpType === 3){
+            if(PullUpInfo.MainPullUpIndex === false && PullUpInfo.PullUpType === 3){
                 Accumulation += m.deltaY;
 
                 if(Math.abs(Accumulation)>= 100){
