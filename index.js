@@ -11,7 +11,18 @@ function checkIfMobile() {
     return check;
 };
 
-
+let buttons = [
+    {
+        "Side": 1,
+        "Chunk": 1,
+        "Color":"#d13333",
+        "depth":24,
+        "Icon": "./img/IMG_0537.GIF",
+        "Name":"黃太妃",
+        "Tag":"Hxx",
+        "Page":"./page/Hxx.JSON"
+    }
+];
 
 function hex(a,b,c){
     if(a.substring(0,1) === "#") a = a.substring(1,7)
@@ -97,132 +108,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let Pushing = 0;
     let Pulling = 0;
 
-
-
-    let buttons = [
-        {
-            "Side": 1,
-            "Chunk": 1,
-            "Color":"#e8a428",
-            "depth":24,
-            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
-            "Name":"太陽魚",
-            "Tag":"Sunfish",
-            "Page":""
-        },
-
-        {
-            "Side": 6,
-            "Chunk": 1,
-            "Color":"#512509",
-            "depth":24,
-            "Icon": null,
-            "Name":"太陽魚",
-            "Tag":"Sunfish",
-            "Page":""
-        },
-
-        {
-            "Side": 5,
-            "Chunk": 1,
-            "Color":"#72a830",
-            "depth":24,
-            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
-            "Name":"太陽魚",
-            "Tag":"Sunfish",
-            "Page":""
-        },
-
-        {
-            "Side": 5,
-            "Chunk": 4,
-            "Color":"#cf4343",
-            "depth":24,
-            "Icon": "./img/a9a72e835d8a6266b636180a30014def.png",
-            "Name":"太陽魚",
-            "Tag":"Sunfish",
-            "Page":""
-        },
-
-
-        {
-            "Side": 1,
-            "Chunk": 2,
-            "Color":"#e4e4e4",
-            "depth":24,
-            "Icon": "./img/32f8f2203ecb889671ddd843e2d737b9.png",
-            "Name":"破魚大帝",
-            "Tag":"ProFish",
-            "Page":""
-
-        },
-
-
-        {
-            "Side": 1,
-            "Chunk": 4,
-            "Color":"#7441cd",
-            "depth":24,
-            "Icon": "./img/160889760.png",
-            "Name":"黃太妃",
-            "Tag":"Hxx",
-            "Page":"./page/Hxx.JSON"
-
-        },
-        {
-            "Side": 1,
-            "Chunk": 3,
-            "Color":"#e4e4e4",
-            "depth":24,
-            "Icon": "./img/3cefb2f1f8b976328364daafe647af0d.png",
-            "Name":"彭搭特",
-            "Tag":"DrPon",
-            "Page":""
-        },
-
-
-        {
-            "Side": 2,
-            "Chunk": 1,
-            "Color":"#0a85b1",
-            "depth":24,
-            "Icon": "./img/52929faad24d847a8c75de0d10dd082e.png",
-            "Name":"JD大臣",
-            "Tag":"JD",
-            "Page":""
-        },
-
-        {
-            "Side": 2,
-            "Chunk": 4,
-            "Color":"#bac5a3",
-            "depth":24,
-            "Icon": "./img/IMG_20250408_223421_737.jpg",
-            "Name":"Weason",
-            "Tag":"Weason",
-            "Page":""
-        },
-        {
-            "Side": 2,
-            "Chunk": 3,
-            "Color":"#fa7965",
-            "depth":24,
-            "Icon": "./img/148810bbcbcc4db37d2ec8188a8a6399.png",
-            "Name":"Ira Nomas",
-            "Tag":"ironman",
-            "Page":""
-        },
-        {
-            "Side": 2,
-            "Chunk": 2,
-            "Color":"#202020",
-            "depth":24,
-            "Icon": "./img/62993182ae16f24ad926f01f9bafa892.png",
-            "Name":"水泥人",
-            "Tag":"Dummy",
-            "Page":""
-        },
-    ];
 
     let buttonElements = [];
 
@@ -313,6 +198,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         newOne.id = String(i);
         buttonElements[buttonElements.length] = newOne;
+
+
     }
 
 
@@ -1282,10 +1169,9 @@ function PullUpMainBubble(MainIndex){
 
 
     for (let i = 0;i<DynamicBubbles.length;i++){
-        if(i !== MainIndex)
-        {
+        if(i !== MainIndex){
             DynamicBubbles[i].style.opacity = "0";
-            DynamicBubbles[i].style.width = "0";
+            DynamicBubbles[i].style.top = `${-100 - 30}px`;
         }
     }
 }
