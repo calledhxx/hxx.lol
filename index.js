@@ -54,15 +54,15 @@ let ControlButtons = [
         "IMPORTANT?":false
     },
     {
-        "Name":"聚集泡泡",
+        "Name":"整理泡泡",
         "IMPORTANT?":false
     },
     {
-        "Name":"泡泡奔放",
+        "Name":"戳破泡泡",
         "IMPORTANT?":true
     },
     {
-        "Name":"泡泡消散",
+        "Name":"吹除泡泡",
         "IMPORTANT?":true
     },
 ]
@@ -868,18 +868,18 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         break;
 
                     }
-                    case "聚集泡泡":{
+                    case "整理泡泡":{
                         await TidyUpDynamicBubbles();
                         await resetPullUpInfo();
 
                         break;
                     }
-                    case "泡泡消散":{
+                    case "吹散泡泡":{
                         await ClearBubble(PullUpInfo.MainPullUpIndex);
 
                         break;
                     }
-                    case "泡泡奔放":{
+                    case "清除所有":{
                         let len = DynamicBubbles.length;
 
                         for (let i = 0;i<len;i++){
