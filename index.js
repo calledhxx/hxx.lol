@@ -51,13 +51,20 @@ else
 let ControlButtons = [
     {
         "Name":"回上一動",
+        "IMPORTANT?":false
     },
     {
         "Name":"聚集泡泡",
+        "IMPORTANT?":false
+    },
+    {
+        "Name":"泡泡奔放",
+        "IMPORTANT?":true
     },
     {
         "Name":"泡泡消散",
-    }
+        "IMPORTANT?":true
+    },
 ]
 
 function hex(a,b,c){
@@ -571,6 +578,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
     }
 
+
+
     TweenUp(true,.1);
 
     moving(0,0);
@@ -593,6 +602,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     xLastMoved = xMoved =  -375;
     yLastMoved = yMoved = -10;
+
+    await CreateDynamicBubbles("Notification",[
+        {
+            "Title":"你闖入到工地了！",
+            "Content":"這個網站還在建造中，所以會有些不穩定的內容。你若能找到問題可以上報至 me@hxx.lol，Hxx會輝常開心的。"
+        }
+    ])
+
 
     let startAt = 0;
 
@@ -842,6 +859,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }else if(Controlling){
             Controlling = false;
+            StartAtElement.getElementsByClassName("DynamicBubbleControlBarMiddleText")[0].style.opacity = "1";
 
             if(LastSelectControlButtonIndex){
                 switch (ControlButtons[LastSelectControlButtonIndex].Name){
@@ -861,7 +879,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                         break;
                     }
+                    case "泡泡奔放":{
+                        let len = DynamicBubbles.length;
+
+                        for (let i = 0;i<len;i++){
+                             ClearBubble(0);
+                        }
+                    }
                 }
+
 
                 LastSelectControlButtonIndex = false;
             }
@@ -939,7 +965,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(y - yStartScreen >= 100){
                 if(ControlBarIsDraw === false){
                     StartAtElement.style.width = "120px";
-                    StartAtElement.style.height = "150px";
+                    StartAtElement.style.height = `${ControlButtons.length*50}px`;
 
                     ControlBarIsDraw = true;
 
@@ -968,13 +994,18 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     }
                 }
 
+                StartAtElement.getElementsByClassName("DynamicBubbleControlBarMiddleText")[0].style.opacity = "0";
+
                 for (let index = 0; index < StartAtElement.getElementsByClassName("ControlBarButton").length; index++) {
                     let thisElement = StartAtElement.getElementsByClassName("ControlBarButton")[index];
                     if(finalButton === StartAtElement.getElementsByClassName("ControlBarButton")[index]){
                         thisElement.style.color = "white";
                         thisElement.style.fontSize = "20px";
                     }else{
-                        thisElement.style.color = "#393939";
+                        if(ControlButtons[index]["IMPORTANT?"])
+                            thisElement.style.color = "#bf3232"
+                        else
+                            thisElement.style.color = "#393939";
                         thisElement.style.fontSize = "16px";
                     }
                 }
@@ -1064,6 +1095,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     }
 
+
 });
 
 let DynamicBubbles = [];
@@ -1102,6 +1134,7 @@ async function TidyUpDynamicBubbles(){
         DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "0";
         DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "0";
         DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "0";
+
 
         if(DynamicBubbles.length === 1){
             DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerHTML =
@@ -1153,6 +1186,13 @@ async function CreateDynamicBubbles(BubbleType,Content){
 
     let newControlBar = document.createElement("div");
     newControlBar.classList.add("DynamicBubbleControlBar");
+
+    let newControlBarMiddleText = document.createElement("h1");
+    newControlBarMiddleText.classList.add("DynamicBubbleControlBarMiddleText");
+
+    newControlBarMiddleText.textContent = "´◡`";
+
+    newControlBar.appendChild(newControlBarMiddleText);
 
     let myIndex = DynamicBubbles.length;
 
@@ -1225,6 +1265,7 @@ async function CreateDynamicBubbles(BubbleType,Content){
 
     DynamicBubbles.push(newBubble);
 
+    newBubble.appendChild(newControlBar);
     newBubble.appendChild(newControlBar);
     newBubble.appendChild(newBubbleTypeTitle);
     newBubble.appendChild(newBubbleFrame);
@@ -1351,6 +1392,9 @@ function PullUpMainBubble(MainIndex){
         "向下拖拉右上方按鈕看看？"
 
     ClickOnBubble.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "auto";
+
+    ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarMiddleText")[0].style.opacity = "1";
+
 
     setTimeout(async function(){
         ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "1";
