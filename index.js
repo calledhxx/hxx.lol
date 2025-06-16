@@ -13,8 +13,6 @@ function checkIfMobile() {
 
 let buttons = [
     null,
-
-
 ];
 
 if((new Date().getSeconds())%2)
@@ -39,6 +37,18 @@ else
         "Tag":"Hxx",
         "Page":"./page/Hxx.JSON"
     }
+
+let ControlButtons = [
+    {
+        "Name":"回上一動",
+    },
+    {
+        "Name":"聚集泡泡",
+    },
+    {
+        "Name":"泡泡消散",
+    }
+]
 
 function hex(a,b,c){
     if(a.substring(0,1) === "#") a = a.substring(1,7)
@@ -123,6 +133,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let Holding = 0;
     let Pushing = 0;
     let Pulling = 0;
+    let Controlling = 0;
 
 
     let buttonElements = [];
@@ -577,6 +588,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let mouseOnButtons = [];
     let mouseOnBubbles = [];
+    let mouseOnControlBars = [];
 
 
     let StartAtElement;
@@ -585,6 +597,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let FinalInfo = {
             "Button":0,
             "Bubble":0,
+            "ControlBar":0,
             "Rotating":0,
         };
 
@@ -600,6 +613,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 break
             }
 
+            let ControlBar = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubbleControlBar");
+
+            if(ControlBar.Parent){
+                FinalInfo.ControlBar = ControlBar.Parent;
+                break
+            }
+
             let CheckBubble = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubble");
 
             if(CheckBubble.Parent){
@@ -610,7 +630,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(retIfParentMatch(ElementsWitchAtPoint[i],"box",0,true)) break;
         }
 
-        if(!FinalInfo.Button && !FinalInfo.Bubble && !FinalInfo.Rotating)
+        if(!FinalInfo.Button && !FinalInfo.Bubble && !FinalInfo.Rotating && !FinalInfo.ControlBar)
             FinalInfo.Rotating = true;
 
 
@@ -639,8 +659,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             Pushing = true;
 
-
-
             FinalElement.style.fontSize = "0px";
 
 
@@ -661,16 +679,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
             moving(xLastMoved,yLastMoved);
 
 
-        }else if(!Holding && !Pushing && FinalInfo.Rotating){
+        }else if(!Holding  && !Pushing && !Pulling && !Controlling &&  FinalInfo.Rotating){
             Holding = true;
 
             TweenUp(false);
 
-
             xMoved = (x - xStartScreen)/3 + xLastMoved;
             yMoved = (-y +   yStartScreen)/3 + yLastMoved;
 
-        } else if(FinalInfo.Bubble && !Pulling){
+        } else if(FinalInfo.Bubble && !Pulling && PullUpInfo.MainPullUpIndex === false){
             FinalInfo.Bubble.style.backgroundColor = "rgba(228, 228, 228, 0.8)";
             FinalInfo.Bubble.style.borderColor = "rgba(207,207,207,0.7)";
             FinalInfo.Bubble.style.transform = "translateX(-50%) translateY(10px)";
@@ -678,6 +695,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
             mouseOnBubbles[mouseOnBubbles.length] = StartAtElement = FinalInfo.Bubble;
 
             Pulling = true;
+        }else if(FinalInfo.ControlBar && !Controlling){
+            mouseOnControlBars[mouseOnControlBars.length] = StartAtElement = FinalInfo.ControlBar;
+
+            FinalInfo.ControlBar.style.width = "34px";
+            FinalInfo.ControlBar.style.height = "34px";
+
+            Controlling = true;
         }
     }
 
@@ -686,6 +710,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let lastDbX = -1;
     let lastDbY = -1;
+
+    let ControlBarIsDraw = false;
+    let LastSelectControlButtonIndex = false;
 
     let endMove = async function (x,y){
         let FinalInfo = getFinalElementWitchAtPoint(x,y);
@@ -785,9 +812,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
             if(PullUpInfo.MainPullUpIndex !== false){
-                if(yStartScreen - y  >= 100){
-                    await ClearBubble(PullUpInfo.MainPullUpIndex);
-                }
+                // if(yStartScreen - y  >= 100){
+                //     await ClearBubble(PullUpInfo.MainPullUpIndex);
+                // }
             }else if(FinalInfo.Bubble === StartAtElement){
                 if(!PullUpInfo.PullUpType)
                     PullUpDynamicBubbles(ClickOnIndex);
@@ -803,10 +830,54 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     PullUpMainBubble(ClickOnIndex);
                 }
             }
+        }else if(Controlling){
+            Controlling = false;
+
+            if(LastSelectControlButtonIndex){
+                switch (ControlButtons[LastSelectControlButtonIndex].Name){
+                    case "回上一動":{
+                        //nothing
+                        break;
+
+                    }
+                    case "聚集泡泡":{
+                        await TidyUpDynamicBubbles();
+                        await resetPullUpInfo();
+
+                        break;
+                    }
+                    case "泡泡消散":{
+                        await ClearBubble(PullUpInfo.MainPullUpIndex);
+
+                        break;
+                    }
+                }
+
+                LastSelectControlButtonIndex = false;
+            }
         }
 
 
+        for (let i in mouseOnControlBars){
+            if(!mouseOnControlBars[i]) continue;
 
+            setTimeout(async function(){
+
+                for (let index = 0; index < StartAtElement.getElementsByClassName("ControlBarButton").length; index++) {
+                    await sleep(20)
+                    StartAtElement.getElementsByClassName("ControlBarButton")[index].style.opacity = "0";
+                }
+
+                await sleep(10);
+                mouseOnControlBars[i].style.width = "28px"
+                mouseOnControlBars[i].style.height = "28px"
+
+
+                mouseOnControlBars[i] = null;
+            },0)
+        }
+
+        ControlBarIsDraw = false;
 
         for (let i in mouseOnButtons){
             if(!mouseOnButtons[i]) continue;
@@ -833,6 +904,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
 
 
+
         for (let i in mouseOnBubbles){
             if(!mouseOnBubbles[i]) continue;
 
@@ -846,21 +918,68 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let ToStableValue = checkIfMobile() ? 3 : 5;
 
-    let fingerMoving = function(x,y){
+
+    let fingerMoving = async function(x,y){
         if(Holding){
             xMoved = (x - xStartScreen)/ToStableValue + xLastMoved;
             yMoved = (-y +   yStartScreen)/ToStableValue + yLastMoved;
 
             moving(xMoved, yMoved);
-        }else if(!Pushing && Pulling){
-            if(StartAtElement === DynamicBubbles[PullUpInfo.MainPullUpIndex] && StartAtElement){
-                if(yStartScreen - y  >= 100)
-                    StartAtElement.style.top = "-100px";
-                else
-                    StartAtElement.style.top = "0px"
+        }else if (Controlling){
+            if(y - yStartScreen >= 100){
+                if(ControlBarIsDraw === false){
+                    StartAtElement.style.width = "120px";
+                    StartAtElement.style.height = "150px";
 
+                    ControlBarIsDraw = true;
+
+                    for (let index = 0; index < StartAtElement.getElementsByClassName("ControlBarButton").length; index++) {
+                        await sleep(20)
+                        StartAtElement.getElementsByClassName("ControlBarButton")[index].style.opacity = "1";
+                    }
+                }
+            }
+
+            if(ControlBarIsDraw)
+            {
+                let LeastPXToCursor = false;
+                let finalButton = false;
+
+
+                for (let index = 0; index < StartAtElement.getElementsByClassName("ControlBarButton").length; index++) {
+                    let DOMReat = StartAtElement.getElementsByClassName("ControlBarButton")[index].getBoundingClientRect();
+
+                    if(LeastPXToCursor===false) LeastPXToCursor = Math.abs(DOMReat.top-y);
+
+                    if(LeastPXToCursor >= Math.abs(DOMReat.top-y)){
+                        LeastPXToCursor = Math.abs(DOMReat.top-y);
+                        finalButton = StartAtElement.getElementsByClassName("ControlBarButton")[index];
+                        LastSelectControlButtonIndex = index;
+                    }
+                }
+
+                for (let index = 0; index < StartAtElement.getElementsByClassName("ControlBarButton").length; index++) {
+                    let thisElement = StartAtElement.getElementsByClassName("ControlBarButton")[index];
+                    if(finalButton === StartAtElement.getElementsByClassName("ControlBarButton")[index]){
+                        thisElement.style.color = "white";
+                        thisElement.style.fontSize = "20px";
+                    }else{
+                        thisElement.style.color = "#393939";
+                        thisElement.style.fontSize = "16px";
+                    }
+                }
             }
         }
+
+        // else if(!Pushing && Pulling){
+        //     if(StartAtElement === DynamicBubbles[PullUpInfo.MainPullUpIndex] && StartAtElement){
+        //         if(yStartScreen - y  >= 100)
+        //             StartAtElement.style.top = "-100px";
+        //         else
+        //             StartAtElement.style.top = "0px"
+        //
+        //     }
+        // }
     }
 
 
@@ -970,6 +1089,15 @@ async function TidyUpDynamicBubbles(){
         DynamicBubbles[i].style.width = `${100 - 5 * (DynamicBubbles.length-1-i)}%`;
         DynamicBubbles[i].style.opacity = `${1 - 0.25*(DynamicBubbles.length-1-i)}`;
 
+        DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "0";
+        DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "0";
+        DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "0";
+
+        DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerHTML =
+            "點擊泡泡以閱覽全文"
+
+        DynamicBubbles[i].getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY =
+            "hidden";
 
         if(i !== DynamicBubbles.length-1){
             DynamicBubbles[i].style.height = "120px";
@@ -1005,8 +1133,20 @@ async function CreateDynamicBubbles(BubbleType,Content){
     let newBubbleFrame = document.createElement("div");
     newBubbleFrame.classList.add("DynamicBubbleFrame");
 
+    let newBubbleBottomBar = document.createElement("div");
+    newBubbleBottomBar.classList.add("DynamicBubbleBottomBar");
+
+    let newControlBar = document.createElement("div");
+    newControlBar.classList.add("DynamicBubbleControlBar");
 
     let myIndex = DynamicBubbles.length;
+
+    for(let i = 0;i<ControlButtons.length;i++){
+        let newControlButton = document.createElement("div");
+        newControlBar.appendChild(newControlButton);
+        newControlButton.classList.add("ControlBarButton");
+        newControlButton.innerText = ControlButtons[i].Name;
+    }
 
     switch (BubbleType){
         case "Notification": {
@@ -1070,8 +1210,11 @@ async function CreateDynamicBubbles(BubbleType,Content){
 
     DynamicBubbles.push(newBubble);
 
+    newBubble.appendChild(newControlBar);
     newBubble.appendChild(newBubbleTypeTitle);
     newBubble.appendChild(newBubbleFrame);
+    newBubble.appendChild(newBubbleBottomBar);
+
     Base.appendChild(newBubble);
 
 
@@ -1183,11 +1326,32 @@ function PullUpMainBubble(MainIndex){
     ClickOnBubble.style.top = "0";
     ClickOnBubble.style.opacity = "1";
 
+    ClickOnBubble.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "auto";
+
+    setTimeout(async function(){
+        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "1";
+
+        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "28px";
+        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "28px";
+        await sleep(120);
+        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "1";
+
+    },110)
+
+
 
     for (let i = 0;i<DynamicBubbles.length;i++){
         if(i !== MainIndex){
+            let mixHeight= 0;
+
+            if(DynamicBubbles[i].classList.contains("PageBubble")){
+                mixHeight = 240;
+            }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
+                mixHeight = 120;
+            }
+
             DynamicBubbles[i].style.opacity = "0";
-            DynamicBubbles[i].style.top = `${-100 - 30}px`;
+            DynamicBubbles[i].style.top = `-${mixHeight}px`;
         }
     }
 }

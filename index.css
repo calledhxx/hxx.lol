@@ -388,19 +388,6 @@ body{
 }
 
 
-
-.DynamicBubble::after{
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-
-    box-shadow: rgba(255, 255, 255, 0.55) 0 0 20px 10px inset;
-}
-
-
 .DynamicBubbleTypeTitle{
     width: calc(100% - 20px);
     height: 20px;
@@ -424,8 +411,22 @@ body{
 
 .DynamicBubbleFrame{
     width: 100%;
-    height: calc(100% - 20px - 10px - 20px);
-    border-radius: 40px;
+    height: calc(100% - 20px - 10px - 20px - 30px);
+
+    overflow: hidden;
+}
+
+.DynamicBubbleBottomBar{
+    width: 100%;
+    height: 30px;
+
+    color: #474747;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-shadow: rgba(255, 255, 255, 0.53) 0 0 10px;
 }
 
 
@@ -454,6 +455,8 @@ body{
     color: #5c5c5c;
 
     text-shadow: rgba(255, 255, 255, 0.8) 0 0 30px;
+
+
 }
 
 
@@ -466,24 +469,82 @@ body{
     min-height: 240px;
 }
 
+.DynamicBubbleControlBar{
+    width: 36px;
+    height: 36px;
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.39);
+    box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.55);
+    border: rgba(207, 207, 207, 0.4) solid 2px;
+
+
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    transition: all 540ms cubic-bezier(0, 0.6, 0.1, 1);
+
+    backdrop-filter: blur(30px);
+
+
+}
+
+.ControlBarButton{
+
+    width: 100px;
+    height: 40px;
+
+    margin: 10px;
+
+    transition: all 270ms cubic-bezier(0, 0.6, 0.1, 1);
+
+    opacity: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 16px;
+
+    text-shadow: 0 0 20px black;
+}
+
+
+
 
 ::-webkit-scrollbar {
-    opacity: 0;
+    width: 10px;
+    height: 10px;
+
 }
 
 ::-webkit-scrollbar-track {
-    opacity: 0;
+    box-shadow: 0 0 2px rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.21);
 
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
 }
 
 
 ::-webkit-scrollbar-thumb {
-    opacity: 0;
+    background: rgba(255, 255, 255, 0.24);
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 2px rgb(255, 255, 255);
+
 
 }
 
 
 ::-webkit-scrollbar-thumb:hover {
-    opacity: 0;
-
+    background: rgba(194, 194, 194, 0.64);
+    backdrop-filter: blur(20px);
 }
