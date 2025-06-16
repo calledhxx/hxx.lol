@@ -722,7 +722,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             mouseOnBubbles[mouseOnBubbles.length] = StartAtElement = FinalInfo.Bubble;
 
             Pulling = true;
-        }else if(FinalInfo.ControlBar && !Controlling){
+        }else if(FinalInfo.ControlBar && !Controlling && PullUpInfo.MainPullUpIndex !== false){
             mouseOnControlBars[mouseOnControlBars.length] = StartAtElement = FinalInfo.ControlBar;
 
             FinalInfo.ControlBar.style.width = "34px";
@@ -861,6 +861,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             Controlling = false;
             StartAtElement.getElementsByClassName("DynamicBubbleControlBarMiddleText")[0].style.opacity = "1";
 
+
             if(LastSelectControlButtonIndex){
                 switch (ControlButtons[LastSelectControlButtonIndex].Name){
                     case "回上一動":{
@@ -885,6 +886,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         for (let i = 0;i<len;i++){
                              ClearBubble(0);
                         }
+
+                        break;
                     }
                 }
 
@@ -1134,7 +1137,6 @@ async function TidyUpDynamicBubbles(){
         DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "0";
         DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "0";
         DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "0";
-
 
         if(DynamicBubbles.length === 1){
             DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerHTML =
