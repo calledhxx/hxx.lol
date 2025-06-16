@@ -857,7 +857,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     PullUpMainBubble(ClickOnIndex);
                 }
             }
-        }else if(Controlling){
+        }else if(Controlling && ControlBarIsDraw){
             Controlling = false;
             StartAtElement.getElementsByClassName("DynamicBubbleControlBarMiddleText")[0].style.opacity = "1";
 
@@ -1389,7 +1389,7 @@ function PullUpMainBubble(MainIndex){
     ClickOnBubble.style.opacity = "1";
 
     ClickOnBubble.getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
-        "向下拖拉右上方按鈕看看？"
+        "向下拖拉右上方的按鈕看看？"
 
     ClickOnBubble.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "auto";
 
