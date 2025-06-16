@@ -1093,8 +1093,13 @@ async function TidyUpDynamicBubbles(){
         DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "0";
         DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "0";
 
-        DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerHTML =
-            "點擊泡泡以閱覽全文"
+        if(DynamicBubbles.length === 1){
+            DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerHTML =
+                "點擊泡泡以閱覽全文"
+        }else{
+            DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerHTML =
+                "點擊並選取閱讀項目"
+        }
 
         DynamicBubbles[i].getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY =
             "hidden";
@@ -1242,6 +1247,9 @@ function PullUpDynamicBubbles(MainIndex){
                 mixHeight = 120;
             }
 
+            DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
+                "選擇我？"
+
             DynamicBubbles[i].style.height = `${mixHeight}px`;
             DynamicBubbles[i].style.width = "100%";
             DynamicBubbles[i].style.opacity = "1";
@@ -1260,6 +1268,9 @@ function PullUpDynamicBubbles(MainIndex){
             }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
                 mixHeight = 120;
             }
+
+            DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
+                "選擇我！"
 
             DynamicBubbles[i].style.height = `${mixHeight}px`;
             DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10}%`;
@@ -1325,6 +1336,9 @@ function PullUpMainBubble(MainIndex){
     ClickOnBubble.style.height = "calc(100vh - 60px)";
     ClickOnBubble.style.top = "0";
     ClickOnBubble.style.opacity = "1";
+
+    ClickOnBubble.getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
+        "恩..."
 
     ClickOnBubble.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "auto";
 
