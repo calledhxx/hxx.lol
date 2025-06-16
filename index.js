@@ -874,12 +874,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                         break;
                     }
-                    case "吹散泡泡":{
+                    case "吹除泡泡":{
                         await ClearBubble(PullUpInfo.MainPullUpIndex);
 
                         break;
                     }
-                    case "清除所有":{
+                    case "戳破泡泡":{
                         let len = DynamicBubbles.length;
 
                         for (let i = 0;i<len;i++){
