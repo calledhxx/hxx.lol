@@ -427,6 +427,10 @@ body{
     align-items: center;
 
     text-shadow: rgba(255, 255, 255, 0.53) 0 0 10px;
+
+    font-weight:bold;
+
+    font-size: 16px;
 }
 
 
@@ -456,7 +460,7 @@ body{
 
     text-shadow: rgba(255, 255, 255, 0.8) 0 0 30px;
 
-
+    font-weight:normal;
 }
 
 
@@ -514,6 +518,8 @@ body{
     font-size: 16px;
 
     text-shadow: 0 0 20px black;
+
+    font-weight:bold;
 }
 
 
