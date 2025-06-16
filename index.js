@@ -13,6 +13,16 @@ function checkIfMobile() {
 
 let buttons = [
     null,
+    {
+        "Side": 1,
+        "Chunk": 4,
+        "Color":"#5175b3",
+        "depth":24,
+        "Icon": null,
+        "Name":"說明書",
+        "Tag":"Manual",
+        "Page":"./page/Manual.JSON"
+    }
 ];
 
 if((new Date().getSeconds())%2)
