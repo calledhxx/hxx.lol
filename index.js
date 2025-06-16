@@ -730,6 +730,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             Controlling = true;
         }
+
     }
 
     let lastToX = 0;
@@ -857,12 +858,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     PullUpMainBubble(ClickOnIndex);
                 }
             }
-        }else if(Controlling && ControlBarIsDraw){
+        }else if(Controlling && PullUpInfo.MainPullUpIndex !== false){
             Controlling = false;
             StartAtElement.getElementsByClassName("DynamicBubbleControlBarMiddleText")[0].style.opacity = "1";
 
 
-            if(LastSelectControlButtonIndex){
+            if(LastSelectControlButtonIndex !== false){
                 switch (ControlButtons[LastSelectControlButtonIndex].Name){
                     case "回上一動":{
                         //nothing
