@@ -1338,7 +1338,7 @@ function PullUpMainBubble(MainIndex){
     ClickOnBubble.style.opacity = "1";
 
     ClickOnBubble.getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
-        "恩..."
+        "向下拖拉右上方按鈕看看？"
 
     ClickOnBubble.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "auto";
 
