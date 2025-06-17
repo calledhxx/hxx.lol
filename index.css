@@ -498,7 +498,7 @@ body{
     backdrop-filter: blur(30px);
 }
 
-.DynamicBubbleControlBarMiddleContent{
+.DynamicBubbleControlBar hr{
     width: 12px;
     height: 12px;
 
@@ -519,10 +519,11 @@ body{
     border-radius: 100%;
     background: rgba(120, 120, 120, 0.4);
     box-shadow: 0 0 10px 10px rgba(227, 227, 227, 0.73);
+    border: none;
 
 }
 
-.ControlBarButton{
+.DynamicBubbleControlBar div{
 
     width: 100px;
     height: 40px;

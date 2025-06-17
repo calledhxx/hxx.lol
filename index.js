@@ -860,7 +860,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }else if(Controlling && PullUpInfo.MainPullUpIndex !== false){
             Controlling = false;
-            StartAtElement.getElementsByClassName("DynamicBubbleControlBarMiddleContent")[0].style.opacity = "1";
+            StartAtElement.getElementsByTagName("hr")[0].style.opacity = "1";
 
 
             if(LastSelectControlButtonIndex !== false){
@@ -903,9 +903,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             setTimeout(async function(){
 
-                for (let index = 0; index < StartAtElement.getElementsByClassName("ControlBarButton").length; index++) {
+                for (let index = 0; index < StartAtElement.getElementsByTagName("div").length; index++) {
                     await sleep(20)
-                    StartAtElement.getElementsByClassName("ControlBarButton")[index].style.opacity = "0";
+                    StartAtElement.getElementsByTagName("div")[index].style.opacity = "0";
                 }
 
                 await sleep(10);
@@ -973,9 +973,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                     ControlBarIsDraw = true;
 
-                    for (let index = 0; index < StartAtElement.getElementsByClassName("ControlBarButton").length; index++) {
+                    for (let index = 0; index < StartAtElement.getElementsByTagName("div").length; index++) {
                         await sleep(20)
-                        StartAtElement.getElementsByClassName("ControlBarButton")[index].style.opacity = "1";
+                        StartAtElement.getElementsByTagName("div")[index].style.opacity = "1";
                     }
                 }
             }
@@ -986,23 +986,23 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 let finalButton = false;
 
 
-                for (let index = 0; index < StartAtElement.getElementsByClassName("ControlBarButton").length; index++) {
-                    let DOMReat = StartAtElement.getElementsByClassName("ControlBarButton")[index].getBoundingClientRect();
+                for (let index = 0; index < StartAtElement.getElementsByTagName("div").length; index++) {
+                    let DOMReat = StartAtElement.getElementsByTagName("div")[index].getBoundingClientRect();
 
                     if(LeastPXToCursor===false) LeastPXToCursor = Math.abs(DOMReat.top-y);
 
                     if(LeastPXToCursor >= Math.abs(DOMReat.top-y)){
                         LeastPXToCursor = Math.abs(DOMReat.top-y);
-                        finalButton = StartAtElement.getElementsByClassName("ControlBarButton")[index];
+                        finalButton = StartAtElement.getElementsByTagName("div")[index];
                         LastSelectControlButtonIndex = index;
                     }
                 }
 
-                StartAtElement.getElementsByClassName("DynamicBubbleControlBarMiddleContent")[0].style.opacity = "0";
+                StartAtElement.getElementsByTagName("hr")[0].style.opacity = "0";
 
-                for (let index = 0; index < StartAtElement.getElementsByClassName("ControlBarButton").length; index++) {
-                    let thisElement = StartAtElement.getElementsByClassName("ControlBarButton")[index];
-                    if(finalButton === StartAtElement.getElementsByClassName("ControlBarButton")[index]){
+                for (let index = 0; index < StartAtElement.getElementsByTagName("div").length; index++) {
+                    let thisElement = StartAtElement.getElementsByTagName("div")[index];
+                    if(finalButton === StartAtElement.getElementsByTagName("div")[index]){
                         thisElement.style.color = "white";
                         thisElement.style.fontSize = "20px";
                     }else{
@@ -1190,9 +1190,7 @@ async function CreateDynamicBubbles(BubbleType,Content){
     let newControlBar = document.createElement("div");
     newControlBar.classList.add("DynamicBubbleControlBar");
 
-    let newControlBarMiddleContent = document.createElement("h1");
-    newControlBarMiddleContent.classList.add("DynamicBubbleControlBarMiddleContent");
-
+    let newControlBarMiddleContent = document.createElement("hr");
     newControlBar.appendChild(newControlBarMiddleContent);
 
     let myIndex = DynamicBubbles.length;
@@ -1200,7 +1198,6 @@ async function CreateDynamicBubbles(BubbleType,Content){
     for(let i = 0;i<ControlButtons.length;i++){
         let newControlButton = document.createElement("div");
         newControlBar.appendChild(newControlButton);
-        newControlButton.classList.add("ControlBarButton");
         newControlButton.innerText = ControlButtons[i].Name;
     }
 
@@ -1394,7 +1391,7 @@ function PullUpMainBubble(MainIndex){
 
     ClickOnBubble.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "auto";
 
-    ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarMiddleContent")[0].style.opacity = "1";
+    ClickOnBubble.getElementsByTagName("hr")[0].style.opacity = "1";
 
 
     setTimeout(async function(){
