@@ -860,7 +860,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }else if(Controlling && PullUpInfo.MainPullUpIndex !== false){
             Controlling = false;
-            StartAtElement.getElementsByClassName("DynamicBubbleControlBarMiddleText")[0].style.opacity = "1";
+            StartAtElement.getElementsByClassName("DynamicBubbleControlBarMiddleContent")[0].style.opacity = "1";
 
 
             if(LastSelectControlButtonIndex !== false){
@@ -998,7 +998,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     }
                 }
 
-                StartAtElement.getElementsByClassName("DynamicBubbleControlBarMiddleText")[0].style.opacity = "0";
+                StartAtElement.getElementsByClassName("DynamicBubbleControlBarMiddleContent")[0].style.opacity = "0";
 
                 for (let index = 0; index < StartAtElement.getElementsByClassName("ControlBarButton").length; index++) {
                     let thisElement = StartAtElement.getElementsByClassName("ControlBarButton")[index];
@@ -1190,12 +1190,10 @@ async function CreateDynamicBubbles(BubbleType,Content){
     let newControlBar = document.createElement("div");
     newControlBar.classList.add("DynamicBubbleControlBar");
 
-    let newControlBarMiddleText = document.createElement("h1");
-    newControlBarMiddleText.classList.add("DynamicBubbleControlBarMiddleText");
+    let newControlBarMiddleContent = document.createElement("h1");
+    newControlBarMiddleContent.classList.add("DynamicBubbleControlBarMiddleContent");
 
-    newControlBarMiddleText.textContent = "´◡`";
-
-    newControlBar.appendChild(newControlBarMiddleText);
+    newControlBar.appendChild(newControlBarMiddleContent);
 
     let myIndex = DynamicBubbles.length;
 
@@ -1396,7 +1394,7 @@ function PullUpMainBubble(MainIndex){
 
     ClickOnBubble.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "auto";
 
-    ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarMiddleText")[0].style.opacity = "1";
+    ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarMiddleContent")[0].style.opacity = "1";
 
 
     setTimeout(async function(){
