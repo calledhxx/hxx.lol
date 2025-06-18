@@ -728,8 +728,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }else if(FinalInfo.ControlBar && !Controlling && PullUpInfo.MainPullUpIndex !== false){
             mouseOnControlBars[mouseOnControlBars.length] = StartAtElement = FinalInfo.ControlBar;
 
-            FinalInfo.ControlBar.style.width = "34px";
-            FinalInfo.ControlBar.style.height = "34px";
+            FinalInfo.ControlBar.style.width =
+                FinalInfo.ControlBar.style.height =
+                    "34px";
 
             Controlling = true;
         }
@@ -912,8 +913,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
 
                 await sleep(10);
-                mouseOnControlBars[i].style.width = "28px"
-                mouseOnControlBars[i].style.height = "28px"
+
+                mouseOnControlBars[i].style.width =
+                    mouseOnControlBars[i].style.height =
+                        "28px";
 
 
                 mouseOnControlBars[i] = null;
@@ -969,8 +972,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             moving(xMoved, yMoved);
         }else if (Controlling){
-            if(y - yStartScreen >= 100){
-                if(ControlBarIsDraw === false){
+            if(ControlBarIsDraw === false){
+                if(y - yStartScreen >= 100){
                     StartAtElement.style.width = "120px";
                     StartAtElement.style.height = `${ControlButtons.length*50}px`;
 
@@ -980,8 +983,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         await sleep(20)
                         StartAtElement.getElementsByTagName("div")[index].style.opacity = "1";
                     }
+                }else{
+                    StartAtElement.style.width = StartAtElement.style.height =
+                        `${(y - yStartScreen > 0 ? (y - yStartScreen)*.2 : 0)+34}px`;
                 }
             }
+
 
             if(ControlBarIsDraw)
             {
