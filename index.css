@@ -556,7 +556,7 @@ body{
 
 ::-webkit-scrollbar-track {
     box-shadow: 0 0 2px rgba(223, 223, 223, 0.85);
-    background-color: rgba(234, 234, 234, 0.73);
+    background-color: rgba(225, 225, 225, 0.73);
 
     border-radius: 6px;
     backdrop-filter: blur(20px);
@@ -564,10 +564,10 @@ body{
 
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(244, 244, 244, 0.74);
+    background: rgba(200, 200, 200, 0.74);
     border-radius: 6px;
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 2px rgb(255, 255, 255);
+    box-shadow: 0 0 2px rgba(200, 200, 200, 0.74);
 
 
 }
@@ -575,5 +575,6 @@ body{
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.55);
+    box-shadow:  0 0 2px rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(20px);
 }
