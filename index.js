@@ -989,10 +989,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 for (let index = 0; index < StartAtElement.getElementsByTagName("div").length; index++) {
                     let DOMReat = StartAtElement.getElementsByTagName("div")[index].getBoundingClientRect();
 
-                    if(LeastPXToCursor===false) LeastPXToCursor = Math.abs(DOMReat.top-y);
+                    if(LeastPXToCursor===false) LeastPXToCursor = Math.abs(DOMReat.top + DOMReat.height/2 -y);
 
-                    if(LeastPXToCursor >= Math.abs(DOMReat.top-y)){
-                        LeastPXToCursor = Math.abs(DOMReat.top-y);
+                    if(LeastPXToCursor >= Math.abs(DOMReat.top + DOMReat.height/2-y)){
+                        LeastPXToCursor = Math.abs(DOMReat.top + DOMReat.height/2-y);
                         finalButton = StartAtElement.getElementsByTagName("div")[index];
                         LastSelectControlButtonIndex = index;
                     }
