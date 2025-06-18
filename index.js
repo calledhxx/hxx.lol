@@ -715,8 +715,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             yMoved = (-y +   yStartScreen)/3 + yLastMoved;
 
         } else if(FinalInfo.Bubble && !Pulling && PullUpInfo.MainPullUpIndex === false){
-            FinalInfo.Bubble.style.backgroundColor = "rgba(228, 228, 228, 0.8)";
-            FinalInfo.Bubble.style.borderColor = "rgba(207,207,207,0.7)";
+            FinalInfo.Bubble.style.backgroundColor = "rgba(228, 228, 228, .9)";
+            FinalInfo.Bubble.style.borderColor = "rgba(207,207,207,.9)";
             FinalInfo.Bubble.style.transform = "translateX(-50%) translateY(10px)";
 
             mouseOnBubbles[mouseOnBubbles.length] = StartAtElement = FinalInfo.Bubble;
@@ -948,8 +948,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         for (let i in mouseOnBubbles){
             if(!mouseOnBubbles[i]) continue;
 
-            mouseOnBubbles[i].style.backgroundColor = "rgba(228, 228, 228, 0.5)";
-            mouseOnBubbles[i].style.borderColor = "rgba(207, 207, 207, 0.4)";
+            mouseOnBubbles[i].style.backgroundColor = "rgba(228, 228, 228, 0.7)";
+            mouseOnBubbles[i].style.borderColor = "rgba(207, 207, 207, 0.7)";
             mouseOnBubbles[i].style.transform = "translateX(-50%) translateY(0)";
 
             mouseOnBubbles[i] = null;
