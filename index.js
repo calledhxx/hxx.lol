@@ -631,7 +631,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let ElementsWitchAtPoint = document.elementsFromPoint(x,y);
 
         for (let i = 0; i < ElementsWitchAtPoint.length; i++) {
-            console.log(ElementsWitchAtPoint[i]);
 
             let CheckButton = retIfParentMatch(ElementsWitchAtPoint[i],0,"button");
 
