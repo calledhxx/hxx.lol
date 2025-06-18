@@ -903,14 +903,16 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
 
 
+
         for (let i in mouseOnControlBars){
             if(!mouseOnControlBars[i]) continue;
 
             setTimeout(async function(){
-
-                for (let index = 0; index < StartAtElement.getElementsByTagName("div").length; index++) {
+                for (let index = 0; index < mouseOnControlBars[i].getElementsByTagName("div").length; index++) {
                     await sleep(20)
-                    StartAtElement.getElementsByTagName("div")[index].style.opacity = "0";
+
+                    if(!mouseOnControlBars[i]) return;
+                    mouseOnControlBars[i].getElementsByTagName("div")[index].style.opacity = "0";
                 }
 
                 await sleep(10);
@@ -925,6 +927,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
 
         ControlBarIsDraw = false;
+
 
         for (let i in mouseOnButtons){
             if(!mouseOnButtons[i]) continue;
@@ -1041,13 +1044,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     if(checkIfMobile()) {
         document.addEventListener("touchend", function (m ){
+            if(m.changedTouches.length > 1) return;
             endMove(m.changedTouches[0].clientX,m.changedTouches[0].clientY);
         })
         document.addEventListener("touchstart", function (m) {
+            if(m.touches.length > 1) return;
             startMove(m.touches[0].clientX,m.touches[0].clientY);
         });
         document.addEventListener("touchmove", function (m) {
-
+            if(m.touches.length > 1) return;
             fingerMoving(m.touches[0].clientX,m.touches[0].clientY);
         });
     }else {
