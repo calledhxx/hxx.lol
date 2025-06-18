@@ -631,6 +631,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let ElementsWitchAtPoint = document.elementsFromPoint(x,y);
 
         for (let i = 0; i < ElementsWitchAtPoint.length; i++) {
+            console.log(ElementsWitchAtPoint[i]);
+
             let CheckButton = retIfParentMatch(ElementsWitchAtPoint[i],0,"button");
 
             if(CheckButton.SearchTimes === 1) continue;
@@ -654,7 +656,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 break
             }
 
-            if(retIfParentMatch(ElementsWitchAtPoint[i],"box",0,true)) break;
+
+            if(retIfParentMatch(ElementsWitchAtPoint[i],"box",0,true).Parent) break;
         }
 
         if(!FinalInfo.Button && !FinalInfo.Bubble && !FinalInfo.Rotating && !FinalInfo.ControlBar)
