@@ -1041,7 +1041,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         // }
     }
 
-
     if(checkIfMobile()) {
         document.addEventListener("touchend", function (m ){
             if(m.changedTouches.length > 1) return;
