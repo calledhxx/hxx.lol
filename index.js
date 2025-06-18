@@ -597,6 +597,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     await sleep(120);
 
+    TweenUp(false);
+
     let xMoved = 0,yMoved = 0;
 
 
