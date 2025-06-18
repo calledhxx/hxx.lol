@@ -550,8 +550,6 @@ body{
 
 ::-webkit-scrollbar {
     width: 6px;
-    height: 6px;
-
 }
 
 ::-webkit-scrollbar-track {
@@ -560,15 +558,15 @@ body{
 
     border-radius: 6px;
     backdrop-filter: blur(20px);
+
 }
 
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(200, 200, 200, 0.74);
+    background: rgba(237, 237, 237, 0.74);
     border-radius: 6px;
     backdrop-filter: blur(20px);
     box-shadow: 0 0 2px rgba(200, 200, 200, 0.74);
-
 }
 
 
