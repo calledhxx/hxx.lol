@@ -993,7 +993,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     let tSlide = Math.sqrt(tX**2 + tY**2);
 
                     StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
-                        `translate(-50%,-50%) rotateZ(${-(Math.asin(tX/tSlide) * 180/Math.PI)*0.4}deg)`
+                        `translate(-50%,-50%) rotateZ(${-(Math.asin(tX/tSlide) * 180/Math.PI)*0.8}deg)`
                 }
             }
 
