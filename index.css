@@ -517,10 +517,11 @@ body{
     opacity: 0;
 
     border-radius: 100%;
-    background: rgba(120, 120, 120, 0.4);
+    background: rgb(186, 186, 186);
     box-shadow: 0 0 10px 10px rgba(227, 227, 227, 0.73);
     border: none;
 
+    overflow: visible;
 }
 
 .DynamicBubbleControlBar div{
@@ -543,6 +544,49 @@ body{
     text-shadow: 0 0 20px black;
 
     font-weight:bold;
+}
+
+.DynamicBubbleControlBarHandle{
+    position: absolute;
+    transform: translate(-50%,-50%) rotateZ(0deg);
+    left: 50%;
+    top: 50%;
+
+
+    width: 30px;
+    height:50px;
+
+    transition: all 230ms ease-out;
+
+}
+
+
+
+.DynamicBubbleControlBarHandle h2{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+
+}
+
+.DynamicBubbleControlBarHandleRope{
+    top: 25px;
+    width: 2px;
+    height: 18px;
+
+    background: rgb(186, 186, 186);
+
+
+}
+.DynamicBubbleControlBarHandleGrip{
+    top: 43px;
+    width: 30px;
+    height: 30px;
+
+
+    border-radius: 100%;
+    border: 3px solid rgb(186, 186, 186);
 }
 
 
