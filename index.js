@@ -12,7 +12,16 @@ function checkIfMobile() {
 };
 
 let buttons = [
-    null,
+    {
+        "Side": 1,
+        "Chunk": 1,
+        "Color":"#aa33d1",
+        "depth":24,
+        "Icon": "./img/IMG_0590.GIF",
+        "Name":"黃太妃",
+        "Tag":"Hxx",
+        "Page":"./page/Hxx.JSON"
+    },
     {
         "Side": 1,
         "Chunk": 4,
@@ -25,28 +34,11 @@ let buttons = [
     }
 ];
 
-if((new Date().getSeconds())%2)
-    buttons[0] =  {
-        "Side": 1,
-        "Chunk": 1,
-        "Color":"#d13333",
-        "depth":24,
-        "Icon": "./img/IMG_0537.GIF",
-        "Name":"黃太妃",
-        "Tag":"Hxx",
-        "Page":"./page/Hxx.JSON"
-    }
-else
-    buttons[0] =   {
-        "Side": 1,
-        "Chunk": 1,
-        "Color":"#aa33d1",
-        "depth":24,
-        "Icon": "./img/IMG_0590.GIF",
-        "Name":"黃太妃",
-        "Tag":"Hxx",
-        "Page":"./page/Hxx.JSON"
-    }
+if((new Date().getSeconds())%3) {
+    buttons[0].Color = "#d13333";
+    buttons[0].Icon = "./img/IMG_0537.GIF";
+}
+
 
 let ControlButtons = [
     {
