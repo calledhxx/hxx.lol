@@ -21,16 +21,6 @@ let buttons = [
         "Name":"黃太妃",
         "Tag":"Hxx",
         "Page":"./page/Hxx.JSON"
-    },
-    {
-        "Side": 1,
-        "Chunk": 4,
-        "Color":"#5175b3",
-        "depth":24,
-        "Icon": null,
-        "Name":"說明書",
-        "Tag":"Manual",
-        "Page":"./page/Manual.JSON"
     }
 ];
 
