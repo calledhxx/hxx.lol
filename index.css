@@ -438,8 +438,11 @@ body{
     padding-left: 20px;
     padding-right: 20px;
     width: calc(100% - 20px - 20px);
+    height: auto;
 
     text-shadow: rgba(255, 255, 255, 0.8) 0 0 30px;
+
+    margin-bottom: 10px;
 }
 
 .DynamicBubbleFrameTitle{
@@ -461,6 +464,31 @@ body{
     text-shadow: rgba(255, 255, 255, 0.8) 0 0 30px;
 
     font-weight:normal;
+}
+
+.DynamicBubbleFrameImageCase{
+    height: 400px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    overflow: hidden;
+}
+
+.DynamicBubbleFrameImage{
+    height: 300px;
+    width: auto;
+
+    padding: 10px 10px 80px 10px;
+    background: rgb(234, 234, 234);
+
+    margin: 10px 10px 10px 0;
+    box-shadow: 0 0 10px 10px rgba(110, 110, 110, 0.7);
+
+    position: absolute;
+    transform: translate(-50%,-50%) rotateZ(0deg);
 }
 
 
@@ -557,7 +585,6 @@ body{
     height:50px;
 
     transition: all 120ms ease-out;
-
 }
 
 
@@ -594,6 +621,7 @@ body{
 
 ::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
