@@ -1189,6 +1189,50 @@ function resetPullUpInfo(){
     PullUpInfo.PullUpType = 0;
 }
 
+async function TidyUpImages(ImagesCase){
+    for(let i = 0;i < ImagesCase.children.length; i++){
+        let img = ImagesCase.children[i];
+
+        switch (i){
+            case 0:{
+                img.style.left = "50%";
+                img.style.top = "50%";
+                img.style.transform = "translate(-50%,-50%) rotateZ(0deg)";
+                img.style.height = "250px";
+                img.style.zIndex = "3";
+                img.style.opacity = "1";
+
+                break;
+            }
+            case 1:{
+                img.style.left = "calc(50% + 8%)";
+                img.style.top = "50%";
+                img.style.transform = "translate(-50%,-50%) rotateZ(12deg)";
+                img.style.height = "210px";
+                img.style.zIndex = "2";
+                img.style.opacity = "1";
+
+                break;
+            }
+
+            case 2:{
+                img.style.left = "calc(50% - 8%)";
+                img.style.top = "50%";
+                img.style.transform = "translate(-50%,-50%) rotateZ(-12deg)";
+                img.style.height = "170px";
+                img.style.zIndex = "1";
+                img.style.opacity = "1";
+
+                break;
+            }
+
+            default:{
+                img.style.opacity = "0";
+            }
+        }
+    }
+}
+
 async function CreateDynamicBubbles(BubbleType,Content){
     resetPullUpInfo();
 
@@ -1280,6 +1324,23 @@ async function CreateDynamicBubbles(BubbleType,Content){
                     newDOM = document.createElement("h6");
                     newDOM.classList.add("DynamicBubbleFrameContent");
                     newDOM.innerText = Content[SectionIndex][index];
+                    break;
+                }
+
+                case"Images":{
+                    newDOM = document.createElement("div");
+                    newDOM.classList.add("DynamicBubbleFrameImageCase");
+
+                    for (let image in Content[SectionIndex][index]) {
+                        let newImage = document.createElement("img");
+                        newImage.classList.add("DynamicBubbleFrameImage");
+                        newImage.src = Content[SectionIndex][index][image];
+
+                        newDOM.appendChild(newImage);
+                    }
+
+                    TidyUpImages(newDOM);
+
                     break;
                 }
 
