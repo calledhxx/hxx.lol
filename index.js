@@ -914,6 +914,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     if(!mouseOnControlBars[i]) return;
                     mouseOnControlBars[i].getElementsByTagName("div")[index].style.opacity = "0";
                 }
+                mouseOnControlBars[i].style.transition = "";
 
                 await sleep(10);
 
@@ -921,6 +922,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     mouseOnControlBars[i].style.height =
                         "28px";
 
+
+
+                mouseOnControlBars[i].getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
+                    `translate(-50%,-50%) rotateZ(0deg)`
 
                 mouseOnControlBars[i] = null;
             },0)
@@ -934,6 +939,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             buttons[Number(mouseOnButtons[i].id)].depth = 24;
 
             mouseOnButtons[i].style.fontSize = "15px";
+
 
             mouseOnButtons[i] .getElementsByClassName("buttonBackSide")[0].style.boxShadow =
                 "black 0 0 10px 2px"
@@ -978,6 +984,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }else if (Controlling){
             if(ControlBarIsDraw === false){
                 if(y - yStartScreen >= 100){
+                    StartAtElement.style.transition = "";
+
+
                     StartAtElement.style.width = "120px";
                     StartAtElement.style.height = `${ControlButtons.length*50}px`;
 
@@ -988,14 +997,28 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         StartAtElement.getElementsByTagName("div")[index].style.opacity = "1";
                     }
                 }else{
+                    StartAtElement.style.transition = "none";
+
+
                     StartAtElement.style.width = StartAtElement.style.height =
                         `${(y - yStartScreen > 0 ? (y - yStartScreen)*.2 : 0)+34}px`;
+
+                    let MidRect = StartAtElement.getBoundingClientRect();
+
+                    let tX = x - (MidRect.left + MidRect.width/2);
+                    let tY = y - (MidRect.top + MidRect.height/2);
+
+                    let tSlide = Math.sqrt(tX**2 + tY**2);
+
+                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
+                        `translate(-50%,-50%) rotateZ(${-(Math.asin(tX/tSlide) * 180/Math.PI)}deg)`
                 }
             }
 
 
             if(ControlBarIsDraw)
             {
+
                 let LeastPXToCursor = false;
                 let finalButton = false;
 
@@ -1243,6 +1266,19 @@ async function CreateDynamicBubbles(BubbleType,Content){
         }
     }
 
+    let newControlBarHandle = document.createElement("h2");
+    newControlBarHandle.classList.add("DynamicBubbleControlBarHandle");
+
+    let newControlBarHandleRope = document.createElement("h2");
+    newControlBarHandleRope.classList.add("DynamicBubbleControlBarHandleRope");
+    newControlBarHandle.appendChild(newControlBarHandleRope);
+
+    let newControlBarHandleGrip = document.createElement("h2");
+    newControlBarHandleGrip.classList.add("DynamicBubbleControlBarHandleGrip");
+    newControlBarHandle.appendChild(newControlBarHandleGrip);
+
+    newControlBarMiddleContent.appendChild(newControlBarHandle);
+
     for(let SectionIndex = 0;SectionIndex<Content.length; SectionIndex++){
         let newSection = document.createElement("div");
         newSection.classList.add("DynamicBubbleFrameSection");
@@ -1417,6 +1453,19 @@ function PullUpMainBubble(MainIndex){
         await sleep(120);
         ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "1";
 
+
+        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
+            `translate(-50%,-50%) rotateZ(19deg)`;
+
+        await sleep(120);
+
+        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
+            `translate(-50%,-50%) rotateZ(-12deg)`;
+
+        await sleep(120);
+
+        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
+            `translate(-50%,-50%) rotateZ(0deg)`;
     },110)
 
 
@@ -1447,8 +1496,9 @@ async function ClearBubble(MainIndex){
         toDel.style.minHeight = "0";
         await sleep(210);
         toDel.remove();
-
     },120);
+
+
 
     resetPullUpInfo();
     await TidyUpDynamicBubbles();
