@@ -1354,7 +1354,7 @@ async function CreateDynamicBubbles(BubbleType,Content){
 
                         let newAlbumInfo = document.createElement("h4");
                         newAlbumInfo.classList.add("DynamicBubbleFrameAlbumInfo");
-                        newAlbumInfo.textContent = `照片來自 ${Content[SectionIndex][index].AlbumName} 專輯`
+                        newAlbumInfo.textContent = `影像內容來自${Content[SectionIndex][index].AlbumName}專輯。影像所有權不包括至此。`
 
                         newAlbumContent.appendChild(newAlbumInfo);
 

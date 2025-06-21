@@ -481,7 +481,7 @@ body{
     height: auto;
     width: 230px;
     background: rgb(234, 234, 234);
-    box-shadow: 0 0 10px 10px rgba(110, 110, 110, 0.7);
+    box-shadow: 0 0 20px 3px rgba(135, 135, 135, 0.7);
     transform: translate(-50%,-50%) rotateZ(0deg);
     position: absolute;
     padding: 10px;
@@ -501,6 +501,7 @@ body{
 
 .DynamicBubbleFrameImageContentCase{
     display: flex;
+    flex-direction: column;
 
     width: 100%;
     height: auto;
@@ -508,44 +509,13 @@ body{
     margin-top: 10px;
 }
 
-.DynamicBubbleFrameAlbumContent{
-    width: 60px;
 
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.DynamicBubbleFrameAlbumContent *{
-    width: calc(100% - 5px);
-}
-
-.DynamicBubbleFrameAlbumImage{
-    height: auto;
-    border-radius: 20px;
-}
-
-.DynamicBubbleFrameAlbumInfo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    text-align: center;
-
-    font-size: 14px;
-    color: #474747;
-    font-weight: normal;
-
+.DynamicBubbleFrameImageContent{
+    width: 100%;
     margin-top: 10px;
 }
 
-.DynamicBubbleFrameImageContent{
-    width: calc(100% - 60px);
-}
-
 .DynamicBubbleFrameImageContent *{
-    margin-left: 10px;
-    margin-right: 10px;
 
     display: flex;
     justify-content: left;
@@ -566,6 +536,42 @@ body{
     font-weight: normal;
     font-size: 14px;
 }
+
+.DynamicBubbleFrameAlbumContent{
+    width: 100%;
+    height: auto;
+    display: flex;
+
+    background: #232323;
+}
+
+.DynamicBubbleFrameAlbumContent *{
+    height: auto;
+}
+
+.DynamicBubbleFrameAlbumImage{
+    height: 60px;
+    width: 60px;
+
+    margin: 10px;
+    border-radius: 20px;
+    box-shadow: 0 0 100px 1px rgba(255, 255, 255, 0.8);
+}
+
+.DynamicBubbleFrameAlbumInfo{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    font-size: 14px;
+    color: #bcbcbc;
+    font-weight: normal;
+
+    margin-left: 10px;
+    margin-right: 10px;
+    width: calc(100% - 60px);
+}
+
 
 
 .NotificationBubble{
