@@ -513,6 +513,8 @@ body{
 .DynamicBubbleFrameImageContent{
     width: 100%;
     margin-top: 10px;
+
+    background: #dcdcdc;
 }
 
 .DynamicBubbleFrameImageContent *{
@@ -522,6 +524,8 @@ body{
     align-items: start;
     flex-wrap: wrap;
 
+    margin: 10px;
+
     width:calc(100% - 10px);
 }
 
@@ -529,12 +533,17 @@ body{
     color: #272727;
     font-weight: bold;
     font-size: 20px;
+
+    margin-bottom: 0;
+
 }
 
 .DynamicBubbleFrameImageDescription{
     color: #505050;
     font-weight: normal;
     font-size: 14px;
+
+    margin-top: 2px;
 }
 
 .DynamicBubbleFrameAlbumContent{
