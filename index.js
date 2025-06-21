@@ -588,12 +588,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     TweenUp(false);
 
-    let xMoved = 0,yMoved = 0;
-    let CardXMoved = 0,CardYMoved = 0;
-
-
-    CubeInfo.LastXMoved = xMoved =  -375;
-    CubeInfo.LastYMoved = yMoved = -10;
+    CubeInfo.LastXMoved = CubeInfo.XMoved =  -375;
+    CubeInfo.LastYMoved = CubeInfo.YMoved = -10;
 
     await CreateDynamicBubbles("Notification",[
         {
@@ -706,13 +702,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
             Holding = true;
 
             if(inCardRotating){
-                CardXMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
-                CardYMoved = (y - yStartScreen)/ToStableValue + CardInfo.LastYMoved;
+                CardInfo.XMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
+                CardInfo.YMoved = (y - yStartScreen)/ToStableValue + CardInfo.LastYMoved;
             }else{
                 TweenUp(false);
 
-                xMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
-                yMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
+                CubeInfo.XMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
+                CubeInfo.YMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
             }
 
         } else if(FinalInfo.Bubble && !Pulling && PullUpInfo.MainPullUpIndex === false){
@@ -753,11 +749,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let totalMs = Date.now() - startAt;
 
             if(inCardRotating){
-                let toX =(CardXMoved - CardInfo.LastXMoved)/(totalMs/200);
-                let toY = (CardYMoved - CardInfo.LastYMoved)/(totalMs/200);
+                let toX =(CardInfo.XMoved - CardInfo.LastXMoved)/(totalMs/200);
+                let toY = (CardInfo.YMoved - CardInfo.LastYMoved)/(totalMs/200);
 
-                let dbX = (CardXMoved - CardInfo.LastXMoved) > 0;
-                let dbY = (CardYMoved - CardInfo.LastYMoved) > 0;
+                let dbX = (CardInfo.XMoved - CardInfo.LastXMoved) > 0;
+                let dbY = (CardInfo.YMoved - CardInfo.LastYMoved) > 0;
 
                 if(lastDbX===dbX && lastToX !== 0 && Math.abs(lastToX) < Math.abs(toX)) toX += lastToX;
                 if(lastDbY===dbY && lastToY !==0 && Math.abs(lastToY) < Math.abs(toY)) toY+=lastToY;
@@ -768,10 +764,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 lastDbX = dbX;
                 lastDbY = dbY;
 
-                CardInfo.LastXMoved = CardXMoved;
-                CardInfo.LastYMoved = CardYMoved;
+                CardInfo.LastXMoved = CardInfo.XMoved;
+                CardInfo.LastYMoved = CardInfo.YMoved;
 
-                cardMoving(CardXMoved,CardYMoved);
+                cardMoving(CardInfo.XMoved,CardInfo.YMoved);
 
                 for (let index = 0;;index++){
 
@@ -784,19 +780,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         Holding || Pushing
                     ) break;
 
-                    await cardMoving(CardXMoved+toX/50,CardYMoved+toY/50);
+                    await cardMoving(CardInfo.XMoved+toX/50,CardInfo.YMoved+toY/50);
 
-                    CardInfo.LastXMoved = CardXMoved = CardXMoved+toX/50;
-                    CardInfo.LastYMoved = CardYMoved = CardYMoved+toY/50;
+                    CardInfo.LastXMoved = CardInfo.XMoved = CardInfo.XMoved+toX/50;
+                    CardInfo.LastYMoved = CardInfo.YMoved = CardInfo.YMoved+toY/50;
 
                     await sleep(1);
                 }
             }else{
-                let toX =(xMoved - CubeInfo.LastXMoved)/(totalMs/200);
-                let toY = (yMoved - CubeInfo.LastYMoved)/(totalMs/200);
+                let toX =(CubeInfo.XMoved - CubeInfo.LastXMoved)/(totalMs/200);
+                let toY = (CubeInfo.YMoved - CubeInfo.LastYMoved)/(totalMs/200);
 
-                let dbX = (xMoved - CubeInfo.LastXMoved) > 0;
-                let dbY = (yMoved - CubeInfo.LastYMoved) > 0;
+                let dbX = (CubeInfo.XMoved - CubeInfo.LastXMoved) > 0;
+                let dbY = (CubeInfo.YMoved - CubeInfo.LastYMoved) > 0;
 
                 if(lastDbX===dbX && lastToX !== 0 && Math.abs(lastToX) < Math.abs(toX)) toX += lastToX;
                 if(lastDbY===dbY && lastToY !==0 && Math.abs(lastToY) < Math.abs(toY)) toY+=lastToY;
@@ -807,10 +803,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 lastDbX = dbX;
                 lastDbY = dbY;
 
-                CubeInfo.LastXMoved = xMoved;
-                CubeInfo.LastYMoved = yMoved;
+                CubeInfo.LastXMoved = CubeInfo.XMoved;
+                CubeInfo.LastYMoved = CubeInfo.YMoved;
 
-                moving(xMoved,yMoved);
+                moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
                 for (let index = 0;;index++){
 
@@ -823,10 +819,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         Holding || Pushing
                     ) break;
 
-                    await moving(xMoved+toX/50,yMoved+toY/50);
+                    await moving(CubeInfo.XMoved+toX/50,CubeInfo.YMoved+toY/50);
 
-                    CubeInfo.LastXMoved = xMoved = xMoved+toX/50;
-                    CubeInfo.LastYMoved = yMoved = yMoved+toY/50;
+                    CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved+toX/50;
+                    CubeInfo.LastYMoved = CubeInfo.YMoved = CubeInfo.YMoved+toY/50;
 
                     await sleep(1);
                 }
@@ -1011,15 +1007,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let fingerMoving = async function(x,y){
         if(Holding){
             if(inCardRotating){
-                CardXMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
-                CardYMoved = (-y + yStartScreen)/ToStableValue +  CardInfo.LastYMoved;
+                CardInfo.XMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
+                CardInfo.YMoved = (-y + yStartScreen)/ToStableValue +  CardInfo.LastYMoved;
 
-                cardMoving(xMoved, yMoved);
+                cardMoving(CubeInfo.XMoved, CubeInfo.YMoved);
             }else{
-                xMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
-                yMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
+                CubeInfo.XMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
+                CubeInfo.YMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
 
-                moving(xMoved, yMoved);
+                moving(CubeInfo.XMoved, CubeInfo.YMoved);
             }
 
         }else if (Controlling){
