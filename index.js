@@ -123,9 +123,23 @@ let PullUpInfo = {
     "MainPullUpIndex": false,
 };
 
-document.addEventListener("DOMContentLoaded",  async function () {
+let CubeInfo = {
+    "XMoved":0,
+    "YMoved":0,
+    "LastXMoved":0,
+    "LastYMoved":0,
+}
 
-    let xLastMoved = 0,yLastMoved = 0;
+let CardInfo = {
+    "XMoved":0,
+    "YMoved":0,
+    "LastXMoved":0,
+    "LastYMoved":0,
+    "CardElement":false
+}
+
+
+document.addEventListener("DOMContentLoaded",  async function () {
 
     let xStartScreen = 0,yStartScreen = 0;
 
@@ -134,6 +148,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let Pulling = 0;
     let Controlling = 0;
 
+    let inCardRotating = false;
 
     let buttonElements = [];
 
@@ -262,15 +277,16 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
     }
 
-    function moving(xMoved, yMoved) {
-        let x360Moved = (xMoved%360);
-        let y360Moved = (yMoved%360);
+
+    function moving(x, y) {
+        let x360Moved = (x%360);
+        let y360Moved = (y%360);
 
         let toFZDeg = (Math.abs(x360Moved)>180) ? 180-(Math.abs(x360Moved)-180) : Math.abs(x360Moved);
         let toFXDeg =
-            (Math.abs((xMoved-90)%360)>180) ? 180-(Math.abs((xMoved-90)%360)-180) : Math.abs((xMoved-90)%360);
+            (Math.abs((x-90)%360)>180) ? 180-(Math.abs((x-90)%360)-180) : Math.abs((x-90)%360);
         let toFYDeg =
-            (Math.abs((yMoved-90)%360)>180) ? 180-(Math.abs((yMoved-90)%360)-180) : Math.abs((yMoved-90)%360);
+            (Math.abs((y-90)%360)>180) ? 180-(Math.abs((y-90)%360)-180) : Math.abs((y-90)%360);
         let YtoFXnFZDeg =
             (Math.abs(y360Moved)>180) ? 180-(Math.abs(y360Moved)-180) : Math.abs(y360Moved);
 
@@ -279,11 +295,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         document.getElementById("passZFront").style.transform =
-            `rotateX(${0+yMoved}deg) rotateY(${180+xMoved}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
+            `rotateX(${0+y}deg) rotateY(${180+x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
 
 
         document.getElementById("passZBack").style.transform =
-            `rotateX(${0+yMoved}deg) rotateY(${0+xMoved}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
+            `rotateX(${0+y}deg) rotateY(${0+x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
 
 
         if(
@@ -302,11 +318,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         document.getElementById("passXFront").style.transform =
-            `rotateX(${0+yMoved}deg) rotateY(${90+xMoved}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
+            `rotateX(${0+y}deg) rotateY(${90+x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
 
 
         document.getElementById("passXBack").style.transform =
-            `rotateX(${0+yMoved}deg) rotateY(${270+xMoved}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
+            `rotateX(${0+y}deg) rotateY(${270+x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
 
         if(
             YtoFXnFZDeg < 90 ? toFXDeg < 90 : toFXDeg > 90
@@ -324,12 +340,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         document.getElementById("passYFront").style.transform =
-            `rotateX(${90+yMoved}deg) rotateZ(${0-xMoved}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px`
+            `rotateX(${90+y}deg) rotateZ(${0-x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px`
 
 
 
         document.getElementById("passYBack").style.transform =
-            `rotateX(${270+yMoved}deg) rotateZ(${0+xMoved}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
+            `rotateX(${270+y}deg) rotateZ(${0+x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
 
         if(
             toFYDeg < 90
@@ -357,7 +373,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         //
 
 
-        let orgXMoved = xMoved,orgYMoved = yMoved;
+        let orgx = x,orgy = y;
 
         for (let i = 0; i<buttonElements.length;i++){
             let addX =  0,addY = 0,addZ = -110-(buttons[i].depth/2);
@@ -434,20 +450,20 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
             }
 
-            xMoved += addDegX;
-            yMoved += addDegY;
+            x += addDegX;
+            y += addDegY;
 
-            x360Moved = (xMoved%360);
-            y360Moved = (yMoved%360);
+            x360Moved = (x%360);
+            y360Moved = (y%360);
 
 
             toFZDeg = (Math.abs(x360Moved)>180) ? 180-(Math.abs(x360Moved)-180) : Math.abs(x360Moved);
 
 
             toFXDeg =
-                (Math.abs((xMoved-90)%360)>180) ? 180-(Math.abs((xMoved-90)%360)-180) : Math.abs((xMoved-90)%360);
+                (Math.abs((x-90)%360)>180) ? 180-(Math.abs((x-90)%360)-180) : Math.abs((x-90)%360);
             toFYDeg =
-                (Math.abs((yMoved-90)%360)>180) ? 180-(Math.abs((yMoved-90)%360)-180) : Math.abs((yMoved-90)%360);
+                (Math.abs((y-90)%360)>180) ? 180-(Math.abs((y-90)%360)-180) : Math.abs((y-90)%360);
             YtoFXnFZDeg =
                 (Math.abs(y360Moved)>180) ? 180-(Math.abs(y360Moved)-180) : Math.abs(y360Moved);
 
@@ -485,35 +501,21 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
             buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`
-                    : `rotateX(${String(yMoved)}deg) rotateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(-xMoved))}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`
+                buttons[i].Side < 5 ? `rotateX(${String(y)}deg) rotateY(${String(x)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`
+                    : `rotateX(${String(y)}deg) rotateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(-x))}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`
 
             buttonElements[i].getElementsByClassName("buttonBackSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${String(yMoved)}deg) rotateY(${String(xMoved+180)}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String(addZ+buttons[i].depth/2)}px)`
-                    : `rotateX(${String(yMoved+180)}deg) rotateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(xMoved+180))}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String((addZ+buttons[i].depth/2))}px)`
+                buttons[i].Side < 5 ? `rotateX(${String(y)}deg) rotateY(${String(x+180)}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String(addZ+buttons[i].depth/2)}px)`
+                    : `rotateX(${String(y+180)}deg) rotateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(x+180))}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String((addZ+buttons[i].depth/2))}px)`
             ;
-
-
-            // if(
-            //
-            //         YtoFXnFZDeg < 90 ? toFZDeg < 90 : toFZDeg > 90
-            //
-            // ){
-            //     buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.opacity = "1";
-            //     // document.getElementsByClassName("buttonBackSide")[0].style.opacity = "0";
-            // }else {
-            //     buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.opacity = "0";
-            //     // document.getElementsByClassName("buttonBackSide")[0].style.opacity = "1";
-            // }
-
             buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${yMoved}deg) rotateY(${xMoved+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+40)}px)`
-                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${(-xMoved-270)}deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${String(addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(addX+40)}px)`
+                buttons[i].Side < 5 ? `rotateX(${y}deg) rotateY(${x+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+40)}px)`
+                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${(-x-270)}deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${String(addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(addX+40)}px)`
 
 
             buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.transform =
-                buttons[i].Side < 5  ? `rotateX(${yMoved}deg) rotateY(${xMoved-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + 40)}px)`
-                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${-xMoved-90 }deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(-addX + 40 )}px)`;
+                buttons[i].Side < 5  ? `rotateX(${y}deg) rotateY(${x-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + 40)}px)`
+                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x-90 }deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(-addX + 40 )}px)`;
 
 
             if(
@@ -530,12 +532,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
             buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${yMoved+90}deg) rotateZ(${-xMoved}deg) translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String(-addY+40)}px)`
-                    :`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved+90)}deg) rotateY(${-xMoved}deg)  translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(-addY+40))}px)`;
+                buttons[i].Side < 5 ? `rotateX(${y+90}deg) rotateZ(${-x}deg) translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String(-addY+40)}px)`
+                    :`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x}deg)  translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(-addY+40))}px)`;
 
             buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${yMoved-90}deg) rotateZ(${xMoved}deg) translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String(addY+40)}px)`
-                    :`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(yMoved-90)}deg) rotateY(${xMoved}deg)  translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(addY+40))}px)`;
+                buttons[i].Side < 5 ? `rotateX(${y-90}deg) rotateZ(${x}deg) translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String(addY+40)}px)`
+                    :`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y-90)}deg) rotateY(${x}deg)  translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(addY+40))}px)`;
 
             if(
                 buttons[i].Side < 5?
@@ -555,9 +557,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
 
-            xMoved = orgXMoved;
-            yMoved = orgYMoved;
+            x = orgx;
+            y = orgy;
         }
+    }
+
+
+    function cardMoving(x,y){
+
     }
 
 
@@ -582,10 +589,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
     TweenUp(false);
 
     let xMoved = 0,yMoved = 0;
+    let CardXMoved = 0,CardYMoved = 0;
 
 
-    xLastMoved = xMoved =  -375;
-    yLastMoved = yMoved = -10;
+    CubeInfo.LastXMoved = xMoved =  -375;
+    CubeInfo.LastYMoved = yMoved = -10;
 
     await CreateDynamicBubbles("Notification",[
         {
@@ -650,6 +658,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         return FinalInfo;
     }
 
+    let ToStableValue = checkIfMobile() ? 3 : 5;
+
 
     let startMove = async function (x,y)
     {
@@ -689,16 +699,21 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     FinalElement.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
                         FinalElement.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(FinalElement.id)].depth)+"px";
 
-            moving(xLastMoved,yLastMoved);
+            moving(CubeInfo.LastXMoved,CubeInfo.LastYMoved);
 
 
         }else if(!Holding  && !Pushing && !Pulling && !Controlling &&  FinalInfo.Rotating){
             Holding = true;
 
-            TweenUp(false);
+            if(inCardRotating){
+                CardXMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
+                CardYMoved = (y - yStartScreen)/ToStableValue + CardInfo.LastYMoved;
+            }else{
+                TweenUp(false);
 
-            xMoved = (x - xStartScreen)/3 + xLastMoved;
-            yMoved = (-y +   yStartScreen)/3 + yLastMoved;
+                xMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
+                yMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
+            }
 
         } else if(FinalInfo.Bubble && !Pulling && PullUpInfo.MainPullUpIndex === false){
             FinalInfo.Bubble.style.backgroundColor = "rgba(228, 228, 228, .9)";
@@ -732,53 +747,90 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let endMove = async function (x,y){
         let FinalInfo = getFinalElementWitchAtPoint(x,y);
 
-
         if(Holding){
             Holding = false;
 
             let totalMs = Date.now() - startAt;
 
+            if(inCardRotating){
+                let toX =(CardXMoved - CardInfo.LastXMoved)/(totalMs/200);
+                let toY = (CardYMoved - CardInfo.LastYMoved)/(totalMs/200);
 
-            let toX =(xMoved - xLastMoved)/(totalMs/200);
-            let toY = (yMoved - yLastMoved)/(totalMs/200);
+                let dbX = (CardXMoved - CardInfo.LastXMoved) > 0;
+                let dbY = (CardYMoved - CardInfo.LastYMoved) > 0;
 
-            let dbX = (xMoved - xLastMoved) > 0;
-            let dbY = (yMoved - yLastMoved) > 0;
+                if(lastDbX===dbX && lastToX !== 0 && Math.abs(lastToX) < Math.abs(toX)) toX += lastToX;
+                if(lastDbY===dbY && lastToY !==0 && Math.abs(lastToY) < Math.abs(toY)) toY+=lastToY;
 
-            if(lastDbX===dbX && lastToX !== 0 && Math.abs(lastToX) < Math.abs(toX)) toX += lastToX;
-            if(lastDbY===dbY && lastToY !==0 && Math.abs(lastToY) < Math.abs(toY)) toY+=lastToY;
+                lastToX = toX;
+                lastToY = toY;
 
-            lastToX = toX;
-            lastToY = toY;
+                lastDbX = dbX;
+                lastDbY = dbY;
 
-            lastDbX = dbX;
-            lastDbY = dbY;
+                CardInfo.LastXMoved = CardXMoved;
+                CardInfo.LastYMoved = CardYMoved;
 
-            xLastMoved = xMoved;
-            yLastMoved = yMoved;
+                cardMoving(CardXMoved,CardYMoved);
 
-            moving(xMoved,yMoved);
+                for (let index = 0;;index++){
 
-            for (let index = 0;;index++){
-
-                if(dbX ? toX > 0 : toX < 0) toX= dbX ? toX-2 : toX+2; else toX = 0;
-                if(dbY ? toY > 0 : toY < 0)  toY= dbY ? toY-2 : toY+2; else toY = 0;
+                    if(dbX ? toX > 0 : toX < 0) toX= dbX ? toX-2 : toX+2; else toX = 0;
+                    if(dbY ? toY > 0 : toY < 0)  toY= dbY ? toY-2 : toY+2; else toY = 0;
 
 
-                if(
-                    ((dbX ? toX <= 0 : toX >= 0) && (dbY ? toY <= 0 : toY >= 0)) ||
-                    Holding || Pushing
-                ) break;
+                    if(
+                        ((dbX ? toX <= 0 : toX >= 0) && (dbY ? toY <= 0 : toY >= 0)) ||
+                        Holding || Pushing
+                    ) break;
 
-                await moving(xMoved+toX/50,yMoved+toY/50);
+                    await cardMoving(CardXMoved+toX/50,CardYMoved+toY/50);
 
-                xLastMoved = xMoved = xMoved+toX/50;
-                yLastMoved = yMoved = yMoved+toY/50;
+                    CardInfo.LastXMoved = CardXMoved = CardXMoved+toX/50;
+                    CardInfo.LastYMoved = CardYMoved = CardYMoved+toY/50;
 
-                await sleep(1);
+                    await sleep(1);
+                }
+            }else{
+                let toX =(xMoved - CubeInfo.LastXMoved)/(totalMs/200);
+                let toY = (yMoved - CubeInfo.LastYMoved)/(totalMs/200);
+
+                let dbX = (xMoved - CubeInfo.LastXMoved) > 0;
+                let dbY = (yMoved - CubeInfo.LastYMoved) > 0;
+
+                if(lastDbX===dbX && lastToX !== 0 && Math.abs(lastToX) < Math.abs(toX)) toX += lastToX;
+                if(lastDbY===dbY && lastToY !==0 && Math.abs(lastToY) < Math.abs(toY)) toY+=lastToY;
+
+                lastToX = toX;
+                lastToY = toY;
+
+                lastDbX = dbX;
+                lastDbY = dbY;
+
+                CubeInfo.LastXMoved = xMoved;
+                CubeInfo.LastYMoved = yMoved;
+
+                moving(xMoved,yMoved);
+
+                for (let index = 0;;index++){
+
+                    if(dbX ? toX > 0 : toX < 0) toX= dbX ? toX-2 : toX+2; else toX = 0;
+                    if(dbY ? toY > 0 : toY < 0)  toY= dbY ? toY-2 : toY+2; else toY = 0;
+
+
+                    if(
+                        ((dbX ? toX <= 0 : toX >= 0) && (dbY ? toY <= 0 : toY >= 0)) ||
+                        Holding || Pushing
+                    ) break;
+
+                    await moving(xMoved+toX/50,yMoved+toY/50);
+
+                    CubeInfo.LastXMoved = xMoved = xMoved+toX/50;
+                    CubeInfo.LastYMoved = yMoved = yMoved+toY/50;
+
+                    await sleep(1);
+                }
             }
-
-
         }else if(Pushing){
             Pushing = false;
 
@@ -931,7 +983,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     mouseOnButtons[i] .getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
                         mouseOnButtons[i] .getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(mouseOnButtons[i] .id)].depth)+"px";
 
-            moving(xLastMoved,yLastMoved);
+            moving(CubeInfo.LastXMoved,CubeInfo.LastYMoved);
 
             await sleep(100);
 
@@ -954,15 +1006,22 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
     }
 
-    let ToStableValue = checkIfMobile() ? 3 : 5;
 
 
     let fingerMoving = async function(x,y){
         if(Holding){
-            xMoved = (x - xStartScreen)/ToStableValue + xLastMoved;
-            yMoved = (-y +   yStartScreen)/ToStableValue + yLastMoved;
+            if(inCardRotating){
+                CardXMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
+                CardYMoved = (-y + yStartScreen)/ToStableValue +  CardInfo.LastYMoved;
 
-            moving(xMoved, yMoved);
+                cardMoving(xMoved, yMoved);
+            }else{
+                xMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
+                yMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
+
+                moving(xMoved, yMoved);
+            }
+
         }else if (Controlling){
             if(ControlBarIsDraw === false){
                 if(y - yStartScreen >= 100){
@@ -1035,15 +1094,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }
 
-        // else if(!Pushing && Pulling){
-        //     if(StartAtElement === DynamicBubbles[PullUpInfo.MainPullUpIndex] && StartAtElement){
-        //         if(yStartScreen - y  >= 100)
-        //             StartAtElement.style.top = "-100px";
-        //         else
-        //             StartAtElement.style.top = "0px"
-        //
-        //     }
-        // }
     }
 
     if(checkIfMobile()) {
@@ -1059,7 +1109,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(m.touches.length > 1) return;
             fingerMoving(m.touches[0].clientX,m.touches[0].clientY);
         });
-    }else {
+    }
+    else {
         document.addEventListener("mouseup", function (m ){
             endMove(m.clientX,m.clientY);
         });
@@ -1118,8 +1169,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
 
     }
-
-
 });
 
 let DynamicBubbles = [];
@@ -1193,35 +1242,7 @@ async function TidyUpImages(ImagesCase){
     for(let i = 0;i < ImagesCase.children.length; i++){
         let img = ImagesCase.children[i];
 
-        switch (i){
-            case 0:{
-                img.style.transform = "translate(-50%,-50%) rotateZ(0deg)";
-                img.style.zIndex = "3";
-                img.style.opacity = "1";
 
-                break;
-            }
-            case 1:{
-                img.style.transform = "translate(-50%,-50%) rotateZ(12deg)";
-                img.style.zIndex = "2";
-                img.style.opacity = "1";
-
-                break;
-            }
-
-            case 2:{
-                img.style.transform = "translate(-50%,-50%) rotateZ(-12deg)";
-                img.style.zIndex = "1";
-                img.style.opacity = "1";
-
-
-                break;
-            }
-
-            default:{
-                img.style.opacity = "0";
-            }
-        }
     }
 }
 
@@ -1327,53 +1348,67 @@ async function CreateDynamicBubbles(BubbleType,Content){
                         let newCarrier = document.createElement("div");
                         newCarrier.classList.add("DynamicBubbleFrameImageCarrier");
 
+                        CardElement = newCarrier;
+
                         newDOM.appendChild(newCarrier);
 
+                        let newFrontSide = document.createElement("div");
+                        newFrontSide.classList.add("DynamicBubbleFrameImageCarrierFrontSide");
+                        newCarrier.appendChild(newFrontSide);
 
-                        let newImage = document.createElement("img");
-                        newImage.classList.add("DynamicBubbleFrameImage");
-                        newImage.src = Content[SectionIndex][index].Images[image].Image;
+                        {
+                            let newImage = document.createElement("img");
+                            newImage.classList.add("DynamicBubbleFrameImage");
+                            newImage.src = Content[SectionIndex][index].Images[image].Image;
 
-                        newCarrier.appendChild(newImage);
+                            newFrontSide.appendChild(newImage);
+                        }
 
-                        let newContentCase = document.createElement("div");
-                        newContentCase.classList.add("DynamicBubbleFrameImageContentCase");
+                        let newBackSide = document.createElement("div");
+                        newBackSide.classList.add("DynamicBubbleFrameImageCarrierBackSide");
+                        newCarrier.appendChild(newBackSide);
 
-                        newCarrier.appendChild(newContentCase);
+                        {
+                            let newContentCase = document.createElement("div");
+                            newContentCase.classList.add("DynamicBubbleFrameImageContentCase");
 
-                        let newAlbumContent = document.createElement("div");
-                        newAlbumContent.classList.add("DynamicBubbleFrameAlbumContent");
+                            newBackSide.appendChild(newContentCase);
 
-                        newContentCase.appendChild(newAlbumContent);
+                            let newAlbumContent = document.createElement("div");
+                            newAlbumContent.classList.add("DynamicBubbleFrameAlbumContent");
 
-                        let newAlbumImage = document.createElement("img");
-                        newAlbumImage.classList.add("DynamicBubbleFrameAlbumImage");
-                        newAlbumImage.src = Content[SectionIndex][index].AlbumImage;
+                            newContentCase.appendChild(newAlbumContent);
 
-                        newAlbumContent.appendChild(newAlbumImage);
+                            let newAlbumImage = document.createElement("img");
+                            newAlbumImage.classList.add("DynamicBubbleFrameAlbumImage");
+                            newAlbumImage.src = Content[SectionIndex][index].AlbumImage;
 
-                        let newAlbumInfo = document.createElement("h4");
-                        newAlbumInfo.classList.add("DynamicBubbleFrameAlbumInfo");
-                        newAlbumInfo.textContent = `影像內容來自${Content[SectionIndex][index].AlbumName}專輯。影像所有權不包括至此。`
+                            newAlbumContent.appendChild(newAlbumImage);
 
-                        newAlbumContent.appendChild(newAlbumInfo);
+                            let newAlbumInfo = document.createElement("h4");
+                            newAlbumInfo.classList.add("DynamicBubbleFrameAlbumInfo");
+                            newAlbumInfo.textContent = `${Content[SectionIndex][index].AlbumName}專輯\n ${Content[SectionIndex][index].AlbumDescription}`
 
-                        let newImageContent = document.createElement("div");
-                        newImageContent.classList.add("DynamicBubbleFrameImageContent");
+                            newAlbumContent.appendChild(newAlbumInfo);
 
-                        newContentCase.appendChild(newImageContent);
+                            let newImageContent = document.createElement("div");
+                            newImageContent.classList.add("DynamicBubbleFrameImageContent");
 
-                        let newImageName = document.createElement("h4");
-                        newImageName.classList.add("DynamicBubbleFrameImageName");
-                        newImageName.textContent = Content[SectionIndex][index].Images[image].Name;
+                            newContentCase.appendChild(newImageContent);
 
-                        newImageContent.appendChild(newImageName);
 
-                        let newImageDescription = document.createElement("h5");
-                        newImageDescription.classList.add("DynamicBubbleFrameImageDescription");
-                        newImageDescription.textContent = Content[SectionIndex][index].Images[image].Description;
+                            let newImageName = document.createElement("h4");
+                            newImageName.classList.add("DynamicBubbleFrameImageName");
+                            newImageName.textContent = Content[SectionIndex][index].Images[image].Name;
 
-                        newImageContent.appendChild(newImageDescription);
+                            newImageContent.appendChild(newImageName);
+
+                            let newImageDescription = document.createElement("h5");
+                            newImageDescription.classList.add("DynamicBubbleFrameImageDescription");
+                            newImageDescription.textContent = Content[SectionIndex][index].Images[image].Description;
+
+                            newImageContent.appendChild(newImageDescription);
+                        }
                     }
 
                     await TidyUpImages(newDOM);
