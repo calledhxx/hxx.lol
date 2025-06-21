@@ -1195,20 +1195,14 @@ async function TidyUpImages(ImagesCase){
 
         switch (i){
             case 0:{
-                img.style.left = "50%";
-                img.style.top = "50%";
                 img.style.transform = "translate(-50%,-50%) rotateZ(0deg)";
-                img.style.height = "250px";
                 img.style.zIndex = "3";
                 img.style.opacity = "1";
 
                 break;
             }
             case 1:{
-                img.style.left = "calc(50% + 8%)";
-                img.style.top = "50%";
                 img.style.transform = "translate(-50%,-50%) rotateZ(12deg)";
-                img.style.height = "210px";
                 img.style.zIndex = "2";
                 img.style.opacity = "1";
 
@@ -1216,12 +1210,10 @@ async function TidyUpImages(ImagesCase){
             }
 
             case 2:{
-                img.style.left = "calc(50% - 8%)";
-                img.style.top = "50%";
                 img.style.transform = "translate(-50%,-50%) rotateZ(-12deg)";
-                img.style.height = "170px";
                 img.style.zIndex = "1";
                 img.style.opacity = "1";
+
 
                 break;
             }
@@ -1329,17 +1321,62 @@ async function CreateDynamicBubbles(BubbleType,Content){
 
                 case"Images":{
                     newDOM = document.createElement("div");
-                    newDOM.classList.add("DynamicBubbleFrameImageCase");
+                    newDOM.classList.add("DynamicBubbleFrameImageCarrierCase");
 
-                    for (let image in Content[SectionIndex][index]) {
+                    for (let image in Content[SectionIndex][index].Images) {
+                        let newCarrier = document.createElement("div");
+                        newCarrier.classList.add("DynamicBubbleFrameImageCarrier");
+
+                        newDOM.appendChild(newCarrier);
+
+
                         let newImage = document.createElement("img");
                         newImage.classList.add("DynamicBubbleFrameImage");
-                        newImage.src = Content[SectionIndex][index][image];
+                        newImage.src = Content[SectionIndex][index].Images[image].Image;
 
-                        newDOM.appendChild(newImage);
+                        newCarrier.appendChild(newImage);
+
+                        let newContentCase = document.createElement("div");
+                        newContentCase.classList.add("DynamicBubbleFrameImageContentCase");
+
+                        newCarrier.appendChild(newContentCase);
+
+                        let newAlbumContent = document.createElement("div");
+                        newAlbumContent.classList.add("DynamicBubbleFrameAlbumContent");
+
+                        newContentCase.appendChild(newAlbumContent);
+
+                        let newAlbumImage = document.createElement("img");
+                        newAlbumImage.classList.add("DynamicBubbleFrameAlbumImage");
+                        newAlbumImage.src = Content[SectionIndex][index].AlbumImage;
+
+                        newAlbumContent.appendChild(newAlbumImage);
+
+                        let newAlbumInfo = document.createElement("h4");
+                        newAlbumInfo.classList.add("DynamicBubbleFrameAlbumInfo");
+                        newAlbumInfo.textContent = `照片來自 ${Content[SectionIndex][index].AlbumName} 專輯`
+
+                        newAlbumContent.appendChild(newAlbumInfo);
+
+                        let newImageContent = document.createElement("div");
+                        newImageContent.classList.add("DynamicBubbleFrameImageContent");
+
+                        newContentCase.appendChild(newImageContent);
+
+                        let newImageName = document.createElement("h4");
+                        newImageName.classList.add("DynamicBubbleFrameImageName");
+                        newImageName.textContent = Content[SectionIndex][index].Images[image].Name;
+
+                        newImageContent.appendChild(newImageName);
+
+                        let newImageDescription = document.createElement("h5");
+                        newImageDescription.classList.add("DynamicBubbleFrameImageDescription");
+                        newImageDescription.textContent = Content[SectionIndex][index].Images[image].Description;
+
+                        newImageContent.appendChild(newImageDescription);
                     }
 
-                    TidyUpImages(newDOM);
+                    await TidyUpImages(newDOM);
 
                     break;
                 }

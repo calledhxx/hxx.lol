@@ -466,8 +466,8 @@ body{
     font-weight:normal;
 }
 
-.DynamicBubbleFrameImageCase{
-    height: 400px;
+.DynamicBubbleFrameImageCarrierCase{
+    height: 500px;
     width: 100%;
 
     display: flex;
@@ -477,18 +477,94 @@ body{
     overflow: hidden;
 }
 
-.DynamicBubbleFrameImage{
-    height: 300px;
-    width: auto;
-
-    padding: 10px 10px 80px 10px;
+.DynamicBubbleFrameImageCarrier{
+    height: auto;
+    width: 230px;
     background: rgb(234, 234, 234);
-
-    margin: 10px 10px 10px 0;
     box-shadow: 0 0 10px 10px rgba(110, 110, 110, 0.7);
-
-    position: absolute;
     transform: translate(-50%,-50%) rotateZ(0deg);
+    position: absolute;
+    padding: 10px;
+
+    left: 50%;
+    top: 50%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.DynamicBubbleFrameImage{
+    height: auto;
+    width: 100%;
+}
+
+.DynamicBubbleFrameImageContentCase{
+    display: flex;
+
+    width: 100%;
+    height: auto;
+
+    margin-top: 10px;
+}
+
+.DynamicBubbleFrameAlbumContent{
+    width: 60px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.DynamicBubbleFrameAlbumContent *{
+    width: calc(100% - 5px);
+}
+
+.DynamicBubbleFrameAlbumImage{
+    height: auto;
+    border-radius: 20px;
+}
+
+.DynamicBubbleFrameAlbumInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+
+    font-size: 14px;
+    color: #474747;
+    font-weight: normal;
+
+    margin-top: 10px;
+}
+
+.DynamicBubbleFrameImageContent{
+    width: calc(100% - 60px);
+}
+
+.DynamicBubbleFrameImageContent *{
+    margin-left: 10px;
+    margin-right: 10px;
+
+    display: flex;
+    justify-content: left;
+    align-items: start;
+    flex-wrap: wrap;
+
+    width:calc(100% - 10px);
+}
+
+.DynamicBubbleFrameImageName{
+    color: #272727;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.DynamicBubbleFrameImageDescription{
+    color: #505050;
+    font-weight: normal;
+    font-size: 14px;
 }
 
 
