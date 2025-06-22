@@ -147,8 +147,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let Pushing = 0;
     let Pulling = 0;
     let Controlling = 0;
-
-    let inCardRotating = false;
+    let Rotating = 0;
 
     let buttonElements = [];
 
@@ -564,7 +563,22 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
     function cardMoving(x,y){
+        let x360 = x%360;
+        let y360 = y%360;
 
+        let XtoFront = Math.abs(x360) > 180 ? 360 - Math.abs(x360) : Math.abs(x360);
+        let YtoFront = Math.abs(y360) > 180 ? 360 - Math.abs(y360) : Math.abs(y360);
+
+        if(YtoFront < 90 ? XtoFront < 90 : XtoFront > 90){
+            CardInfo.CardElement.getElementsByClassName("DynamicBubbleFrameImageCarrierFrontSide")[0].style.opacity = "1";
+            CardInfo.CardElement.getElementsByClassName("DynamicBubbleFrameImageCarrierBackSide")[0].style.opacity = "0";
+        }else{
+            CardInfo.CardElement.getElementsByClassName("DynamicBubbleFrameImageCarrierFrontSide")[0].style.opacity = "0";
+            CardInfo.CardElement.getElementsByClassName("DynamicBubbleFrameImageCarrierBackSide")[0].style.opacity = "1";
+        }
+
+            CardInfo.CardElement.style.transform =
+            `translate(-50%,-50%) rotateX(${y360}deg) rotateY(${x360}deg)`;
     }
 
 
@@ -605,7 +619,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let mouseOnBubbles = [];
     let mouseOnControlBars = [];
 
-
     let StartAtElement;
 
     function getFinalElementWitchAtPoint(x,y){
@@ -614,6 +627,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Bubble":0,
             "ControlBar":0,
             "Rotating":0,
+            "Image":0,
         };
 
         let ElementsWitchAtPoint = document.elementsFromPoint(x,y);
@@ -629,12 +643,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 break
             }
 
-            let ControlBar = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubbleControlBar");
+            let CheckImage = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubbleFrameImageCarrier");
+            if(CheckImage.Parent){
+                FinalInfo.Image = CheckImage.Parent;
+                break
+            }
 
+            let ControlBar = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubbleControlBar");
             if(ControlBar.Parent){
                 FinalInfo.ControlBar = ControlBar.Parent;
                 break
             }
+
+
 
             let CheckBubble = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubble");
 
@@ -647,7 +668,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(retIfParentMatch(ElementsWitchAtPoint[i],"box",0,true).Parent) break;
         }
 
-        if(!FinalInfo.Button && !FinalInfo.Bubble && !FinalInfo.Rotating && !FinalInfo.ControlBar)
+        if(
+            !FinalInfo.Button &&
+            !FinalInfo.Bubble &&
+            !FinalInfo.Rotating &&
+            !FinalInfo.Image &&
+            !FinalInfo.ControlBar
+        )
             FinalInfo.Rotating = true;
 
 
@@ -668,7 +695,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         startAt = Date.now();
 
-        if(FinalInfo.Button && !Pushing){
+        if(!Holding && !Pushing && !Pulling && !Controlling && !Rotating && FinalInfo.Rotating ){
+            Holding = true;
+            TweenUp(false);
+
+            CubeInfo.XMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
+            CubeInfo.YMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
+
+        }else if(FinalInfo.Button && !Pushing){
             let FinalElement = FinalInfo.Button;
 
             if(mouseOnButtons[FinalElement.id]) return;
@@ -698,19 +732,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             moving(CubeInfo.LastXMoved,CubeInfo.LastYMoved);
 
 
-        }else if(!Holding  && !Pushing && !Pulling && !Controlling &&  FinalInfo.Rotating){
-            Holding = true;
-
-            if(inCardRotating){
-                CardInfo.XMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
-                CardInfo.YMoved = (y - yStartScreen)/ToStableValue + CardInfo.LastYMoved;
-            }else{
-                TweenUp(false);
-
-                CubeInfo.XMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
-                CubeInfo.YMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
-            }
-
         } else if(FinalInfo.Bubble && !Pulling && PullUpInfo.MainPullUpIndex === false){
             FinalInfo.Bubble.style.backgroundColor = "rgba(228, 228, 228, .9)";
             FinalInfo.Bubble.style.borderColor = "rgba(207,207,207,.9)";
@@ -727,7 +748,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     "34px";
 
             Controlling = true;
+        }else if(FinalInfo.Image && !Rotating && !CardInfo.CardElement){
+            CardInfo.CardElement = FinalInfo.Image;
+            Rotating = true;
+
+            CardInfo.XMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
+            CardInfo.YMoved = (y - yStartScreen)/ToStableValue + CardInfo.LastYMoved;
         }
+
 
     }
 
@@ -748,85 +776,45 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             let totalMs = Date.now() - startAt;
 
-            if(inCardRotating){
-                let toX =(CardInfo.XMoved - CardInfo.LastXMoved)/(totalMs/200);
-                let toY = (CardInfo.YMoved - CardInfo.LastYMoved)/(totalMs/200);
+            let toX =(CubeInfo.XMoved - CubeInfo.LastXMoved)/(totalMs/200);
+            let toY = (CubeInfo.YMoved - CubeInfo.LastYMoved)/(totalMs/200);
 
-                let dbX = (CardInfo.XMoved - CardInfo.LastXMoved) > 0;
-                let dbY = (CardInfo.YMoved - CardInfo.LastYMoved) > 0;
+            let dbX = (CubeInfo.XMoved - CubeInfo.LastXMoved) > 0;
+            let dbY = (CubeInfo.YMoved - CubeInfo.LastYMoved) > 0;
 
-                if(lastDbX===dbX && lastToX !== 0 && Math.abs(lastToX) < Math.abs(toX)) toX += lastToX;
-                if(lastDbY===dbY && lastToY !==0 && Math.abs(lastToY) < Math.abs(toY)) toY+=lastToY;
+            if(lastDbX===dbX && lastToX !== 0 && Math.abs(lastToX) < Math.abs(toX)) toX += lastToX;
+            if(lastDbY===dbY && lastToY !==0 && Math.abs(lastToY) < Math.abs(toY)) toY+=lastToY;
 
-                lastToX = toX;
-                lastToY = toY;
+            lastToX = toX;
+            lastToY = toY;
 
-                lastDbX = dbX;
-                lastDbY = dbY;
+            lastDbX = dbX;
+            lastDbY = dbY;
 
-                CardInfo.LastXMoved = CardInfo.XMoved;
-                CardInfo.LastYMoved = CardInfo.YMoved;
+            CubeInfo.LastXMoved = CubeInfo.XMoved;
+            CubeInfo.LastYMoved = CubeInfo.YMoved;
 
-                cardMoving(CardInfo.XMoved,CardInfo.YMoved);
+            moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                for (let index = 0;;index++){
+            for (let index = 0;;index++){
 
-                    if(dbX ? toX > 0 : toX < 0) toX= dbX ? toX-2 : toX+2; else toX = 0;
-                    if(dbY ? toY > 0 : toY < 0)  toY= dbY ? toY-2 : toY+2; else toY = 0;
-
-
-                    if(
-                        ((dbX ? toX <= 0 : toX >= 0) && (dbY ? toY <= 0 : toY >= 0)) ||
-                        Holding || Pushing
-                    ) break;
-
-                    await cardMoving(CardInfo.XMoved+toX/50,CardInfo.YMoved+toY/50);
-
-                    CardInfo.LastXMoved = CardInfo.XMoved = CardInfo.XMoved+toX/50;
-                    CardInfo.LastYMoved = CardInfo.YMoved = CardInfo.YMoved+toY/50;
-
-                    await sleep(1);
-                }
-            }else{
-                let toX =(CubeInfo.XMoved - CubeInfo.LastXMoved)/(totalMs/200);
-                let toY = (CubeInfo.YMoved - CubeInfo.LastYMoved)/(totalMs/200);
-
-                let dbX = (CubeInfo.XMoved - CubeInfo.LastXMoved) > 0;
-                let dbY = (CubeInfo.YMoved - CubeInfo.LastYMoved) > 0;
-
-                if(lastDbX===dbX && lastToX !== 0 && Math.abs(lastToX) < Math.abs(toX)) toX += lastToX;
-                if(lastDbY===dbY && lastToY !==0 && Math.abs(lastToY) < Math.abs(toY)) toY+=lastToY;
-
-                lastToX = toX;
-                lastToY = toY;
-
-                lastDbX = dbX;
-                lastDbY = dbY;
-
-                CubeInfo.LastXMoved = CubeInfo.XMoved;
-                CubeInfo.LastYMoved = CubeInfo.YMoved;
-
-                moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-                for (let index = 0;;index++){
-
-                    if(dbX ? toX > 0 : toX < 0) toX= dbX ? toX-2 : toX+2; else toX = 0;
-                    if(dbY ? toY > 0 : toY < 0)  toY= dbY ? toY-2 : toY+2; else toY = 0;
+                if(dbX ? toX > 0 : toX < 0) toX= dbX ? toX-2 : toX+2; else toX = 0;
+                if(dbY ? toY > 0 : toY < 0)  toY= dbY ? toY-2 : toY+2; else toY = 0;
 
 
-                    if(
-                        ((dbX ? toX <= 0 : toX >= 0) && (dbY ? toY <= 0 : toY >= 0)) ||
-                        Holding || Pushing
-                    ) break;
+                if(
+                    ((dbX ? toX <= 0 : toX >= 0) && (dbY ? toY <= 0 : toY >= 0)) ||
+                    Holding || Pushing
+                ) break;
 
-                    await moving(CubeInfo.XMoved+toX/50,CubeInfo.YMoved+toY/50);
+                await moving(CubeInfo.XMoved+toX/50,CubeInfo.YMoved+toY/50);
 
-                    CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved+toX/50;
-                    CubeInfo.LastYMoved = CubeInfo.YMoved = CubeInfo.YMoved+toY/50;
+                CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved+toX/50;
+                CubeInfo.LastYMoved = CubeInfo.YMoved = CubeInfo.YMoved+toY/50;
 
-                    await sleep(1);
-                }
+                await sleep(1);
             }
+
         }else if(Pushing){
             Pushing = false;
 
@@ -930,6 +918,52 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 LastSelectControlButtonIndex = false;
             }
+        }else if(Rotating){
+            Rotating = false;
+
+
+            let totalMs = Date.now() - startAt;
+
+            let toX =(CardInfo.XMoved - CardInfo.LastXMoved)/(totalMs/200);
+            let toY = (CardInfo.YMoved - CardInfo.LastYMoved)/(totalMs/200);
+
+            let dbX = (CardInfo.XMoved - CardInfo.LastXMoved) > 0;
+            let dbY = (CardInfo.YMoved - CardInfo.LastYMoved) > 0;
+
+            if(lastDbX===dbX && lastToX !== 0 && Math.abs(lastToX) < Math.abs(toX)) toX += lastToX;
+            if(lastDbY===dbY && lastToY !==0 && Math.abs(lastToY) < Math.abs(toY)) toY+=lastToY;
+
+            lastToX = toX;
+            lastToY = toY;
+
+            lastDbX = dbX;
+            lastDbY = dbY;
+
+            CardInfo.LastXMoved = CardInfo.XMoved;
+            CardInfo.LastYMoved = CardInfo.YMoved;
+
+            cardMoving(CardInfo.XMoved,CardInfo.YMoved);
+
+            for (let index = 0;;index++){
+
+                if(dbX ? toX > 0 : toX < 0) toX= dbX ? toX-2 : toX+2; else toX = 0;
+                if(dbY ? toY > 0 : toY < 0)  toY= dbY ? toY-2 : toY+2; else toY = 0;
+
+
+                if(
+                    ((dbX ? toX <= 0 : toX >= 0) && (dbY ? toY <= 0 : toY >= 0)) ||
+                    Holding || Pushing
+                ) break;
+
+                await cardMoving(CardInfo.XMoved+toX/50,CardInfo.YMoved+toY/50);
+
+                CardInfo.LastXMoved = CardInfo.XMoved = CardInfo.XMoved+toX/50;
+                CardInfo.LastYMoved = CardInfo.YMoved = CardInfo.YMoved+toY/50;
+
+                await sleep(1);
+            }
+
+            CardInfo.CardElement = false;
         }
 
 
@@ -1006,18 +1040,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let fingerMoving = async function(x,y){
         if(Holding){
-            if(inCardRotating){
-                CardInfo.XMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
-                CardInfo.YMoved = (-y + yStartScreen)/ToStableValue +  CardInfo.LastYMoved;
+            CubeInfo.XMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
+            CubeInfo.YMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
 
-                cardMoving(CubeInfo.XMoved, CubeInfo.YMoved);
-            }else{
-                CubeInfo.XMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
-                CubeInfo.YMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
-
-                moving(CubeInfo.XMoved, CubeInfo.YMoved);
-            }
-
+            moving(CubeInfo.XMoved, CubeInfo.YMoved);
         }else if (Controlling){
             if(ControlBarIsDraw === false){
                 if(y - yStartScreen >= 100){
@@ -1088,6 +1114,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     }
                 }
             }
+        }else if(Rotating){
+            CardInfo.XMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
+            CardInfo.YMoved = (-y + yStartScreen)/ToStableValue +  CardInfo.LastYMoved;
+
+            cardMoving(CardInfo.XMoved, CardInfo.YMoved);
         }
 
     }
@@ -1344,8 +1375,6 @@ async function CreateDynamicBubbles(BubbleType,Content){
                         let newCarrier = document.createElement("div");
                         newCarrier.classList.add("DynamicBubbleFrameImageCarrier");
 
-                        CardElement = newCarrier;
-
                         newDOM.appendChild(newCarrier);
 
                         let newFrontSide = document.createElement("div");
@@ -1432,8 +1461,6 @@ async function CreateDynamicBubbles(BubbleType,Content){
     newBubble.appendChild(newBubbleBottomBar);
 
     Base.appendChild(newBubble);
-
-
 
     await TidyUpDynamicBubbles();
 };
