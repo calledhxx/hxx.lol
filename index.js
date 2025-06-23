@@ -31,6 +31,16 @@ let buttons = [
         "Name":"網站日誌",
         "Tag":"Logs",
         "Page":"./page/Logs.JSON"
+    },
+    {
+        "Side": 5,
+        "Chunk": 4,
+        "Color":"#74a84a",
+        "depth":24,
+        "Icon": null,
+        "Name":"草",
+        "Tag":"Grass",
+        "Page":"./page/Grass.JSON"
     }
 ];
 
