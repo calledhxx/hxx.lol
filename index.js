@@ -956,12 +956,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
     CubeInfo.LastXMoved = CubeInfo.XMoved =  -375;
     CubeInfo.LastYMoved = CubeInfo.YMoved = -10;
 
-    await CreateDynamicBubbles("Notification",[
-        {
-            "Title":"你闖入到工地了！",
-            "Content":"這個網站還在建造中，所以會有些不穩定的內容。你若能找到問題可以上報至 me@hxx.lol，Hxx會輝常開心的。"
-        }
-    ])
+    // await CreateDynamicBubbles("Notification",[
+    //     {
+    //         "Title":"你闖入到工地了！",
+    //         "Content":"這個網站還在建造中，所以會有些不穩定的內容。你若能找到問題可以上報至 me@hxx.lol，Hxx會輝常開心的。"
+    //     }
+    // ])
 
 
     let startAt = 0;
@@ -1347,7 +1347,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(ControlBarIsDraw === false){
                 if(y - yStartScreen >= 100){
                     StartAtElement.style.transition = "";
-
 
                     StartAtElement.style.width = "120px";
                     StartAtElement.style.height = `${ControlButtons.length*50}px`;
