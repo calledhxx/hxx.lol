@@ -27,7 +27,30 @@ body{
     position: absolute;
 }
 
+#mainHub{
+    position: absolute;
+    top: 0;
+    left: 0;
 
+    width: 100%;
+    height: 100%;
+
+    transition: all 320ms ease-out;
+
+}
+
+#viewHub{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    transition: all 320ms ease-out;
+
+    z-index: -1;
+}
 
 #box{
     transform: translate(-50%, -50%);
@@ -464,143 +487,6 @@ body{
     text-shadow: rgba(255, 255, 255, 0.8) 0 0 30px;
 
     font-weight:normal;
-}
-
-.DynamicBubbleFrameImageCarrierCase{
-    height: 400px;
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    position: relative;
-
-    overflow: hidden;
-}
-
-.DynamicBubbleFrameImageCarrier{
-    height: auto;
-    width: 230px;
-    box-shadow: 0 0 20px 3px rgba(135, 135, 135, 0.7);
-    transform: translate(-50%,-50%) rotateZ(0deg);
-    position: absolute;
-    left: 50%;
-    top: 50%;
-
-}
-
-.DynamicBubbleFrameImageCarrierFrontSide{
-    width: auto;
-    height: auto;
-
-    position: relative;
-    top: 0;
-    left: 0;
-
-    background: rgb(234, 234, 234);
-
-    opacity: 1;
-}
-
-
-
-.DynamicBubbleFrameImage{
-    height: auto;
-    width: calc(100% - 20px);
-    margin: 10px;
-}
-
-.DynamicBubbleFrameImageCarrierBackSide{
-    width: 100%;
-    height: 100%;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    background: rgb(69, 159, 255);
-    transform: scaleX(-1);
-
-    opacity: 0;
-}
-
-.DynamicBubbleFrameImageContentCase{
-    display: flex;
-    flex-direction: column;
-
-    width: 100%;
-    height: auto;
-}
-
-
-.DynamicBubbleFrameImageContent{
-    width: 100%;
-
-    background: #232323;
-
-}
-
-.DynamicBubbleFrameImageContent *{
-
-    display: flex;
-    justify-content: left;
-    align-items: start;
-    flex-wrap: wrap;
-
-    margin: 10px;
-
-    width:calc(100% - 10px);
-}
-
-.DynamicBubbleFrameImageName{
-    color: #cacaca;
-    font-weight: bold;
-    font-size: 20px;
-
-    margin-bottom: 0;
-
-}
-
-.DynamicBubbleFrameImageDescription{
-    color: #acacac;
-    font-weight: normal;
-    font-size: 14px;
-
-}
-
-.DynamicBubbleFrameAlbumContent{
-    width: 100%;
-    height: auto;
-    display: flex;
-
-    background: #232323;
-}
-
-.DynamicBubbleFrameAlbumContent *{
-    height: auto;
-}
-
-.DynamicBubbleFrameAlbumImage{
-    height: 60px;
-    width: 60px;
-
-    margin: 10px;
-    border-radius: 20px;
-    box-shadow: 0 0 100px 1px rgba(255, 255, 255, 0.8);
-}
-
-.DynamicBubbleFrameAlbumInfo{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-
-    font-size: 14px;
-    color: #bcbcbc;
-    font-weight: normal;
-
-    margin-left: 10px;
-    margin-right: 10px;
-    width: calc(100% - 60px);
-    white-space: pre-line;
 }
 
 

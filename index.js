@@ -128,6 +128,10 @@ let CubeInfo = {
     "YMoved":0,
     "LastXMoved":0,
     "LastYMoved":0,
+    "LastToX":0,
+    "LastToY":0,
+    "LastDBX":-1,
+    "LastDBY":-1
 }
 
 let CardInfo = {
@@ -138,6 +142,9 @@ let CardInfo = {
     "CardElement":false
 }
 
+let DynamicBubbles = [];
+
+
 
 document.addEventListener("DOMContentLoaded",  async function () {
 
@@ -147,7 +154,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let Pushing = 0;
     let Pulling = 0;
     let Controlling = 0;
-    let Rotating = 0;
 
     let buttonElements = [];
 
@@ -234,13 +240,73 @@ document.addEventListener("DOMContentLoaded",  async function () {
         newTopSide.children[0].style.height = String(buttons[i].depth)+"px";
         newBottomSide.children[0].style.height = String(buttons[i].depth)+"px";
 
-        document.body.appendChild(newOne);
+        document.getElementById("mainHub").appendChild(newOne);
 
         newOne.id = String(i);
         buttonElements[buttonElements.length] = newOne;
 
 
     }
+
+
+    async function TidyUpDynamicBubbles(){
+        resetPullUpInfo();
+
+        let Base = document.getElementById("DynamicBubbleBase");
+
+        if(DynamicBubbles.length > 3){
+            for (let i = 0; i < DynamicBubbles.length; i++)
+                DynamicBubbles[i].style.opacity = "0";
+
+            setTimeout(async function(){
+                Base.style.top = "50px"
+                await sleep(120);
+                Base.style.top = "30px"
+
+            },0)
+
+            await sleep(100);
+
+        }else {
+            await sleep(100);
+
+        }
+
+
+
+        for (let i = DynamicBubbles.length-1; i > DynamicBubbles.length-5; i--) {
+            if(!DynamicBubbles[i]) continue;
+            DynamicBubbles[i].style.top = `${8 * (DynamicBubbles.length-1-i)}`;
+            DynamicBubbles[i].style.width = `${100 - 5 * (DynamicBubbles.length-1-i)}%`;
+            DynamicBubbles[i].style.opacity = `${1 - 0.25*(DynamicBubbles.length-1-i)}`;
+
+            DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "0";
+            DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "0";
+            DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "0";
+
+            if(DynamicBubbles.length === 1){
+                DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerHTML =
+                    "點擊泡泡以閱覽全文"
+            }else{
+                DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerHTML =
+                    "點擊並選取閱讀項目"
+            }
+
+            DynamicBubbles[i].getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY =
+                "hidden";
+
+            if(i !== DynamicBubbles.length-1){
+                DynamicBubbles[i].style.height = "120px";
+            }else{
+                if(DynamicBubbles[i].classList.contains("NotificationBubble"))
+                    DynamicBubbles[i].style.height = "120px";
+                else if(DynamicBubbles[i].classList.contains("PageBubble"))
+                    DynamicBubbles[i].style.height = "330px";
+
+            }
+        }
+
+    };
 
 
 
@@ -561,27 +627,312 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
     }
 
+    function resetPullUpInfo(){
+        PullUpInfo.ChoseToPullUpIndex = false;
+        PullUpInfo.MainPullUpIndex = false;
+        PullUpInfo.PullUpType = 0;
+    }
 
-    function cardMoving(x,y){
-        let x360 = x%360;
-        let y360 = y%360;
+    async function CreateDynamicBubbles(BubbleType,Content){
+        resetPullUpInfo();
 
-        let XtoFront = Math.abs(x360) > 180 ? 360 - Math.abs(x360) : Math.abs(x360);
-        let YtoFront = Math.abs(y360) > 180 ? 360 - Math.abs(y360) : Math.abs(y360);
+        let Base = document.getElementById("DynamicBubbleBase");
 
-        if(YtoFront < 90 ? XtoFront < 90 : XtoFront > 90){
-            CardInfo.CardElement.getElementsByClassName("DynamicBubbleFrameImageCarrierFrontSide")[0].style.opacity = "1";
-            CardInfo.CardElement.getElementsByClassName("DynamicBubbleFrameImageCarrierBackSide")[0].style.opacity = "0";
-        }else{
-            CardInfo.CardElement.getElementsByClassName("DynamicBubbleFrameImageCarrierFrontSide")[0].style.opacity = "0";
-            CardInfo.CardElement.getElementsByClassName("DynamicBubbleFrameImageCarrierBackSide")[0].style.opacity = "1";
+        let newBubble = document.createElement("div");
+        newBubble.classList.add("DynamicBubble");
+
+
+        let newBubbleTypeTitle = document.createElement("h1");
+        newBubbleTypeTitle.classList.add("DynamicBubbleTypeTitle");
+
+        let newBubbleFrame = document.createElement("div");
+        newBubbleFrame.classList.add("DynamicBubbleFrame");
+
+        let newBubbleBottomBar = document.createElement("div");
+        newBubbleBottomBar.classList.add("DynamicBubbleBottomBar");
+
+        let newControlBar = document.createElement("div");
+        newControlBar.classList.add("DynamicBubbleControlBar");
+
+        let newControlBarMiddleContent = document.createElement("hr");
+        newControlBar.appendChild(newControlBarMiddleContent);
+
+        let myIndex = DynamicBubbles.length;
+
+        for(let i = 0;i<ControlButtons.length;i++){
+            let newControlButton = document.createElement("div");
+            newControlBar.appendChild(newControlButton);
+            newControlButton.innerText = ControlButtons[i].Name;
         }
 
-            CardInfo.CardElement.style.transform =
-            `translate(-50%,-50%) rotateX(${y360}deg) rotateY(${x360}deg)`;
+        switch (BubbleType){
+            case "Notification": {
+                newBubbleTypeTitle.innerText = "A Notification";
+
+                setTimeout(async function(){
+                    newBubble.classList.add("NotificationBubble");
+
+                    if(myIndex === DynamicBubbles.length-1){
+                        newBubble.style.height = "120px";
+                    }
+                },280);
+                break;
+            }
+            case "Page":{
+                newBubbleTypeTitle.innerText = "A Page";
+
+                setTimeout(async function(){
+                    newBubble.classList.add("PageBubble")
+
+                    if(myIndex === DynamicBubbles.length-1){
+                        newBubble.style.height = "330px";
+                    }
+                },280);
+                break;
+            }
+        }
+
+        let newControlBarHandle = document.createElement("h2");
+        newControlBarHandle.classList.add("DynamicBubbleControlBarHandle");
+
+        let newControlBarHandleRope = document.createElement("h2");
+        newControlBarHandleRope.classList.add("DynamicBubbleControlBarHandleRope");
+        newControlBarHandle.appendChild(newControlBarHandleRope);
+
+        let newControlBarHandleGrip = document.createElement("h2");
+        newControlBarHandleGrip.classList.add("DynamicBubbleControlBarHandleGrip");
+        newControlBarHandle.appendChild(newControlBarHandleGrip);
+
+        newControlBarMiddleContent.appendChild(newControlBarHandle);
+
+        for(let SectionIndex = 0;SectionIndex<Content.length; SectionIndex++){
+            let newSection = document.createElement("div");
+            newSection.classList.add("DynamicBubbleFrameSection");
+
+            for(let index in Content[SectionIndex]){
+                let newDOM;
+
+                switch(index){
+                    case"Title":{
+                        newDOM = document.createElement("h1");
+                        newDOM.classList.add("DynamicBubbleFrameTitle");
+                        newDOM.innerText = Content[SectionIndex][index];
+                        break;
+                    }
+
+                    case"Content":{
+                        newDOM = document.createElement("h6");
+                        newDOM.classList.add("DynamicBubbleFrameContent");
+                        newDOM.innerText = Content[SectionIndex][index];
+                        break;
+                    }
+
+                    default:{
+                        //...
+                    }
+                }
+
+                newSection.appendChild(newDOM);
+            }
+
+            newBubbleFrame.appendChild(newSection);
+        }
+
+        DynamicBubbles.push(newBubble);
+
+        newBubble.appendChild(newControlBar);
+        newBubble.appendChild(newControlBar);
+        newBubble.appendChild(newBubbleTypeTitle);
+        newBubble.appendChild(newBubbleFrame);
+        newBubble.appendChild(newBubbleBottomBar);
+
+        Base.appendChild(newBubble);
+
+        await TidyUpDynamicBubbles();
+    };
+
+
+
+    function PullUpDynamicBubbles(MainIndex){
+        PullUpInfo.ChoseToPullUpIndex = MainIndex;
+
+        if(DynamicBubbles.length === 1){
+            PullUpInfo.PullUpType = 1;
+            PullUpMainBubble(MainIndex);
+        }else if(DynamicBubbles.length <= 3){
+            PullUpInfo.PullUpType = 2;
+
+            let Accumulation = 0;
+
+            for (let i = 0; i < DynamicBubbles.length; i++){
+                let mixHeight = 0;
+
+                if(DynamicBubbles[i].classList.contains("PageBubble")){
+                    mixHeight = 240;
+                }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
+                    mixHeight = 120;
+                }
+
+                DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
+                    "選擇我？"
+
+                DynamicBubbles[i].style.height = `${mixHeight}px`;
+                DynamicBubbles[i].style.width = "100%";
+                DynamicBubbles[i].style.opacity = "1";
+
+                DynamicBubbles[i].style.top = String( Accumulation )+"px";
+                Accumulation += mixHeight+20;
+            }
+        }else if(DynamicBubbles.length >= 4){
+            PullUpInfo.PullUpType = 3;
+
+            for (let i = 0; i < DynamicBubbles.length; i++){
+                let mixHeight = 0;
+
+                if(DynamicBubbles[i].classList.contains("PageBubble")){
+                    mixHeight = 240;
+                }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
+                    mixHeight = 120;
+                }
+
+                DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
+                    "選擇我！"
+
+                DynamicBubbles[i].style.height = `${mixHeight}px`;
+                DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10}%`;
+
+                if(100 - Math.abs(i - MainIndex )*10 > 40)
+                    DynamicBubbles[i].style.opacity = "1";
+                else
+                    DynamicBubbles[i].style.opacity = "0";
+
+            }
+
+
+            //
+
+            let LastMixHeight = 0;
+
+            let Accumulation = 0;
+
+
+
+            for (let i = MainIndex; i >= 0; i--){
+                let mixHeight = 0;
+
+                if(DynamicBubbles[i].classList.contains("PageBubble")){
+                    mixHeight = 240;
+                }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
+                    mixHeight = 120;
+                }
+
+                Accumulation += 20 + LastMixHeight - LastMixHeight + mixHeight;
+                DynamicBubbles[i].style.top = `${400 - Accumulation}px`
+
+                LastMixHeight = mixHeight;
+
+            }
+
+            Accumulation = 0;
+            LastMixHeight = 0;
+
+            for (let i = MainIndex+1; i < DynamicBubbles.length; i++){
+                let mixHeight = 0;
+
+                if(DynamicBubbles[i].classList.contains("PageBubble")){
+                    mixHeight = 240;
+                }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
+                    mixHeight = 120;
+                }
+
+                Accumulation += 30 + LastMixHeight;
+                DynamicBubbles[i].style.top = `${400 + Accumulation}px`
+
+                LastMixHeight = mixHeight;
+            }
+        }
+    }
+
+    function PullUpMainBubble(MainIndex){
+
+        let ClickOnBubble = DynamicBubbles[MainIndex];
+
+        PullUpInfo.MainPullUpIndex = MainIndex;
+
+        ClickOnBubble.style.height = "calc(100vh - 60px)";
+        ClickOnBubble.style.top = "0";
+        ClickOnBubble.style.opacity = "1";
+
+        ClickOnBubble.getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
+            "向下拖拉右上方的按鈕看看？"
+
+        ClickOnBubble.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "auto";
+
+        ClickOnBubble.getElementsByTagName("hr")[0].style.opacity = "1";
+
+
+        setTimeout(async function(){
+            ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "1";
+
+            ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "28px";
+            ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "28px";
+            await sleep(120);
+            ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "1";
+
+
+            ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
+                `translate(-50%,-50%) rotateZ(19deg)`;
+
+            await sleep(120);
+
+            ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
+                `translate(-50%,-50%) rotateZ(-12deg)`;
+
+            await sleep(120);
+
+            ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
+                `translate(-50%,-50%) rotateZ(0deg)`;
+        },110)
+
+
+
+        for (let i = 0;i<DynamicBubbles.length;i++){
+            if(i !== MainIndex){
+                let mixHeight= 0;
+
+                if(DynamicBubbles[i].classList.contains("PageBubble")){
+                    mixHeight = 240;
+                }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
+                    mixHeight = 120;
+                }
+
+                DynamicBubbles[i].style.opacity = "0";
+                DynamicBubbles[i].style.top = `-${mixHeight}px`;
+            }
+        }
+    }
+
+    async function ClearBubble(MainIndex){
+        let toDel = DynamicBubbles[MainIndex];
+        DynamicBubbles.splice(MainIndex,1);
+
+        setTimeout(async function(){
+            toDel.style.opacity = "0";
+            toDel.style.height = "0";
+            toDel.style.minHeight = "0";
+            await sleep(210);
+            toDel.remove();
+        },120);
+
+
+
+        resetPullUpInfo();
+        await TidyUpDynamicBubbles();
+        await PullUpDynamicBubbles(DynamicBubbles.length-1);
     }
 
 
+    //start at here
 
     TweenUp(true,.1);
 
@@ -627,7 +978,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Bubble":0,
             "ControlBar":0,
             "Rotating":0,
-            "Image":0,
         };
 
         let ElementsWitchAtPoint = document.elementsFromPoint(x,y);
@@ -640,12 +990,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             if(CheckButton.Parent){
                 FinalInfo.Button = CheckButton.Parent;
-                break
-            }
-
-            let CheckImage = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubbleFrameImageCarrier");
-            if(CheckImage.Parent){
-                FinalInfo.Image = CheckImage.Parent;
                 break
             }
 
@@ -672,7 +1016,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             !FinalInfo.Button &&
             !FinalInfo.Bubble &&
             !FinalInfo.Rotating &&
-            !FinalInfo.Image &&
             !FinalInfo.ControlBar
         )
             FinalInfo.Rotating = true;
@@ -688,6 +1031,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
     {
         if(Date.now() - startAt < 160) return;
 
+        StartAtElement = false;
+
         xStartScreen = x;
         yStartScreen = y;
 
@@ -695,7 +1040,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         startAt = Date.now();
 
-        if(!Holding && !Pushing && !Pulling && !Controlling && !Rotating && FinalInfo.Rotating ){
+        // Rotating = true;
+        // CardInfo.CardElement.style.transition = "none";
+
+
+        if(!Holding && !Pushing && !Pulling && !Controlling && FinalInfo.Rotating ){
             Holding = true;
             TweenUp(false);
 
@@ -730,8 +1079,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         FinalElement.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(FinalElement.id)].depth)+"px";
 
             moving(CubeInfo.LastXMoved,CubeInfo.LastYMoved);
-
-
         } else if(FinalInfo.Bubble && !Pulling && PullUpInfo.MainPullUpIndex === false){
             FinalInfo.Bubble.style.backgroundColor = "rgba(228, 228, 228, .9)";
             FinalInfo.Bubble.style.borderColor = "rgba(207,207,207,.9)";
@@ -748,22 +1095,20 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     "34px";
 
             Controlling = true;
-        }else if(FinalInfo.Image && !Rotating && !CardInfo.CardElement){
-            CardInfo.CardElement = FinalInfo.Image;
+        }else if(FinalInfo.View){
             Rotating = true;
+            let element = FinalInfo.View.getElementsByClassName("DynamicBubbleFrameImageCarrier")[0];
+            element.style.transition = "none";
 
             CardInfo.XMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
             CardInfo.YMoved = (y - yStartScreen)/ToStableValue + CardInfo.LastYMoved;
+
         }
 
 
     }
 
-    let lastToX = 0;
-    let lastToY = 0;
 
-    let lastDbX = -1;
-    let lastDbY = -1;
 
     let ControlBarIsDraw = false;
     let LastSelectControlButtonIndex = false;
@@ -782,14 +1127,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let dbX = (CubeInfo.XMoved - CubeInfo.LastXMoved) > 0;
             let dbY = (CubeInfo.YMoved - CubeInfo.LastYMoved) > 0;
 
-            if(lastDbX===dbX && lastToX !== 0 && Math.abs(lastToX) < Math.abs(toX)) toX += lastToX;
-            if(lastDbY===dbY && lastToY !==0 && Math.abs(lastToY) < Math.abs(toY)) toY+=lastToY;
+            if(CubeInfo.LastDBX===dbX && CubeInfo.LastToX !== 0 && Math.abs(CubeInfo.LastToX) < Math.abs(toX)) toX += CubeInfo.LastToX;
+            if(CubeInfo.LastDBY===dbY && CubeInfo.LastToY !==0 && Math.abs(CubeInfo.LastToY) < Math.abs(toY)) toY+=CubeInfo.LastToY;
 
-            lastToX = toX;
-            lastToY = toY;
+            CubeInfo.LastToX = toX;
+            CubeInfo.LastToY = toY;
 
-            lastDbX = dbX;
-            lastDbY = dbY;
+            CubeInfo.LastDBX = dbX;
+            CubeInfo.LastDBY = dbY;
 
             CubeInfo.LastXMoved = CubeInfo.XMoved;
             CubeInfo.LastYMoved = CubeInfo.YMoved;
@@ -918,52 +1263,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 LastSelectControlButtonIndex = false;
             }
-        }else if(Rotating){
-            Rotating = false;
-
-
-            let totalMs = Date.now() - startAt;
-
-            let toX =(CardInfo.XMoved - CardInfo.LastXMoved)/(totalMs/200);
-            let toY = (CardInfo.YMoved - CardInfo.LastYMoved)/(totalMs/200);
-
-            let dbX = (CardInfo.XMoved - CardInfo.LastXMoved) > 0;
-            let dbY = (CardInfo.YMoved - CardInfo.LastYMoved) > 0;
-
-            if(lastDbX===dbX && lastToX !== 0 && Math.abs(lastToX) < Math.abs(toX)) toX += lastToX;
-            if(lastDbY===dbY && lastToY !==0 && Math.abs(lastToY) < Math.abs(toY)) toY+=lastToY;
-
-            lastToX = toX;
-            lastToY = toY;
-
-            lastDbX = dbX;
-            lastDbY = dbY;
-
-            CardInfo.LastXMoved = CardInfo.XMoved;
-            CardInfo.LastYMoved = CardInfo.YMoved;
-
-            cardMoving(CardInfo.XMoved,CardInfo.YMoved);
-
-            for (let index = 0;;index++){
-
-                if(dbX ? toX > 0 : toX < 0) toX= dbX ? toX-2 : toX+2; else toX = 0;
-                if(dbY ? toY > 0 : toY < 0)  toY= dbY ? toY-2 : toY+2; else toY = 0;
-
-
-                if(
-                    ((dbX ? toX <= 0 : toX >= 0) && (dbY ? toY <= 0 : toY >= 0)) ||
-                    Holding || Pushing
-                ) break;
-
-                await cardMoving(CardInfo.XMoved+toX/50,CardInfo.YMoved+toY/50);
-
-                CardInfo.LastXMoved = CardInfo.XMoved = CardInfo.XMoved+toX/50;
-                CardInfo.LastYMoved = CardInfo.YMoved = CardInfo.YMoved+toY/50;
-
-                await sleep(1);
-            }
-
-            CardInfo.CardElement = false;
         }
 
 
@@ -1114,11 +1413,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     }
                 }
             }
-        }else if(Rotating){
-            CardInfo.XMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
-            CardInfo.YMoved = (-y + yStartScreen)/ToStableValue +  CardInfo.LastYMoved;
-
-            cardMoving(CardInfo.XMoved, CardInfo.YMoved);
         }
 
     }
@@ -1198,447 +1492,3 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 });
 
-let DynamicBubbles = [];
-
-async function TidyUpDynamicBubbles(){
-    resetPullUpInfo();
-
-    let Base = document.getElementById("DynamicBubbleBase");
-
-    if(DynamicBubbles.length > 3){
-        for (let i = 0; i < DynamicBubbles.length; i++)
-            DynamicBubbles[i].style.opacity = "0";
-
-        setTimeout(async function(){
-            Base.style.top = "50px"
-            await sleep(120);
-            Base.style.top = "30px"
-
-        },0)
-
-        await sleep(100);
-
-    }else {
-        await sleep(100);
-
-    }
-
-
-
-    for (let i = DynamicBubbles.length-1; i > DynamicBubbles.length-5; i--) {
-        if(!DynamicBubbles[i]) continue;
-        DynamicBubbles[i].style.top = `${8 * (DynamicBubbles.length-1-i)}`;
-        DynamicBubbles[i].style.width = `${100 - 5 * (DynamicBubbles.length-1-i)}%`;
-        DynamicBubbles[i].style.opacity = `${1 - 0.25*(DynamicBubbles.length-1-i)}`;
-
-        DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "0";
-        DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "0";
-        DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "0";
-
-        if(DynamicBubbles.length === 1){
-            DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerHTML =
-                "點擊泡泡以閱覽全文"
-        }else{
-            DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerHTML =
-                "點擊並選取閱讀項目"
-        }
-
-        DynamicBubbles[i].getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY =
-            "hidden";
-
-        if(i !== DynamicBubbles.length-1){
-            DynamicBubbles[i].style.height = "120px";
-        }else{
-            if(DynamicBubbles[i].classList.contains("NotificationBubble"))
-                DynamicBubbles[i].style.height = "120px";
-            else if(DynamicBubbles[i].classList.contains("PageBubble"))
-                DynamicBubbles[i].style.height = "330px";
-
-        }
-    }
-
-};
-
-function resetPullUpInfo(){
-    PullUpInfo.ChoseToPullUpIndex = false;
-    PullUpInfo.MainPullUpIndex = false;
-    PullUpInfo.PullUpType = 0;
-}
-
-async function TidyUpImages(ImagesCase){
-    for(let i = 0;i < ImagesCase.children.length; i++){
-        let img = ImagesCase.children[i];
-
-
-    }
-}
-
-async function CreateDynamicBubbles(BubbleType,Content){
-    resetPullUpInfo();
-
-    let Base = document.getElementById("DynamicBubbleBase");
-
-    let newBubble = document.createElement("div");
-    newBubble.classList.add("DynamicBubble");
-
-
-    let newBubbleTypeTitle = document.createElement("h1");
-    newBubbleTypeTitle.classList.add("DynamicBubbleTypeTitle");
-
-    let newBubbleFrame = document.createElement("div");
-    newBubbleFrame.classList.add("DynamicBubbleFrame");
-
-    let newBubbleBottomBar = document.createElement("div");
-    newBubbleBottomBar.classList.add("DynamicBubbleBottomBar");
-
-    let newControlBar = document.createElement("div");
-    newControlBar.classList.add("DynamicBubbleControlBar");
-
-    let newControlBarMiddleContent = document.createElement("hr");
-    newControlBar.appendChild(newControlBarMiddleContent);
-
-    let myIndex = DynamicBubbles.length;
-
-    for(let i = 0;i<ControlButtons.length;i++){
-        let newControlButton = document.createElement("div");
-        newControlBar.appendChild(newControlButton);
-        newControlButton.innerText = ControlButtons[i].Name;
-    }
-
-    switch (BubbleType){
-        case "Notification": {
-            newBubbleTypeTitle.innerText = "A Notification";
-
-            setTimeout(async function(){
-                newBubble.classList.add("NotificationBubble");
-
-                if(myIndex === DynamicBubbles.length-1){
-                    newBubble.style.height = "120px";
-                }
-            },280);
-            break;
-        }
-        case "Page":{
-            newBubbleTypeTitle.innerText = "A Page";
-
-            setTimeout(async function(){
-                newBubble.classList.add("PageBubble")
-
-                if(myIndex === DynamicBubbles.length-1){
-                    newBubble.style.height = "330px";
-                }
-            },280);
-            break;
-        }
-    }
-
-    let newControlBarHandle = document.createElement("h2");
-    newControlBarHandle.classList.add("DynamicBubbleControlBarHandle");
-
-    let newControlBarHandleRope = document.createElement("h2");
-    newControlBarHandleRope.classList.add("DynamicBubbleControlBarHandleRope");
-    newControlBarHandle.appendChild(newControlBarHandleRope);
-
-    let newControlBarHandleGrip = document.createElement("h2");
-    newControlBarHandleGrip.classList.add("DynamicBubbleControlBarHandleGrip");
-    newControlBarHandle.appendChild(newControlBarHandleGrip);
-
-    newControlBarMiddleContent.appendChild(newControlBarHandle);
-
-    for(let SectionIndex = 0;SectionIndex<Content.length; SectionIndex++){
-        let newSection = document.createElement("div");
-        newSection.classList.add("DynamicBubbleFrameSection");
-
-        for(let index in Content[SectionIndex]){
-            let newDOM;
-
-            switch(index){
-                case"Title":{
-                    newDOM = document.createElement("h1");
-                    newDOM.classList.add("DynamicBubbleFrameTitle");
-                    newDOM.innerText = Content[SectionIndex][index];
-                    break;
-                }
-
-                case"Content":{
-                    newDOM = document.createElement("h6");
-                    newDOM.classList.add("DynamicBubbleFrameContent");
-                    newDOM.innerText = Content[SectionIndex][index];
-                    break;
-                }
-
-                case"Images":{
-                    newDOM = document.createElement("div");
-                    newDOM.classList.add("DynamicBubbleFrameImageCarrierCase");
-
-                    for (let image in Content[SectionIndex][index].Images) {
-                        let newCarrier = document.createElement("div");
-                        newCarrier.classList.add("DynamicBubbleFrameImageCarrier");
-
-                        newDOM.appendChild(newCarrier);
-
-                        let newFrontSide = document.createElement("div");
-                        newFrontSide.classList.add("DynamicBubbleFrameImageCarrierFrontSide");
-                        newCarrier.appendChild(newFrontSide);
-
-                        {
-                            let newImage = document.createElement("img");
-                            newImage.classList.add("DynamicBubbleFrameImage");
-                            newImage.src = Content[SectionIndex][index].Images[image].Image;
-
-                            newFrontSide.appendChild(newImage);
-                        }
-
-                        let newBackSide = document.createElement("div");
-                        newBackSide.classList.add("DynamicBubbleFrameImageCarrierBackSide");
-                        newCarrier.appendChild(newBackSide);
-
-                        {
-                            let newContentCase = document.createElement("div");
-                            newContentCase.classList.add("DynamicBubbleFrameImageContentCase");
-
-                            newBackSide.appendChild(newContentCase);
-
-                            let newAlbumContent = document.createElement("div");
-                            newAlbumContent.classList.add("DynamicBubbleFrameAlbumContent");
-
-                            newContentCase.appendChild(newAlbumContent);
-
-                            let newAlbumImage = document.createElement("img");
-                            newAlbumImage.classList.add("DynamicBubbleFrameAlbumImage");
-                            newAlbumImage.src = Content[SectionIndex][index].AlbumImage;
-
-                            newAlbumContent.appendChild(newAlbumImage);
-
-                            let newAlbumInfo = document.createElement("h4");
-                            newAlbumInfo.classList.add("DynamicBubbleFrameAlbumInfo");
-                            newAlbumInfo.textContent = `${Content[SectionIndex][index].AlbumName}專輯\n ${Content[SectionIndex][index].AlbumDescription}`
-
-                            newAlbumContent.appendChild(newAlbumInfo);
-
-                            let newImageContent = document.createElement("div");
-                            newImageContent.classList.add("DynamicBubbleFrameImageContent");
-
-                            newContentCase.appendChild(newImageContent);
-
-
-                            let newImageName = document.createElement("h4");
-                            newImageName.classList.add("DynamicBubbleFrameImageName");
-                            newImageName.textContent = Content[SectionIndex][index].Images[image].Name;
-
-                            newImageContent.appendChild(newImageName);
-
-                            let newImageDescription = document.createElement("h5");
-                            newImageDescription.classList.add("DynamicBubbleFrameImageDescription");
-                            newImageDescription.textContent = Content[SectionIndex][index].Images[image].Description;
-
-                            newImageContent.appendChild(newImageDescription);
-                        }
-                    }
-
-                    await TidyUpImages(newDOM);
-
-                    break;
-                }
-
-                default:{
-                    //...
-                }
-            }
-
-            newSection.appendChild(newDOM);
-        }
-
-        newBubbleFrame.appendChild(newSection);
-    }
-
-    DynamicBubbles.push(newBubble);
-
-    newBubble.appendChild(newControlBar);
-    newBubble.appendChild(newControlBar);
-    newBubble.appendChild(newBubbleTypeTitle);
-    newBubble.appendChild(newBubbleFrame);
-    newBubble.appendChild(newBubbleBottomBar);
-
-    Base.appendChild(newBubble);
-
-    await TidyUpDynamicBubbles();
-};
-
-function PullUpDynamicBubbles(MainIndex){
-    PullUpInfo.ChoseToPullUpIndex = MainIndex;
-
-    if(DynamicBubbles.length === 1){
-        PullUpInfo.PullUpType = 1;
-        PullUpMainBubble(MainIndex);
-    }else if(DynamicBubbles.length <= 3){
-        PullUpInfo.PullUpType = 2;
-
-        let Accumulation = 0;
-
-        for (let i = 0; i < DynamicBubbles.length; i++){
-            let mixHeight = 0;
-
-            if(DynamicBubbles[i].classList.contains("PageBubble")){
-                mixHeight = 240;
-            }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                mixHeight = 120;
-            }
-
-            DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
-                "選擇我？"
-
-            DynamicBubbles[i].style.height = `${mixHeight}px`;
-            DynamicBubbles[i].style.width = "100%";
-            DynamicBubbles[i].style.opacity = "1";
-
-            DynamicBubbles[i].style.top = String( Accumulation )+"px";
-            Accumulation += mixHeight+20;
-        }
-    }else if(DynamicBubbles.length >= 4){
-        PullUpInfo.PullUpType = 3;
-
-        for (let i = 0; i < DynamicBubbles.length; i++){
-            let mixHeight = 0;
-
-            if(DynamicBubbles[i].classList.contains("PageBubble")){
-                mixHeight = 240;
-            }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                mixHeight = 120;
-            }
-
-            DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
-                "選擇我！"
-
-            DynamicBubbles[i].style.height = `${mixHeight}px`;
-            DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10}%`;
-
-            if(100 - Math.abs(i - MainIndex )*10 > 40)
-                DynamicBubbles[i].style.opacity = "1";
-            else
-                DynamicBubbles[i].style.opacity = "0";
-
-        }
-
-
-        //
-
-        let LastMixHeight = 0;
-
-        let Accumulation = 0;
-
-
-
-        for (let i = MainIndex; i >= 0; i--){
-            let mixHeight = 0;
-
-            if(DynamicBubbles[i].classList.contains("PageBubble")){
-                mixHeight = 240;
-            }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                mixHeight = 120;
-            }
-
-            Accumulation += 20 + LastMixHeight - LastMixHeight + mixHeight;
-            DynamicBubbles[i].style.top = `${400 - Accumulation}px`
-
-            LastMixHeight = mixHeight;
-
-        }
-
-        Accumulation = 0;
-        LastMixHeight = 0;
-
-        for (let i = MainIndex+1; i < DynamicBubbles.length; i++){
-            let mixHeight = 0;
-
-            if(DynamicBubbles[i].classList.contains("PageBubble")){
-                mixHeight = 240;
-            }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                mixHeight = 120;
-            }
-
-            Accumulation += 30 + LastMixHeight;
-            DynamicBubbles[i].style.top = `${400 + Accumulation}px`
-
-            LastMixHeight = mixHeight;
-        }
-    }
-}
-
-function PullUpMainBubble(MainIndex){
-
-    let ClickOnBubble = DynamicBubbles[MainIndex];
-
-    PullUpInfo.MainPullUpIndex = MainIndex;
-
-    ClickOnBubble.style.height = "calc(100vh - 60px)";
-    ClickOnBubble.style.top = "0";
-    ClickOnBubble.style.opacity = "1";
-
-    ClickOnBubble.getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
-        "向下拖拉右上方的按鈕看看？"
-
-    ClickOnBubble.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "auto";
-
-    ClickOnBubble.getElementsByTagName("hr")[0].style.opacity = "1";
-
-
-    setTimeout(async function(){
-        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "1";
-
-        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "28px";
-        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "28px";
-        await sleep(120);
-        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "1";
-
-
-        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
-            `translate(-50%,-50%) rotateZ(19deg)`;
-
-        await sleep(120);
-
-        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
-            `translate(-50%,-50%) rotateZ(-12deg)`;
-
-        await sleep(120);
-
-        ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
-            `translate(-50%,-50%) rotateZ(0deg)`;
-    },110)
-
-
-
-    for (let i = 0;i<DynamicBubbles.length;i++){
-        if(i !== MainIndex){
-            let mixHeight= 0;
-
-            if(DynamicBubbles[i].classList.contains("PageBubble")){
-                mixHeight = 240;
-            }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                mixHeight = 120;
-            }
-
-            DynamicBubbles[i].style.opacity = "0";
-            DynamicBubbles[i].style.top = `-${mixHeight}px`;
-        }
-    }
-}
-
-async function ClearBubble(MainIndex){
-    let toDel = DynamicBubbles[MainIndex];
-    DynamicBubbles.splice(MainIndex,1);
-
-    setTimeout(async function(){
-        toDel.style.opacity = "0";
-        toDel.style.height = "0";
-        toDel.style.minHeight = "0";
-        await sleep(210);
-        toDel.remove();
-    },120);
-
-
-
-    resetPullUpInfo();
-    await TidyUpDynamicBubbles();
-    await PullUpDynamicBubbles(DynamicBubbles.length-1);
-}

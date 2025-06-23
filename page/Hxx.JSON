@@ -23,20 +23,5 @@
   {
     "Title":"已參與的大型公共事務",
     "Content":"沒有"
-  },
-
-  {
-    "Images": {
-      "AlbumName": "Hxx",
-      "AlbumImage": "./img/IMG_0537.GIF",
-      "AlbumDescription": "eee",
-      "Images": [
-        {
-          "Image": "./img/IMG_0537.GIF",
-          "Description": "照片堆疊的功能還沒做完，期待一下下ㄅ",
-          "Name": "Hxx?"
-        }
-      ]
-    }
   }
 ]
