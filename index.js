@@ -989,7 +989,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Content":"而你在閱讀的這東西叫做Dynamic Bubble ，動態泡泡，是不是特別動態，特別動感(▀̿Ĺ̯▀̿ ̿)"
         },
         {
-            "Content":"喔對了，看到右上角的把手了嗎？向下拉他就「有機會」離開這顆泡泡喔。 (不是百分百的原因是我怕你不知道怎麼用ww)"
+            "Content":"喔對了，看到右上角的把手了嗎？向下拉他就「有機會」帶你離開這顆泡泡喔。 (不是百分百的原因是我怕你不知道怎麼用ww)"
         },
         {
             "Content":"還有丫，蘇東坡沒有講過這句話：蘇波哀東的笑容。"
