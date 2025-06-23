@@ -34,6 +34,7 @@ let buttons = [
     }
 ];
 
+
 if((new Date().getSeconds())%3) {
     buttons[0].Color = "#d13333";
     buttons[0].Icon = "./img/IMG_0537.GIF";
