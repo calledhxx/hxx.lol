@@ -25,6 +25,11 @@ body{
 
     overflow: hidden;
     position: absolute;
+
+    padding-bottom: env(safe-area-inset-bottom);
+    /*
+    https://stackoverflow.com/questions/68094609/ios-15-safari-floating-address-bar
+     */
 }
 
 #Hub{
