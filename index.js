@@ -977,12 +977,24 @@ document.addEventListener("DOMContentLoaded",  async function () {
     CubeInfo.LastXMoved = CubeInfo.XMoved =  -375;
     CubeInfo.LastYMoved = CubeInfo.YMoved = -10;
 
-    // await CreateDynamicBubbles("Notification",[
-    //     {
-    //         "Title":"你闖入到工地了！",
-    //         "Content":"這個網站還在建造中，所以會有些不穩定的內容。你若能找到問題可以上報至 me@hxx.lol，Hxx會輝常開心的。"
-    //     }
-    // ])
+    await CreateDynamicBubbles("Notification",[
+        {
+            "Title":"你是誰？！",
+            "Content":"歡迎來到Hxx的Weblog，這裡存著Hxx很唐的...東西。"
+        },
+        {
+            "Content":"眼前的方塊是這網站的核心，方塊上有許多按鈕，你可以轉動方塊選擇你想按的按鈕。按鈕裡面有...這是秘密，不跟你講。:-S"
+        },
+        {
+            "Content":"而你在閱讀的這東西叫做Dynamic Bubble ，動態泡泡，是不是特別動態，特別動感(▀̿Ĺ̯▀̿ ̿)"
+        },
+        {
+            "Content":"喔對了，看到右上角的把手了嗎？向下拉他就「有機會」離開這顆泡泡喔。 (不是百分百的原因是我怕你不知道怎麼用ww)"
+        },
+        {
+            "Content":"還有丫，蘇東坡沒有講過這句話：蘇波哀東的笑容。"
+        }
+    ])
 
 
     let startAt = 0;
