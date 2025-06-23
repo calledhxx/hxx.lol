@@ -21,6 +21,16 @@ let buttons = [
         "Name":"黃太妃",
         "Tag":"Hxx",
         "Page":"./page/Hxx.JSON"
+    },
+    {
+        "Side": 1,
+        "Chunk": 4,
+        "Color":"#cc8131",
+        "depth":24,
+        "Icon": null,
+        "Name":"網站日誌",
+        "Tag":"Logs",
+        "Page":"./page/Logs.JSON"
     }
 ];
 
@@ -240,7 +250,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         newTopSide.children[0].style.height = String(buttons[i].depth)+"px";
         newBottomSide.children[0].style.height = String(buttons[i].depth)+"px";
 
-        document.getElementById("mainHub").appendChild(newOne);
+        document.getElementById("Hub").appendChild(newOne);
 
         newOne.id = String(i);
         buttonElements[buttonElements.length] = newOne;
