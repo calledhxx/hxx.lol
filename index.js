@@ -23,6 +23,16 @@ let buttons = [
         "Page":"./page/Hxx.JSON"
     },
     {
+        "Side": 6,
+        "Chunk": 1,
+        "Color":"#aa33d1",
+        "depth":24,
+        "Icon": "./img/IMG_0590.GIF",
+        "Name":"黃太妃",
+        "Tag":"Hxx",
+        "Page":"./page/Hxx.JSON"
+    },
+    {
         "Side": 1,
         "Chunk": 4,
         "Color":"#cc8131",
@@ -568,8 +578,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
             }
 
-
-
             if(buttons[i].Side < 5 ?
                 toFYDeg > 90
                 :
@@ -594,14 +602,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 buttons[i].Side < 5 ? `rotateX(${String(y)}deg) rotateY(${String(x+180)}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String(addZ+buttons[i].depth/2)}px)`
                     : `rotateX(${String(y+180)}deg) rotateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(x+180))}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String((addZ+buttons[i].depth/2))}px)`
             ;
+
             buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.transform =
                 buttons[i].Side < 5 ? `rotateX(${y}deg) rotateY(${x+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+40)}px)`
-                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${(-x-270)}deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${String(addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(addX+40)}px)`
+                    : (`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${(-x-270)}deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${String(addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(addX+40)}px) `
+            + (buttons[i].Side === 6 ? "scaleY(-1)" :""));
 
 
             buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.transform =
                 buttons[i].Side < 5  ? `rotateX(${y}deg) rotateY(${x-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + 40)}px)`
-                    : `rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x-90 }deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(-addX + 40 )}px)`;
+                    : (`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x-90 }deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(-addX + 40 )}px)`
+                    +( buttons[i].Side === 6 ? "scaleY(-1)" :""));
+
+
 
 
             if(
