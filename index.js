@@ -11,55 +11,7 @@ function checkIfMobile() {
     return check;
 };
 
-let buttons = [
-    {
-        "Side": 1,
-        "Chunk": 1,
-        "Color":"#aa33d1",
-        "depth":24,
-        "Icon": "./img/IMG_0590.GIF",
-        "Name":"黃太妃",
-        "Tag":"Hxx",
-        "Page":"./page/Hxx.JSON"
-    },
-    {
-        "Side": 6,
-        "Chunk": 1,
-        "Color":"#aa33d1",
-        "depth":24,
-        "Icon": "./img/IMG_0590.GIF",
-        "Name":"黃太妃",
-        "Tag":"Hxx",
-        "Page":"./page/Hxx.JSON"
-    },
-    {
-        "Side": 1,
-        "Chunk": 4,
-        "Color":"#cc8131",
-        "depth":24,
-        "Icon": null,
-        "Name":"網站日誌",
-        "Tag":"Logs",
-        "Page":"./page/Logs.JSON"
-    },
-    {
-        "Side": 5,
-        "Chunk": 4,
-        "Color":"#74a84a",
-        "depth":24,
-        "Icon": null,
-        "Name":"草",
-        "Tag":"Grass",
-        "Page":"./page/Grass.JSON"
-    }
-];
-
-
-if((new Date().getSeconds())%3) {
-    buttons[0].Color = "#d13333";
-    buttons[0].Icon = "./img/IMG_0537.GIF";
-}
-
+let buttons = [];
 
 let ControlButtons = [
     {
@@ -165,17 +117,8 @@ let CubeInfo = {
     "LastDBY":-1
 }
 
-let CardInfo = {
-    "XMoved":0,
-    "YMoved":0,
-    "LastXMoved":0,
-    "LastYMoved":0,
-    "CardElement":false
-}
 
 let DynamicBubbles = [];
-
-
 
 document.addEventListener("DOMContentLoaded",  async function () {
 
@@ -186,97 +129,114 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let Pulling = 0;
     let Controlling = 0;
 
+    let Locked = 0;
+
     let buttonElements = [];
 
-    for (let i = 0; i < buttons.length; i++) {
-        let newOne = document.createElement("div");
-        newOne.classList.add("button");
+    function DeleteButtons() {
+        for (let i = 0; i < buttons.length; i++){
+            let element = buttonElements[i];
+            buttons[i].depth = 0;
+            element.style.opacity = "0";
 
-        let newFrontSide = document.createElement("div");
-        let newBackSide = document.createElement("div");
-        let newRightSide = document.createElement("div");
-        let newLeftSide = document.createElement("div");
-        let newTopSide = document.createElement("div");
-        let newBottomSide = document.createElement("div");
-
-
-        let frontMain = document.createElement("div");
-
-
-        if(buttons[i].Icon)
-        {
-            let frontIcon = document.createElement("img");
-            frontIcon.style.borderColor = hex(buttons[i].Color,"404040",-1);
-            frontIcon.src = buttons[i].Icon;
-            frontMain.appendChild(frontIcon);
-        }
-        else
-        {
-            let frontTitle = document.createElement("h1");
-            frontTitle.style.borderColor = hex(buttons[i].Color,"404040",-1);
-            frontTitle.textContent = buttons[i].Name.substring(0, 1);
-            frontMain.appendChild(frontTitle);
+            setTimeout(function (){
+                element.remove();
+            },120)
         }
 
+        buttons = [];
+        buttonElements = [];
+    }
 
-        frontMain.style.borderColor = hex(buttons[i].Color,"252525",-1);
-        frontMain.style.backgroundColor = hex(buttons[i].Color,"181818",-1);
+    function CreateButtons(){
+        for (let i = 0; i < buttons.length; i++) {
+            let newOne = document.createElement("div");
+            newOne.classList.add("button");
 
-        newFrontSide.classList.add("buttonFrontSide");
-        newBackSide.classList.add("buttonBackSide");
-        newTopSide.classList.add("buttonTopSide");
-        newBottomSide.classList.add("buttonBottomSide");
-        newLeftSide.classList.add("buttonLeftSide");
-        newRightSide.classList.add("buttonRightSide");
-
-        newOne.appendChild(newFrontSide);
-        newOne.appendChild(newBackSide);
-        newOne.appendChild(newRightSide);
-        newOne.appendChild(newLeftSide);
-        newOne.appendChild(newTopSide);
-        newOne.appendChild(newBottomSide);
-
-        newFrontSide.appendChild(frontMain);
+            let newFrontSide = document.createElement("div");
+            let newBackSide = document.createElement("div");
+            let newRightSide = document.createElement("div");
+            let newLeftSide = document.createElement("div");
+            let newTopSide = document.createElement("div");
+            let newBottomSide = document.createElement("div");
 
 
+            let frontMain = document.createElement("div");
 
 
-        newRightSide.appendChild(document.createElement("div"));
-        newLeftSide.appendChild(document.createElement("div"));
-        newTopSide.appendChild(document.createElement("div"));
-        newBottomSide.appendChild(document.createElement("div"));
+            if(buttons[i].Icon)
+            {
+                let frontIcon = document.createElement("img");
+                frontIcon.style.borderColor = hex(buttons[i].Color,"404040",-1);
+                frontIcon.src = buttons[i].Icon;
+                frontMain.appendChild(frontIcon);
+            }
+            else
+            {
+                let frontTitle = document.createElement("h1");
+                frontTitle.style.borderColor = hex(buttons[i].Color,"404040",-1);
+                frontTitle.textContent = buttons[i].Name.substring(0, 1);
+                frontMain.appendChild(frontTitle);
+            }
 
 
-        newTopSide.children[0].textContent = " • ";
-        newBottomSide.children[0].textContent = " • ";
-        newLeftSide.children[0].textContent = buttons[i].Name;
-        newRightSide.children[0].textContent = buttons[i].Tag;
+            frontMain.style.borderColor = hex(buttons[i].Color,"252525",-1);
+            frontMain.style.backgroundColor = hex(buttons[i].Color,"181818",-1);
 
-        newOne.style.color = hex(buttons[i].Color,"121212",1);
+            newFrontSide.classList.add("buttonFrontSide");
+            newBackSide.classList.add("buttonBackSide");
+            newTopSide.classList.add("buttonTopSide");
+            newBottomSide.classList.add("buttonBottomSide");
+            newLeftSide.classList.add("buttonLeftSide");
+            newRightSide.classList.add("buttonRightSide");
 
-        let pads = [
-            newRightSide.children[0],
-            newLeftSide.children[0],
-            newTopSide.children[0],
-            newBottomSide.children[0],
-            newFrontSide
-        ]
+            newOne.appendChild(newFrontSide);
+            newOne.appendChild(newBackSide);
+            newOne.appendChild(newRightSide);
+            newOne.appendChild(newLeftSide);
+            newOne.appendChild(newTopSide);
+            newOne.appendChild(newBottomSide);
 
-        for (let j = 0; j < pads.length; j++) {
-            pads[j].style.backgroundColor = buttons[i].Color;
+            newFrontSide.appendChild(frontMain);
+
+
+
+
+            newRightSide.appendChild(document.createElement("div"));
+            newLeftSide.appendChild(document.createElement("div"));
+            newTopSide.appendChild(document.createElement("div"));
+            newBottomSide.appendChild(document.createElement("div"));
+
+
+            newTopSide.children[0].textContent = " • ";
+            newBottomSide.children[0].textContent = " • ";
+            newLeftSide.children[0].textContent = buttons[i].Name;
+            newRightSide.children[0].textContent = buttons[i].Tag;
+
+            newOne.style.color = hex(buttons[i].Color,"121212",1);
+
+            let pads = [
+                newRightSide.children[0],
+                newLeftSide.children[0],
+                newTopSide.children[0],
+                newBottomSide.children[0],
+                newFrontSide
+            ]
+
+            for (let j = 0; j < pads.length; j++) {
+                pads[j].style.backgroundColor = buttons[i].Color;
+            }
+
+            newRightSide.children[0].style.width =
+                newLeftSide.children[0].style.width =
+                    newTopSide.children[0].style.height =
+                        newBottomSide.children[0].style.height = "0px";
+
+            document.getElementById("Hub").appendChild(newOne);
+
+            newOne.id = String(i);
+            buttonElements[buttonElements.length] = newOne;
         }
-
-        newRightSide.children[0].style.width = String(buttons[i].depth)+"px";
-        newLeftSide.children[0].style.width = String(buttons[i].depth)+"px";
-        newTopSide.children[0].style.height = String(buttons[i].depth)+"px";
-        newBottomSide.children[0].style.height = String(buttons[i].depth)+"px";
-
-        document.getElementById("Hub").appendChild(newOne);
-
-        newOne.id = String(i);
-        buttonElements[buttonElements.length] = newOne;
-
-
     }
 
 
@@ -343,34 +303,26 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     function TweenUp(db,smoothSec){
         smoothSec = smoothSec ? smoothSec : 0.1;
-        if(db){
+
+        document.getElementById("box").style.transition=
             document.getElementById("passZFront").style.transition =
                 document.getElementById("passZBack").style.transition =
                     document.getElementById("passZBack").style.transition =
                         document.getElementById("passXFront").style.transition =
                             document.getElementById("passXBack").style.transition =
                                 document.getElementById("passYFront").style.transition =
-                                    document.getElementById("passYBack").style.transition = `all ${smoothSec}s ease-out`;
+                                    document.getElementById("passYBack").style.transition = db ?`all ${smoothSec}s ease` : "";
 
-
-
-        }else{
-            document.getElementById("passZFront").style.transition =
-                document.getElementById("passZBack").style.transition =
-                    document.getElementById("passZBack").style.transition =
-                        document.getElementById("passXFront").style.transition =
-                            document.getElementById("passXBack").style.transition =
-                                document.getElementById("passYFront").style.transition =
-                                    document.getElementById("passYBack").style.transition = "";
-        }
-
-        for (let i = 0;i<buttonElements.length; i++)
+        for (let i = 0;i<buttonElements.length; i++){
+            buttonElements[i].style.transition = document.getElementById("passZFront").style.transition;
             for (let j = 0; j<buttonElements[i].children.length; j++) {
-                buttonElements[i].children[j].style.transition =document.getElementById("passZFront").style.transition;
+                buttonElements[i].children[j].style.transition = document.getElementById("passZFront").style.transition;
                 for (let  c= 0; c<buttonElements[i].children[j].children.length; c++)
                     buttonElements[i].children[j].children[c].style.transition = document.getElementById("passZFront").style.transition;
 
             }
+        }
+
     }
 
 
@@ -388,7 +340,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         let FVisible = false,RVisible = false,LVisible = false,TVisible = false,BVisible = false,BackVisible = false;
 
+        document.getElementById("box").style.width =
+            document.getElementById("box").style.height =
+                CubeSideSize
 
+        for(let i = 0;i<document.getElementsByClassName("pass").length;i++)
+            document.getElementsByClassName("pass")[i].style.width =
+                document.getElementsByClassName("pass")[i].style.height =
+                    CubeSideSize
 
         document.getElementById("passZFront").style.transform =
             `rotateX(${0+y}deg) rotateY(${180+x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
@@ -472,7 +431,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let orgx = x,orgy = y;
 
         for (let i = 0; i<buttonElements.length;i++){
-            let addX =  0,addY = 0,addZ = -110-(buttons[i].depth/2);
+            let addX =  0,addY = 0,addZ = -CubeSideSize/2-(buttons[i].depth/2);
             let addDegX = 0,addDegY = 0;
             let db = false;
 
@@ -525,26 +484,28 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             switch (buttons[i].Chunk){
                 case 1:{
-                    addX = -55;
-                    addY = -55;
+                    addX = - CubeSideSize/4;
+                    addY = - CubeSideSize/4;
                     break;
                 }
                 case 2:{
-                    addX = 55;
-                    addY = -55;
+                    addX = CubeSideSize/4;
+                    addY = -CubeSideSize/4;
                     break;
                 }
                 case 3:{
-                    addX = -55;
-                    addY = 55;
+                    addX = -CubeSideSize/4;
+                    addY = CubeSideSize/4;
                     break;
                 }
                 case 4:{
-                    addX = 55;
-                    addY = 55;
+                    addX = CubeSideSize/4;
+                    addY = CubeSideSize/4;
                     break;
                 }
             }
+
+
 
             x += addDegX;
             y += addDegY;
@@ -594,6 +555,37 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
 
+            buttonElements[i].getElementsByClassName("buttonTopSide")[0].children[0].style.height =
+                buttonElements[i].getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
+                    buttonElements[i].getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
+                        buttonElements[i].getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[i].depth)+"px";
+
+
+            buttonElements[i].style.width =
+                buttonElements[i].style.height =
+                    buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.width =
+                        buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.height =
+                            buttonElements[i].getElementsByClassName("buttonBackSide")[0].style.width =
+                                buttonElements[i].getElementsByClassName("buttonBackSide")[0].style.height =
+                                    buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.width =
+                                        buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.height =
+                                            buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.width =
+                                                buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.height =
+                                                    buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.width =
+                                                        buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.height =
+                                                            buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.width =
+                                                                buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.height =
+                                                                    `${CubeSideSize * 4/11}px`;
+
+                buttonElements[i].getElementsByClassName("buttonRightSide")[0].children[0].style.height =
+                        buttonElements[i].getElementsByClassName("buttonLeftSide")[0].children[0].style.height =
+                            `${CubeSideSize * 4/11}px`;
+
+            buttonElements[i].getElementsByClassName("buttonTopSide")[0].children[0].style.width =
+                    buttonElements[i].getElementsByClassName("buttonBottomSide")[0].children[0].style.width =
+                            `${CubeSideSize * 4/11}px`;
+
+
             buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.transform =
                 buttons[i].Side < 5 ? `rotateX(${String(y)}deg) rotateY(${String(x)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`
                     : `rotateX(${String(y)}deg) rotateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(-x))}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`
@@ -604,18 +596,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
             ;
 
             buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${y}deg) rotateY(${x+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+40)}px)`
-                    : (`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${(-x-270)}deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${String(addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(addX+40)}px) `
+                buttons[i].Side < 5 ? `rotateX(${y}deg) rotateY(${x+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+CubeSideSize * 4/11/2)}px)`
+                    : (`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${(-x-270)}deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${String(addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? CubeSideSize/2 : 0 ))}px) translateZ(${String(addX+CubeSideSize * 4/11/2)}px) `
             + (buttons[i].Side === 6 ? "scaleY(-1)" :""));
 
 
             buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.transform =
-                buttons[i].Side < 5  ? `rotateX(${y}deg) rotateY(${x-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + 40)}px)`
-                    : (`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x-90 }deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? 110 : 0 ))}px) translateZ(${String(-addX + 40 )}px)`
+                buttons[i].Side < 5  ? `rotateX(${y}deg) rotateY(${x-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + CubeSideSize * 4/11/2)}px)`
+                    : (`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x-90 }deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? CubeSideSize/2 : 0 ))}px) translateZ(${String(-addX + CubeSideSize * 4/11/2 )}px)`
                     +( buttons[i].Side === 6 ? "scaleY(-1)" :""));
-
-
-
 
             if(
                 buttons[i].Side < 5 ?
@@ -631,12 +620,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
             buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${y+90}deg) rotateZ(${-x}deg) translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String(-addY+40)}px)`
-                    :`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x}deg)  translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(-addY+40))}px)`;
+                buttons[i].Side < 5 ? `rotateX(${y+90}deg) rotateZ(${-x}deg) translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String(-addY+CubeSideSize * 4/11/2)}px)`
+                    :`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x}deg)  translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(-addY+CubeSideSize * 4/11/2))}px)`;
 
             buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${y-90}deg) rotateZ(${x}deg) translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String(addY+40)}px)`
-                    :`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y-90)}deg) rotateY(${x}deg)  translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(addY+40))}px)`;
+                buttons[i].Side < 5 ? `rotateX(${y-90}deg) rotateZ(${x}deg) translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String(addY+CubeSideSize * 4/11/2)}px)`
+                    :`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y-90)}deg) rotateY(${x}deg)  translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(addY+CubeSideSize * 4/11/2))}px)`;
 
             if(
                 buttons[i].Side < 5?
@@ -650,8 +639,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }else {
                 buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.opacity = "0";
                 buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.opacity = "1";
-
-
             }
 
 
@@ -966,50 +953,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
 
-    //start at here
-
-    TweenUp(true,.1);
-
-    moving(0,0);
-
-    await sleep(400);
-    moving(0,-10);
-    await sleep(400);
-    moving(-15,-10);
-    await sleep(400);
-
-    for (let i = 0; i < 4; i++){
-        moving(-90*(i+1) - 15,-10);
-        await sleep(100);
-    }
-
-    await sleep(120);
-
-    TweenUp(false);
-
-    CubeInfo.LastXMoved = CubeInfo.XMoved =  -375;
-    CubeInfo.LastYMoved = CubeInfo.YMoved = -10;
-
-    await CreateDynamicBubbles("Notification",[
-        {
-            "Title":"你是誰？！",
-            "Content":"歡迎來到Hxx的Weblog，這裡存著Hxx很唐的...東西。"
-        },
-        {
-            "Content":"眼前的方塊是這網站的核心，方塊上有許多按鈕，你可以轉動方塊選擇你想按的按鈕。按鈕裡面有...這是秘密，不跟你講。:-S"
-        },
-        {
-            "Content":"而你在閱讀的這東西叫做Dynamic Bubble ，動態泡泡，是不是特別動態，特別動感(▀̿Ĺ̯▀̿ ̿)"
-        },
-        {
-            "Content":"喔對了，看到右上角的把手了嗎？向下拉他就「有機會」帶你離開這顆泡泡喔。 (不是百分百的原因是我怕你不知道怎麼用ww)"
-        },
-        {
-            "Content":"還有丫，蘇東坡沒有講過這句話：蘇波哀東的笑容。"
-        }
-    ])
-
-
     let startAt = 0;
 
     let mouseOnButtons = [];
@@ -1029,6 +972,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let ElementsWitchAtPoint = document.elementsFromPoint(x,y);
 
         for (let i = 0; i < ElementsWitchAtPoint.length; i++) {
+            if(retIfParentMatch(ElementsWitchAtPoint[i],"box",0).Parent) break;
 
             let CheckButton = retIfParentMatch(ElementsWitchAtPoint[i],0,"button");
 
@@ -1055,7 +999,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
 
-            if(retIfParentMatch(ElementsWitchAtPoint[i],"box",0,true).Parent) break;
         }
 
         if(
@@ -1075,6 +1018,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let startMove = async function (x,y)
     {
+        if(Locked) return;
+
         if(Date.now() - startAt < 160) return;
 
         StartAtElement = false;
@@ -1086,17 +1031,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         startAt = Date.now();
 
-        // Rotating = true;
-        // CardInfo.CardElement.style.transition = "none";
-
-
         if(!Holding && !Pushing && !Pulling && !Controlling && FinalInfo.Rotating ){
             Holding = true;
             TweenUp(false);
 
             CubeInfo.XMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
             CubeInfo.YMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
-
         }else if(FinalInfo.Button && !Pushing){
             let FinalElement = FinalInfo.Button;
 
@@ -1109,20 +1049,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             FinalElement.style.fontSize = "0px";
 
-
             TweenUp(true);
 
             buttons[Number(FinalElement.id)].depth = 6;
 
-
             FinalElement.getElementsByClassName("buttonBackSide")[0].style.boxShadow =
                 "black 0 0 5px 1px"
-
-
-            FinalElement.getElementsByClassName("buttonTopSide")[0].children[0].style.height =
-                FinalElement.getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
-                    FinalElement.getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
-                        FinalElement.getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(FinalElement.id)].depth)+"px";
 
             moving(CubeInfo.LastXMoved,CubeInfo.LastYMoved);
         } else if(FinalInfo.Bubble && !Pulling && PullUpInfo.MainPullUpIndex === false){
@@ -1141,17 +1073,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     "34px";
 
             Controlling = true;
-        }else if(FinalInfo.View){
-            Rotating = true;
-            let element = FinalInfo.View.getElementsByClassName("DynamicBubbleFrameImageCarrier")[0];
-            element.style.transition = "none";
-
-            CardInfo.XMoved = (x - xStartScreen)/ToStableValue + CardInfo.LastXMoved;
-            CardInfo.YMoved = (y - yStartScreen)/ToStableValue + CardInfo.LastYMoved;
-
         }
-
-
     }
 
 
@@ -1160,6 +1082,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let LastSelectControlButtonIndex = false;
 
     let endMove = async function (x,y){
+        if(Locked) return;
+
         let FinalInfo = getFinalElementWitchAtPoint(x,y);
 
         if(Holding){
@@ -1212,32 +1136,77 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let FinalElement = FinalInfo.Button;
 
             if(FinalElement === StartAtElement){
-                HTTPService.open("GET",buttons[FinalElement.id].Page);
-                HTTPService.send();
+                for (let index in buttons[FinalElement.id].Event){
 
-                let waitUntilLoad = function (){
-                    return new Promise(function (resolve, reject) {
-                        HTTPService.addEventListener("loadend",function (){
-                            resolve(HTTPService.response);
-                        })
-                        HTTPService.addEventListener("error", (err) => {
-                            reject(err);
-                        });
-                    });
+                    let Content = await loadData(buttons[FinalElement.id].Event[index]);
+                    if(!Content) break;
+
+                    switch (index){
+                        case "Page":{
+                            await CreateDynamicBubbles(
+                                "Page",
+                                Content
+                            )
+                            break;
+                        }
+                        case "Cube":{
+                            Locked = 1;
+
+                            TweenUp(true,0.3);
+
+                            CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 - 360;
+                            CubeInfo.LastYMoved = CubeInfo.YMoved = - 10;
+
+                            DeleteButtons();
+
+                            CubeSideSize = 50;
+                            moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+                            await sleep(370);
+
+                            CubeSideSize = 270;
+                            moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+                            await sleep(300)
+
+                            CubeSideSize = 220;
+                            moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+                            await sleep(500);
+
+                            buttons = structuredClone(Content);
+                            CreateButtons();
+                            TweenUp(true,0.3);
+
+                            for(let i = 0;i<buttonElements.length;i++){
+                                buttonElements[i].style.opacity = "0";
+                                FinalElement.style.fontSize = "0px";
+                            }
+
+                            for(let i = 0;i<buttons.length;i++)
+                                buttons[i].depth = 0;
+                            moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+                            await sleep(300);
+                            for(let i = 0;i<buttonElements.length;i++){
+                                buttonElements[i].style.opacity = "1";
+                                FinalElement.style.fontSize = "15px";
+                            }
+                            buttons =  structuredClone(Content);
+
+                            moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+                            await sleep(300);
+                            TweenUp(false);
+
+                            Locked = 0;
+                            break;
+                        }
+                    }
                 }
-
-                let type,content;
-
-                try {
-                    type = "Page";
-                    content = JSON.parse(await waitUntilLoad());
-                } catch (err) {
-                    type = "Notification";
-                    content = [{"Title":"未知錯誤🤔","Content":`您所點擊的按鈕 : ${buttons[FinalElement.id].Name}，觸發了錯誤訊息，但無法從之提取錯誤原因。`},{"Content":"您可以向 me@hxx.lol 發送回饋或是重新嘗試，還請多多見諒！"}];
-                }
-                await CreateDynamicBubbles(type,content);
 
             }
+
         }else if(Pulling){
             Pulling = false;
             let ClickOnIndex = false;
@@ -1345,18 +1314,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         for (let i in mouseOnButtons){
             if(!mouseOnButtons[i]) continue;
+            if(!buttons[Number(mouseOnButtons[i].id)]) continue;
+
             buttons[Number(mouseOnButtons[i].id)].depth = 24;
 
             mouseOnButtons[i].style.fontSize = "15px";
 
-
             mouseOnButtons[i] .getElementsByClassName("buttonBackSide")[0].style.boxShadow =
                 "black 0 0 10px 2px"
-
-            mouseOnButtons[i] .getElementsByClassName("buttonTopSide")[0].children[0].style.height =
-                mouseOnButtons[i] .getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
-                    mouseOnButtons[i] .getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
-                        mouseOnButtons[i] .getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[Number(mouseOnButtons[i] .id)].depth)+"px";
 
             moving(CubeInfo.LastXMoved,CubeInfo.LastYMoved);
 
@@ -1384,6 +1349,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
     let fingerMoving = async function(x,y){
+        if(Locked) return;
+
         if(Holding){
             CubeInfo.XMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
             CubeInfo.YMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
@@ -1506,7 +1473,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         })
     }
-
     function retIfParentMatch(e,id,cname,info){
         if(!info)
             info = {
@@ -1535,5 +1501,145 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
 
     }
+
+    let waitUntilLoad = function (){
+        return new Promise(function (resolve, reject) {
+            HTTPService.addEventListener("loadend",function (){
+                resolve(HTTPService.response);
+            })
+            HTTPService.addEventListener("error", (err) => {
+                reject(err);
+            });
+        });
+    }
+
+    async function loadData(Path){
+        let Content = null;
+
+        try {
+            HTTPService.open("GET",Path);
+            HTTPService.send();
+            Content = JSON.parse(await waitUntilLoad());
+        } catch (err) {
+             await CreateDynamicBubbles(
+                "Notification",
+                [
+                    {
+                        "Title": "好噁心的錯誤",
+                        "Content": `你...你...做了什麼？？竟然導致我的寶貝出現錯誤！... 噓！我聽到他奄奄一息的氣聲：「${err}」`
+                    },
+                    {
+                        "Content": "我們做個交易，要是你能將他說的那句話告訴 me@hxx.lol，這件事我們就當作沒發生過。哼！(還請多多見諒！)"
+                    }
+                ]
+            );
+        }
+
+        return Content;
+    }
+
+
+
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //### START AT HERE ###
+    Locked = 1;
+
+    let defaultButtons = await loadData("./cube/Default.JSON");
+
+    if((new Date().getSeconds())%3) {
+        defaultButtons[0].Color = "#d13333";
+        defaultButtons[0].Icon = "./img/IMG_0537.GIF";
+    }
+
+
+    buttons = structuredClone(defaultButtons);
+
+    CreateButtons();
+
+    for(let i = 0;i<buttons.length;i++)
+        buttons[i].depth = 0;
+
+    for (let i = 0;i<buttonElements.length;i++)
+        buttonElements[i].style.fontSize = "0px";
+
+    moving(CubeInfo.XMoved, CubeInfo.YMoved);
+
+    await sleep(400);
+
+    TweenUp(true,.1);
+
+    moving(0,0);
+
+    await sleep(400);
+    moving(0,-10);
+    await sleep(400);
+    moving(-15,-10);
+    await sleep(400);
+
+    for (let i = 0; i < 4; i++){
+        moving(-90*(i+1) - 15,-10);
+        await sleep(100);
+    }
+
+    await sleep(120);
+
+
+    CubeInfo.LastXMoved = CubeInfo.XMoved =  -375;
+    CubeInfo.LastYMoved = CubeInfo.YMoved = -10;
+
+
+
+    TweenUp(true,.4);
+
+
+
+    await sleep(120);
+
+    buttons = structuredClone(defaultButtons);
+    for (let i = 0;i<buttonElements.length;i++)
+        buttonElements[i].style.fontSize = "15px";
+
+    moving(CubeInfo.XMoved, CubeInfo.YMoved);
+
+    await sleep(440);
+    TweenUp(false);
+
+
+    await CreateDynamicBubbles("Notification",[
+        {
+            "Title":"你是誰？！",
+            "Content":"歡迎來到Hxx的Weblog，這裡存著Hxx很唐的...東西。"
+        },
+        {
+            "Content":"眼前的方塊是這網站的核心，方塊上有許多按鈕，你可以轉動方塊選擇你想按的按鈕。按鈕裡面有...這是秘密，不跟你講。:-S"
+        },
+        {
+            "Content":"而你在閱讀的這東西叫做Dynamic Bubble ，動態泡泡，是不是特別動態，特別動感(▀̿Ĺ̯▀̿ ̿)"
+        },
+        {
+            "Content":"喔對了，看到右上角的把手了嗎？向下拉他就「有機會」帶你離開這顆泡泡喔。 (不是百分百的原因是我怕你不知道怎麼用ww)"
+        },
+        {
+            "Content":"還有丫，蘇東坡沒有講過這句話：蘇波哀東的笑容。"
+        }
+    ])
+
+    Locked = 0;
 });
 

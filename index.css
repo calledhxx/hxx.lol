@@ -55,6 +55,7 @@ body{
 
     width: 220px;
     height: 220px;
+
 }
 
 .pass{
@@ -167,8 +168,6 @@ body{
     z-index: -100;
 
     font-size: 15px;
-
-
 }
 
 .button div{
