@@ -1583,7 +1583,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let defaultCube = await loadData("./cube/Default.JSON");
 
-    await sleep(1000)
+    await sleep(740)
 
     document.body.style.background = defaultCube.BackgroundColor;
 
