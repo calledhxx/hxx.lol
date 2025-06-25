@@ -892,7 +892,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         PullUpInfo.MainPullUpIndex = MainIndex;
 
-        ClickOnBubble.style.height = "calc(100vh - 60px)";
+        ClickOnBubble.style.height = "calc(var(--fh,100vh) - 60px)";
         ClickOnBubble.style.top = "0";
         ClickOnBubble.style.opacity = "1";
 
