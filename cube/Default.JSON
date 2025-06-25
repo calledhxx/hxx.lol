@@ -20,7 +20,7 @@
     "Name":"友宜錄",
     "Tag":"Friends",
     "Event":{
-      "Cube":"./cube/FriendShip.JSON"
+      "Cube":"./cube/Friendship.JSON"
     }
   },
   {
