@@ -120,7 +120,18 @@ let CubeInfo = {
 
 let DynamicBubbles = [];
 
+function setView(){
+    let height = window.innerHeight;
+    let width =  window.innerWidth;
+
+    document.documentElement.style.setProperty('--fh', `${height}px`);
+    document.documentElement.style.setProperty('--fw', `${width}px`);
+}
+document.addEventListener("resize",setView);
+
 document.addEventListener("DOMContentLoaded",  async function () {
+    setView();
+
 
     let xStartScreen = 0,yStartScreen = 0;
 

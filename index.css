@@ -17,10 +17,14 @@
 
 }
 
+root{
+    --fh : 100px;
+    --fw : 100px;
+}
 
 body{
-    height: 100vh;
-    width: 100vw;
+    height: var(--fh,100vh);
+    width: var(--fw,100vw);
     background: #ececec;
 
     overflow: hidden;
