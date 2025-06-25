@@ -1454,14 +1454,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     if(finalButton === StartAtElement.getElementsByTagName("div")[index]){
                         thisElement.style.color = "#ffffff";
                         thisElement.style.fontSize = "20px";
-                        thisElement.style.textShadow = "0 0 40px "+"#292929b3";
                     }else{
                         if(ControlButtons[index]["IMPORTANT?"])
                             thisElement.style.color = "#bf3232"
                         else
                             thisElement.style.color = "#393939";
                         thisElement.style.fontSize = "16px";
-                        thisElement.style.textShadow = "";
                     }
                 }
             }
