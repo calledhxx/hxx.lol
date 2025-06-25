@@ -1558,6 +1558,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
     //
     //
     //### START AT HERE ###
+    TweenUp(true,.14);
+    moving(0,0);
+    await sleep(600);
+    moving(0,-10);
+    await sleep(340);
+    moving(-15,-10);
+
+    moving(-15,-10);
+    CubeInfo.XMoved = -15;
+    CubeInfo.YMoved = -10;
+
+    await sleep(100);
+
     Locked = 1;
 
     let defaultButtons = await loadData("./cube/Default.JSON");
@@ -1567,10 +1580,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
         defaultButtons[0].Icon = "./img/IMG_0537.GIF";
     }
 
-
     buttons = structuredClone(defaultButtons);
-
     CreateButtons();
+
+    TweenUp(true,.4);
+
 
     for(let i = 0;i<buttons.length;i++)
         buttons[i].depth = 0;
@@ -1583,32 +1597,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     moving(CubeInfo.XMoved, CubeInfo.YMoved);
 
-    await sleep(400);
-
-    TweenUp(true,.1);
-
-    moving(0,0);
-
-    await sleep(400);
-    moving(0,-10);
-    await sleep(400);
-    moving(-15,-10);
-    await sleep(400);
-
-    for (let i = 0; i < 4; i++){
-        moving(-90*(i+1) - 15,-10);
-        await sleep(100);
-    }
-
-    await sleep(120);
-
-
-    CubeInfo.LastXMoved = CubeInfo.XMoved =  -375;
-    CubeInfo.LastYMoved = CubeInfo.YMoved = -10;
-
-
-
-    TweenUp(true,.4);
 
     await sleep(120);
 
@@ -1620,7 +1608,23 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     moving(CubeInfo.XMoved, CubeInfo.YMoved);
 
-    await sleep(440);
+    await sleep(200);
+
+    TweenUp(true,.1);
+
+    for (let i = 0; i < 4; i++){
+        moving(-90*(i+1) - 15,-10);
+        await sleep(100);
+    }
+
+
+
+    CubeInfo.LastXMoved = CubeInfo.XMoved =  -375;
+    CubeInfo.LastYMoved = CubeInfo.YMoved = -10;
+
+
+    await sleep(240);
+
     TweenUp(false);
 
 
