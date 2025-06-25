@@ -251,6 +251,8 @@ body{
     border-radius: 50%;
 
     border: 2px solid #000000;
+
+    text-shadow: rgba(0, 0, 0, 0.5) 0 0 20px;
 }
 
 .buttonBackSide{
