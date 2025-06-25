@@ -382,14 +382,14 @@ body{
 
     width: 30%; /*100%*/
     min-height: 120px;
-    max-height: calc(100vh - 60px);
+    max-height: calc(var(--fh,100vh) - 60px);
     height: 120px;
 
     /*border: #b6b6b6 2px solid;*/
     border-radius: 40px;
 
     transform: translateX(-50%) translateY(0);
-    top: 100vh;
+    top: var(--fh,100vh);
     left: 50%;
 
     background: rgba(228, 228, 228, 0.7);
