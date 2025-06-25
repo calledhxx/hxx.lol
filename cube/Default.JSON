@@ -24,6 +24,30 @@
       "Event":{
         "Cube":"./cube/Friendship.JSON"
       }
+    },
+    {
+      "Side": 1,
+      "Chunk": 4,
+      "Color":"#cc8131",
+      "depth":24,
+      "Icon": null,
+      "Name":"網站日誌",
+      "Tag":"Logs",
+      "Event":{
+        "Page":"./page/Logs.JSON"
+      }
+    },
+    {
+      "Side": 5,
+      "Chunk": 4,
+      "Color":"#74a84a",
+      "depth":24,
+      "Icon": null,
+      "Name":"草",
+      "Tag":"Grass",
+      "Event":{
+        "Page":"./page/Grass.JSON"
+      }
     }
   ]
 }
