@@ -6,7 +6,7 @@
   },
   "Buttons": [
     {
-      "Side": 6,
+      "Side": 1,
       "Chunk": 1,
       "Color": "#b696ff",
       "depth": 24,
@@ -20,14 +20,27 @@
 
     {
       "Side": 1,
-      "Chunk": 1,
+      "Chunk": 2,
       "Color":"#cab5ff",
       "depth":24,
       "Icon": null,
       "Name":"太陽魚",
       "Tag":"Sunfish",
       "Event":{
-        "Page":"no"
+        "Page":""
+      }
+    },
+
+    {
+      "Side": 1,
+      "Chunk": 3,
+      "Color":"#cab5ff",
+      "depth":24,
+      "Icon": null,
+      "Name":"破魚",
+      "Tag":"Profish",
+      "Event":{
+        "Page":""
       }
     }
   ]
