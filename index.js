@@ -1280,7 +1280,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }else if(Controlling && PullUpInfo.MainPullUpIndex !== false){
             Controlling = false;
-            StartAtElement.getElementsByTagName("hr")[0].style.opacity = "1";
 
             if(LastSelectControlButtonIndex !== false){
                 switch (ControlButtons[LastSelectControlButtonIndex].Name){
@@ -1313,6 +1312,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 setTimeout(function (){
                     StartAtElement.style.overflow = "visible"
+                    StartAtElement.getElementsByTagName("hr")[0].style.opacity = "1";
                 },200)
                 LastSelectControlButtonIndex = false;
             }
