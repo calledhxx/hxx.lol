@@ -1,14 +1,10 @@
 {
-  "BackgroundColor": "#efe9ff",
-  "Chunk": {
-    "Black": "#463771",
-    "White": "#d1c4f5"
-  },
+
   "Buttons": [
     {
       "Side": 1,
       "Chunk": 1,
-      "Color": "#b696ff",
+      "Color": "#eb5795",
       "depth": 24,
       "Icon": null,
       "Name": "返回",
