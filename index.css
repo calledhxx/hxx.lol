@@ -25,7 +25,7 @@ root{
 body{
     height: var(--fh,100vh);
     width: var(--fw,100vw);
-    background: #ececec;
+    background: #101010;
 
     overflow: hidden;
     position: absolute;
@@ -91,11 +91,11 @@ body{
 }
 
 .blackChunk{
-    background: #202020;
+    background: #101010;
 }
 
 .whiteChunk{
-    background: #cfcfcf;
+    background: #101010;
 }
 
 

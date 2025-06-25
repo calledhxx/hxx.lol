@@ -1580,7 +1580,24 @@ document.addEventListener("DOMContentLoaded",  async function () {
     //### START AT HERE ###
     TweenUp(true,.14);
     moving(0,0);
-    await sleep(600);
+
+    let defaultCube = await loadData("./cube/Default.JSON");
+
+    await sleep(1000)
+
+    document.body.style.background = defaultCube.BackgroundColor;
+
+    for (let i = 0;i<document.getElementsByClassName("blackChunk").length;i++)
+        document.getElementsByClassName("blackChunk")[i].style.background = defaultCube.Chunk.Black;
+
+    for (let i = 0;i<document.getElementsByClassName("whiteChunk").length;i++)
+        document.getElementsByClassName("whiteChunk")[i].style.background = defaultCube.Chunk.White;
+
+
+    let defaultButtons = defaultCube.Buttons;
+
+
+    await sleep(300);
     moving(0,-10);
     await sleep(340);
     moving(-15,-10);
@@ -1593,18 +1610,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     Locked = 1;
 
-    let defaultCube = await loadData("./cube/Default.JSON");
 
-    document.body.style.background = defaultCube.BackgroundColor;
-
-    for (let i = 0;i<document.getElementsByClassName("blackChunk").length;i++)
-        document.getElementsByClassName("blackChunk")[i].style.background = defaultCube.Chunk.Black;
-
-    for (let i = 0;i<document.getElementsByClassName("whiteChunk").length;i++)
-        document.getElementsByClassName("whiteChunk")[i].style.background = defaultCube.Chunk.White;
-
-
-    let defaultButtons = defaultCube.Buttons;
 
     buttons = structuredClone(defaultButtons);
     CreateButtons();
