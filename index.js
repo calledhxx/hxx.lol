@@ -1172,7 +1172,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             CubeSideSize = 220;
                             moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                            await sleep(500);
+                            await sleep(300);
 
                             buttons = structuredClone(Content);
                             CreateButtons();
@@ -1187,7 +1187,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                                 buttons[i].depth = 0;
                             moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                            await sleep(300);
+                            await sleep(100);
                             for(let i = 0;i<buttonElements.length;i++){
                                 buttonElements[i].style.opacity = "1";
                                 FinalElement.style.fontSize = "15px";
@@ -1576,7 +1576,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
         buttons[i].depth = 0;
 
     for (let i = 0;i<buttonElements.length;i++)
+    {
         buttonElements[i].style.fontSize = "0px";
+        buttonElements[i].style.opacity = "0";
+    }
 
     moving(CubeInfo.XMoved, CubeInfo.YMoved);
 
@@ -1607,13 +1610,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     TweenUp(true,.4);
 
-
-
     await sleep(120);
 
     buttons = structuredClone(defaultButtons);
-    for (let i = 0;i<buttonElements.length;i++)
+    for (let i = 0;i<buttonElements.length;i++){
         buttonElements[i].style.fontSize = "15px";
+        buttonElements[i].style.opacity = "1";
+    }
 
     moving(CubeInfo.XMoved, CubeInfo.YMoved);
 
