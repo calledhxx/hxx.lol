@@ -1328,7 +1328,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             await sleep(100);
 
 
-            TweenUp(false);
 
             mouseOnButtons[i] = null;
         }
