@@ -166,13 +166,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
             dynamicBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.background
-                = "#"+hex(Cube.BackgroundColor,"080808",1) + "7f";
-
+                = "#"+hex(Cube.BackgroundColor,"030303",-1) + "CD";
             dynamicBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.boxShadow
-                = "0 0 10px 10px "+"#"+hex(Cube.BackgroundColor,"080808",1) + "7f";
+                = "0 0 10px 10px "+"#"+hex(Cube.BackgroundColor,"020202",-1) + "7f";
 
             dynamicBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.borderColor
-                = "#"+hex(Cube.BackgroundColor,"101010",-1) + "BF";
+                = "#"+hex(Cube.BackgroundColor,"111111",-1) + "BF";
 
            dynamicBubble.getElementsByClassName("DynamicBubbleControlBar")[0]
                 .getElementsByTagName("hr")[0].style.boxShadow = "0 0 10px 10px "+
@@ -747,13 +746,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         newControlBar.style.background
-            = "#"+hex(Cube.BackgroundColor,"080808",1) + "7f";
+            = "#"+hex(Cube.BackgroundColor,"030303",-1) + "CD";
 
         newControlBar.style.boxShadow
-            = "0 0 10px 10px "+"#"+hex(Cube.BackgroundColor,"080808",1) + "7f";
+            = "0 0 10px 10px "+"#"+hex(Cube.BackgroundColor,"020202",-1) + "7f";
 
         newControlBar.style.borderColor
-            = "#"+hex(Cube.BackgroundColor,"101010",-1) + "BF";
+            = "#"+hex(Cube.BackgroundColor,"111111",-1) + "BF";
 
 
         let newControlBarMiddleContent = document.createElement("hr");
@@ -1509,7 +1508,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 for (let index = 0; index < StartAtElement.getElementsByTagName("div").length; index++) {
                     let thisElement = StartAtElement.getElementsByTagName("div")[index];
                     if(finalButton === StartAtElement.getElementsByTagName("div")[index]){
-                        thisElement.style.color = "white";
+                        thisElement.style.color = "#ffffff";
                         thisElement.style.fontSize = "20px";
                     }else{
                         if(ControlButtons[index]["IMPORTANT?"])
