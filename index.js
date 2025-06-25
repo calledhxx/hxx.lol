@@ -11,7 +11,7 @@ function checkIfMobile() {
     return check;
 };
 
-let buttons = [];
+let Cube = [];
 
 let ControlButtons = [
     {
@@ -145,10 +145,27 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let buttonElements = [];
 
+    function SummonCube(CubeData){
+        DeleteButtons();
+
+        Cube = structuredClone(CubeData);
+
+        document.body.style.background = Cube.BackgroundColor;
+
+        for (let i = 0;i<document.getElementsByClassName("blackChunk").length;i++)
+            document.getElementsByClassName("blackChunk")[i].style.background = Cube.Chunk.Black;
+
+        for (let i = 0;i<document.getElementsByClassName("whiteChunk").length;i++)
+            document.getElementsByClassName("whiteChunk")[i].style.background = Cube.Chunk.White;
+
+        CreateButtons();
+    }
+
     function DeleteButtons() {
-        for (let i = 0; i < buttons.length; i++){
+        if(!Cube.Buttons) return;
+        for (let i = 0; i < Cube.Buttons.length; i++){
             let element = buttonElements[i];
-            buttons[i].depth = 0;
+            Cube.Buttons[i].depth = 0;
             element.style.opacity = "0";
 
             setTimeout(function (){
@@ -156,12 +173,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
             },120)
         }
 
-        buttons = [];
+        Cube.Buttons = [];
         buttonElements = [];
+
+
     }
 
     function CreateButtons(){
-        for (let i = 0; i < buttons.length; i++) {
+        for (let i = 0; i < Cube.Buttons.length; i++) {
             let newOne = document.createElement("div");
             newOne.classList.add("button");
 
@@ -176,24 +195,24 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let frontMain = document.createElement("div");
 
 
-            if(buttons[i].Icon)
+            if(Cube.Buttons[i].Icon)
             {
                 let frontIcon = document.createElement("img");
-                frontIcon.style.borderColor = hex(buttons[i].Color,"404040",-1);
-                frontIcon.src = buttons[i].Icon;
+                frontIcon.style.borderColor = hex(Cube.Buttons[i].Color,"404040",-1);
+                frontIcon.src = Cube.Buttons[i].Icon;
                 frontMain.appendChild(frontIcon);
             }
             else
             {
                 let frontTitle = document.createElement("h1");
-                frontTitle.style.borderColor = hex(buttons[i].Color,"404040",-1);
-                frontTitle.textContent = buttons[i].Name.substring(0, 1);
+                frontTitle.style.borderColor = hex(Cube.Buttons[i].Color,"404040",-1);
+                frontTitle.textContent = Cube.Buttons[i].Name.substring(0, 1);
                 frontMain.appendChild(frontTitle);
             }
 
 
-            frontMain.style.borderColor = hex(buttons[i].Color,"252525",-1);
-            frontMain.style.backgroundColor = hex(buttons[i].Color,"181818",-1);
+            frontMain.style.borderColor = hex(Cube.Buttons[i].Color,"252525",-1);
+            frontMain.style.backgroundColor = hex(Cube.Buttons[i].Color,"181818",-1);
 
             newFrontSide.classList.add("buttonFrontSide");
             newBackSide.classList.add("buttonBackSide");
@@ -222,10 +241,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             newTopSide.children[0].textContent = " • ";
             newBottomSide.children[0].textContent = " • ";
-            newLeftSide.children[0].textContent = buttons[i].Name;
-            newRightSide.children[0].textContent = buttons[i].Tag;
+            newLeftSide.children[0].textContent = Cube.Buttons[i].Name;
+            newRightSide.children[0].textContent = Cube.Buttons[i].Tag;
 
-            newOne.style.color = hex(buttons[i].Color,"121212",1);
+            newOne.style.color = hex(Cube.Buttons[i].Color,"121212",1);
 
             let pads = [
                 newRightSide.children[0],
@@ -236,7 +255,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             ]
 
             for (let j = 0; j < pads.length; j++) {
-                pads[j].style.backgroundColor = buttons[i].Color;
+                pads[j].style.backgroundColor = Cube.Buttons[i].Color;
             }
 
             newRightSide.children[0].style.width =
@@ -443,11 +462,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let orgx = x,orgy = y;
 
         for (let i = 0; i<buttonElements.length;i++){
-            let addX =  0,addY = 0,addZ = -CubeSideSize/2-(buttons[i].depth/2);
+            let addX =  0,addY = 0,addZ = -CubeSideSize/2-(Cube.Buttons[i].depth/2);
             let addDegX = 0,addDegY = 0;
             let db = false;
 
-            switch (buttons[i].Side){
+            switch (Cube.Buttons[i].Side){
                 case 1:{ //f
                     addDegX = 0;
                     db = FVisible;
@@ -494,7 +513,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
 
-            switch (buttons[i].Chunk){
+            switch (Cube.Buttons[i].Chunk){
                 case 1:{
                     addX = - CubeSideSize/4;
                     addY = - CubeSideSize/4;
@@ -537,30 +556,30 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 (Math.abs(y360Moved)>180) ? 180-(Math.abs(y360Moved)-180) : Math.abs(y360Moved);
 
 
-            if(buttons[i].Side < 5 ?
+            if(Cube.Buttons[i].Side < 5 ?
                 (YtoFXnFZDeg < 90 ? toFXDeg > 90 : toFXDeg < 90)
                 :
                 (toFYDeg < 90 ? toFXDeg > 90 : toFXDeg < 90)
             ){
-                if(buttons[i].Chunk%2===1){
+                if(Cube.Buttons[i].Chunk%2===1){
                     buttonElements[i].style.zIndex = String(Number(buttonElements[i].style.zIndex) - 1);
                 }
             }else{
-                if(buttons[i].Chunk%2!==1){
+                if(Cube.Buttons[i].Chunk%2!==1){
                     buttonElements[i].style.zIndex = String(Number(buttonElements[i].style.zIndex) - 1);
                 }
             }
 
-            if(buttons[i].Side < 5 ?
+            if(Cube.Buttons[i].Side < 5 ?
                 toFYDeg > 90
                 :
                 (toFYDeg < 90 ? toFZDeg > 90 : toFZDeg < 90)
             ){
-                if(buttons[i].Chunk>2){
+                if(Cube.Buttons[i].Chunk>2){
                     buttonElements[i].style.zIndex = String(Number(buttonElements[i].style.zIndex) - 1);
                 }
             }else{
-                if(buttons[i].Chunk<=2){
+                if(Cube.Buttons[i].Chunk<=2){
                     buttonElements[i].style.zIndex = String(Number(buttonElements[i].style.zIndex) - 1);
                 }
             }
@@ -570,7 +589,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             buttonElements[i].getElementsByClassName("buttonTopSide")[0].children[0].style.height =
                 buttonElements[i].getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
                     buttonElements[i].getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
-                        buttonElements[i].getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(buttons[i].depth)+"px";
+                        buttonElements[i].getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(Cube.Buttons[i].depth)+"px";
 
 
             buttonElements[i].style.width =
@@ -599,30 +618,30 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
             buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${String(y)}deg) rotateY(${String(x)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`
-                    : `rotateX(${String(y)}deg) rotateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(-x))}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+buttons[i].depth/2)}px)`
+                Cube.Buttons[i].Side < 5 ? `rotateX(${String(y)}deg) rotateY(${String(x)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+Cube.Buttons[i].depth/2)}px)`
+                    : `rotateX(${String(y)}deg) rotateZ(${String((Cube.Buttons[i].Side === 6 ? -1 : 1 )*(-x))}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+Cube.Buttons[i].depth/2)}px)`
 
             buttonElements[i].getElementsByClassName("buttonBackSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${String(y)}deg) rotateY(${String(x+180)}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String(addZ+buttons[i].depth/2)}px)`
-                    : `rotateX(${String(y+180)}deg) rotateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(x+180))}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String((addZ+buttons[i].depth/2))}px)`
+                Cube.Buttons[i].Side < 5 ? `rotateX(${String(y)}deg) rotateY(${String(x+180)}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String(addZ+Cube.Buttons[i].depth/2)}px)`
+                    : `rotateX(${String(y+180)}deg) rotateZ(${String((Cube.Buttons[i].Side === 6 ? -1 : 1 )*(x+180))}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String((addZ+Cube.Buttons[i].depth/2))}px)`
             ;
 
             buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${y}deg) rotateY(${x+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+CubeSideSize * 4/11/2)}px)`
-                    : (`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${(-x-270)}deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${String(addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? CubeSideSize/2 : 0 ))}px) translateZ(${String(addX+CubeSideSize * 4/11/2)}px) `
-            + (buttons[i].Side === 6 ? "scaleY(-1)" :""));
+                Cube.Buttons[i].Side < 5 ? `rotateX(${y}deg) rotateY(${x+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+CubeSideSize * 4/11/2)}px)`
+                    : (`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${(-x-270)}deg) rotateZ(${(Cube.Buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${String(addZ)}px)  translateY(${String(addY+(Cube.Buttons[i].Side === 6 ? CubeSideSize/2 : 0 ))}px) translateZ(${String(addX+CubeSideSize * 4/11/2)}px) `
+            + (Cube.Buttons[i].Side === 6 ? "scaleY(-1)" :""));
 
 
             buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.transform =
-                buttons[i].Side < 5  ? `rotateX(${y}deg) rotateY(${x-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + CubeSideSize * 4/11/2)}px)`
-                    : (`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x-90 }deg) rotateZ(${(buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${String(addY+(buttons[i].Side === 6 ? CubeSideSize/2 : 0 ))}px) translateZ(${String(-addX + CubeSideSize * 4/11/2 )}px)`
-                    +( buttons[i].Side === 6 ? "scaleY(-1)" :""));
+                Cube.Buttons[i].Side < 5  ? `rotateX(${y}deg) rotateY(${x-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + CubeSideSize * 4/11/2)}px)`
+                    : (`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x-90 }deg) rotateZ(${(Cube.Buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${String(addY+(Cube.Buttons[i].Side === 6 ? CubeSideSize/2 : 0 ))}px) translateZ(${String(-addX + CubeSideSize * 4/11/2 )}px)`
+                    +( Cube.Buttons[i].Side === 6 ? "scaleY(-1)" :""));
 
             if(
-                buttons[i].Side < 5 ?
+                Cube.Buttons[i].Side < 5 ?
                     (YtoFXnFZDeg < 90  ? toFXDeg < 90 : toFXDeg > 90)
                     :
-                    (toFYDeg < 90  ? (buttons[i].Side  !== 6 ? toFXDeg < 90 :  toFXDeg > 90) : (buttons[i].Side  !== 6 ? toFXDeg > 90 :  toFXDeg < 90))
+                    (toFYDeg < 90  ? (Cube.Buttons[i].Side  !== 6 ? toFXDeg < 90 :  toFXDeg > 90) : (Cube.Buttons[i].Side  !== 6 ? toFXDeg > 90 :  toFXDeg < 90))
             ){
                 buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.opacity = "1";
                 buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.opacity = "0";
@@ -632,15 +651,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
             buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${y+90}deg) rotateZ(${-x}deg) translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String(-addY+CubeSideSize * 4/11/2)}px)`
-                    :`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x}deg)  translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(-addY+CubeSideSize * 4/11/2))}px)`;
+                Cube.Buttons[i].Side < 5 ? `rotateX(${y+90}deg) rotateZ(${-x}deg) translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String(-addY+CubeSideSize * 4/11/2)}px)`
+                    :`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x}deg)  translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String((Cube.Buttons[i].Side === 6 ? -1 : 1 )*(-addY+CubeSideSize * 4/11/2))}px)`;
 
             buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.transform =
-                buttons[i].Side < 5 ? `rotateX(${y-90}deg) rotateZ(${x}deg) translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String(addY+CubeSideSize * 4/11/2)}px)`
-                    :`rotateX(${(buttons[i].Side === 6 ? -1 : 1 )*(y-90)}deg) rotateY(${x}deg)  translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String((buttons[i].Side === 6 ? -1 : 1 )*(addY+CubeSideSize * 4/11/2))}px)`;
+                Cube.Buttons[i].Side < 5 ? `rotateX(${y-90}deg) rotateZ(${x}deg) translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String(addY+CubeSideSize * 4/11/2)}px)`
+                    :`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y-90)}deg) rotateY(${x}deg)  translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String((Cube.Buttons[i].Side === 6 ? -1 : 1 )*(addY+CubeSideSize * 4/11/2))}px)`;
 
             if(
-                buttons[i].Side < 5?
+                Cube.Buttons[i].Side < 5?
                     (toFYDeg < 90)
                     :
                     (toFZDeg < 90  ? toFYDeg < 90 : toFYDeg > 90)
@@ -1063,7 +1082,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             TweenUp(true);
 
-            buttons[Number(FinalElement.id)].depth = 6;
+            Cube.Buttons[Number(FinalElement.id)].depth = 6;
 
             FinalElement.getElementsByClassName("buttonBackSide")[0].style.boxShadow =
                 "black 0 0 5px 1px"
@@ -1148,9 +1167,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let FinalElement = FinalInfo.Button;
 
             if(FinalElement === StartAtElement){
-                for (let index in buttons[FinalElement.id].Event){
+                for (let index in Cube.Buttons[FinalElement.id].Event){
 
-                    let Content = await loadData(buttons[FinalElement.id].Event[index]);
+                    let Content = await loadData(Cube.Buttons[FinalElement.id].Event[index]);
                     if(!Content) break;
 
                     switch (index){
@@ -1163,22 +1182,26 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         }
                         case "Cube":{
                             Locked = 1;
-
-                            document.body.style.background = Content.BackgroundColor;
-
-                            for (let i = 0;i<document.getElementsByClassName("blackChunk").length;i++)
-                                document.getElementsByClassName("blackChunk")[i].style.background = Content.Chunk.Black;
-
-                            for (let i = 0;i<document.getElementsByClassName("whiteChunk").length;i++)
-                                document.getElementsByClassName("whiteChunk")[i].style.background = Content.Chunk.White;
-
-
                             TweenUp(true,0.3);
 
                             CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 - 360;
                             CubeInfo.LastYMoved = CubeInfo.YMoved = - 10;
 
-                            DeleteButtons();
+
+                            let TheCube = structuredClone(Content);
+                            SummonCube(TheCube);
+                            TweenUp(true,0.3);
+
+
+                            for(let i = 0;i<buttonElements.length;i++){
+                                buttonElements[i].style.opacity = "0";
+                                FinalElement.style.fontSize = "0px";
+                            }
+
+                            for(let i = 0;i<Cube.Buttons.length;i++)
+                                Cube.Buttons[i].depth = 0;
+                            moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
 
                             CubeSideSize = 50;
                             moving(CubeInfo.XMoved,CubeInfo.YMoved);
@@ -1195,25 +1218,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                             await sleep(300);
 
-                            buttons = structuredClone(Content.Buttons);
-                            CreateButtons();
-                            TweenUp(true,0.3);
-
-                            for(let i = 0;i<buttonElements.length;i++){
-                                buttonElements[i].style.opacity = "0";
-                                FinalElement.style.fontSize = "0px";
-                            }
-
-                            for(let i = 0;i<buttons.length;i++)
-                                buttons[i].depth = 0;
-                            moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                            Cube.Buttons = structuredClone(Content.Buttons);
 
                             await sleep(100);
                             for(let i = 0;i<buttonElements.length;i++){
                                 buttonElements[i].style.opacity = "1";
                                 FinalElement.style.fontSize = "15px";
                             }
-                            buttons =  structuredClone(Content.Buttons);
+                            Cube.Buttons =  structuredClone(Content.Buttons);
 
                             moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
@@ -1335,9 +1347,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         for (let i in mouseOnButtons){
             if(!mouseOnButtons[i]) continue;
-            if(!buttons[Number(mouseOnButtons[i].id)]) continue;
+            if(!Cube.Buttons[Number(mouseOnButtons[i].id)]) continue;
 
-            buttons[Number(mouseOnButtons[i].id)].depth = 24;
+            Cube.Buttons[Number(mouseOnButtons[i].id)].depth = 24;
 
             mouseOnButtons[i].style.fontSize = "15px";
 
@@ -1582,20 +1594,21 @@ document.addEventListener("DOMContentLoaded",  async function () {
     moving(0,0);
 
     let defaultCube = await loadData("./cube/Default.JSON");
+    SummonCube(defaultCube);
+
+    for(let i = 0;i<Cube.Buttons.length;i++)
+        Cube.Buttons[i].depth = 0;
+
+    for (let i = 0;i<buttonElements.length;i++)
+    {
+        buttonElements[i].style.fontSize = "0px";
+        buttonElements[i].style.opacity = "0";
+    }
+
+    moving(CubeInfo.XMoved, CubeInfo.YMoved);
+    TweenUp(true,.14);
 
     await sleep(740)
-
-    document.body.style.background = defaultCube.BackgroundColor;
-
-    for (let i = 0;i<document.getElementsByClassName("blackChunk").length;i++)
-        document.getElementsByClassName("blackChunk")[i].style.background = defaultCube.Chunk.Black;
-
-    for (let i = 0;i<document.getElementsByClassName("whiteChunk").length;i++)
-        document.getElementsByClassName("whiteChunk")[i].style.background = defaultCube.Chunk.White;
-
-
-    let defaultButtons = defaultCube.Buttons;
-
 
     await sleep(300);
     moving(0,-10);
@@ -1611,28 +1624,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
     Locked = 1;
 
 
-
-    buttons = structuredClone(defaultButtons);
-    CreateButtons();
-
     TweenUp(true,.4);
 
 
-    for(let i = 0;i<buttons.length;i++)
-        buttons[i].depth = 0;
-
-    for (let i = 0;i<buttonElements.length;i++)
-    {
-        buttonElements[i].style.fontSize = "0px";
-        buttonElements[i].style.opacity = "0";
-    }
-
-    moving(CubeInfo.XMoved, CubeInfo.YMoved);
 
 
     await sleep(120);
 
-    buttons = structuredClone(defaultButtons);
+    Cube.Buttons = structuredClone(defaultCube.Buttons);
+
     for (let i = 0;i<buttonElements.length;i++){
         buttonElements[i].style.fontSize = "15px";
         buttonElements[i].style.opacity = "1";
