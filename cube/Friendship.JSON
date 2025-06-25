@@ -40,7 +40,7 @@
       "Name":"破魚",
       "Tag":"Profish",
       "Event":{
-        "Page":""
+        "Cube":"./cube/aaaa.JSON"
       }
     }
   ]

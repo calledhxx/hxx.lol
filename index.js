@@ -36,6 +36,9 @@ function hex(a,b,c){
     if(a.substring(0,1) === "#") a = a.substring(1,7)
     if(b.substring(0,1) === "#") b = b.substring(1,7)
 
+    a = a.toLowerCase()
+    b = b.toLowerCase()
+
     let str = [
         '0',
         '1',
@@ -989,7 +992,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             await sleep(120);
             ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "1";
 
-
+            StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transition = "all 120ms ease-out";
             ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
                 `translate(-50%,-50%) rotateZ(19deg)`;
 
@@ -1467,7 +1470,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }else{
                     StartAtElement.style.transition = "none";
 
-
                     StartAtElement.style.width = StartAtElement.style.height =
                         `${(y - yStartScreen > 0 ? (y - yStartScreen)*.2 : 0)+34}px`;
 
@@ -1480,6 +1482,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                     StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
                         `translate(-50%,-50%) rotateZ(${-(Math.asin(tX/tSlide) * 180/Math.PI)*0.8}deg)`
+                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transition = "none";
                 }
             }
 
@@ -1510,12 +1513,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     if(finalButton === StartAtElement.getElementsByTagName("div")[index]){
                         thisElement.style.color = "#ffffff";
                         thisElement.style.fontSize = "20px";
+                        thisElement.style.textShadow = "0 0 40px "+"#292929b3";
                     }else{
                         if(ControlButtons[index]["IMPORTANT?"])
                             thisElement.style.color = "#bf3232"
                         else
                             thisElement.style.color = "#393939";
                         thisElement.style.fontSize = "16px";
+                        thisElement.style.textShadow = "";
                     }
                 }
             }
