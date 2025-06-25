@@ -1282,7 +1282,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             Controlling = false;
             StartAtElement.getElementsByTagName("hr")[0].style.opacity = "1";
 
-
             if(LastSelectControlButtonIndex !== false){
                 switch (ControlButtons[LastSelectControlButtonIndex].Name){
                     case "回上一動":{
@@ -1312,7 +1311,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     }
                 }
 
-
+                setTimeout(function (){
+                    StartAtElement.style.overflow = "visible"
+                },200)
                 LastSelectControlButtonIndex = false;
             }
         }
@@ -1327,18 +1328,18 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     await sleep(20)
 
                     if(!mouseOnControlBars[i]) return;
+
                     mouseOnControlBars[i].getElementsByTagName("div")[index].style.opacity = "0";
                 }
                 mouseOnControlBars[i].style.transition = "";
-
                 await sleep(10);
 
                 mouseOnControlBars[i].style.width =
                     mouseOnControlBars[i].style.height =
                         "28px";
 
-
-
+                mouseOnControlBars[i].getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transition =
+                    "all 120ms ease"
                 mouseOnControlBars[i].getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
                     `translate(-50%,-50%) rotateZ(0deg)`
 
@@ -1409,7 +1410,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         StartAtElement.getElementsByTagName("div")[index].style.opacity = "1";
                     }
                 }else{
-                    StartAtElement.style.transition = "none";
 
                     StartAtElement.style.width = StartAtElement.style.height =
                         `${(y - yStartScreen > 0 ? (y - yStartScreen)*.2 : 0)+34}px`;
@@ -1430,6 +1430,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             if(ControlBarIsDraw)
             {
+                StartAtElement.style.overflow = "hidden";
 
                 let LeastPXToCursor = false;
                 let finalButton = false;
@@ -1454,14 +1455,24 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     if(finalButton === StartAtElement.getElementsByTagName("div")[index]){
                         thisElement.style.color = "#ffffff";
                         thisElement.style.fontSize = "20px";
+
+                        if(ControlButtons[index]["IMPORTANT?"])
+                            thisElement.style.background = "#bf3232"
+                        else
+                            thisElement.style.background = "#393939";
+
                     }else{
                         if(ControlButtons[index]["IMPORTANT?"])
                             thisElement.style.color = "#bf3232"
                         else
                             thisElement.style.color = "#393939";
+
+                        thisElement.style.background = "";
                         thisElement.style.fontSize = "16px";
                     }
                 }
+            }else{
+                StartAtElement.style.overflow = "visible";
             }
         }
 
