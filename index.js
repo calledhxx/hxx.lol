@@ -158,6 +158,40 @@ document.addEventListener("DOMContentLoaded",  async function () {
         for (let i = 0;i<document.getElementsByClassName("whiteChunk").length;i++)
             document.getElementsByClassName("whiteChunk")[i].style.background = Cube.Chunk.White;
 
+        for(let i = 0;i<document.getElementsByClassName("DynamicBubble").length;i++){
+            let dynamicBubble = document.getElementsByClassName("dynamicBubble")[i];
+            dynamicBubble.style.backgroundColor = "#"+hex(Cube.BackgroundColor,"080808",-1) + "B2";
+            dynamicBubble.style.borderColor = "#"+hex(Cube.BackgroundColor,"090909",-1) + "B2";
+            dynamicBubble.style.boxShadow =  "0 0 40px 5px" +"#"+hex(Cube.BackgroundColor,"262626",-1);
+
+
+            dynamicBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.background
+                = "#"+hex(Cube.BackgroundColor,"080808",1) + "7f";
+
+            dynamicBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.boxShadow
+                = "0 0 10px 10px "+"#"+hex(Cube.BackgroundColor,"080808",1) + "7f";
+
+            dynamicBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.borderColor
+                = "#"+hex(Cube.BackgroundColor,"101010",-1) + "BF";
+
+           dynamicBubble.getElementsByClassName("DynamicBubbleControlBar")[0]
+                .getElementsByTagName("hr")[0].style.boxShadow = "0 0 10px 10px "+
+                "#"+hex(Cube.BackgroundColor,"090909",-1)+"BA";
+
+            dynamicBubble.getElementsByClassName("DynamicBubbleControlBar")[0]
+                .getElementsByClassName("DynamicBubbleControlBarHandleRope")[0]
+                .style.background =
+
+                dynamicBubble.getElementsByClassName("DynamicBubbleControlBar")[0]
+                    .getElementsByClassName("DynamicBubbleControlBarHandleGrip")[0]
+                    .style.borderColor =
+
+                dynamicBubble.getElementsByClassName("DynamicBubbleControlBar")[0]
+                    .getElementsByTagName("hr")[0].style.background = "#"+hex(Cube.BackgroundColor,"323232",-1);
+
+        }
+
+
         CreateButtons();
     }
 
@@ -693,6 +727,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let newBubble = document.createElement("div");
         newBubble.classList.add("DynamicBubble");
 
+        newBubble.style.backgroundColor = "#"+hex(Cube.BackgroundColor,"080808",-1) + "B2";
+        newBubble.style.borderColor = "#"+hex(Cube.BackgroundColor,"090909",-1) + "B2";
+        newBubble.style.boxShadow =  "0 0 40px 5px" +"#"+hex(Cube.BackgroundColor,"262626",-1);
+
+
 
         let newBubbleTypeTitle = document.createElement("h1");
         newBubbleTypeTitle.classList.add("DynamicBubbleTypeTitle");
@@ -706,8 +745,22 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let newControlBar = document.createElement("div");
         newControlBar.classList.add("DynamicBubbleControlBar");
 
+
+        newControlBar.style.background
+            = "#"+hex(Cube.BackgroundColor,"080808",1) + "7f";
+
+        newControlBar.style.boxShadow
+            = "0 0 10px 10px "+"#"+hex(Cube.BackgroundColor,"080808",1) + "7f";
+
+        newControlBar.style.borderColor
+            = "#"+hex(Cube.BackgroundColor,"101010",-1) + "BF";
+
+
         let newControlBarMiddleContent = document.createElement("hr");
         newControlBar.appendChild(newControlBarMiddleContent);
+
+        newControlBarMiddleContent.style.boxShadow = "0 0 10px 10px "+
+            "#"+hex(Cube.BackgroundColor,"090909",-1)+"BA";
 
         let myIndex = DynamicBubbles.length;
 
@@ -756,6 +809,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
         newControlBarHandle.appendChild(newControlBarHandleGrip);
 
         newControlBarMiddleContent.appendChild(newControlBarHandle);
+
+
+        newControlBarMiddleContent.style.background =
+            newControlBarHandleRope.style.background =
+                newControlBarHandleGrip.style.borderColor =
+                    "#"+hex(Cube.BackgroundColor,"323232",-1);
 
         for(let SectionIndex = 0;SectionIndex<Content.length; SectionIndex++){
             let newSection = document.createElement("div");
@@ -1089,8 +1148,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             moving(CubeInfo.LastXMoved,CubeInfo.LastYMoved);
         } else if(FinalInfo.Bubble && !Pulling && PullUpInfo.MainPullUpIndex === false){
-            FinalInfo.Bubble.style.backgroundColor = "rgba(228, 228, 228, .9)";
-            FinalInfo.Bubble.style.borderColor = "rgba(207,207,207,.9)";
+            FinalInfo.Bubble.style.backgroundColor = "#"+hex(Cube.BackgroundColor,"030303",-1) + "E5";
+            FinalInfo.Bubble.style.borderColor = "#"+hex(Cube.BackgroundColor,"040404",-1) + "E5";
+            FinalInfo.Bubble.style.boxShadow =  "0 0 40px 5px" +"#"+hex(Cube.BackgroundColor,"282828",-1);
+
             FinalInfo.Bubble.style.transform = "translateX(-50%) translateY(10px)";
 
             mouseOnBubbles[mouseOnBubbles.length] = StartAtElement = FinalInfo.Bubble;
@@ -1370,8 +1431,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
         for (let i in mouseOnBubbles){
             if(!mouseOnBubbles[i]) continue;
 
-            mouseOnBubbles[i].style.backgroundColor = "rgba(228, 228, 228, 0.7)";
-            mouseOnBubbles[i].style.borderColor = "rgba(207, 207, 207, 0.7)";
+            mouseOnBubbles[i].style.backgroundColor = "#"+hex(Cube.BackgroundColor,"080808",-1) + "B2";
+            mouseOnBubbles[i].style.borderColor = "#"+hex(Cube.BackgroundColor,"090909",-1) + "B2";
+            mouseOnBubbles[i].style.boxShadow =  "0 0 40px 5px" +"#"+hex(Cube.BackgroundColor,"262626",-1);
+
             mouseOnBubbles[i].style.transform = "translateX(-50%) translateY(0)";
 
             mouseOnBubbles[i] = null;
