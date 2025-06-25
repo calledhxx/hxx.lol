@@ -1456,9 +1456,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         thisElement.style.color = "#ffffff";
 
                         if(ControlButtons[index]["IMPORTANT?"])
-                            thisElement.style.background = "#bf3232"
+                            thisElement.style.background = "#bf3232e0"
                         else
-                            thisElement.style.background = "#393939";
+                            thisElement.style.background = "#393939e0";
 
                     }else{
                         if(ControlButtons[index]["IMPORTANT?"])
