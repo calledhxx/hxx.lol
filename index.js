@@ -1164,6 +1164,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         case "Cube":{
                             Locked = 1;
 
+                            document.body.style.background = Content.BackgroundColor;
+
+                            for (let i = 0;i<document.getElementsByClassName("blackChunk").length;i++)
+                                document.getElementsByClassName("blackChunk")[i].style.background = Content.Chunk.Black;
+
+                            for (let i = 0;i<document.getElementsByClassName("whiteChunk").length;i++)
+                                document.getElementsByClassName("whiteChunk")[i].style.background = Content.Chunk.White;
+
+
                             TweenUp(true,0.3);
 
                             CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 - 360;
@@ -1186,7 +1195,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                             await sleep(300);
 
-                            buttons = structuredClone(Content);
+                            buttons = structuredClone(Content.Buttons);
                             CreateButtons();
                             TweenUp(true,0.3);
 
@@ -1204,7 +1213,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                                 buttonElements[i].style.opacity = "1";
                                 FinalElement.style.fontSize = "15px";
                             }
-                            buttons =  structuredClone(Content);
+                            buttons =  structuredClone(Content.Buttons);
 
                             moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
@@ -1584,12 +1593,18 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     Locked = 1;
 
-    let defaultButtons = await loadData("./cube/Default.JSON");
+    let defaultCube = await loadData("./cube/Default.JSON");
 
-    if((new Date().getSeconds())%3) {
-        defaultButtons[0].Color = "#d13333";
-        defaultButtons[0].Icon = "./img/IMG_0537.GIF";
-    }
+    document.body.style.background = defaultCube.BackgroundColor;
+
+    for (let i = 0;i<document.getElementsByClassName("blackChunk").length;i++)
+        document.getElementsByClassName("blackChunk")[i].style.background = defaultCube.Chunk.Black;
+
+    for (let i = 0;i<document.getElementsByClassName("whiteChunk").length;i++)
+        document.getElementsByClassName("whiteChunk")[i].style.background = defaultCube.Chunk.White;
+
+
+    let defaultButtons = defaultCube.Buttons;
 
     buttons = structuredClone(defaultButtons);
     CreateButtons();
@@ -1627,7 +1642,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         moving(-90*(i+1) - 15,-10);
         await sleep(100);
     }
-
 
 
     CubeInfo.LastXMoved = CubeInfo.XMoved =  -375;
