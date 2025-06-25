@@ -1,27 +1,34 @@
-[
-  {
-    "Side": 6,
-    "Chunk": 1,
-    "Color": "#793ac2",
-    "depth": 24,
-    "Icon": null,
-    "Name": "返回",
-    "Tag": "Return",
-    "Event": {
-      "Cube": "./cube/Default.JSON"
-    }
+{
+  "BackgroundColor": "rgb(239 233 255)",
+  "Chunk": {
+    "Black": "rgb(70 55 113)",
+    "White": "rgb(209 196 245)"
   },
+  "Buttons": [
+    {
+      "Side": 6,
+      "Chunk": 1,
+      "Color": "#793ac2",
+      "depth": 24,
+      "Icon": null,
+      "Name": "返回",
+      "Tag": "Return",
+      "Event": {
+        "Cube": "./cube/Default.JSON"
+      }
+    },
 
-  {
-    "Side": 1,
-    "Chunk": 1,
-    "Color":"#959595",
-    "depth":24,
-    "Icon": null,
-    "Name":"太陽魚",
-    "Tag":"Sunfish",
-    "Event":{
-      "Page":"no"
+    {
+      "Side": 1,
+      "Chunk": 1,
+      "Color":"#959595",
+      "depth":24,
+      "Icon": null,
+      "Name":"太陽魚",
+      "Tag":"Sunfish",
+      "Event":{
+        "Page":"no"
+      }
     }
-  }
-]
+  ]
+}

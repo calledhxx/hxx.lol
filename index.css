@@ -30,10 +30,7 @@ body{
     overflow: hidden;
     position: absolute;
 
-    padding-bottom: env(safe-area-inset-bottom);
-    /*
-    https://stackoverflow.com/questions/68094609/ios-15-safari-floating-address-bar
-     */
+    transition: all 320ms ease;
 }
 
 #Hub{
@@ -89,6 +86,8 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+
+    transition: all 320ms ease;
 }
 
 .blackChunk{
