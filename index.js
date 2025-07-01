@@ -1329,9 +1329,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
             if(PullUpInfo.MainPullUpIndex !== false){
-                // if(yStartScreen - y  >= 100){
-                //     await ClearBubble(PullUpInfo.MainPullUpIndex);
-                // }
+
             }else if(FinalInfo.Bubble === StartAtElement){
                 if(!PullUpInfo.PullUpType)
                     PullUpDynamicBubbles(ClickOnIndex);
