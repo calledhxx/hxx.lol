@@ -12,6 +12,31 @@
       "Event": {
         "Cube": "./cube/Default.JSON"
       }
+    },
+
+    {
+      "Side": 1,
+      "Chunk": 3,
+      "Color": "#e6a312",
+      "depth": 24,
+      "Icon": "./img/7Sunfish.png",
+      "Name": "太陽魚",
+      "Tag": "7Sunfish",
+      "Event": {
+        "Page": "./page/FriendshipGroup/7Sunfish.JSON"
+      }
+    },
+    {
+      "Side": 1,
+      "Chunk": 4,
+      "Color": "#dbdbd9",
+      "depth": 24,
+      "Icon": "./img/Profish.png",
+      "Name": "破魚",
+      "Tag": "Profish",
+      "Event": {
+        "Page": "./page/FriendshipGroup/Profish.JSON"
+      }
     }
   ]
 }
