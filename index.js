@@ -136,6 +136,7 @@ window.addEventListener("resize",setView);
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
 
+    let CubePath = [];
 
     let xStartScreen = 0,yStartScreen = 0;
 
@@ -144,13 +145,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let Pulling = 0;
     let Controlling = 0;
 
-    let Locked = 0;
+    let Locked = 1;
 
     let buttonElements = [];
 
     function SummonCube(CubeData){
         DeleteButtons();
 
+        CubePath[CubePath.length] = structuredClone(CubeData);
         Cube = structuredClone(CubeData);
 
         CreateButtons();
@@ -1174,11 +1176,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(FinalElement === StartAtElement){
                 for (let index in ButtonInfo.Event){
 
-                    let Content = await loadData(ButtonInfo.Event[index]);
-                    if(!Content) break;
-
                     switch (index){
                         case "Page":{
+                            let Content = await loadData(ButtonInfo.Event[index]);
+                            if(!Content) break;
+
                             await CreateDynamicBubbles(
                                 "Page",
                                 Content
@@ -1186,6 +1188,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             break;
                         }
                         case "Cube":{
+                            let Content = await loadData(ButtonInfo.Event[index]);
+                            if(!Content) break;
+
                             Locked = 1;
                             TweenUp(true,0.3);
 
@@ -1239,6 +1244,68 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                             Locked = 0;
                             break;
+                        }
+                        case "Action":{
+                            switch (ButtonInfo.Event[index]){
+                                case "Return":{
+                                    CubePath.splice(CubePath.length-1, 1);
+                                    let backTo = structuredClone(CubePath[CubePath.length-1]);
+
+                                    Locked = 1;
+                                    TweenUp(true,0.3);
+
+                                    CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 - 360;
+                                    CubeInfo.LastYMoved = CubeInfo.YMoved = - 10;
+
+
+                                    let TheCube = structuredClone(backTo);
+                                    SummonCube(TheCube);
+                                    TweenUp(true,0.3);
+
+
+                                    for(let i = 0;i<buttonElements.length;i++){
+                                        buttonElements[i].style.opacity = "0";
+                                        FinalElement.style.fontSize = "0px";
+                                    }
+
+                                    for(let i = 0;i<Cube.Buttons.length;i++)
+                                        Cube.Buttons[i].depth = 0;
+                                    moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+
+                                    CubeSideSize = 50;
+                                    moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+                                    await sleep(370);
+
+                                    CubeSideSize = 270;
+                                    moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+                                    await sleep(300)
+
+                                    CubeSideSize = 220;
+                                    moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+                                    await sleep(300);
+
+                                    Cube.Buttons = structuredClone(backTo.Buttons);
+
+                                    await sleep(100);
+                                    for(let i = 0;i<buttonElements.length;i++){
+                                        buttonElements[i].style.opacity = "1";
+                                        FinalElement.style.fontSize = "15px";
+                                    }
+                                    Cube.Buttons =  structuredClone(backTo.Buttons);
+
+                                    moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+                                    await sleep(300);
+                                    TweenUp(false);
+
+                                    Locked = 0;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
@@ -1637,7 +1704,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     await sleep(100);
 
-    Locked = 1;
 
 
     TweenUp(true,.4);
