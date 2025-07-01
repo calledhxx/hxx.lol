@@ -133,10 +133,12 @@ function setView(){
 }
 window.addEventListener("resize",setView);
 
+let CubePath = [];
+
+
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
 
-    let CubePath = [];
 
     let xStartScreen = 0,yStartScreen = 0;
 
@@ -149,10 +151,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let buttonElements = [];
 
-    function SummonCube(CubeData){
+    function SummonCube(CubeData,SavePath){
         DeleteButtons();
 
-        CubePath[CubePath.length] = structuredClone(CubeData);
+        if(SavePath) CubePath[CubePath.length] = structuredClone(CubeData);
         Cube = structuredClone(CubeData);
 
         CreateButtons();
@@ -350,7 +352,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             }
         }
-
     }
 
 
@@ -1199,7 +1200,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
                             let TheCube = structuredClone(Content);
-                            SummonCube(TheCube);
+                            SummonCube(TheCube,true);
                             TweenUp(true,0.3);
 
 
@@ -1259,7 +1260,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
                                     let TheCube = structuredClone(backTo);
-                                    SummonCube(TheCube);
+                                    SummonCube(TheCube,false);
                                     TweenUp(true,0.3);
 
 
@@ -1677,7 +1678,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     moving(0,0);
 
     let defaultCube = await loadData("./cube/Default.JSON");
-    SummonCube(defaultCube);
+    SummonCube(defaultCube,true);
 
     for(let i = 0;i<Cube.Buttons.length;i++)
         Cube.Buttons[i].depth = 0;
