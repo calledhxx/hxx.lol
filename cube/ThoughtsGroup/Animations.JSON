@@ -3,25 +3,25 @@
     {
       "Side": 1,
       "Chunk": 1,
-      "Color": "#d95b90",
+      "Color": "#a067e6",
       "depth": 24,
       "Icon": null,
       "Name": "返回",
       "Tag": "Return",
       "Event": {
-        "Cube": "./cube/Default.JSON"
+        "Cube": "./cube/Thoughts.JSON"
       }
     },
     {
       "Side": 1,
       "Chunk": 2,
-      "Color": "#755DE1",
+      "Color": "#AF61DF",
       "depth": 24,
-      "Icon": null,
-      "Name": "動畫",
-      "Tag": "Animations",
+      "Icon": "./img/KDH.png",
+      "Name": "獵魔女團",
+      "Tag": "K-POP",
       "Event": {
-        "Cube": "./cube/ThoughtsGroup/Animations.JSON"
+        "Page": "./page/ThoughtsGroup/KDH.JSON"
       }
     }
   ]
