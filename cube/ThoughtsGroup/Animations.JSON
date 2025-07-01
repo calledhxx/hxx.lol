@@ -9,7 +9,7 @@
       "Name": "返回",
       "Tag": "Return",
       "Event": {
-        "Cube": "./cube/Thoughts.JSON"
+        "Action": "Return"
       }
     },
     {
