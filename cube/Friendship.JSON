@@ -37,6 +37,84 @@
       "Event": {
         "Page": "./page/FriendshipGroup/Profish.JSON"
       }
+    },
+    {
+      "Side": 2,
+      "Chunk": 1,
+      "Color": "#ff817a",
+      "depth": 24,
+      "Icon": "./img/Weason.png",
+      "Name": "威森",
+      "Tag": "Weason",
+      "Event": {
+      }
+    },
+    {
+      "Side": 2,
+      "Chunk": 2,
+      "Color": "#cc7337",
+      "depth": 24,
+      "Icon": "./img/RO.png",
+      "Name": "RO逆滲透",
+      "Tag": "RO",
+      "Event": {
+      }
+    },
+    {
+      "Side": 2,
+      "Chunk": 3,
+      "Color": "#62bae3",
+      "depth": 24,
+      "Icon": "./img/JD.png",
+      "Name": "嗟低",
+      "Tag": "JD",
+      "Event": {
+      }
+    },
+    {
+      "Side": 2,
+      "Chunk": 4,
+      "Color": "#ffa724",
+      "depth": 24,
+      "Icon": "./img/Iranomas.png",
+      "Name": "一籃喔慢",
+      "Tag": "Iranomas",
+      "Event": {
+      }
+    },
+
+    {
+      "Side": 5,
+      "Chunk": 3,
+      "Color": "#262626",
+      "depth": 24,
+      "Icon": "./img/Dummy.png",
+      "Name": "水泥人",
+      "Tag": "Dummy",
+      "Event": {
+      }
+    },
+    {
+      "Side": 5,
+      "Chunk": 4,
+      "Color": "#dbdbdb",
+      "depth": 24,
+      "Icon": "./img/DoctorFish.png",
+      "Name": "醫生魚",
+      "Tag": "DoctorFish",
+      "Event": {
+      }
+    },
+    {
+      "Side": 5,
+      "Chunk": 2,
+      "Color": "#262626",
+      "depth": 24,
+      "Icon": "./img/Sponge.png",
+      "Name": "醫生魚",
+      "Tag": "Sponge",
+      "Event": {
+      }
     }
   ]
 }
