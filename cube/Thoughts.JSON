@@ -15,13 +15,13 @@
     {
       "Side": 1,
       "Chunk": 2,
-      "Color": "#985ae8",
+      "Color": "#755DE1",
       "depth": 24,
       "Icon": null,
       "Name": "動畫",
       "Tag": "Animations",
       "Event": {
-        "Cube": "./cube/Thoughts.JSON"
+        "Cube": "./cube/ThoughtsGroup/Animations.JSON"
       }
     }
   ]

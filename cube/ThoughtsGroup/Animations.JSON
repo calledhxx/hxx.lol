@@ -1,0 +1,28 @@
+{
+  "Buttons": [
+    {
+      "Side": 1,
+      "Chunk": 1,
+      "Color": "#a067e6",
+      "depth": 24,
+      "Icon": null,
+      "Name": "返回",
+      "Tag": "Return",
+      "Event": {
+        "Cube": "./cube/Thoughts.JSON"
+      }
+    },
+    {
+      "Side": 1,
+      "Chunk": 2,
+      "Color": "#AF61DF",
+      "depth": 24,
+      "Icon": "./img/KDH.png",
+      "Name": "獵魔女團",
+      "Tag": "K-POP",
+      "Event": {
+        "Page": "./page/ThoughtsGroup/KDH.JSON"
+      }
+    }
+  ]
+}
