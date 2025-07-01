@@ -16,13 +16,26 @@
     {
       "Side": 6,
       "Chunk": 1,
-      "Color":"#8d6bdb",
+      "Color":"#5472e8",
       "depth":24,
       "Icon": null,
       "Name":"友宜錄",
       "Tag":"Friends",
       "Event":{
         "Cube":"./cube/Friendship.JSON"
+      }
+    },
+    {
+      "Side": 6,
+      "Chunk": 2,
+      "Color":"#9654e8",
+      "depth":24,
+      "Icon": null,
+      "Name":"影集心得",
+      "Tag":"Thoughts",
+      "Event":{
+        "Cube":"./cube/Thoughts.JSON",
+        "Page": "./page/ThoughtsIntro.JSON"
       }
     },
     {
