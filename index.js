@@ -157,7 +157,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         if(SavePath) CubePath[CubePath.length] = structuredClone(CubeData);
         Cube = structuredClone(CubeData);
 
-        console.log(structuredClone(CubeData))
         CreateButtons(structuredClone(CubeData));
     }
 
@@ -180,7 +179,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
     function CreateButtons(Cube){
-        console.log(Cube)
         for (let i = 0; i < Cube.Buttons.length; i++) {
             let newOne = document.createElement("div");
             newOne.classList.add("button");
@@ -1016,6 +1014,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(CheckButton.SearchTimes === 1) continue;
 
             if(CheckButton.Parent){
+                if (retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonRightSide").SearchTimes === 1 ||
+                retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonLeftSide").SearchTimes === 1 ||
+                retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonTopSide").SearchTimes === 1 ||
+                retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonBottomSide").SearchTimes === 1)
+                    continue;
+
                 FinalInfo.Button = CheckButton.Parent;
                 break
             }
