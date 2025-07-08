@@ -157,7 +157,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         if(SavePath) CubePath[CubePath.length] = structuredClone(CubeData);
         Cube = structuredClone(CubeData);
 
-        CreateButtons();
+        console.log(structuredClone(CubeData))
+        CreateButtons(structuredClone(CubeData));
     }
 
     function DeleteButtons() {
@@ -178,7 +179,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     }
 
-    function CreateButtons(){
+    function CreateButtons(Cube){
+        console.log(Cube)
         for (let i = 0; i < Cube.Buttons.length; i++) {
             let newOne = document.createElement("div");
             newOne.classList.add("button");
@@ -1176,137 +1178,151 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             if(FinalElement === StartAtElement){
                 for (let index in ButtonInfo.Event){
+                    let data = ButtonInfo.Event[index];
 
                     switch (index){
                         case "Page":{
-                            let Content = await loadData(ButtonInfo.Event[index]);
+                            let Content = await loadData(data);
                             if(!Content) break;
 
-                            await CreateDynamicBubbles(
-                                "Page",
-                                Content
-                            )
+                            setTimeout(async function (){
+                                await CreateDynamicBubbles(
+                                    "Page",
+                                    Content
+                                )
+                            })
+
                             break;
                         }
                         case "Cube":{
-                            let Content = await loadData(ButtonInfo.Event[index]);
+                            const Content = await loadData(data);
                             if(!Content) break;
 
-                            Locked = 1;
-                            TweenUp(true,0.3);
+                            setTimeout(async function (){
+                                Locked = 1;
+                                TweenUp(true,0.3);
 
-                            CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 - 360;
-                            CubeInfo.LastYMoved = CubeInfo.YMoved = - 10;
-
-
-                            let TheCube = structuredClone(Content);
-                            SummonCube(TheCube,true);
-                            TweenUp(true,0.3);
+                                CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 - 360;
+                                CubeInfo.LastYMoved = CubeInfo.YMoved = - 10;
 
 
-                            for(let i = 0;i<buttonElements.length;i++){
-                                buttonElements[i].style.opacity = "0";
-                                FinalElement.style.fontSize = "0px";
-                            }
-
-                            for(let i = 0;i<Cube.Buttons.length;i++)
-                                Cube.Buttons[i].depth = 0;
-                            moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                                let TheCube = structuredClone(Content);
+                                SummonCube(TheCube,true);
+                                TweenUp(true,0.3);
 
 
-                            CubeSideSize = 50;
-                            moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                                for(let i = 0;i<buttonElements.length;i++){
+                                    buttonElements[i].style.opacity = "0";
+                                    FinalElement.style.fontSize = "0px";
+                                }
 
-                            await sleep(370);
+                                for(let i = 0;i<Cube.Buttons.length;i++)
+                                    Cube.Buttons[i].depth = 0;
+                                moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                            CubeSideSize = 270;
-                            moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                            await sleep(300)
+                                CubeSideSize = 50;
+                                moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                            CubeSideSize = 220;
-                            moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                                await sleep(370);
 
-                            await sleep(300);
+                                CubeSideSize = 270;
+                                moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                            Cube.Buttons = structuredClone(Content.Buttons);
+                                await sleep(300)
 
-                            await sleep(100);
-                            for(let i = 0;i<buttonElements.length;i++){
-                                buttonElements[i].style.opacity = "1";
-                                FinalElement.style.fontSize = "15px";
-                            }
-                            Cube.Buttons =  structuredClone(Content.Buttons);
+                                CubeSideSize = 220;
+                                moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                            moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                                await sleep(300);
 
-                            await sleep(300);
-                            TweenUp(false);
+                                Cube.Buttons = structuredClone(Content.Buttons);
 
-                            Locked = 0;
+                                await sleep(100);
+                                for(let i = 0;i<buttonElements.length;i++){
+                                    buttonElements[i].style.opacity = "1";
+                                    FinalElement.style.fontSize = "15px";
+                                }
+                                Cube.Buttons =  structuredClone(Content.Buttons);
+
+                                moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+                                await sleep(300);
+                                TweenUp(false);
+
+                                Locked = 0;
+                            })
+
+
                             break;
                         }
                         case "Action":{
-                            switch (ButtonInfo.Event[index]){
+                            switch (data){
                                 case "Return":{
-                                    CubePath.splice(CubePath.length-1, 1);
-                                    let backTo = structuredClone(CubePath[CubePath.length-1]);
+                                    setTimeout(async function () {
+                                        CubePath.splice(CubePath.length-1, 1);
+                                        let backTo = structuredClone(CubePath[CubePath.length-1]);
 
-                                    Locked = 1;
-                                    TweenUp(true,0.3);
+                                        Locked = 1;
+                                        TweenUp(true,0.3);
 
-                                    CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 - 360;
-                                    CubeInfo.LastYMoved = CubeInfo.YMoved = - 10;
-
-
-                                    let TheCube = structuredClone(backTo);
-                                    SummonCube(TheCube,false);
-                                    TweenUp(true,0.3);
+                                        CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 - 360;
+                                        CubeInfo.LastYMoved = CubeInfo.YMoved = - 10;
 
 
-                                    for(let i = 0;i<buttonElements.length;i++){
-                                        buttonElements[i].style.opacity = "0";
-                                        FinalElement.style.fontSize = "0px";
-                                    }
-
-                                    for(let i = 0;i<Cube.Buttons.length;i++)
-                                        Cube.Buttons[i].depth = 0;
-                                    moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                                        let TheCube = structuredClone(backTo);
+                                        SummonCube(TheCube,false);
+                                        TweenUp(true,0.3);
 
 
-                                    CubeSideSize = 50;
-                                    moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                                        for(let i = 0;i<buttonElements.length;i++){
+                                            buttonElements[i].style.opacity = "0";
+                                            FinalElement.style.fontSize = "0px";
+                                        }
 
-                                    await sleep(370);
+                                        for(let i = 0;i<Cube.Buttons.length;i++)
+                                            Cube.Buttons[i].depth = 0;
+                                        moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                                    CubeSideSize = 270;
-                                    moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                                    await sleep(300)
+                                        CubeSideSize = 50;
+                                        moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                                    CubeSideSize = 220;
-                                    moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                                        await sleep(370);
 
-                                    await sleep(300);
+                                        CubeSideSize = 270;
+                                        moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                                    Cube.Buttons = structuredClone(backTo.Buttons);
+                                        await sleep(300)
 
-                                    await sleep(100);
-                                    for(let i = 0;i<buttonElements.length;i++){
-                                        buttonElements[i].style.opacity = "1";
-                                        FinalElement.style.fontSize = "15px";
-                                    }
-                                    Cube.Buttons =  structuredClone(backTo.Buttons);
+                                        CubeSideSize = 220;
+                                        moving(CubeInfo.XMoved,CubeInfo.YMoved);
 
-                                    moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                                        await sleep(300);
 
-                                    await sleep(300);
-                                    TweenUp(false);
+                                        Cube.Buttons = structuredClone(backTo.Buttons);
 
-                                    Locked = 0;
+                                        await sleep(100);
+                                        for(let i = 0;i<buttonElements.length;i++){
+                                            buttonElements[i].style.opacity = "1";
+                                            FinalElement.style.fontSize = "15px";
+                                        }
+                                        Cube.Buttons =  structuredClone(backTo.Buttons);
+
+                                        moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+                                        await sleep(300);
+                                        TweenUp(false);
+
+                                        Locked = 0;
+                                    })
+
+
                                     break;
                                 }
                             }
+
+                            break;
                         }
                     }
                 }
