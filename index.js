@@ -1480,8 +1480,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let ControlBarPullUpAtY = 0;
     let AlreadyInRecording = 0;
 
+    let nowCursorAtX = 0;
+    let nowCursorAtY = 0;
+
     let fingerMoving = async function(x,y){
         if(Locked) return;
+
+        nowCursorAtX = x;
+        nowCursorAtY = y;
 
         if(Holding){
             CubeInfo.XMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
@@ -1535,9 +1541,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     setTimeout(function () {
                         if (ControlBarIsDraw) {
                             StartAtElement.style.transition = "none";
-                            console.log("set")
-                            ControlBarPullUpAtX = x;
-                            ControlBarPullUpAtY = y;
+                            ControlBarPullUpAtX = nowCursorAtX;
+                            ControlBarPullUpAtY = nowCursorAtY;
+
+                            // let pointer = document.createElement("div");
+                            // pointer.style.width = pointer.style.height = "10px"
+                            // pointer.style.position = "absolute";
+                            //
+                            // pointer.style.top = `${ControlBarPullUpAtY}px`;
+                            // pointer.style.left = `${ControlBarPullUpAtX}px`;
+                            //
+                            // pointer.style.background = "red";
+                            // pointer.style.zIndex = "999"
+                            // document.body.appendChild(pointer);
                         }
                     }, 240)
                 }
