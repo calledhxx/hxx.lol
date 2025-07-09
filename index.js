@@ -1495,7 +1495,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             moving(CubeInfo.XMoved, CubeInfo.YMoved);
         }else if (Controlling){
-            console.log(ControlBarPullUpAtY,ControlBarPullUpAtX);
 
             if(ControlBarIsDraw === false){
                 ControlBarPullUpAtX = ControlBarPullUpAtY = 0;
