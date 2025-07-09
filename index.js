@@ -1394,9 +1394,17 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     case "戳破泡泡":{
                         let len = DynamicBubbles.length;
 
-                        for (let i = 0;i<len;i++){
+                        for (let i = 0;i<len;i++)
                              ClearBubble(0);
-                        }
+
+                        await sleep(120);
+
+                        if(Math.random() > 0.5) CreateDynamicBubbles("Notification",[
+                            {
+                                "Title":"嘿嘿，你弄不破我。",
+                                "Content":"想弄破我有點難度，但我不會跟你說解決我的方法就是把我吹走。"
+                            }
+                        ]);
 
                         break;
                     }
