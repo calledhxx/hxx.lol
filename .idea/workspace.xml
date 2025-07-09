@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d57fe96b-7e11-4fc9-9596-6dafe5dbf177" name="Changes" comment="hxx.lol">
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/page/FriendshipGroup/DoctorFish.JSON" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/page/FriendshipGroup/Dummy.JSON" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/page/FriendshipGroup/Intro.JSON" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/page/FriendshipGroup/Iranomas.JSON" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/page/FriendshipGroup/JD.JSON" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/page/FriendshipGroup/RO.JSON" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/page/FriendshipGroup/Sponge.JSON" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/page/FriendshipGroup/Weason.JSON" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cube/Friendship.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/cube/Friendship.JSON" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/page/FriendshipGroup/7Sunfish.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/page/FriendshipGroup/7Sunfish.JSON" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/page/FriendshipGroup/Profish.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/page/FriendshipGroup/Profish.JSON" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,23 +160,8 @@
       <workItem from="1752027157770" duration="408000" />
       <workItem from="1752027682246" duration="143000" />
       <workItem from="1752027921036" duration="3495000" />
-      <workItem from="1752031510580" duration="659000" />
-    </task>
-    <task id="LOCAL-00120" summary="hxx.lol">
-      <option name="closed" value="true" />
-      <created>1750833871623</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1750833871623</updated>
-    </task>
-    <task id="LOCAL-00121" summary="hxx.lol">
-      <option name="closed" value="true" />
-      <created>1750834019482</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1750834019482</updated>
+      <workItem from="1752031510580" duration="996000" />
+      <workItem from="1752034261809" duration="6224000" />
     </task>
     <task id="LOCAL-00122" summary="hxx.lol">
       <option name="closed" value="true" />
@@ -543,7 +539,23 @@
       <option name="project" value="LOCAL" />
       <updated>1752031910227</updated>
     </task>
-    <option name="localTasksCounter" value="169" />
+    <task id="LOCAL-00169" summary="hxx.lol">
+      <option name="closed" value="true" />
+      <created>1752032227254</created>
+      <option name="number" value="00169" />
+      <option name="presentableId" value="LOCAL-00169" />
+      <option name="project" value="LOCAL" />
+      <updated>1752032227254</updated>
+    </task>
+    <task id="LOCAL-00170" summary="hxx.lol">
+      <option name="closed" value="true" />
+      <created>1752032502076</created>
+      <option name="number" value="00170" />
+      <option name="presentableId" value="LOCAL-00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1752032502076</updated>
+    </task>
+    <option name="localTasksCounter" value="171" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
