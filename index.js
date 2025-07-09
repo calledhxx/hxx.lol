@@ -1441,7 +1441,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(!mouseOnButtons[i]) continue;
             if(!Cube.Buttons[Number(mouseOnButtons[i].id)]) continue;
 
-            Cube.Buttons[Number(mouseOnButtons[i].id)].depth = 24;
+            Cube.Buttons[Number(mouseOnButtons[i].id)].depth =
+                CubePath[CubePath.length-1].Buttons[Number(mouseOnButtons[i].id)].depth;
 
             mouseOnButtons[i].style.fontSize = "15px";
 
