@@ -1476,6 +1476,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
 
+    let ControlBarPullUpAtX = 0;
+    let ControlBarPullUpAtY = 0;
+    let AlreadyInRecording = 0;
 
     let fingerMoving = async function(x,y){
         if(Locked) return;
@@ -1486,19 +1489,25 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             moving(CubeInfo.XMoved, CubeInfo.YMoved);
         }else if (Controlling){
+            console.log(ControlBarPullUpAtY,ControlBarPullUpAtX);
+
             if(ControlBarIsDraw === false){
+                ControlBarPullUpAtX = ControlBarPullUpAtY = 0;
+                AlreadyInRecording = 0
+
+
                 if(y - yStartScreen >= 100){
                     StartAtElement.style.transition = "";
 
-                    StartAtElement.style.width = "120px";
-                    StartAtElement.style.height = `${ControlButtons.length*50}px`;
 
                     ControlBarIsDraw = true;
 
-                    for (let index = 0; index < StartAtElement.getElementsByTagName("div").length; index++) {
-                        await sleep(20)
-                        StartAtElement.getElementsByTagName("div")[index].style.opacity = "1";
-                    }
+                    setTimeout(async function (){
+                        for (let index = 0; index < StartAtElement.getElementsByTagName("div").length; index++) {
+                            await sleep(20)
+                            StartAtElement.getElementsByTagName("div")[index].style.opacity = "1";
+                        }
+                    },120)
                 }else{
                     StartAtElement.style.transition = "none";
 
@@ -1521,15 +1530,22 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             if(ControlBarIsDraw)
             {
-                setTimeout(function (){
-                    if(ControlBarIsDraw)
-                        StartAtElement.style.transition = "none";
-                },240)
+                if(!(ControlBarPullUpAtX || ControlBarPullUpAtY || AlreadyInRecording)) {
+                    AlreadyInRecording = 1;
+                    setTimeout(function () {
+                        if (ControlBarIsDraw) {
+                            StartAtElement.style.transition = "none";
+                            console.log("set")
+                            ControlBarPullUpAtX = x;
+                            ControlBarPullUpAtY = y;
+                        }
+                    }, 240)
+                }
 
-                StartAtElement.style.top = `${15 + (y - yStartScreen - 100)/20}px`;
-                StartAtElement.style.right = `${15 + (xStartScreen - x)/20}px`;
-                StartAtElement.style.height = `${ControlButtons.length*50 + Math.abs((xStartScreen - x)/50)}px`;
-                StartAtElement.style.width = `${120 + Math.abs((xStartScreen - x)/50)}px`;
+                StartAtElement.style.top = `${15 + (y - (ControlBarPullUpAtY ? ControlBarPullUpAtY : y)) / 20}px`;
+                StartAtElement.style.right = `${15 + ((ControlBarPullUpAtX ? ControlBarPullUpAtX : x) - x) / 20}px`;
+                StartAtElement.style.width = `${120 + Math.abs(((ControlBarPullUpAtX ? ControlBarPullUpAtX : x) - x) / 50)}px`;
+                StartAtElement.style.height = `${ControlButtons.length * 50 + Math.abs((y - (ControlBarPullUpAtY ? ControlBarPullUpAtY : y)) / 50)}px`;
 
                 StartAtElement.style.overflow = "hidden";
 
@@ -1574,6 +1590,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 StartAtElement.style.overflow = "visible";
             }
         }
+
 
     }
 
