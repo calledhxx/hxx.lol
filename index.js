@@ -1014,7 +1014,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(CheckButton.SearchTimes === 1) continue;
 
             if(CheckButton.Parent){
-                if (retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonRightSide").SearchTimes === 1 ||
+                if(!Pushing) if (retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonRightSide").SearchTimes === 1 ||
                 retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonLeftSide").SearchTimes === 1 ||
                 retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonTopSide").SearchTimes === 1 ||
                 retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonBottomSide").SearchTimes === 1)
