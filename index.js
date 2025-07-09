@@ -298,7 +298,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         }
 
-
+        for(let i = 0; i < DynamicBubbles.length; i++){
+            DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "0";
+            DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "0";
+            DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "0";
+            DynamicBubbles[i].getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY =
+                "hidden";
+        }
 
         for (let i = DynamicBubbles.length-1; i > DynamicBubbles.length-5; i--) {
             if(!DynamicBubbles[i]) continue;
@@ -306,9 +312,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             DynamicBubbles[i].style.width = `${100 - 5 * (DynamicBubbles.length-1-i)}%`;
             DynamicBubbles[i].style.opacity = `${1 - 0.25*(DynamicBubbles.length-1-i)}`;
 
-            DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "0";
-            DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "0";
-            DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "0";
 
             if(DynamicBubbles.length === 1){
                 DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerHTML =
@@ -318,8 +321,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     "點擊並選取閱讀項目"
             }
 
-            DynamicBubbles[i].getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY =
-                "hidden";
 
             if(i !== DynamicBubbles.length-1){
                 DynamicBubbles[i].style.height = "120px";
@@ -1401,12 +1402,17 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     }
                 }
 
-                setTimeout(function (){
-                    StartAtElement.style.overflow = "visible"
-                    StartAtElement.style.top = "15px"
-                    StartAtElement.style.right = "15px"
-                    StartAtElement.getElementsByTagName("hr")[0].style.opacity = "1";
-                },200)
+                setTimeout(async function (){
+                    let element = StartAtElement;
+
+                    await sleep(140);
+                    if(!element) return;
+
+                    element.style.overflow = "visible"
+                    element.style.top = "15px"
+                    element.style.right = "15px"
+                    element.getElementsByTagName("hr")[0].style.opacity = "1";
+                })
                 LastSelectControlButtonIndex = false;
             }
         }
