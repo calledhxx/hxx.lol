@@ -131,10 +131,15 @@ function setView(){
     document.documentElement.style.setProperty('--fh', `${height}px`);
     document.documentElement.style.setProperty('--fw', `${width}px`);
 }
-window.addEventListener("resize",setView);
+window.addEventListener("resize",function (){
+    setView();
+
+    if(checkIfMobile() !== useTouchPad) location.reload();
+});
 
 let CubePath = [];
 
+let useTouchPad = checkIfMobile();
 
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
@@ -1054,8 +1059,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         return FinalInfo;
     }
 
-    let ToStableValue = checkIfMobile() ? 3 : 5;
-
+    let ToStableValue = useTouchPad ? 3 : 5;
 
     let startMove = async function (x,y)
     {
@@ -1609,7 +1613,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     }
 
-    if(checkIfMobile()) {
+    if(useTouchPad) {
         document.addEventListener("touchend", function (m ){
             if(m.changedTouches.length > 1) return;
             endMove(m.changedTouches[0].clientX,m.changedTouches[0].clientY);
