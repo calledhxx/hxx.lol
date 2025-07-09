@@ -1,0 +1,17 @@
+{
+  "Buttons": [
+    {
+      "Side": 1,
+      "Chunk": 1,
+      "Color": "#d95b90",
+      "depth": 24,
+      "Icon": null,
+      "Name": "返回",
+      "Tag": "Return",
+      "Event": {
+        "Action": "Return"
+
+      }
+    }
+  ]
+}
