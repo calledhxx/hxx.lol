@@ -175,8 +175,6 @@ body{
 
 .button div{
     position: absolute;
-    cursor: pointer;
-
 }
 
 .button div div{
@@ -187,7 +185,6 @@ body{
     align-items: center;
 
 
-    cursor: pointer;
     writing-mode:vertical-rl;
 
 
@@ -200,7 +197,7 @@ body{
     width: 80px;
     height: 80px;
 
-
+    cursor: pointer;
 }
 
 .buttonFrontSide div{
@@ -265,6 +262,7 @@ body{
     box-shadow: black 0 0 10px 2px;
 
     z-index: -1;
+
 }
 
 .buttonRightSide{
@@ -285,6 +283,8 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    cursor: pointer;
 }
 
 .buttonLeftSide{
@@ -304,6 +304,8 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    cursor: pointer;
 }
 
 
@@ -324,6 +326,8 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    cursor: pointer;
 }
 
 
@@ -343,6 +347,8 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    cursor: pointer;
 }
 
 
