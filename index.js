@@ -1399,6 +1399,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 setTimeout(function (){
                     StartAtElement.style.overflow = "visible"
+                    StartAtElement.style.top = "15px"
+                    StartAtElement.style.right = "15px"
                     StartAtElement.getElementsByTagName("hr")[0].style.opacity = "1";
                 },200)
                 LastSelectControlButtonIndex = false;
@@ -1498,6 +1500,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         StartAtElement.getElementsByTagName("div")[index].style.opacity = "1";
                     }
                 }else{
+                    StartAtElement.style.transition = "none";
 
                     StartAtElement.style.width = StartAtElement.style.height =
                         `${(y - yStartScreen > 0 ? (y - yStartScreen)*.2 : 0)+34}px`;
@@ -1518,6 +1521,16 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             if(ControlBarIsDraw)
             {
+                setTimeout(function (){
+                    if(ControlBarIsDraw)
+                        StartAtElement.style.transition = "none";
+                },240)
+
+                StartAtElement.style.top = `${15 + (y - yStartScreen - 100)/20}px`;
+                StartAtElement.style.right = `${15 + (xStartScreen - x)/20}px`;
+                StartAtElement.style.height = `${ControlButtons.length*50 + Math.abs((xStartScreen - x)/50)}px`;
+                StartAtElement.style.width = `${120 + Math.abs((xStartScreen - x)/50)}px`;
+
                 StartAtElement.style.overflow = "hidden";
 
                 let LeastPXToCursor = false;
