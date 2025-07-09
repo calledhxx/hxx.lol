@@ -1431,7 +1431,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     mouseOnControlBars[i].getElementsByTagName("div")[index].style.opacity = "0";
                 }
                 mouseOnControlBars[i].style.transition = "";
-                await sleep(10);
+                await sleep(20);
 
                 mouseOnControlBars[i].style.width =
                     mouseOnControlBars[i].style.height =
