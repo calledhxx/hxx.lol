@@ -14,19 +14,7 @@
 
       }
     },
-    {
-      "Side": 1,
-      "Chunk": 2,
-      "Color": "#d98943",
-      "depth": 24,
-      "Icon": null,
-      "Name": "故事",
-      "Tag": "Story",
-      "Event": {
-        "Page": "./page/FriendshipGroup/Intro.JSON"
 
-      }
-    },
 
     {
       "Side": 1,
