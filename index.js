@@ -16,7 +16,7 @@ const Colors = {
 
         "DynamicBubblesBackground" : "rgba(67,67,67,0.7)",
         "DynamicBubblesBorder" :"rgba(53,53,53,0.7)",
-        "DynamicBubblesShadow" :"0 0 40px 5px rgba(72, 72, 72, 1)",
+        "DynamicBubblesShadow" :"0 0 40px 5px rgba(52, 52, 52, 1)",
 
         "BlackChunk":"#1c1c1c",
         "WhiteChunk":"#787878",
@@ -30,7 +30,7 @@ const Colors = {
 
         "Background" : "#272727",
 
-        "DMControlBarBackground":"rgba(80,80,80,0.5)",
+        "DMControlBarBackground":"rgba(74,74,74,0.5)",
         "DMControlBarShadow":"0 0 10px 10px rgba(78,78,78, 0.2)",
         "DMControlBarBorder":"rgba(85,85,85,0.75)",
 
@@ -1810,13 +1810,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         thisElement.style.color = isDarkMode ? "#272727" : "#ffffff";
 
                         if(ControlButtons[index]["IMPORTANT?"])
-                            thisElement.style.backgroundColor = "#bf3232e0"
+                            thisElement.style.backgroundColor = isDarkMode ? "rgba(234,83,83,0.88)" : "#bf3232e0"
                         else
                             thisElement.style.backgroundColor = isDarkMode ? "rgba(230,230,230,0.88)" :"#393939e0";
 
                     }else{
                         if(ControlButtons[index]["IMPORTANT?"])
-                            thisElement.style.color = "#bf3232"
+                            thisElement.style.color = isDarkMode ? "rgb(234,83,83)" : "#bf3232"
                         else
                             thisElement.style.color = isDarkMode ? "rgb(230,230,230)" :"#393939";
 
