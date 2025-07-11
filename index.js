@@ -8,197 +8,244 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', fun
     PaintUp();
 });
 
-const Colors = {
-    "Dark":{
-        "CLICKON_DynamicBubblesBackground" : "rgba(53,53,53,0.9)",
-        "CLICKON_DynamicBubblesBorder" :"rgba(46,46,46,0.9)",
-        "CLICKON_DynamicBubblesShadow" :"0 0 40px 5px rgba(60, 60, 60, 1)",
-
-        "DynamicBubblesBackground" : "rgba(67,67,67,0.7)",
-        "DynamicBubblesBorder" :"rgba(53,53,53,0.7)",
-        "DynamicBubblesShadow" :"0 0 40px 5px rgba(52, 52, 52, 1)",
-
-        "BlackChunk":"#1c1c1c",
-        "WhiteChunk":"#787878",
-
-        "DBTitle": "#cdcdcd",
-        "DBContent" : "#c5c5c5",
-        "DBType" : "#c8c8c8",
-        "DBBottomBar" : "#cdcdcd",
-
-        "DBTextShadow" : "rgba(64, 64, 64, 0.75) 0 0 20px",
-
-        "Background" : "#272727",
-
-        "DMControlBarBackground":"rgba(74,74,74,0.5)",
-        "DMControlBarShadow":"0 0 10px 10px rgba(78,78,78, 0.2)",
-        "DMControlBarBorder":"rgba(85,85,85,0.75)",
-
-        "DMControlBarMidBackground" : "rgb(108,108,108)",
-        "DMControlBarMidShadow" : "0 0 10px 10px rgba(53,53,53, 0.73)",
-
-        "DMControlBarRopeBackground" : "rgb(108,108,108)",
-        "DMControlBarGripBorder" : "rgb(108,108,108)",
-    },
-    "Light":{
-        "CLICKON_DynamicBubblesBackground" : "rgba(236,236,236,0.9)",
-        "CLICKON_DynamicBubblesBorder" :"rgba(218,218,218,0.9)",
-        "CLICKON_DynamicBubblesShadow" :"0 0 40px 5px rgba(184, 184, 184, 1)",
-
-        "DynamicBubblesBackground" : "rgba(228, 228, 228, 0.7)",
-        "DynamicBubblesBorder" :"rgba(207, 207, 207, 0.7)",
-        "DynamicBubblesShadow" :"0 0 40px 5px rgba(198, 198, 198, 1)",
-
-        "BlackChunk":"#202020",
-        "WhiteChunk":"#cfcfcf",
-
-        "DBTitle": "#474747",
-        "DBContent" : "#5c5c5c",
-        "DBType" : "#393939",
-        "DBBottomBar" : "#484848",
-
-        "DBTextShadow" : "rgba(255, 255, 255, 0.75) 0 0 20px",
-
-        "Background" : "#ececec",
-
-        "DMControlBarBackground":"rgba(244, 244, 244, 0.5)",
-        "DMControlBarShadow":"0 0 10px 10px rgba(255, 255, 255, 0.2)",
-        "DMControlBarBorder":"rgba(207, 207, 207, 0.75)",
-
-        "DMControlBarMidBackground" : "rgb(186, 186, 186)",
-        "DMControlBarMidShadow" : "0 0 10px 10px rgba(227, 227, 227, 0.73)",
-
-        "DMControlBarRopeBackground" : "rgb(186, 186, 186)",
-        "DMControlBarGripBorder" : "rgb(186, 186, 186)",
-    }
-}
-
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function PaintUp(){
+    const Colors = {
+        "Dark":[
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubble"),
+                "Path" : "backgroundColor",
+                "Value": "rgba(67,67,67,0.7)"
+            },
+
+            {
+
+                "Elements" : document.getElementsByClassName("DynamicBubble"),
+                "Path" : "borderColor",
+                "Value": "rgba(53,53,53,0.7)"
+            },
+
+            {
+
+                "Elements" : document.getElementsByClassName("DynamicBubble"),
+                "Path" : "boxShadow",
+                "Value": "0 0 40px 5px rgba(52, 52, 52, 1)",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("blackChunk"),
+                "Path" : "backgroundColor",
+                "Value": "#1c1c1c",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("whiteChunk"),
+                "Path" : "backgroundColor",
+                "Value": "#787878",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleFrameTitle"),
+                "Path" : "color",
+                "Value": "#cdcdcd",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleFrameContent"),
+                "Path" : "color",
+                "Value": "#c5c5c5",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleTypeTitle"),
+                "Path" : "color",
+                "Value": "#c8c8c8",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleBottomBar"),
+                "Path" : "color",
+                "Value": "#cdcdcd",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubble"),
+                "Path" : "textShadow",
+                "Value": "rgba(64, 64, 64, 0.75) 0 0 20px",
+            },
+
+
+            {
+                "Elements" : [document.body],
+                "Path" : "backgroundColor",
+                "Value": "#272727",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleControlBar"),
+                "Path" : "backgroundColor",
+                "Value": "rgba(74,74,74,0.5)",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleControlBar"),
+                "Path" : "boxShadow",
+                "Value": "0 0 10px 10px rgba(78,78,78, 0.2)",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleControlBar"),
+                "Path" : "borderColor",
+                "Value": "rgba(85,85,85,0.75)",
+            },
+
+            {
+                "Elements" : document.getElementById("DynamicBubbleBase").getElementsByTagName("hr"),
+                "Path" : "backgroundColor",
+                "Value": "rgb(108,108,108)",
+            },
+
+            {
+                "Elements" : document.getElementById("DynamicBubbleBase").getElementsByTagName("hr"),
+                "Path" : "boxShadow",
+                "Value": "0 0 10px 10px rgba(53,53,53, 0.73)",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleControlBarHandleGrip"),
+                "Path" : "borderColor",
+                "Value": "rgb(108,108,108)",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleControlBarHandleRope"),
+                "Path" : "backgroundColor",
+                "Value": "rgb(108,108,108)",
+            }
+        ],
+        "Light":[
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubble"),
+                "Path" : "backgroundColor",
+                "Value": "rgba(228, 228, 228, 0.7)"
+            },
+
+            {
+
+                "Elements" : document.getElementsByClassName("DynamicBubble"),
+                "Path" : "borderColor",
+                "Value": "rgba(207, 207, 207, 0.7)"
+            },
+
+            {
+
+                "Elements" : document.getElementsByClassName("DynamicBubble"),
+                "Path" : "boxShadow",
+                "Value": "0 0 40px 5px rgba(198, 198, 198, 1)",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("blackChunk"),
+                "Path" : "backgroundColor",
+                "Value": "#202020",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("whiteChunk"),
+                "Path" : "backgroundColor",
+                "Value": "#cfcfcf",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleFrameTitle"),
+                "Path" : "color",
+                "Value": "#474747",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleFrameContent"),
+                "Path" : "color",
+                "Value": "#5c5c5c",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleTypeTitle"),
+                "Path" : "color",
+                "Value": "#393939",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleBottomBar"),
+                "Path" : "color",
+                "Value": "#484848",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubble"),
+                "Path" : "textShadow",
+                "Value": "rgba(255, 255, 255, 0.75) 0 0 20px",
+            },
+
+
+            {
+                "Elements" : [document.body],
+                "Path" : "backgroundColor",
+                "Value": "#ececec",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleControlBar"),
+                "Path" : "backgroundColor",
+                "Value": "rgba(244, 244, 244, 0.5)",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleControlBar"),
+                "Path" : "boxShadow",
+                "Value": "0 0 10px 10px rgba(255, 255, 255, 0.2)",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleControlBar"),
+                "Path" : "borderColor",
+                "Value": "rgba(207, 207, 207, 0.75)",
+            },
+
+            {
+                "Elements" : document.getElementById("DynamicBubbleBase").getElementsByTagName("hr"),
+                "Path" : "backgroundColor",
+                "Value": "rgb(186, 186, 186)",
+            },
+
+            {
+                "Elements" : document.getElementById("DynamicBubbleBase").getElementsByTagName("hr"),
+                "Path" : "boxShadow",
+                "Value": "0 0 10px 10px rgba(227, 227, 227, 0.73)",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleControlBarHandleGrip"),
+                "Path" : "borderColor",
+                "Value": "rgb(186, 186, 186)",
+            },
+
+            {
+                "Elements" : document.getElementsByClassName("DynamicBubbleControlBarHandleRope"),
+                "Path" : "backgroundColor",
+                "Value": "rgb(186, 186, 186)",
+            }
+        ]
+    };
+
     let Album = isDarkMode ? Colors.Dark : Colors.Light;
 
-    for (let i in Album) {
-        let Elements = [];
-        let ColorPath = "";
+    for (let i = 0; i < Album.length; i++)
+        for (let j = 0; j < Album[i].Elements.length; j++)
+            Album[i].Elements[j].style[Album[i].Path] =  Album[i].Value;
 
-        switch (i) {
-            case "DynamicBubblesBackground":{
-                Elements = document.getElementsByClassName("DynamicBubble");
-                ColorPath = "backgroundColor";
-                break;
-            }
-
-            case "DynamicBubblesBorder":{
-                Elements = document.getElementsByClassName("DynamicBubble");
-                ColorPath = "borderColor";
-                break;
-            }
-
-            case "DynamicBubblesShadow":{
-                Elements = document.getElementsByClassName("DynamicBubble");
-                ColorPath = "boxShadow";
-                break;
-            }
-
-            case "DBTitle":{
-                Elements = document.getElementsByClassName("DynamicBubbleFrameTitle");
-                ColorPath = "color";
-                break;
-            }
-
-            case "DBContent":{
-                Elements = document.getElementsByClassName("DynamicBubbleFrameContent");
-                ColorPath = "color";
-                break;
-            }
-
-            case "DBType":{
-                Elements = document.getElementsByClassName("DynamicBubbleTypeTitle");
-                ColorPath = "color";
-                break;
-            }
-
-            case "DBBottomBar":{
-                Elements = document.getElementsByClassName("DynamicBubbleBottomBar");
-                ColorPath = "color";
-                break;
-            }
-
-            case "DBTextShadow":{
-                Elements = document.getElementsByClassName("DynamicBubble");
-                ColorPath = "textShadow";
-                break;
-            }
-
-            case "Background":{
-                Elements = [document.body];
-                ColorPath = "backgroundColor";
-                break;
-            }
-
-            case "DMControlBarBackground":{
-                Elements = document.getElementsByClassName("DynamicBubbleControlBar");
-                ColorPath = "backgroundColor";
-                break;
-            }
-
-            case "DMControlBarShadow":{
-                Elements = document.getElementsByClassName("DynamicBubbleControlBar")
-                ColorPath = "boxShadow";
-                break;
-            }
-
-            case "DMControlBarBorder":{
-                Elements = document.getElementsByClassName("DynamicBubbleControlBar")
-                console.log(Elements);
-                ColorPath = "borderColor";
-                break;
-            }
-
-            case "DMControlBarMidBackground":{
-                Elements = document.getElementById("DynamicBubbleBase").getElementsByTagName("hr");
-                ColorPath = "backgroundColor";
-                break;
-            }
-
-            case "DMControlBarMidShadow":{
-                Elements = document.getElementById("DynamicBubbleBase").getElementsByTagName("hr");
-                ColorPath = "boxShadow";
-                break;
-            }
-
-            case "DMControlBarGripBorder":{
-                Elements = document.getElementsByClassName("DynamicBubbleControlBarHandleGrip");
-                ColorPath = "borderColor";
-                break;
-            }
-
-            case "DMControlBarRopeBackground":{
-                Elements = document.getElementsByClassName("DynamicBubbleControlBarHandleRope");
-                ColorPath = "backgroundColor";
-                break;
-            }
-
-            case "BlackChunk":{
-                Elements = document.getElementsByClassName("whiteChunk");
-                ColorPath = "backgroundColor";
-                break;
-            }
-
-            case "WhiteChunk":{
-                Elements = document.getElementsByClassName("blackChunk");
-                ColorPath = "backgroundColor";
-                break;
-            }
-        }
-
-        for (let j = 0;j<Elements.length;j++)
-            Elements[j].style[ColorPath] = Album[i];
-
-    }
 }
 
 function checkIfMobile() {
@@ -340,7 +387,6 @@ let useTouchPad = checkIfMobile();
 
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
-
 
     let xStartScreen = 0,yStartScreen = 0;
 
@@ -1309,9 +1355,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
             moving(CubeInfo.LastXMoved,CubeInfo.LastYMoved);
         } else if(FinalInfo.Bubble && !Pulling && PullUpInfo.MainPullUpIndex === false){
 
-            FinalInfo.Bubble.style.backgroundColor = (isDarkMode ? Colors.Dark : Colors.Light).CLICKON_DynamicBubblesBackground;
-            FinalInfo.Bubble.style.borderColor = (isDarkMode ? Colors.Dark : Colors.Light).CLICKON_DynamicBubblesBorder;
-            FinalInfo.Bubble.style.boxShadow =  (isDarkMode ? Colors.Dark : Colors.Light).CLICKON_DynamicBubblesShadow;
+            FinalInfo.Bubble.style.backgroundColor = (isDarkMode ? "rgba(53,53,53,0.9)" : "rgba(236,236,236,0.9)");
+            FinalInfo.Bubble.style.borderColor = (isDarkMode ? "rgba(46,46,46,0.9)" : "rgba(218,218,218,0.9)");
+            FinalInfo.Bubble.style.boxShadow =  (isDarkMode ? "0 0 40px 5px rgba(60, 60, 60, 1)" : "0 0 40px 5px rgba(184, 184, 184, 1)");
 
             FinalInfo.Bubble.style.transform = "translateX(-50%) translateY(10px)";
 
@@ -1687,9 +1733,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
         for (let i in mouseOnBubbles){
             if(!mouseOnBubbles[i]) continue;
 
-            mouseOnBubbles[i].style.backgroundColor = (isDarkMode ? Colors.Dark : Colors.Light).DynamicBubblesBackground;
-            mouseOnBubbles[i].style.borderColor = (isDarkMode ? Colors.Dark : Colors.Light).DynamicBubblesBorder;
-            mouseOnBubbles[i].style.boxShadow =  (isDarkMode ? Colors.Dark : Colors.Light).DynamicBubblesShadow;
+            mouseOnBubbles[i].style.backgroundColor = (isDarkMode ? "rgba(67,67,67,0.7)" : "rgba(228, 228, 228, 0.7)");
+            mouseOnBubbles[i].style.borderColor = (isDarkMode ? "rgba(53,53,53,0.7)" : "rgba(207, 207, 207, 0.7)");
+            mouseOnBubbles[i].style.boxShadow =  (isDarkMode ? "0 0 40px 5px rgba(52, 52, 52, 1)" : "0 0 40px 5px rgba(198, 198, 198, 1)");
 
             mouseOnBubbles[i].style.transform = "translateX(-50%) translateY(0)";
 
