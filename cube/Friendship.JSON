@@ -49,6 +49,7 @@
       "Name": "威森",
       "Tag": "Weason",
       "Event": {
+        "Page": "./page/FriendshipGroup/Weason.JSON"
       }
     },
     {
@@ -60,6 +61,7 @@
       "Name": "RO逆滲透",
       "Tag": "RO",
       "Event": {
+        "Page": "./page/FriendshipGroup/RO.JSON"
       }
     },
     {
@@ -71,6 +73,7 @@
       "Name": "嗟低",
       "Tag": "JD",
       "Event": {
+        "Page": "./page/FriendshipGroup/JD.JSON"
       }
     },
     {
@@ -82,6 +85,7 @@
       "Name": "一籃喔慢",
       "Tag": "Iranomas",
       "Event": {
+        "Page": "./page/FriendshipGroup/Iranomas.JSON"
       }
     },
 
@@ -94,6 +98,7 @@
       "Name": "水泥人",
       "Tag": "Dummy",
       "Event": {
+        "Page": "./page/FriendshipGroup/Dummy.JSON"
       }
     },
     {
@@ -105,6 +110,7 @@
       "Name": "醫生魚",
       "Tag": "DoctorFish",
       "Event": {
+        "Page": "./page/FriendshipGroup/DoctorFish.JSON"
       }
     },
     {
@@ -116,6 +122,8 @@
       "Name": "醫生魚",
       "Tag": "Sponge",
       "Event": {
+        "Page": "./page/FriendshipGroup/Sponge.JSON"
+
       }
     }
   ]
