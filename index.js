@@ -1108,7 +1108,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
 
                 DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
-                    "選擇我！"
+                    "選擇我？"
 
                 DynamicBubbles[i].style.height = `${mixHeight}px`;
                 DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10}%`;
@@ -1119,6 +1119,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     DynamicBubbles[i].style.opacity = "0";
 
             }
+
+            DynamicBubbles[MainIndex].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
+                "在點擊一次以閱覽泡泡"
 
 
             //
