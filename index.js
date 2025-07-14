@@ -1366,6 +1366,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             mouseOnBubbles[mouseOnBubbles.length] = StartAtElement = FinalInfo.Bubble;
 
+            LastPullUpAtY = y;
             Pulling = true;
         }else if(FinalInfo.ControlBar && !Controlling && PullUpInfo.MainPullUpIndex !== false){
             mouseOnControlBars[mouseOnControlBars.length] = StartAtElement = FinalInfo.ControlBar;
@@ -1761,6 +1762,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let nowCursorAtX = 0;
     let nowCursorAtY = 0;
 
+
+    let LastPullUpAtY = 0;
+
     let fingerMoving = async function(x,y){
         if(Locked) return;
 
@@ -1862,9 +1866,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                     }else{
                         if(ControlButtons[index]["IMPORTANT?"])
-                            thisElement.style.color = isDarkMode ? "rgb(234,83,83)" : "#bf3232"
+                            thisElement.style.color = isDarkMode ? "#EA5353" : "#bf3232"
                         else
-                            thisElement.style.color = isDarkMode ? "rgb(230,230,230)" :"#393939";
+                            thisElement.style.color = isDarkMode ? "#E6E6E6" :"#393939";
 
                         thisElement.style.backgroundColor = "";
                     }
@@ -1872,7 +1876,25 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }else{
                 StartAtElement.style.overflow = "visible";
             }
-        }
+        }else if(Pulling)
+            if(PullUpInfo.PullUpType === 3 && PullUpInfo.MainPullUpIndex === false){
+                if(y-LastPullUpAtY > 140){
+                    LastPullUpAtY = y;
+
+                    if(PullUpInfo.ChoseToPullUpIndex-1 >= 0){
+                        PullUpInfo.ChoseToPullUpIndex--;
+                        PullUpDynamicBubbles(PullUpInfo.ChoseToPullUpIndex);
+                    }
+
+                }else if(y - LastPullUpAtY < - 140){
+                    LastPullUpAtY = y;
+
+                    if(PullUpInfo.ChoseToPullUpIndex+1 < DynamicBubbles.length){
+                        PullUpInfo.ChoseToPullUpIndex++;
+                        PullUpDynamicBubbles(PullUpInfo.ChoseToPullUpIndex);
+                    }
+                }
+            }
 
 
     }
