@@ -1692,6 +1692,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     mouseOnControlBars[i].getElementsByTagName("div")[index].style.opacity = "0";
                 }
                 mouseOnControlBars[i].style.transition = "";
+
+                mouseOnControlBars[i].parentElement.getElementsByClassName("DynamicBubbleTypeTitle")[0].style.filter =
+                    mouseOnControlBars[i].parentElement.getElementsByClassName("DynamicBubbleFrame")[0].style.filter =
+                        mouseOnControlBars[i].parentElement.getElementsByClassName("DynamicBubbleBottomBar")[0].style.filter = "";
+
+
+
                 await sleep(20);
 
                 mouseOnControlBars[i].style.width =
@@ -1766,15 +1773,16 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             moving(CubeInfo.XMoved, CubeInfo.YMoved);
         }else if (Controlling){
-
             if(ControlBarIsDraw === false){
                 ControlBarPullUpAtX = ControlBarPullUpAtY = 0;
                 AlreadyInRecording = 0
 
-
                 if(y - yStartScreen >= 100){
                     StartAtElement.style.transition = "";
 
+                    StartAtElement.parentElement.getElementsByClassName("DynamicBubbleTypeTitle")[0].style.filter =
+                        StartAtElement.parentElement.getElementsByClassName("DynamicBubbleFrame")[0].style.filter =
+                            StartAtElement.parentElement.getElementsByClassName("DynamicBubbleBottomBar")[0].style.filter = "blur(3px)";
 
                     ControlBarIsDraw = true;
 
@@ -1813,17 +1821,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             StartAtElement.style.transition = "none";
                             ControlBarPullUpAtX = nowCursorAtX;
                             ControlBarPullUpAtY = nowCursorAtY;
-
-                            // let pointer = document.createElement("div");
-                            // pointer.style.width = pointer.style.height = "10px"
-                            // pointer.style.position = "absolute";
-                            //
-                            // pointer.style.top = `${ControlBarPullUpAtY}px`;
-                            // pointer.style.left = `${ControlBarPullUpAtX}px`;
-                            //
-                            // pointer.style.background = "red";
-                            // pointer.style.zIndex = "999"
-                            // document.body.appendChild(pointer);
                         }
                     }, 240)
                 }
@@ -1859,9 +1856,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         thisElement.style.color = isDarkMode ? "#272727" : "#ffffff";
 
                         if(ControlButtons[index]["IMPORTANT?"])
-                            thisElement.style.backgroundColor = isDarkMode ? "rgba(234,83,83,0.88)" : "#bf3232e0"
+                            thisElement.style.backgroundColor = isDarkMode ? "#EA5353" : "#bf3232"
                         else
-                            thisElement.style.backgroundColor = isDarkMode ? "rgba(230,230,230,0.88)" :"#393939e0";
+                            thisElement.style.backgroundColor = isDarkMode ? "#E6E6E6" :"#393939";
 
                     }else{
                         if(ControlButtons[index]["IMPORTANT?"])
