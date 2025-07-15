@@ -2073,12 +2073,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     TweenUp(false);
 
-    for (let i = 0; i < 4; i++){
-        for (let j = 0;j<90/5;j++){
-            let a = j*5;
-            moving((i)*(-90) - a - 20,-10);
-            await sleep(0);
-        }
+    for (let j = 0;j<=360/5;j++){
+        moving(-j*5 - 15,-10);
+        await sleep(0);
     }
 
 
