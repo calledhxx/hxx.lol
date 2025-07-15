@@ -2085,8 +2085,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     await sleep(240);
 
-
-
     await CreateDynamicBubbles("Notification",[
         {
             "Title":"你是誰？！",
