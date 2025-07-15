@@ -423,7 +423,7 @@ body{
 
     z-index: 3;
 
-    transition: all 730ms cubic-bezier(0, 0.6, 0.1, 1);
+    transition: all 730ms ease;
 }
 
 .DynamicBubbleFrame{
@@ -432,7 +432,7 @@ body{
 
     overflow: hidden;
 
-    transition: all 540ms cubic-bezier(0, 0.6, 0.1, 1);
+    transition: all 540ms ease;
 }
 
 .DynamicBubbleBottomBar{
@@ -450,7 +450,7 @@ body{
 
     font-size: 16px;
 
-    transition: all 320ms cubic-bezier(0, 0.6, 0.1, 1);
+    transition: all 320ms ease;
 }
 
 
