@@ -2071,11 +2071,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     await sleep(200);
 
-    TweenUp(true,.1);
+    TweenUp(false);
 
     for (let i = 0; i < 4; i++){
-        moving(-90*(i+1) - 15,-10);
-        await sleep(100);
+        for (let j = 0;j<90/5;j++){
+            let a = j*5;
+            moving((i)*(-90) - a - 20,-10);
+            await sleep(0);
+        }
     }
 
 
@@ -2085,7 +2088,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     await sleep(240);
 
-    TweenUp(false);
 
 
     await CreateDynamicBubbles("Notification",[
