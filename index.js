@@ -1367,6 +1367,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             mouseOnBubbles[mouseOnBubbles.length] = StartAtElement = FinalInfo.Bubble;
 
             LastPullUpAtY = y;
+            PullUpMoving = 0;
             Pulling = true;
         }else if(FinalInfo.ControlBar && !Controlling && PullUpInfo.MainPullUpIndex !== false){
             mouseOnControlBars[mouseOnControlBars.length] = StartAtElement = FinalInfo.ControlBar;
@@ -1612,7 +1613,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }else if(FinalInfo.Bubble === StartAtElement){
                 if(!PullUpInfo.PullUpType)
                     PullUpDynamicBubbles(ClickOnIndex);
-                else if(PullUpInfo.PullUpType === 3)
+                else if(PullUpInfo.PullUpType === 3 && !PullUpMoving)
                 {
                     if(ClickOnIndex !== PullUpInfo.ChoseToPullUpIndex){
                         await PullUpDynamicBubbles(ClickOnIndex);
@@ -1764,6 +1765,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
     let LastPullUpAtY = 0;
+    let PullUpMoving = 0;
 
     let fingerMoving = async function(x,y){
         if(Locked) return;
@@ -1880,6 +1882,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(PullUpInfo.PullUpType === 3 && PullUpInfo.MainPullUpIndex === false){
                 if(y-LastPullUpAtY > 140){
                     LastPullUpAtY = y;
+                    PullUpMoving = 1;
 
                     if(PullUpInfo.ChoseToPullUpIndex-1 >= 0){
                         PullUpInfo.ChoseToPullUpIndex--;
@@ -1888,6 +1891,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 }else if(y - LastPullUpAtY < - 140){
                     LastPullUpAtY = y;
+                    PullUpMoving = 1;
 
                     if(PullUpInfo.ChoseToPullUpIndex+1 < DynamicBubbles.length){
                         PullUpInfo.ChoseToPullUpIndex++;
