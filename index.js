@@ -1113,7 +1113,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 DynamicBubbles[i].style.height = `${mixHeight}px`;
                 DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10}%`;
 
-                if(100 - Math.abs(i - MainIndex )*10 > 40)
+                if(100 - Math.abs(i - MainIndex )*10 > 60)
                     DynamicBubbles[i].style.opacity = "1";
                 else
                     DynamicBubbles[i].style.opacity = "0";
@@ -1880,6 +1880,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }else if(Pulling)
             if(PullUpInfo.PullUpType === 3 && PullUpInfo.MainPullUpIndex === false){
+
+
                 if(y-LastPullUpAtY > 140){
                     LastPullUpAtY = y;
                     PullUpMoving = 1;
