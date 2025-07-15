@@ -1862,9 +1862,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         thisElement.style.color = isDarkMode ? "#272727" : "#ffffff";
 
                         if(ControlButtons[index]["IMPORTANT?"])
-                            thisElement.style.backgroundColor = isDarkMode ? "#EA5353" : "#bf3232"
+                            thisElement.style.backgroundColor = isDarkMode ? "#EA5353E0" : "#bf3232E0"
                         else
-                            thisElement.style.backgroundColor = isDarkMode ? "#E6E6E6" :"#393939";
+                            thisElement.style.backgroundColor = isDarkMode ? "#E6E6E6E0" :"#393939E0";
 
                     }else{
                         if(ControlButtons[index]["IMPORTANT?"])
