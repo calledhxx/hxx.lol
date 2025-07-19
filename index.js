@@ -1379,7 +1379,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             if(PullUpInfo.PullUpType === 3)
             {
-                document.getElementById("DynamicBubbleBase").style.transition = "all 140ms ease-in";
+                document.getElementById("DynamicBubbleBase").style.transition = "all 140ms cubic-bezier(0, 0.2, 0.1, 1)";
                 document.getElementById("DynamicBubbleBase").style.top = `30px`;
 
                 setTimeout(function(){
