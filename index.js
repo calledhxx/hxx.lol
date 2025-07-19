@@ -1607,6 +1607,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 if(ClickOnIndex === false) return;
             }
 
+            if(PullUpInfo.PullUpType === 3)
+            {
+                document.getElementById("DynamicBubbleBase").style.transition = "all 140ms ease-in";
+                document.getElementById("DynamicBubbleBase").style.top = `30px`;
+
+                setTimeout(function(){
+                    document.getElementById("DynamicBubbleBase").style.transition = `none`;
+                },140)
+            }
 
             if(PullUpInfo.MainPullUpIndex !== false){
 
@@ -1880,29 +1889,26 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }else if(Pulling)
             if(PullUpInfo.PullUpType === 3 && PullUpInfo.MainPullUpIndex === false){
-
-
                 if(y-LastPullUpAtY > 140){
-                    LastPullUpAtY = y;
-                    PullUpMoving = 1;
-
                     if(PullUpInfo.ChoseToPullUpIndex-1 >= 0){
+                        LastPullUpAtY = y;
+                        PullUpMoving = 1;
+
                         PullUpInfo.ChoseToPullUpIndex--;
                         PullUpDynamicBubbles(PullUpInfo.ChoseToPullUpIndex);
                     }
-
                 }else if(y - LastPullUpAtY < - 140){
-                    LastPullUpAtY = y;
-                    PullUpMoving = 1;
-
                     if(PullUpInfo.ChoseToPullUpIndex+1 < DynamicBubbles.length){
+                        LastPullUpAtY = y;
+                        PullUpMoving = 1;
+
                         PullUpInfo.ChoseToPullUpIndex++;
                         PullUpDynamicBubbles(PullUpInfo.ChoseToPullUpIndex);
                     }
                 }
+
+                document.getElementById("DynamicBubbleBase").style.top = `${30 + 50*(y - LastPullUpAtY)/140}px`;
             }
-
-
     }
 
     if(useTouchPad) {
