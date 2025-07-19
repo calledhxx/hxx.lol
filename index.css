@@ -660,3 +660,136 @@ body{
 .SearchableBubble {
     cursor: auto;
 }
+
+
+.MouseOnBubble{
+    background-color: rgba(236,236,236,0.9);
+    border-color: rgba(218,218,218,0.9);
+    box-shadow: 0 0 40px 5px rgba(184, 184, 184, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .MouseOnBubble{
+        background-color: rgba(53,53,53,0.9);
+        border-color : rgba(46,46,46,0.9);
+        box-shadow : 0 0 40px 5px rgba(60, 60, 60, 1);
+    }
+
+    body{
+        background-Color:#272727
+    }
+
+    .DynamicBubble{
+        background-Color:rgba(67,67,67,0.7);
+        border-Color:rgba(53,53,53,0.7);
+        box-Shadow:0 0 40px 5px rgba(52, 52, 52, 1);
+        text-Shadow:rgba(64, 64, 64, 0.75) 0 0 20px
+    }
+
+    .blackChunk{
+        background-Color:#1c1c1c;
+    }
+
+    .whiteChunk{
+        background-Color:#787878;
+    }
+
+    .DynamicBubbleFrameTitle{
+        color:#cdcdcd;
+    }
+
+    .DynamicBubbleFrameContent{
+        color:#c5c5c5
+    }
+
+    .DynamicBubbleTypeTitle{
+        color:#c8c8c8
+    }
+
+    .DynamicBubbleBottomBar{
+        color:#cdcdcd
+    }
+
+    .DynamicBubbleControlBar{
+        background-Color:rgba(74,74,74,0.5);
+        box-Shadow:0 0 10px 10px rgba(78,78,78, 0.2);
+        border-Color:rgba(85,85,85,0.75);
+
+    }
+
+    #DynamicBubbleBase hr{
+        background-Color:rgb(108,108,108);
+        box-Shadow:0 0 10px 10px rgba(53,53,53, 0.73)
+    }
+
+    .DynamicBubbleControlBarHandleGrip{
+        border-Color:rgb(108,108,108)
+    }
+
+    .DynamicBubbleControlBarHandleRope{
+        background-Color:rgb(108,108,108)
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .MouseOnBubble{
+        background-color:rgba(236,236,236,0.9);
+        border-color : rgba(218,218,218,0.9);
+        box-shadow : 0 0 40px 5px rgba(184, 184, 184, 1);
+    }
+
+    body{
+        background-Color:#ececec
+    }
+
+    .DynamicBubble{
+        background-Color:rgba(228, 228, 228, 0.7);
+        border-Color:rgba(207, 207, 207, 0.7);
+        box-Shadow:0 0 40px 5px rgba(198, 198, 198, 1);
+        text-Shadow:rgba(255, 255, 255, 0.75) 0 0 20px
+    }
+
+    .blackChunk{
+        background-Color:#202020;
+    }
+
+    .whiteChunk{
+        background-Color:#cfcfcf;
+    }
+
+    .DynamicBubbleFrameTitle{
+        color:#474747;
+    }
+
+    .DynamicBubbleFrameContent{
+        color:#5c5c5c
+    }
+
+    .DynamicBubbleTypeTitle{
+        color:#393939
+    }
+
+    .DynamicBubbleBottomBar{
+        color:#484848
+    }
+
+    .DynamicBubbleControlBar{
+        background-Color:rgba(244, 244, 244, 0.5);
+        box-Shadow:0 0 10px 10px rgba(255, 255, 255, 0.2);
+        border-Color:rgba(207, 207, 207, 0.75);
+
+    }
+
+    #DynamicBubbleBase hr{
+        background-Color:rgb(186, 186, 186);
+        box-Shadow:0 0 10px 10px rgba(227, 227, 227, 0.73)
+    }
+
+    .DynamicBubbleControlBarHandleGrip{
+        border-Color:rgb(186, 186, 186)
+    }
+
+    .DynamicBubbleControlBarHandleRope{
+        background-Color:rgb(186, 186, 186)
+    }
+}
