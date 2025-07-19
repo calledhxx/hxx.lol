@@ -1002,7 +1002,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             toDel.style.opacity = "0";
             toDel.style.height = "0";
             toDel.style.minHeight = "0";
-            await sleep(210);
+            await sleep(340);
             toDel.remove();
         },120);
 
