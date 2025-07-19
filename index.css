@@ -519,7 +519,9 @@ body{
 
     backdrop-filter: blur(30px);
 
-    z-index:1
+    z-index:1;
+
+    cursor:  pointer;
 }
 
 .DynamicBubbleControlBar hr{
@@ -638,4 +640,23 @@ body{
     background: rgba(255, 255, 255, 0.55);
     box-shadow:  0 0 2px rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(20px);
+}
+
+.SearchableBubble .DynamicBubbleFrameSection *{
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    -khtml-user-select: text;
+    user-select: text;
+
+    -webkit-user-drag: auto;
+    -moz-user-drag: auto;
+    -ms-user-drag: auto;
+    user-drag: auto;
+
+    cursor: text;
+}
+
+.SearchableBubble {
+    cursor: auto;
 }
