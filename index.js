@@ -523,6 +523,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
     async function TidyUpDynamicBubbles(){
+        if(PullUpInfo.MainPullUpIndex!==false)
+            DynamicBubbles[PullUpInfo.MainPullUpIndex].classList.remove("SearchableBubble");
+
+
         resetPullUpInfo();
 
         let Base = document.getElementById("DynamicBubbleBase");
@@ -544,6 +548,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             await sleep(100);
 
         }
+
 
         for(let i = 0; i < DynamicBubbles.length; i++){
             DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "0";
@@ -1177,6 +1182,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         ClickOnBubble.style.height = "calc(var(--fh,100vh) - 60px)";
         ClickOnBubble.style.top = "0";
         ClickOnBubble.style.opacity = "1";
+
+        ClickOnBubble.classList.add("SearchableBubble");
 
         ClickOnBubble.getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
             "向下拖拉右上方的按鈕看看？"
