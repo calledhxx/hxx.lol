@@ -34,8 +34,9 @@
       "Name":"家族錄",
       "Tag":"Family",
       "Event":{
-        "Cube":"./cube/Family.JSON"
+
       }
+
     },
     {
       "Side": 6,
