@@ -35,6 +35,17 @@
       "Tag": "Movies",
       "Event": {
       }
+    },
+    {
+      "Side": 1,
+      "Chunk": 3,
+      "Color": "#9a38c7 ",
+      "depth": 24,
+      "Icon": null,
+      "Name": "音樂",
+      "Tag": "Music",
+      "Event": {
+      }
     }
   ]
 }
