@@ -1660,17 +1660,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }else if(Pulling)
             if(PullUpInfo.PullUpType === 3 && PullUpInfo.MainPullUpIndex === false){
                 if(y-LastPullUpAtY > 140){
+                    PullUpMoving = 1;
+
                     if(PullUpInfo.ChoseToPullUpIndex-1 >= 0){
                         LastPullUpAtY = y;
-                        PullUpMoving = 1;
 
                         PullUpInfo.ChoseToPullUpIndex--;
                         PullUpDynamicBubbles(PullUpInfo.ChoseToPullUpIndex);
                     }
                 }else if(y - LastPullUpAtY < - 140){
+                    PullUpMoving = 1;
+
                     if(PullUpInfo.ChoseToPullUpIndex+1 < DynamicBubbles.length){
                         LastPullUpAtY = y;
-                        PullUpMoving = 1;
 
                         PullUpInfo.ChoseToPullUpIndex++;
                         PullUpDynamicBubbles(PullUpInfo.ChoseToPullUpIndex);

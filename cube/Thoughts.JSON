@@ -24,6 +24,17 @@
       "Event": {
         "Cube": "./cube/ThoughtsGroup/Animations.JSON"
       }
+    },
+    {
+      "Side": 1,
+      "Chunk": 2,
+      "Color": "#fcb04c",
+      "depth": 24,
+      "Icon": null,
+      "Name": "電影",
+      "Tag": "Movies",
+      "Event": {
+      }
     }
   ]
 }
