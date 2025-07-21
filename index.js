@@ -1776,7 +1776,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
 
-
     //
     //
     //
@@ -1829,12 +1828,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     await sleep(100);
 
-
-
     TweenUp(true,.4);
-
-
-
 
     await sleep(120);
 
@@ -1855,7 +1849,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         moving(-j*5 - 15,-10);
         await sleep(0);
     }
-
 
     CubeInfo.LastXMoved = CubeInfo.XMoved =  -375;
     CubeInfo.LastYMoved = CubeInfo.YMoved = -10;
@@ -1884,4 +1877,3 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     Locked = 0;
 });
-
