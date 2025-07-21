@@ -397,11 +397,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     CubeSideSize
 
         document.getElementById("passZFront").style.transform =
-            `rotateX(${0+y}deg) rotateY(${180+x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
+            `rotateX(${0+y}deg) rotateY(${180+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
 
 
         document.getElementById("passZBack").style.transform =
-            `rotateX(${0+y}deg) rotateY(${0+x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
+            `rotateX(${0+y}deg) rotateY(${0+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
 
 
         if(
@@ -420,11 +420,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         document.getElementById("passXFront").style.transform =
-            `rotateX(${0+y}deg) rotateY(${90+x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
+            `rotateX(${0+y}deg) rotateY(${90+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
 
 
         document.getElementById("passXBack").style.transform =
-            `rotateX(${0+y}deg) rotateY(${270+x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
+            `rotateX(${0+y}deg) rotateY(${270+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
 
         if(
             YtoFXnFZDeg < 90 ? toFXDeg < 90 : toFXDeg > 90
@@ -442,12 +442,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         document.getElementById("passYFront").style.transform =
-            `rotateX(${90+y}deg) rotateZ(${0-x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px`
+            `rotateX(${90+y}deg) rotateZ(${0-x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px`
 
 
 
         document.getElementById("passYBack").style.transform =
-            `rotateX(${270+y}deg) rotateZ(${0+x}deg) translateX(0) translateY(0) translateZ(-${String(CubeSideSize/2)}px)`
+            `rotateX(${270+y}deg) rotateZ(${0+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
 
         if(
             toFYDeg < 90
@@ -634,23 +634,23 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
             buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.transform =
-                Cube.Buttons[i].Side < 5 ? `rotateX(${String(y)}deg) rotateY(${String(x)}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+Cube.Buttons[i].depth/2)}px)`
-                    : `rotateX(${String(y)}deg) rotateZ(${String((Cube.Buttons[i].Side === 6 ? -1 : 1 )*(-x))}deg) translateX(${String(addX)}px) translateY(${String(addY)}px) translateZ(${String(-addZ+Cube.Buttons[i].depth/2)}px)`
+                Cube.Buttons[i].Side < 5 ? `rotateX(${(y)}deg) rotateY(${(x)}deg) translateX(${(addX)}px) translateY(${(addY)}px) translateZ(${(-addZ+Cube.Buttons[i].depth/2)}px)`
+                    : `rotateX(${(y)}deg) rotateZ(${((Cube.Buttons[i].Side === 6 ? -1 : 1 )*(-x))}deg) translateX(${(addX)}px) translateY(${(addY)}px) translateZ(${(-addZ+Cube.Buttons[i].depth/2)}px)`
 
             buttonElements[i].getElementsByClassName("buttonBackSide")[0].style.transform =
-                Cube.Buttons[i].Side < 5 ? `rotateX(${String(y)}deg) rotateY(${String(x+180)}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String(addZ+Cube.Buttons[i].depth/2)}px)`
-                    : `rotateX(${String(y+180)}deg) rotateZ(${String((Cube.Buttons[i].Side === 6 ? -1 : 1 )*(x+180))}deg) translateX(${String(-addX)}px) translateY(${String(addY)}px) translateZ(${String((addZ+Cube.Buttons[i].depth/2))}px)`
+                Cube.Buttons[i].Side < 5 ? `rotateX(${(y)}deg) rotateY(${(x+180)}deg) translateX(${(-addX)}px) translateY(${(addY)}px) translateZ(${(addZ+Cube.Buttons[i].depth/2)}px)`
+                    : `rotateX(${(y+180)}deg) rotateZ(${((Cube.Buttons[i].Side === 6 ? -1 : 1 )*(x+180))}deg) translateX(${(-addX)}px) translateY(${(addY)}px) translateZ(${((addZ+Cube.Buttons[i].depth/2))}px)`
             ;
 
             buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.transform =
-                Cube.Buttons[i].Side < 5 ? `rotateX(${y}deg) rotateY(${x+90}deg) translateX(${String(addZ)}px) translateY(${String(addY)}px) translateZ(${String(addX+CubeSideSize * 4/11/2)}px)`
-                    : (`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${(-x-270)}deg) rotateZ(${(Cube.Buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${String(addZ)}px)  translateY(${addY * (Cube.Buttons[i].Side === 6 ? -1 : 1)}px) translateZ(${String(addX+CubeSideSize * 4/11/2)}px) `
+                Cube.Buttons[i].Side < 5 ? `rotateX(${y}deg) rotateY(${x+90}deg) translateX(${(addZ)}px) translateY(${(addY)}px) translateZ(${(addX+CubeSideSize * 4/11/2)}px)`
+                    : (`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${(-x-270)}deg) rotateZ(${(Cube.Buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${(addZ)}px)  translateY(${addY * (Cube.Buttons[i].Side === 6 ? -1 : 1)}px) translateZ(${(addX+CubeSideSize * 4/11/2)}px) `
             + (Cube.Buttons[i].Side === 6 ? "scaleY(-1)" :""));
 
 
             buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.transform =
-                Cube.Buttons[i].Side < 5  ? `rotateX(${y}deg) rotateY(${x-90}deg) translateX(${String(-addZ)}px) translateY(${String(addY)}px) translateZ(${String(-addX + CubeSideSize * 4/11/2)}px)`
-                    : (`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x-90 }deg) rotateZ(${(Cube.Buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${String(-addZ)}px)  translateY(${addY * (Cube.Buttons[i].Side === 6 ? -1 : 1)}px) translateZ(${String(-addX + CubeSideSize * 4/11/2 )}px)`
+                Cube.Buttons[i].Side < 5  ? `rotateX(${y}deg) rotateY(${x-90}deg) translateX(${(-addZ)}px) translateY(${(addY)}px) translateZ(${(-addX + CubeSideSize * 4/11/2)}px)`
+                    : (`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x-90 }deg) rotateZ(${(Cube.Buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${(-addZ)}px)  translateY(${addY * (Cube.Buttons[i].Side === 6 ? -1 : 1)}px) translateZ(${(-addX + CubeSideSize * 4/11/2 )}px)`
                     +( Cube.Buttons[i].Side === 6 ? "scaleY(-1)" :""));
 
             if(
@@ -667,12 +667,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
             buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.transform =
-                Cube.Buttons[i].Side < 5 ? `rotateX(${y+90}deg) rotateZ(${-x}deg) translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String(-addY+CubeSideSize * 4/11/2)}px)`
-                    :`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x}deg)  translateX(${String(addX)}px) translateY(${String(-addZ)}px) translateZ(${String((Cube.Buttons[i].Side === 6 ? -1 : 1 )*(-addY+CubeSideSize * 4/11/2))}px)`;
+                Cube.Buttons[i].Side < 5 ? `rotateX(${y+90}deg) rotateZ(${-x}deg) translateX(${(addX)}px) translateY(${(-addZ)}px) translateZ(${(-addY+CubeSideSize * 4/11/2)}px)`
+                    :`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x}deg)  translateX(${(addX)}px) translateY(${(-addZ)}px) translateZ(${((Cube.Buttons[i].Side === 6 ? -1 : 1 )*(-addY+CubeSideSize * 4/11/2))}px)`;
 
             buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.transform =
-                Cube.Buttons[i].Side < 5 ? `rotateX(${y-90}deg) rotateZ(${x}deg) translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String(addY+CubeSideSize * 4/11/2)}px)`
-                    :`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y-90)}deg) rotateY(${x}deg)  translateX(${String(addX)}px) translateY(${String(addZ)}px) translateZ(${String((Cube.Buttons[i].Side === 6 ? -1 : 1 )*(addY+CubeSideSize * 4/11/2))}px)`;
+                Cube.Buttons[i].Side < 5 ? `rotateX(${y-90}deg) rotateZ(${x}deg) translateX(${(addX)}px) translateY(${(addZ)}px) translateZ(${(addY+CubeSideSize * 4/11/2)}px)`
+                    :`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y-90)}deg) rotateY(${x}deg)  translateX(${(addX)}px) translateY(${(addZ)}px) translateZ(${((Cube.Buttons[i].Side === 6 ? -1 : 1 )*(addY+CubeSideSize * 4/11/2))}px)`;
 
             if(
                 Cube.Buttons[i].Side < 5?
