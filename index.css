@@ -746,6 +746,7 @@ body{
     }
 }
 
+
 @media (prefers-color-scheme: light) {
     .MouseOnBubble{
         background-color: rgba(241, 241, 241, 0.9) !important;
