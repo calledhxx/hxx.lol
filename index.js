@@ -946,7 +946,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         ClickOnBubble.classList.add("SearchableBubble");
 
         ClickOnBubble.getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
-            "向下拖拉右上方的按鈕看看？"
+            "向下拖拉右上方的握把看看？"
 
         ClickOnBubble.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "auto";
 
