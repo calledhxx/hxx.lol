@@ -1151,7 +1151,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
 
-
     let ControlBarIsDraw = false;
     let LastSelectControlButtonIndex = false;
 
