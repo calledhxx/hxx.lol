@@ -27,19 +27,6 @@
     },
     {
       "Side": 6,
-      "Chunk": 4,
-      "Color":"#04E08F",
-      "depth":24,
-      "Icon": null,
-      "Name":"家族錄",
-      "Tag":"Family",
-      "Event":{
-
-      }
-
-    },
-    {
-      "Side": 6,
       "Chunk": 2,
       "Color":"#9654e8",
       "depth":24,
