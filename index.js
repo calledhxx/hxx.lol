@@ -1872,6 +1872,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
         },
         {
             "Content":"還有丫，蘇東坡沒有講過這句話：蘇波哀東的笑容。"
+        },
+        {
+            "Content":"某些瀏覽器或裝置會限制或影響網站程式的流暢度，導致畫面卡頓。這時候你就要大展鴻圖，關公都點頭，有料!。"
+        },
+        {
+            "Content":"網站錯誤或意見回報：me@hxx.lol。"
+        },
+        {
+            "Title":"版權宣告",
+            "Content":"Copyright © from 2024 to PRESENT @CalledHxx. All rights reserved."
+        },
+        {
+            "Content":"MIT License, open-source library: https://github.com/calledhxx/hxx.lol"
         }
     ])
 
