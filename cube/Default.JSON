@@ -61,6 +61,30 @@
       "Event":{
         "Page":"./page/Grass.JSON"
       }
+    },
+    {
+      "Side": 2,
+      "Chunk": 1,
+      "Color":"#ebad3b",
+      "depth":24,
+      "Icon": null,
+      "Name":"待辦事項",
+      "Tag":"Todo",
+      "Event":{
+        "Page":"./page/Todo.JSON"
+      }
+    },
+    {
+      "Side": 2,
+      "Chunk": 4,
+      "Color":"#d62d30",
+      "depth":24,
+      "Icon": null,
+      "Name":"個人立場",
+      "Tag":"Subjective",
+      "Event":{
+        "Page":"./page/Subjective.JSON"
+      }
     }
   ]
 }
