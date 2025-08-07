@@ -739,6 +739,7 @@ body{
     .SearchableBubble .DynamicBubbleFrameSection *::selection{
         color: #3c3c3c;
         background-color: rgba(197, 197, 197, 0.8);
+        text-shadow: none !important;
     }
 }
 
@@ -808,5 +809,6 @@ body{
     .SearchableBubble .DynamicBubbleFrameSection *::selection{
         color: #ececec;
         background-color: rgba(50, 50, 50, 0.8);
+        text-shadow: none !important;
     }
 }
