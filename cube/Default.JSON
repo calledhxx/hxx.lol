@@ -89,13 +89,13 @@
     {
       "Side": 4,
       "Chunk": 3,
-      "Color":"#34eb8c",
+      "Color":"#55c999",
       "depth":24,
       "Icon": null,
-      "Name":"幹，啥阿",
-      "Tag":"FuckOff",
+      "Name":"江南風格",
+      "Tag":"Style",
       "Event":{
-        "Page":"./page/FuckOff.JSON"
+        "Page":"./page/Style.JSON"
       }
     }
   ]
