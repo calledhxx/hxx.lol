@@ -85,6 +85,18 @@
       "Event":{
         "Page":"./page/Subjective.JSON"
       }
+    },
+    {
+      "Side": 4,
+      "Chunk": 3,
+      "Color":"#34eb8c",
+      "depth":24,
+      "Icon": null,
+      "Name":"幹，啥阿",
+      "Tag":"FuckOff",
+      "Event":{
+        "Page":"./page/FuckOff.JSON"
+      }
     }
   ]
 }
