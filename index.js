@@ -338,7 +338,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 DynamicBubbles[i].style.height = "120px";
             }else{
                 if(DynamicBubbles[i].classList.contains("NotificationBubble"))
-                    DynamicBubbles[i].style.height = "120px";
+                    DynamicBubbles[i].style.height = "160px";
                 else if(DynamicBubbles[i].classList.contains("PageBubble"))
                     DynamicBubbles[i].style.height = "330px";
 
@@ -746,7 +746,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     newBubble.classList.add("NotificationBubble");
 
                     if(myIndex === DynamicBubbles.length-1){
-                        newBubble.style.height = "120px";
+                        newBubble.style.height = "160px";
                     }
                 },280);
                 break;
@@ -847,7 +847,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 if(DynamicBubbles[i].classList.contains("PageBubble")){
                     mixHeight = 240;
                 }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                    mixHeight = 120;
+                    mixHeight = 155;
                 }
 
                 DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
@@ -869,7 +869,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 if(DynamicBubbles[i].classList.contains("PageBubble")){
                     mixHeight = 240;
                 }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                    mixHeight = 120;
+                    mixHeight = 155;
                 }
 
                 DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
@@ -903,7 +903,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 if(DynamicBubbles[i].classList.contains("PageBubble")){
                     mixHeight = 240;
                 }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                    mixHeight = 120;
+                    mixHeight = 155;
                 }
 
                 Accumulation += 20 + LastMixHeight - LastMixHeight + mixHeight;
@@ -922,7 +922,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 if(DynamicBubbles[i].classList.contains("PageBubble")){
                     mixHeight = 240;
                 }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                    mixHeight = 120;
+                    mixHeight = 155;
                 }
 
                 Accumulation += 30 + LastMixHeight;
@@ -985,7 +985,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 if(DynamicBubbles[i].classList.contains("PageBubble")){
                     mixHeight = 240;
                 }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                    mixHeight = 120;
+                    mixHeight = 140;
                 }
 
                 DynamicBubbles[i].style.opacity = "0";
