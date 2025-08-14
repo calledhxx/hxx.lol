@@ -27,6 +27,8 @@ root{
 }
 
 body{
+    overscroll-behavior: none;
+
     height: var(--fh,100vh);
     width: var(--fw,100vw);
     background: #ececec;
