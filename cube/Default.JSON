@@ -26,8 +26,8 @@
       }
     },
     {
-      "Side": 6,
-      "Chunk": 2,
+      "Side": 2,
+      "Chunk": 4,
       "Color":"#9654e8",
       "depth":24,
       "Icon": null,
@@ -75,15 +75,15 @@
       }
     },
     {
-      "Side": 2,
+      "Side": 6,
       "Chunk": 4,
-      "Color":"#d62d30",
+      "Color":"#a1a1a1",
       "depth":24,
       "Icon": null,
-      "Name":"個人立場",
-      "Tag":"Subjective",
+      "Name":"岩石",
+      "Tag":"Rock",
       "Event":{
-        "Page":"./page/Subjective.JSON"
+        "Page":"./page/Rock.JSON"
       }
     },
     {
