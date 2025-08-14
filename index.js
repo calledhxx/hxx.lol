@@ -907,7 +907,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
 
                 Accumulation += 20 + LastMixHeight - LastMixHeight + mixHeight;
-                DynamicBubbles[i].style.top = `${400 - Accumulation}px`
+                DynamicBubbles[i].style.top = `${450 - Accumulation}px`
 
                 LastMixHeight = mixHeight;
 
@@ -926,7 +926,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
 
                 Accumulation += 20 + LastMixHeight;
-                DynamicBubbles[i].style.top = `${400 + Accumulation}px`
+                DynamicBubbles[i].style.top = `${430 + Accumulation}px`
 
                 LastMixHeight = mixHeight;
             }
