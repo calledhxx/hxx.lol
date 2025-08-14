@@ -628,29 +628,6 @@ body{
     height: 6px;
 }
 
-::-webkit-scrollbar-track {
-    box-shadow: 0 0 2px rgba(223, 223, 223, 0.85);
-    background-color: rgba(225, 225, 225, 0.73);
-
-    border-radius: 6px;
-    backdrop-filter: blur(20px);
-
-}
-
-
-::-webkit-scrollbar-thumb {
-    background: rgba(237, 237, 237, 0.74);
-    border-radius: 6px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 2px rgba(200, 200, 200, 0.74);
-}
-
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.55);
-    box-shadow:  0 0 2px rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(20px);
-}
 
 .SearchableBubble .DynamicBubbleFrameSection *{
     -moz-user-select: text;
@@ -743,6 +720,30 @@ body{
         background-color: rgba(197, 197, 197, 0.8);
         text-shadow: none !important;
     }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: 0 0 2px rgba(35, 35, 35, 0.85);
+        background-color: rgba(41, 41, 41, 0.73);
+
+        border-radius: 6px;
+        backdrop-filter: blur(20px);
+
+    }
+
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(104, 104, 104, 0.74);
+        border-radius: 6px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 0 2px rgba(57, 57, 57, 0.74);
+    }
+
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(101, 101, 101, 0.55);
+        box-shadow:  0 0 2px rgba(99, 99, 99, 0.55);
+        backdrop-filter: blur(20px);
+    }
 }
 
 
@@ -812,5 +813,29 @@ body{
         color: #ececec;
         background-color: rgba(50, 50, 50, 0.8);
         text-shadow: none !important;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: 0 0 2px rgba(179, 179, 179, 0.85);
+        background-color: rgba(202, 202, 202, 0.73);
+
+        border-radius: 6px;
+        backdrop-filter: blur(20px);
+
+    }
+
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(237, 237, 237, 0.74);
+        border-radius: 6px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 0 2px rgba(200, 200, 200, 0.74);
+    }
+
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.55);
+        box-shadow:  0 0 2px rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(20px);
     }
 }
