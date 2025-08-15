@@ -907,7 +907,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
 
                 Accumulation += 20 + LastMixHeight - LastMixHeight + mixHeight;
-                DynamicBubbles[i].style.top = `${450 - Accumulation}px`
+                DynamicBubbles[i].style.top = `${400 - Accumulation}px`
 
                 LastMixHeight = mixHeight;
 
@@ -926,7 +926,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
 
                 Accumulation += 20 + LastMixHeight;
-                DynamicBubbles[i].style.top = `${430 + Accumulation}px`
+                DynamicBubbles[i].style.top = `${380 + Accumulation}px`
 
                 LastMixHeight = mixHeight;
             }
@@ -1153,6 +1153,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let ControlBarIsDraw = false;
     let LastSelectControlButtonIndex = false;
+
+    let LastPullUpAtY = 0;
 
     let endMove = async function (x,y){
         if(Locked) return;
@@ -1384,6 +1386,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 setTimeout(function(){
                     document.getElementById("DynamicBubbleBase").style.transition = `none`;
                 },140)
+
+                if(Math.abs(LastPullUpAtY - y) > 340)
+                    await TidyUpDynamicBubbles();
             }
 
             if(PullUpInfo.MainPullUpIndex !== false){
@@ -1539,8 +1544,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let nowCursorAtX = 0;
     let nowCursorAtY = 0;
 
-
-    let LastPullUpAtY = 0;
     let PullUpMoving = 0;
 
     let fingerMoving = async function(x,y){
