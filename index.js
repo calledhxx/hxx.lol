@@ -311,6 +311,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         for(let i = 0; i < DynamicBubbles.length; i++){
+            DynamicBubbles[i].style.top = `0`;
             DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "0";
             DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "0";
             DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "0";
