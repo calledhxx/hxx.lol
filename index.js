@@ -14,6 +14,7 @@ function checkIfMobile() {
 }; //i forgot where it from,but... oh it's https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
 
 const soundEffects = {
+
 }
 
 let Cube = [];
