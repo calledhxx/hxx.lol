@@ -885,7 +885,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     "選擇我？"
 
                 DynamicBubbles[i].style.height = `${mixHeight}px`;
-                DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10 * i/4}%`;
+                DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10 * Math.abs(i - MainIndex )/4}%`;
 
                 if(Math.abs(i - MainIndex ) < 4)
                     DynamicBubbles[i].style.opacity = "1";
@@ -898,6 +898,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 "在點擊一次以閱覽泡泡"
 
             let Accumulation = 0;
+            let Weld = 0;
 
             for (let i = MainIndex - 1; i >= 0; i--){
                 let mixHeight = getMixHeight(DynamicBubbles[i]);
@@ -913,7 +914,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
 
                 Accumulation+= mixHeight + freeSpace;
-                DynamicBubbles[i].style.top = `${100 - Accumulation}px`;
+                DynamicBubbles[i].style.top = `${280 - Accumulation}px`;
+
+                if(i === MainIndex - 1)
+                    Weld = freeSpace;
 
             }
 
@@ -935,7 +939,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
 
                 Accumulation+= LastMixHeight + freeSpace;
-                DynamicBubbles[i].style.top = `${100 + 20 + Accumulation}px`;
+                DynamicBubbles[i].style.top = `${280 + Weld + Accumulation}px`;
 
                 LastMixHeight = mixHeight;
             }
