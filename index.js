@@ -919,7 +919,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
 
                 Accumulation+= mixHeight + freeSpace;
-                DynamicBubbles[i].style.top = `${280 - Accumulation}px`;
+                DynamicBubbles[i].style.top = `${180 - Accumulation}px`;
 
                 if(i === MainIndex - 1)
                     Weld = freeSpace;
@@ -944,7 +944,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
 
                 Accumulation+= LastMixHeight + freeSpace;
-                DynamicBubbles[i].style.top = `${280 + Weld + Accumulation}px`;
+                DynamicBubbles[i].style.top = `${180 + Weld + Accumulation}px`;
 
                 LastMixHeight = mixHeight;
             }
