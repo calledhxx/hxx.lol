@@ -870,14 +870,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }else if(DynamicBubbles.length >= 4){
             PullUpInfo.PullUpType = 3;
 
+            let Height = 250;
+
             for (let i = 0; i < DynamicBubbles.length; i++){
-                let mixHeight = 250;
 
                 DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
                     "選擇我？"
 
-                DynamicBubbles[i].style.height = `${mixHeight}px`;
                 DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10 * Math.abs(i - MainIndex )/4}%`;
+                DynamicBubbles[i].style.height = `${Height}px`;
 
                 if(Math.abs(i - MainIndex ) < 4)
                     if(Math.abs(i - MainIndex ))
@@ -895,10 +896,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             let Accumulation = 0;
 
-            let Horizontal = 180;
+            let Horizontal = 170;
+
 
             for (let i = MainIndex - 1; i >= 0; i--){
-                let mixHeight = 250;
+                let mixHeight = Height;
 
                 let absIndex = Math.abs(MainIndex - i);
 
@@ -917,7 +919,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             Accumulation = 0;
 
             for (let i = MainIndex; i < DynamicBubbles.length; i++){
-                let mixHeight = 250;
+                let mixHeight = Height;
 
                 let absIndex = Math.abs(MainIndex - i);
 
@@ -930,7 +932,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
 
                 Accumulation+= mixHeight + freeSpace;
-                DynamicBubbles[i].style.top = `${Horizontal + Accumulation - 250}px`;
+                DynamicBubbles[i].style.top = `${Horizontal + Accumulation - Height}px`;
 
             }
         }
