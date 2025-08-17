@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         if(SavePath) CubePath[CubePath.length] = structuredClone(CubeData);
         Cube = structuredClone(CubeData);
 
-        
+
 
         CreateButtons(structuredClone(CubeData));
     }
@@ -627,13 +627,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
                                                                 buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.height =
                                                                     `${CubeSideSize * 4/11}px`;
 
-                buttonElements[i].getElementsByClassName("buttonRightSide")[0].children[0].style.height =
-                        buttonElements[i].getElementsByClassName("buttonLeftSide")[0].children[0].style.height =
-                            `${CubeSideSize * 4/11}px`;
+            buttonElements[i].getElementsByClassName("buttonRightSide")[0].children[0].style.height =
+                buttonElements[i].getElementsByClassName("buttonLeftSide")[0].children[0].style.height =
+                    `${CubeSideSize * 4/11}px`;
 
             buttonElements[i].getElementsByClassName("buttonTopSide")[0].children[0].style.width =
-                    buttonElements[i].getElementsByClassName("buttonBottomSide")[0].children[0].style.width =
-                            `${CubeSideSize * 4/11}px`;
+                buttonElements[i].getElementsByClassName("buttonBottomSide")[0].children[0].style.width =
+                    `${CubeSideSize * 4/11}px`;
 
 
             buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.transform =
@@ -648,13 +648,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
             buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.transform =
                 Cube.Buttons[i].Side < 5 ? `rotateX(${y}deg) rotateY(${x+90}deg) translateX(${(addZ)}px) translateY(${(addY)}px) translateZ(${(addX+CubeSideSize * 4/11/2)}px)`
                     : (`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${(-x-270)}deg) rotateZ(${(Cube.Buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${(addZ)}px)  translateY(${addY * (Cube.Buttons[i].Side === 6 ? -1 : 1)}px) translateZ(${(addX+CubeSideSize * 4/11/2)}px) `
-            + (Cube.Buttons[i].Side === 6 ? "scaleY(-1)" :""));
+                        + (Cube.Buttons[i].Side === 6 ? "scaleY(-1)" :""));
 
 
             buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.transform =
                 Cube.Buttons[i].Side < 5  ? `rotateX(${y}deg) rotateY(${x-90}deg) translateX(${(-addZ)}px) translateY(${(addY)}px) translateZ(${(-addX + CubeSideSize * 4/11/2)}px)`
                     : (`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x-90 }deg) rotateZ(${(Cube.Buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${(-addZ)}px)  translateY(${addY * (Cube.Buttons[i].Side === 6 ? -1 : 1)}px) translateZ(${(-addX + CubeSideSize * 4/11/2 )}px)`
-                    +( Cube.Buttons[i].Side === 6 ? "scaleY(-1)" :""));
+                        +( Cube.Buttons[i].Side === 6 ? "scaleY(-1)" :""));
 
             if(
                 Cube.Buttons[i].Side < 5 ?
@@ -827,7 +827,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         Base.appendChild(newBubble);
 
-        
+
 
         await TidyUpDynamicBubbles();
     };
@@ -1045,9 +1045,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             if(CheckButton.Parent){
                 if(!Pushing) if (retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonRightSide").SearchTimes === 1 ||
-                retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonLeftSide").SearchTimes === 1 ||
-                retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonTopSide").SearchTimes === 1 ||
-                retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonBottomSide").SearchTimes === 1)
+                    retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonLeftSide").SearchTimes === 1 ||
+                    retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonTopSide").SearchTimes === 1 ||
+                    retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonBottomSide").SearchTimes === 1)
                     continue;
 
                 FinalInfo.Button = CheckButton.Parent;
@@ -1437,7 +1437,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         let len = DynamicBubbles.length;
 
                         for (let i = 0;i<len;i++)
-                             ClearBubble(0);
+                            ClearBubble(0);
 
                         await sleep(120);
 
@@ -1764,7 +1764,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             HTTPService.send();
             Content = JSON.parse(await waitUntilLoad());
         } catch (err) {
-             await CreateDynamicBubbles(
+            await CreateDynamicBubbles(
                 "Notification",
                 [
                     {
@@ -1800,7 +1800,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     //
     //
     //### START OVER HERE ###
-    
+
 
     TweenUp(true,.14);
     moving(0,0);
