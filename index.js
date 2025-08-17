@@ -313,6 +313,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         for(let i = 0; i < DynamicBubbles.length; i++){
+            DynamicBubbles[i].style.transform = "translateX(-50%) translateY(0)"
             DynamicBubbles[i].style.top = `0`;
             DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "0";
             DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "0";
@@ -888,7 +889,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10 * Math.abs(i - MainIndex )/4}%`;
 
                 if(Math.abs(i - MainIndex ) < 4)
-                    DynamicBubbles[i].style.opacity = "1";
+                    DynamicBubbles[i].style.opacity = String( (4 - Math.abs(i - MainIndex ))/4);
                 else
                     DynamicBubbles[i].style.opacity = "0";
 
