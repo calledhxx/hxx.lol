@@ -627,13 +627,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
                                                                 buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.height =
                                                                     `${CubeSideSize * 4/11}px`;
 
-            buttonElements[i].getElementsByClassName("buttonRightSide")[0].children[0].style.height =
-                buttonElements[i].getElementsByClassName("buttonLeftSide")[0].children[0].style.height =
-                    `${CubeSideSize * 4/11}px`;
+                buttonElements[i].getElementsByClassName("buttonRightSide")[0].children[0].style.height =
+                        buttonElements[i].getElementsByClassName("buttonLeftSide")[0].children[0].style.height =
+                            `${CubeSideSize * 4/11}px`;
 
             buttonElements[i].getElementsByClassName("buttonTopSide")[0].children[0].style.width =
-                buttonElements[i].getElementsByClassName("buttonBottomSide")[0].children[0].style.width =
-                    `${CubeSideSize * 4/11}px`;
+                    buttonElements[i].getElementsByClassName("buttonBottomSide")[0].children[0].style.width =
+                            `${CubeSideSize * 4/11}px`;
 
 
             buttonElements[i].getElementsByClassName("buttonFrontSide")[0].style.transform =
@@ -648,13 +648,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
             buttonElements[i].getElementsByClassName("buttonRightSide")[0].style.transform =
                 Cube.Buttons[i].Side < 5 ? `rotateX(${y}deg) rotateY(${x+90}deg) translateX(${(addZ)}px) translateY(${(addY)}px) translateZ(${(addX+CubeSideSize * 4/11/2)}px)`
                     : (`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${(-x-270)}deg) rotateZ(${(Cube.Buttons[i].Side === 6 ? 1 : 1 )*270}deg) translateX(${(addZ)}px)  translateY(${addY * (Cube.Buttons[i].Side === 6 ? -1 : 1)}px) translateZ(${(addX+CubeSideSize * 4/11/2)}px) `
-                        + (Cube.Buttons[i].Side === 6 ? "scaleY(-1)" :""));
+            + (Cube.Buttons[i].Side === 6 ? "scaleY(-1)" :""));
 
 
             buttonElements[i].getElementsByClassName("buttonLeftSide")[0].style.transform =
                 Cube.Buttons[i].Side < 5  ? `rotateX(${y}deg) rotateY(${x-90}deg) translateX(${(-addZ)}px) translateY(${(addY)}px) translateZ(${(-addX + CubeSideSize * 4/11/2)}px)`
                     : (`rotateX(${(Cube.Buttons[i].Side === 6 ? -1 : 1 )*(y+90)}deg) rotateY(${-x-90 }deg) rotateZ(${(Cube.Buttons[i].Side === 6 ? 1 : 1 )*90}deg) translateX(${(-addZ)}px)  translateY(${addY * (Cube.Buttons[i].Side === 6 ? -1 : 1)}px) translateZ(${(-addX + CubeSideSize * 4/11/2 )}px)`
-                        +( Cube.Buttons[i].Side === 6 ? "scaleY(-1)" :""));
+                    +( Cube.Buttons[i].Side === 6 ? "scaleY(-1)" :""));
 
             if(
                 Cube.Buttons[i].Side < 5 ?
@@ -835,6 +835,17 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
     function PullUpDynamicBubbles(MainIndex){
+        let getMixHeight = function (bubble){
+            let mixHeight = 0;
+
+            if(bubble.classList.contains("PageBubble"))
+                mixHeight = 240;
+            else if (bubble.classList.contains("NotificationBubble"))
+                mixHeight = 155;
+
+            return mixHeight;
+        }
+
         PullUpInfo.ChoseToPullUpIndex = MainIndex;
 
         if(DynamicBubbles.length === 1){
@@ -868,21 +879,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
             PullUpInfo.PullUpType = 3;
 
             for (let i = 0; i < DynamicBubbles.length; i++){
-                let mixHeight = 0;
-
-                if(DynamicBubbles[i].classList.contains("PageBubble")){
-                    mixHeight = 240;
-                }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                    mixHeight = 155;
-                }
+                let mixHeight = getMixHeight(DynamicBubbles[i]);
 
                 DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
                     "選擇我？"
 
                 DynamicBubbles[i].style.height = `${mixHeight}px`;
-                DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10}%`;
+                DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10 * i/4}%`;
 
-                if(100 - Math.abs(i - MainIndex )*10 > 60)
+                if(Math.abs(i - MainIndex ) < 4)
                     DynamicBubbles[i].style.opacity = "1";
                 else
                     DynamicBubbles[i].style.opacity = "0";
@@ -892,45 +897,45 @@ document.addEventListener("DOMContentLoaded",  async function () {
             DynamicBubbles[MainIndex].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
                 "在點擊一次以閱覽泡泡"
 
-
-            //
-
-            let LastMixHeight = 0;
-
             let Accumulation = 0;
 
+            for (let i = MainIndex - 1; i >= 0; i--){
+                let mixHeight = getMixHeight(DynamicBubbles[i]);
 
+                let absIndex = Math.abs(MainIndex - i);
 
-            for (let i = MainIndex; i >= 0; i--){
-                let mixHeight = 0;
+                mixHeight *= Math.cos(absIndex * 90/4 * Math.PI / 180);
 
-                if(DynamicBubbles[i].classList.contains("PageBubble")){
-                    mixHeight = 240;
-                }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                    mixHeight = 155;
-                }
+                const pizzaC = Math.sin((absIndex * 90/4/2) * Math.PI / 180)*50*2;
+                const cosB = Math.cos((90 - (180 - (absIndex * 90/4))/2) * Math.PI / 180);
+                const freeSpace = (pizzaC * cosB);
 
-                Accumulation += 20 + LastMixHeight - LastMixHeight + mixHeight;
-                DynamicBubbles[i].style.top = `${400 - Accumulation}px`
+                DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
 
-                LastMixHeight = mixHeight;
+                Accumulation+= mixHeight + freeSpace;
+                DynamicBubbles[i].style.top = `${100 - Accumulation}px`;
 
             }
 
             Accumulation = 0;
-            LastMixHeight = 0;
 
-            for (let i = MainIndex+1; i < DynamicBubbles.length; i++){
-                let mixHeight = 0;
+            let LastMixHeight = 0;
 
-                if(DynamicBubbles[i].classList.contains("PageBubble")){
-                    mixHeight = 240;
-                }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                    mixHeight = 155;
-                }
+            for (let i = MainIndex; i < DynamicBubbles.length; i++){
+                let mixHeight = getMixHeight(DynamicBubbles[i]);
 
-                Accumulation += 20 + LastMixHeight;
-                DynamicBubbles[i].style.top = `${380 + Accumulation}px`
+                let absIndex = Math.abs(MainIndex - i);
+
+                mixHeight *= Math.cos(absIndex * 90/4 * Math.PI / 180);
+
+                const pizzaC = Math.sin((absIndex * 90/4/2) * Math.PI / 180)*50*2;
+                const cosB = Math.cos((90 - (180 - (absIndex * 90/4))/2) * Math.PI / 180);
+                const freeSpace = (pizzaC * cosB);
+
+                DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
+
+                Accumulation+= LastMixHeight + freeSpace;
+                DynamicBubbles[i].style.top = `${100 + 20 + Accumulation}px`;
 
                 LastMixHeight = mixHeight;
             }
@@ -1045,9 +1050,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             if(CheckButton.Parent){
                 if(!Pushing) if (retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonRightSide").SearchTimes === 1 ||
-                    retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonLeftSide").SearchTimes === 1 ||
-                    retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonTopSide").SearchTimes === 1 ||
-                    retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonBottomSide").SearchTimes === 1)
+                retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonLeftSide").SearchTimes === 1 ||
+                retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonTopSide").SearchTimes === 1 ||
+                retIfParentMatch(ElementsWitchAtPoint[i],0,"buttonBottomSide").SearchTimes === 1)
                     continue;
 
                 FinalInfo.Button = CheckButton.Parent;
@@ -1137,7 +1142,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             FinalInfo.Bubble.classList.add("MouseOnBubble");
 
-            FinalInfo.Bubble.style.transform = "translateX(-50%) translateY(10px)";
+            // FinalInfo.Bubble.style.transform = "translateX(-50%) translateY(10px)";
 
             mouseOnBubbles[mouseOnBubbles.length] = StartAtElement = FinalInfo.Bubble;
 
@@ -1437,7 +1442,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         let len = DynamicBubbles.length;
 
                         for (let i = 0;i<len;i++)
-                            ClearBubble(0);
+                             ClearBubble(0);
 
                         await sleep(120);
 
@@ -1534,7 +1539,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             mouseOnBubbles[i].classList.remove("MouseOnBubble");
 
-            mouseOnBubbles[i].style.transform = "translateX(-50%) translateY(0)";
+            // mouseOnBubbles[i].style.transform = "translateX(-50%) translateY(0)";
 
             mouseOnBubbles[i] = null;
         }
@@ -1764,7 +1769,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             HTTPService.send();
             Content = JSON.parse(await waitUntilLoad());
         } catch (err) {
-            await CreateDynamicBubbles(
+             await CreateDynamicBubbles(
                 "Notification",
                 [
                     {
