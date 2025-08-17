@@ -873,19 +873,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let Height = 250;
 
             for (let i = 0; i < DynamicBubbles.length; i++){
+                let absIndex = Math.abs(i - MainIndex);
 
-
-                if(Math.abs(i - MainIndex ) < 4)
+                if(absIndex < 4)
                 {
-                    if(Math.abs(i - MainIndex ))
-                        DynamicBubbles[i].style.opacity = String( (4 - Math.abs(i - MainIndex ))/6);
+                    if(absIndex)
+                        DynamicBubbles[i].style.opacity = String( (4 - absIndex)/6);
                     else
                         DynamicBubbles[i].style.opacity = "1";
 
                     DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
                         "選擇我？"
 
-                    DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10 * Math.abs(i - MainIndex )/4}%`;
+                    DynamicBubbles[i].style.width = `${100 - absIndex*10 * absIndex/4}%`;
                     DynamicBubbles[i].style.height = `${Height}px`;
                 }
                 else
@@ -895,9 +895,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                     DynamicBubbles[i].style.width = "100%";
                     DynamicBubbles[i].style.height = "0";
-                    DynamicBubbles[i].style.top = `${-Height}px`;
                     DynamicBubbles[i].style.opacity = "0";
-
                 }
 
             }
