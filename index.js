@@ -837,7 +837,16 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
     function PullUpDynamicBubbles(MainIndex){
+        let getHeightOfDynamicBubble = function (Bubble){
+            let result = 0;
 
+            if (Bubble.classList.contains("PageBubble"))
+                result = 240;
+            else if (Bubble.classList.contains("NotificationBubble"))
+                result = 155;
+
+            return result;
+        }
 
         PullUpInfo.ChoseToPullUpIndex = MainIndex;
 
@@ -850,13 +859,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let Accumulation = 0;
 
             for (let i = 0; i < DynamicBubbles.length; i++){
-                let mixHeight = 0;
-
-                if(DynamicBubbles[i].classList.contains("PageBubble")){
-                    mixHeight = 240;
-                }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                    mixHeight = 155;
-                }
+                let mixHeight = getHeightOfDynamicBubble(DynamicBubbles[i]);
 
                 DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
                     "選擇我？"
@@ -871,7 +874,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }else if(DynamicBubbles.length >= 4){
             PullUpInfo.PullUpType = 3;
 
-            let Height = 250;
 
             for (let i = 0; i < DynamicBubbles.length; i++){
                 let absIndex = Math.abs(i - MainIndex);
@@ -890,7 +892,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         "選擇我？"
 
                     DynamicBubbles[i].style.width = `${100 - absIndex*10 * absIndex/4}%`;
-                    DynamicBubbles[i].style.height = `${Height}px`;
+                    DynamicBubbles[i].style.height = `${getHeightOfDynamicBubble(DynamicBubbles[i])}px`;
                 }
                 else
                 {
@@ -910,7 +912,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             let Accumulation = 0;
 
-            let Horizontal = 170;
+            let Horizontal = 180;
 
 
             for (let i = MainIndex - 1; i >= 0; i--){
@@ -919,21 +921,22 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 if(absIndex >= 4)
                     continue;
 
-                let mixHeight = Height;
+                let mixHeight = getHeightOfDynamicBubble(DynamicBubbles[i]);
 
                 mixHeight *= Math.cos(absIndex * 90/4 * Math.PI / 180);
 
-                const pizzaC = Math.sin((absIndex * 90/4/2) * Math.PI / 180)*60*2;
+                const pizzaC = Math.sin((absIndex * 90/4/2) * Math.PI / 180)*160*2;
                 const cosB = Math.cos((90 - (180 - (absIndex * 90/4))/2) * Math.PI / 180);
                 const freeSpace = (pizzaC * cosB);
 
                 DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
 
-                Accumulation+= mixHeight + freeSpace;
-                DynamicBubbles[i].style.top = `${Horizontal - Accumulation}px`;
+                Accumulation+= mixHeight;
+                DynamicBubbles[i].style.top = `${Horizontal - Accumulation - freeSpace}px`;
             }
 
             Accumulation = 0;
+            let LastMixHeight = 0;
 
             for (let i = MainIndex; i < DynamicBubbles.length; i++){
                 let absIndex = Math.abs(MainIndex - i);
@@ -941,19 +944,20 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 if(absIndex >= 4)
                     continue;
 
-                let mixHeight = Height;
+                let mixHeight = getHeightOfDynamicBubble(DynamicBubbles[i]);
 
                 mixHeight *= Math.cos(absIndex * 90/4 * Math.PI / 180);
 
-                const pizzaC = Math.sin((absIndex * 90/4/2) * Math.PI / 180)*60*2;
+                const pizzaC = Math.sin((absIndex * 90/4/2) * Math.PI / 180)*160*2;
                 const cosB = Math.cos((90 - (180 - (absIndex * 90/4))/2) * Math.PI / 180);
                 const freeSpace = (pizzaC * cosB);
 
                 DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
 
-                Accumulation+= mixHeight + freeSpace;
-                DynamicBubbles[i].style.top = `${Horizontal + Accumulation - Height}px`;
+                Accumulation+= LastMixHeight;
+                DynamicBubbles[i].style.top = `${Horizontal + Accumulation + freeSpace}px`;
 
+                LastMixHeight = mixHeight;
             }
         }
     }
