@@ -889,7 +889,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10 * Math.abs(i - MainIndex )/4}%`;
 
                 if(Math.abs(i - MainIndex ) < 4)
-                    DynamicBubbles[i].style.opacity = String( (4 - Math.abs(i - MainIndex ))/4);
+                    if(Math.abs(i - MainIndex ))
+                        DynamicBubbles[i].style.opacity = String( (4 - Math.abs(i - MainIndex ))/6);
+                    else
+                        DynamicBubbles[i].style.opacity = "1";
+
                 else
                     DynamicBubbles[i].style.opacity = "0";
 

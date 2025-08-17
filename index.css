@@ -658,6 +658,7 @@ body{
         background-color: rgba(53,53,53,0.9) !important;
         border-color : rgba(46,46,46,0.9) !important;;
         box-shadow : 0 0 40px 5px rgb(34, 34, 34) !important;;
+        translate: 0 10px !important;
     }
 
     body{
@@ -750,8 +751,9 @@ body{
 @media (prefers-color-scheme: light) {
     .MouseOnBubble{
         background-color: rgba(241, 241, 241, 0.9) !important;
-        border-color : rgba(232, 232, 232, 0.9) !important;;
-        box-shadow : 0 0 40px 5px rgb(255, 255, 255) !important;;
+        border-color : rgba(232, 232, 232, 0.9) !important;
+        box-shadow : 0 0 40px 5px rgb(255, 255, 255) !important;
+        translate: 0 10px !important;
     }
 
     body{
