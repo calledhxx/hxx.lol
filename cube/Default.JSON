@@ -71,7 +71,7 @@
       "Name":"待辦事項",
       "Tag":"Todo",
       "Event":{
-        "Page":"./page/Todo.JSO"
+        "Page":"./page/Todo.JSON"
       }
     },
     {
