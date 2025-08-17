@@ -929,7 +929,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
 
-                Accumulation+= mixHeight + freeSpace; //WHAT THE FUCK, last mix height cant help me. That's why I decided to use 250 height each bubble type.
+                Accumulation+= mixHeight + freeSpace;
                 DynamicBubbles[i].style.top = `${Horizontal + Accumulation - 250}px`;
 
             }
