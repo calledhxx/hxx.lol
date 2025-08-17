@@ -313,6 +313,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         for(let i = 0; i < DynamicBubbles.length; i++){
+            DynamicBubbles[i].style.filter = `brightness(100%)`
             DynamicBubbles[i].style.transform = "translateX(-50%) translateY(0)"
             DynamicBubbles[i].style.top = `0`;
             DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "0";
@@ -877,10 +878,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 if(absIndex < 4)
                 {
-                    if(absIndex)
-                        DynamicBubbles[i].style.opacity = String( (4 - absIndex)/6);
-                    else
+                    if(absIndex) {
+                        DynamicBubbles[i].style.filter = `brightness(${(7 - absIndex) / 8 * 100}%)`
+                        DynamicBubbles[i].style.opacity = String((8 - absIndex) / 8);
+                    }else {
+                        DynamicBubbles[i].style.filter = `brightness(100%)`
                         DynamicBubbles[i].style.opacity = "1";
+                    }
 
                     DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
                         "選擇我？"
@@ -893,6 +897,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
                         "選擇我？"
 
+                    DynamicBubbles[i].style.filter = `brightness(0)`
                     DynamicBubbles[i].style.width = "0";
                     DynamicBubbles[i].style.height = "0";
                     DynamicBubbles[i].style.opacity = "0";
