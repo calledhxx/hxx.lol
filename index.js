@@ -893,7 +893,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
                         "選擇我？"
 
-                    DynamicBubbles[i].style.width = "100%";
+                    DynamicBubbles[i].style.width = "0";
                     DynamicBubbles[i].style.height = "0";
                     DynamicBubbles[i].style.opacity = "0";
                 }
