@@ -874,20 +874,31 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             for (let i = 0; i < DynamicBubbles.length; i++){
 
-                DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
-                    "選擇我？"
-
-                DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10 * Math.abs(i - MainIndex )/4}%`;
-                DynamicBubbles[i].style.height = `${Height}px`;
 
                 if(Math.abs(i - MainIndex ) < 4)
+                {
                     if(Math.abs(i - MainIndex ))
                         DynamicBubbles[i].style.opacity = String( (4 - Math.abs(i - MainIndex ))/6);
                     else
                         DynamicBubbles[i].style.opacity = "1";
 
+                    DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
+                        "選擇我？"
+
+                    DynamicBubbles[i].style.width = `${100 - Math.abs(i - MainIndex )*10 * Math.abs(i - MainIndex )/4}%`;
+                    DynamicBubbles[i].style.height = `${Height}px`;
+                }
                 else
+                {
+                    DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
+                        "選擇我？"
+
+                    DynamicBubbles[i].style.width = "100%";
+                    DynamicBubbles[i].style.height = "0";
+                    DynamicBubbles[i].style.top = `${-Height}px`;
                     DynamicBubbles[i].style.opacity = "0";
+
+                }
 
             }
 
@@ -900,9 +911,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
             for (let i = MainIndex - 1; i >= 0; i--){
-                let mixHeight = Height;
-
                 let absIndex = Math.abs(MainIndex - i);
+
+                if(absIndex >= 4)
+                    continue;
+
+                let mixHeight = Height;
 
                 mixHeight *= Math.cos(absIndex * 90/4 * Math.PI / 180);
 
@@ -919,9 +933,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
             Accumulation = 0;
 
             for (let i = MainIndex; i < DynamicBubbles.length; i++){
-                let mixHeight = Height;
-
                 let absIndex = Math.abs(MainIndex - i);
+
+                if(absIndex >= 4)
+                    continue;
+
+                let mixHeight = Height;
 
                 mixHeight *= Math.cos(absIndex * 90/4 * Math.PI / 180);
 
