@@ -798,7 +798,7 @@ body{
 
     #DynamicBubbleBase hr{
         background-Color:rgb(186, 186, 186);
-        box-Shadow:0 0 10px 10px rgba(227, 227, 227, 0.73)
+        box-Shadow:0 0 10px 10px rgba(227, 227, 227, 0.73) ;
     }
 
     .DynamicBubbleControlBarHandleGrip{
