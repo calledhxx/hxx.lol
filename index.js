@@ -313,6 +313,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         for(let i = 0; i < DynamicBubbles.length; i++){
+            DynamicBubbles[i].style.filter = ``;
             DynamicBubbles[i].style.transform = "translateX(-50%) translateY(0)"
             DynamicBubbles[i].style.top = `0`;
             DynamicBubbles[i].getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "0";
@@ -885,6 +886,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     else
                         DynamicBubbles[i].style.opacity = "1";
 
+                    DynamicBubbles[i].style.filter = `blur(${(absIndex)}px)`;
+
 
                     DynamicBubbles[i].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
                         "選擇我？"
@@ -900,6 +903,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     DynamicBubbles[i].style.width = "0";
                     DynamicBubbles[i].style.height = "0";
                     DynamicBubbles[i].style.opacity = "0";
+                    DynamicBubbles[i].style.filter = `blur(5px)`;
                 }
 
             }
@@ -968,6 +972,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         ClickOnBubble.style.height = "calc(var(--fh,100vh) - 60px)";
         ClickOnBubble.style.top = "0";
         ClickOnBubble.style.opacity = "1";
+        ClickOnBubble.style.filter = ``;
 
         ClickOnBubble.classList.add("SearchableBubble");
 
