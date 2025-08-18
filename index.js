@@ -1413,8 +1413,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     document.getElementById("DynamicBubbleBase").style.transition = `none`;
                 },140)
 
-                if(Math.abs(LastPullUpAtY - y) > 340)
+                if(LastPullUpAtY - y > 340)
                     await TidyUpDynamicBubbles();
+                else if(LastPullUpAtY - y < -340)
+                    await PullUpMainBubble(0);
             }
 
             if(PullUpInfo.MainPullUpIndex !== false){
