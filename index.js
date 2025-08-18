@@ -733,7 +733,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         let newControlBarMiddleContent = document.createElement("hr");
         newControlBar.appendChild(newControlBarMiddleContent);
-
+        newBubble.style.top = "-300px";
 
         let myIndex = DynamicBubbles.length;
 
@@ -760,7 +760,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 newBubbleTypeTitle.innerText = "A Page";
 
                 setTimeout(async function(){
-                    newBubble.classList.add("PageBubble")
+                    newBubble.classList.add("PageBubble");
 
                     if(myIndex === DynamicBubbles.length-1){
                         newBubble.style.height = "330px";
@@ -769,6 +769,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 break;
             }
         }
+
 
         let newControlBarHandle = document.createElement("h2");
         newControlBarHandle.classList.add("DynamicBubbleControlBarHandle");
