@@ -22,7 +22,7 @@ let Cube = [];
 let ControlButtons = [
     {
         "Name":"回上一動",
-        "IMPORTANT?":false
+        "IMPORTANT?":false //我也是腦袋破洞才會這樣設計
     },
     {
         "Name":"整理泡泡",
