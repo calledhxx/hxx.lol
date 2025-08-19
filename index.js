@@ -911,55 +911,65 @@ document.addEventListener("DOMContentLoaded",  async function () {
             DynamicBubbles[MainIndex].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
                 "在點擊一次以閱覽泡泡"
 
-            let Accumulation = 0;
-
             let Horizontal = 180;
 
+            setTimeout(async function (){
+                let Accumulation = 0;
 
-            for (let i = MainIndex - 1; i >= 0; i--){
-                let absIndex = Math.abs(MainIndex - i);
+                for (let i = MainIndex - 1; i >= 0; i--){
+                    let absIndex = Math.abs(MainIndex - i);
 
-                if(absIndex >= 4)
-                    continue;
+                    if(absIndex >= 4)
+                        continue;
 
-                let mixHeight = getHeightOfDynamicBubble(DynamicBubbles[i]);
+                    let mixHeight = getHeightOfDynamicBubble(DynamicBubbles[i]);
 
-                mixHeight *= Math.cos(absIndex * 90/4 * Math.PI / 180);
+                    mixHeight *= Math.cos(absIndex * 90/4 * Math.PI / 180);
 
-                const pizzaC = Math.sin((absIndex * 90/4/2) * Math.PI / 180)*160*2;
-                const cosB = Math.cos((90 - (180 - (absIndex * 90/4))/2) * Math.PI / 180);
-                const freeSpace = (pizzaC * cosB);
+                    const pizzaC = Math.sin((absIndex * 90/4/2) * Math.PI / 180)*160*2;
+                    const cosB = Math.cos((90 - (180 - (absIndex * 90/4))/2) * Math.PI / 180);
+                    const freeSpace = (pizzaC * cosB);
 
-                DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
+                    DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
 
-                Accumulation+= mixHeight;
-                DynamicBubbles[i].style.top = `${Horizontal - Accumulation - freeSpace}px`;
-            }
+                    Accumulation+= mixHeight;
+                    DynamicBubbles[i].style.top = `${Horizontal - Accumulation - freeSpace}px`;
 
-            Accumulation = 0;
-            let LastMixHeight = 0;
+                    await sleep(30);
+                }
+            });
 
-            for (let i = MainIndex; i < DynamicBubbles.length; i++){
-                let absIndex = Math.abs(MainIndex - i);
 
-                if(absIndex >= 4)
-                    continue;
+            setTimeout(async function (){
+                let Accumulation = 0;
 
-                let mixHeight = getHeightOfDynamicBubble(DynamicBubbles[i]);
+                let LastMixHeight = 0;
 
-                mixHeight *= Math.cos(absIndex * 90/4 * Math.PI / 180);
+                for (let i = MainIndex; i < DynamicBubbles.length; i++){
+                    let absIndex = Math.abs(MainIndex - i);
 
-                const pizzaC = Math.sin((absIndex * 90/4/2) * Math.PI / 180)*160*2;
-                const cosB = Math.cos((90 - (180 - (absIndex * 90/4))/2) * Math.PI / 180);
-                const freeSpace = (pizzaC * cosB);
+                    if(absIndex >= 4)
+                        continue;
 
-                DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
+                    let mixHeight = getHeightOfDynamicBubble(DynamicBubbles[i]);
 
-                Accumulation+= LastMixHeight;
-                DynamicBubbles[i].style.top = `${Horizontal + Accumulation + freeSpace}px`;
+                    mixHeight *= Math.cos(absIndex * 90/4 * Math.PI / 180);
 
-                LastMixHeight = mixHeight;
-            }
+                    const pizzaC = Math.sin((absIndex * 90/4/2) * Math.PI / 180)*160*2;
+                    const cosB = Math.cos((90 - (180 - (absIndex * 90/4))/2) * Math.PI / 180);
+                    const freeSpace = (pizzaC * cosB);
+
+                    DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
+
+                    Accumulation+= LastMixHeight;
+                    DynamicBubbles[i].style.top = `${Horizontal + Accumulation + freeSpace}px`;
+
+                    LastMixHeight = mixHeight;
+
+                    await sleep(30);
+                }
+            });
+
         }
     }
 
