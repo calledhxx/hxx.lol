@@ -913,7 +913,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             let Horizontal = 180;
 
-            setTimeout(async function (){
+            setTimeout(function (){
                 let Accumulation = 0;
 
                 for (let i = MainIndex - 1; i >= 0; i--){
@@ -935,12 +935,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     Accumulation+= mixHeight;
                     DynamicBubbles[i].style.top = `${Horizontal - Accumulation - freeSpace}px`;
 
-                    await sleep(30);
                 }
             });
 
 
-            setTimeout(async function (){
+            setTimeout(function (){
                 let Accumulation = 0;
 
                 let LastMixHeight = 0;
@@ -966,7 +965,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                     LastMixHeight = mixHeight;
 
-                    await sleep(30);
                 }
             });
 
