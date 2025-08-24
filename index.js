@@ -211,21 +211,21 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(Cube.Buttons[i].Icon)
             {
                 let frontIcon = document.createElement("img");
-                frontIcon.style.borderColor = hex(Cube.Buttons[i].Color,"404040",-1);
+                frontIcon.style.borderColor = "#"+hex(Cube.Buttons[i].Color,"404040",-1);
                 frontIcon.src = Cube.Buttons[i].Icon;
                 frontMain.appendChild(frontIcon);
             }
             else
             {
                 let frontTitle = document.createElement("h1");
-                frontTitle.style.borderColor = hex(Cube.Buttons[i].Color,"404040",-1);
+                frontTitle.style.borderColor = "#"+hex(Cube.Buttons[i].Color,"404040",-1);
                 frontTitle.textContent = Cube.Buttons[i].Name.substring(0, 1);
                 frontMain.appendChild(frontTitle);
             }
 
 
-            frontMain.style.borderColor = hex(Cube.Buttons[i].Color,"252525",-1);
-            frontMain.style.backgroundColor = hex(Cube.Buttons[i].Color,"181818",-1);
+            frontMain.style.borderColor = "#"+hex(Cube.Buttons[i].Color,"252525",-1);
+            frontMain.style.backgroundColor = "#"+hex(Cube.Buttons[i].Color,"181818",-1);
 
             newFrontSide.classList.add("buttonFrontSide");
             newBackSide.classList.add("buttonBackSide");
@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             newLeftSide.children[0].textContent = Cube.Buttons[i].Name;
             newRightSide.children[0].textContent = Cube.Buttons[i].Tag;
 
-            newOne.style.color = hex(Cube.Buttons[i].Color,"121212",1);
+            newOne.style.color = "#"+hex(Cube.Buttons[i].Color,"121212",1);
 
             let pads = [
                 newRightSide.children[0],
