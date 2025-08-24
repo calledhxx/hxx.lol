@@ -311,7 +311,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         }
 
-
         for(let i = 0; i < DynamicBubbles.length; i++){
             DynamicBubbles[i].style.height = "0";
             DynamicBubbles[i].style.filter = ``;
