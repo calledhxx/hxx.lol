@@ -993,11 +993,18 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         setTimeout(async function(){
+            if(!ClickOnBubble)
+                return;
+
             ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "1";
 
             ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.width = "28px";
             ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.height = "28px";
             await sleep(120);
+
+            if(!ClickOnBubble)
+                return;
+
             ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "1";
 
             StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transition = "all 120ms ease-out";
@@ -1006,10 +1013,16 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             await sleep(120);
 
+            if(!ClickOnBubble)
+                return;
+
             ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
                 `translate(-50%,-50%) rotateZ(-12deg)`;
 
             await sleep(120);
+
+            if(!ClickOnBubble)
+                return;
 
             ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
                 `translate(-50%,-50%) rotateZ(0deg)`;
