@@ -313,6 +313,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         for(let i = 0; i < DynamicBubbles.length; i++){
+            DynamicBubbles[i].style.height = "0";
             DynamicBubbles[i].style.filter = ``;
             DynamicBubbles[i].style.transform = "translateX(-50%) translateY(0)"
             DynamicBubbles[i].style.top = `0`;
@@ -325,7 +326,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         for (let i = DynamicBubbles.length-1; i > DynamicBubbles.length-5; i--) {
             if(!DynamicBubbles[i]) continue;
-            DynamicBubbles[i].style.top = `${8 * (DynamicBubbles.length-1-i)}`;
+            DynamicBubbles[i].style.top = `${8 * (DynamicBubbles.length-1-i)}px`;
             DynamicBubbles[i].style.width = `${100 - 5 * (DynamicBubbles.length-1-i)}%`;
             DynamicBubbles[i].style.opacity = `${1 - 0.25*(DynamicBubbles.length-1-i)}`;
 
@@ -394,12 +395,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         document.getElementById("box").style.width =
             document.getElementById("box").style.height =
-                CubeSideSize
+                CubeSideSize+"px"
 
         for(let i = 0;i<document.getElementsByClassName("pass").length;i++)
             document.getElementsByClassName("pass")[i].style.width =
                 document.getElementsByClassName("pass")[i].style.height =
-                    CubeSideSize
+                    CubeSideSize+"px"
 
         document.getElementById("passZFront").style.transform =
             `rotateX(${0+y}deg) rotateY(${180+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
