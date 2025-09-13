@@ -694,23 +694,23 @@ body{
     }
 
     .DynamicBubbleControlBar{
-        background-Color:rgba(74,74,74,0.5);
-        box-Shadow:0 0 10px 10px rgba(78,78,78, 0.2);
-        border-Color:rgba(85,85,85,0.75);
+        background-Color: rgba(39, 39, 39, 0.5);
+        box-Shadow:0 0 10px 10px rgba(51, 51, 51, 0.2);
+        border-Color: rgba(50, 50, 50, 0.75);
 
     }
 
     #DynamicBubbleBase hr{
-        background-Color:rgb(108,108,108);
-        box-Shadow:0 0 10px 10px rgba(53,53,53, 0.73)
+        background-Color: rgb(60, 60, 60);
+        box-Shadow:0 0 10px 10px rgba(39, 39, 39, 0.73)
     }
 
     .DynamicBubbleControlBarHandleGrip{
-        border-Color:rgb(108,108,108)
+        border-Color: rgb(60, 60, 60)
     }
 
     .DynamicBubbleControlBarHandleRope{
-        background-Color:rgb(108,108,108)
+        background-Color: rgb(60, 60, 60)
     }
 
     .SearchableBubble .DynamicBubbleFrameSection *::selection{
