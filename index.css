@@ -652,21 +652,21 @@ body{
 
 @media (prefers-color-scheme: dark) {
     .MouseOnBubble{
-        background-color: rgba(37, 37, 37, 0.9) !important;
+        background-color: rgba(32, 32, 32, 0.9) !important;
         border-color : rgba(34, 34, 34, 0.9) !important;;
-        box-shadow : 0 0 40px 5px rgb(34, 34, 34) !important;;
+        box-shadow : 0 0 40px 5px rgb(0, 0, 0) !important;;
         translate: 0 10px !important;
     }
 
     body{
-        background-Color: #222222
+        background-Color: #202020
     }
 
     .DynamicBubble{
-        background-Color: rgba(53, 53, 53, 0.7);
-        border-Color: rgba(51, 51, 51, 0.7);
-        box-Shadow:0 0 40px 5px rgba(52, 52, 52, 1);
-        text-Shadow:rgba(64, 64, 64, 0.75) 0 0 20px
+        background-Color: rgba(37, 37, 37, 0.7);
+        border-Color: rgba(28, 28, 28, 0.7);
+        box-Shadow:0 0 40px 5px rgb(25, 25, 25);
+        text-Shadow: rgba(67, 67, 67, 0.75) 0 0 20px
     }
 
     .blackChunk{

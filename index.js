@@ -1,7 +1,6 @@
 let CubeSideSize = 220;
 let HTTPService = new XMLHttpRequest();
 
-
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
