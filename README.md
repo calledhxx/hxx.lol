@@ -5,7 +5,7 @@
 </div>
 
 # 我在哪？🗺️
-嗨嗨，你現在處於我的個人部落格 [hxx.lol](https://bubbles.hxx.lol) 的Github專案裡，
+嗨嗨，你現在處於我的個人部落格 [hxx.lol](https://hxx.lol) 的Github專案裡，
 這邊放置著該網站的所有內容。包括 ：
 1. `index.html` 
 2. `index.js` 
