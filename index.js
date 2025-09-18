@@ -1530,7 +1530,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
 
-                await sleep(20);
+                await sleep(40);
 
                 mouseOnControlBars[i].style.width =
                     mouseOnControlBars[i].style.height =
