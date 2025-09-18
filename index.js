@@ -902,7 +902,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
             DynamicBubbles[MainIndex].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
-                "在點擊一次以閱覽泡泡"
+                "再點擊一次以閱覽泡泡"
 
             let Horizontal = 180;
 
