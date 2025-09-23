@@ -18,6 +18,7 @@
     user-drag: none;
 
     font-family: 'Huninn', sans-serif;
+    font-weight: bold;
 
 }
 
@@ -448,7 +449,6 @@ body{
     align-items: center;
 
 
-    font-weight:bold;
 
     font-size: 16px;
 
@@ -572,7 +572,6 @@ body{
 
     text-shadow: 0 0 20px rgba(0, 0, 0, .3);
 
-    font-weight:bold;
 }
 
 .DynamicBubbleControlBarHandle{
@@ -666,7 +665,7 @@ body{
         background-Color: rgba(37, 37, 37, 0.7);
         border-Color: rgba(28, 28, 28, 0.7);
         box-Shadow:0 0 40px 5px rgb(25, 25, 25);
-        text-Shadow: rgba(67, 67, 67, 0.75) 0 0 20px
+        text-Shadow: rgba(67, 67, 67, 0.5) 0 0 20px
     }
 
     .blackChunk{
@@ -761,7 +760,7 @@ body{
         background-Color:rgba(228, 228, 228, 0.7);
         border-Color:rgba(207, 207, 207, 0.7);
         box-Shadow:0 0 40px 5px rgba(198, 198, 198, 1);
-        text-Shadow:rgba(255, 255, 255, 0.75) 0 0 20px
+        text-Shadow:rgba(255, 255, 255, 0.5) 0 0 20px
     }
 
     .blackChunk{
