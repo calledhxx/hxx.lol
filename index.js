@@ -1658,8 +1658,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 StartAtElement.style.top = `${15 + (y - (ControlBarPullUpAtY ? ControlBarPullUpAtY : y)) / 20}px`;
                 StartAtElement.style.right = `${15 + ((ControlBarPullUpAtX ? ControlBarPullUpAtX : x) - x) / 20}px`;
-                StartAtElement.style.width = `${120 + Math.abs(((ControlBarPullUpAtX ? ControlBarPullUpAtX : x) - x) / 50)}px`;
-                StartAtElement.style.height = `${ControlButtons.length * 50 + Math.abs((y - (ControlBarPullUpAtY ? ControlBarPullUpAtY : y)) / 50)}px`;
+                StartAtElement.style.width =
+                    `${120 + Math.abs(((ControlBarPullUpAtX ? ControlBarPullUpAtX : x) - x) / 50) - Math.abs((y - (ControlBarPullUpAtY ? ControlBarPullUpAtY : y)) / 50)}px`;
+                StartAtElement.style.height =
+                    `${ControlButtons.length * 50 + Math.abs((y - (ControlBarPullUpAtY ? ControlBarPullUpAtY : y)) / 50) - Math.abs(((ControlBarPullUpAtX ? ControlBarPullUpAtX : x) - x) / 50)}px`;
 
                 StartAtElement.style.overflow = "hidden";
 
