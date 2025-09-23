@@ -27,7 +27,7 @@ const ControlButtons = [
         "IMPORTANT?":false
     },
     {
-        "Name":"戳破泡泡",
+        "Name":"消滅泡泡",
         "IMPORTANT?":true
     },
     {
@@ -1475,7 +1475,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                         break;
                     }
-                    case "戳破泡泡":{
+                    case "消滅泡泡":{
                         let len = DynamicBubbles.length;
 
                         for (let i = 0;i<len;i++)
@@ -1483,10 +1483,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                         await sleep(120);
 
-                        if(Math.random() > 0.5) CreateDynamicBubbles("Notification",[
+                        if(Math.random() > 0.8) CreateDynamicBubbles("Notification",[
                             {
                                 "Title":"嘿嘿，你弄不破我。",
-                                "Content":"想弄破我有點難度，但我不會跟你說解決我的方法就是把我吹走。"
+                                "Content":"亨，你以為使用「消滅泡泡」就可以消除我嗎？太天真了哈哈哈哈。"
+                            },
+                            {
+                                "Content":"其實還是有東西能夠消滅我，那就是「吹除泡泡」... ㄜ...當我沒說好嗎？不要ㄍㄚˊ了我呀！"
                             }
                         ]);
 
@@ -1659,9 +1662,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 StartAtElement.style.top = `${15 + (y - (ControlBarPullUpAtY ? ControlBarPullUpAtY : y)) / 20}px`;
                 StartAtElement.style.right = `${15 + ((ControlBarPullUpAtX ? ControlBarPullUpAtX : x) - x) / 20}px`;
                 StartAtElement.style.width =
-                    `${120 + Math.abs(((ControlBarPullUpAtX ? ControlBarPullUpAtX : x) - x) / 50) - Math.abs((y - (ControlBarPullUpAtY ? ControlBarPullUpAtY : y)) / 50)}px`;
+                    `${120 + Math.abs(((ControlBarPullUpAtX ? ControlBarPullUpAtX : x) - x) / 50) - Math.abs((y - (ControlBarPullUpAtY ? ControlBarPullUpAtY : y)) / 50) * 0.6}px`;
                 StartAtElement.style.height =
-                    `${ControlButtons.length * 50 + Math.abs((y - (ControlBarPullUpAtY ? ControlBarPullUpAtY : y)) / 50) - Math.abs(((ControlBarPullUpAtX ? ControlBarPullUpAtX : x) - x) / 50)}px`;
+                    `${ControlButtons.length * 50 + Math.abs((y - (ControlBarPullUpAtY ? ControlBarPullUpAtY : y)) / 50) - Math.abs(((ControlBarPullUpAtX ? ControlBarPullUpAtX : x) - x) / 50) * 0.6}px`;
 
                 StartAtElement.style.overflow = "hidden";
 
@@ -1918,12 +1921,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Content":"而你在閱讀的這東西叫做Dynamic Bubble ，動態泡泡，是不是特別動態，特別動感(▀̿Ĺ̯▀̿ ̿)"
         },
         {
-            "Content":"喔對了，看到右上角的把手了嗎？向下拉他就「有機會」帶你離開這顆泡泡喔。 (不是百分百的原因是我怕你不知道怎麼用ww)"
+            "Content":"喔對了，看到右上角的把手了嗎？向下拉他就「有機會」帶你離開這顆泡泡喔。"
         },
         {
             "Content":"還有丫，蘇東坡沒有講過這句話：蘇波哀東的笑容。"
         },
         {
+            "Title":"極端的東西！",
             "Content":"某些瀏覽器或裝置會限制或影響網站程式的流暢度，導致畫面卡頓。這時候你就要大展鴻圖，關公都點頭，有料!。"
         },
         {
