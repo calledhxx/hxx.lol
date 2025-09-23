@@ -17,6 +17,9 @@
     -ms-user-drag: none;
     user-drag: none;
 
+    overscroll-behavior-y: contain;
+    overscroll-behavior-x: none;
+
     font-family: 'Huninn', sans-serif;
     font-weight: bold;
 
@@ -28,7 +31,6 @@ root{
 }
 
 body{
-    overscroll-behavior: none;
 
     height: var(--fh,100vh);
     width: var(--fw,100vw);
