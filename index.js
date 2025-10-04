@@ -929,7 +929,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             DynamicBubbles[MainIndex].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
                 "再點擊一次以閱覽泡泡"
 
-            let Horizontal = 180;
+            let Horizontal = 200;
 
             setTimeout(function (){
                 let Accumulation = 0;
@@ -950,7 +950,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                     DynamicBubbles[i].style.transform = `translateX(-50%) rotateX(${absIndex * 90/4}deg)`;
 
-                    Accumulation+= mixHeight;
+                    Accumulation += mixHeight;
                     DynamicBubbles[i].style.top = `${Horizontal - Accumulation - freeSpace}px`;
 
                 }
