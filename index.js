@@ -1114,7 +1114,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
 
-            if(PullUpInfo.PullUpType !== 0){
+            if(PullUpInfo.MainPullUpIndex !== false){
                 let ControlBar = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubbleControlBar");
 
                 if(ControlBar.Parent){
