@@ -11,9 +11,9 @@ function checkIfMobile() {
     return check;
 }; //i forgot wheres it from,but... oh it's https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
 
-const soundEffects = {
-
-} //fuck off,ill never use it... ri?
+const APIWays = {
+    "CREATE-MESSAGE":"localhost:443/leave-a-bubble-message"
+}
 
 let Cube = [];
 
@@ -24,6 +24,10 @@ const ControlButtons = [
     },
     {
         "Name":"整理泡泡",
+        "IMPORTANT?":false
+    },
+    {
+        "Name":"留言泡泡",
         "IMPORTANT?":false
     },
     {
@@ -284,7 +288,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     async function TidyUpDynamicBubbles(){
         if(PullUpInfo.MainPullUpIndex!==false)
             DynamicBubbles[PullUpInfo.MainPullUpIndex].classList.remove("SearchableBubble");
-
 
         resetPullUpInfo();
 
@@ -704,7 +707,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
     async function CreateDynamicBubbles(BubbleType,Content){
-        resetPullUpInfo();
+        await TidyUpDynamicBubbles();
+        // resetPullUpInfo(); TidyUpDynamicBubbles有了 ( 以防我忘記
 
         let Base = document.getElementById("DynamicBubbleBase");
 
@@ -762,6 +766,18 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 },280);
                 break;
             }
+            case "Function":{
+                newBubbleTypeTitle.innerText = "A Function";
+
+                setTimeout(async function(){
+                    newBubble.classList.add("FunctionBubble");
+
+                    if(myIndex === DynamicBubbles.length-1){
+                        newBubble.style.height = "360px";
+                    }
+                },280);
+                break;
+            }
         }
 
 
@@ -802,6 +818,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         break;
                     }
 
+                    case"Button":{
+                        newDOM = document.createElement("div");
+                        newDOM.classList.add("DynamicBubbleFrameButton");
+                        newDOM.innerText = Content[SectionIndex][index].Text;
+                        break;
+                    }
+
                     default:{
                         //...
                     }
@@ -829,18 +852,21 @@ document.addEventListener("DOMContentLoaded",  async function () {
     };
 
 
+    function getHeightOfDynamicBubble(Bubble){
+        let result = 0;
+
+        if (Bubble.classList.contains("PageBubble"))
+            result = 240;
+        else if (Bubble.classList.contains("NotificationBubble"))
+            result = 155;
+        else if (Bubble.classList.contains("FunctionBubble"))
+            result = 300;
+
+        return result;
+    }
 
     function PullUpDynamicBubbles(MainIndex){
-        let getHeightOfDynamicBubble = function (Bubble){
-            let result = 0;
 
-            if (Bubble.classList.contains("PageBubble"))
-                result = 240;
-            else if (Bubble.classList.contains("NotificationBubble"))
-                result = 155;
-
-            return result;
-        }
 
         PullUpInfo.ChoseToPullUpIndex = MainIndex;
 
@@ -867,7 +893,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }else if(DynamicBubbles.length >= 4){
             PullUpInfo.PullUpType = 3;
-
 
             for (let i = 0; i < DynamicBubbles.length; i++){
                 let absIndex = Math.abs(i - MainIndex);
@@ -1024,13 +1049,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         for (let i = 0;i<DynamicBubbles.length;i++){
             if(i !== MainIndex){
-                let mixHeight= 0;
-
-                if(DynamicBubbles[i].classList.contains("PageBubble")){
-                    mixHeight = 240;
-                }else if (DynamicBubbles[i].classList.contains("NotificationBubble")){
-                    mixHeight = 140;
-                }
+                let mixHeight= getHeightOfDynamicBubble(DynamicBubbles[i]);
 
                 DynamicBubbles[i].style.opacity = "0";
                 DynamicBubbles[i].style.top = `-${mixHeight}px`;
@@ -1273,6 +1292,29 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                             break;
                         }
+                        case "Function":{
+                            let Content = await loadData(data);
+                            if(!Content) break;
+
+                            setTimeout(async function (){
+                                await CreateDynamicBubbles(
+                                    "Function",
+                                    Content
+                                )
+
+                                await CreateDynamicBubbles(
+                                    "Notification",
+                                    [
+                                        {
+                                            "Title":"恐龍康啷今天罷工，不給你用這東西。",
+                                            "Content":"等恐龍康啷來上班時，你就可以用這個酷咚咚了。"
+                                        }
+                                    ]
+                                )
+                            })
+
+                            break;
+                        }
                         case "Cube":{
                             const Content = await loadData(data);
                             if(!Content) break;
@@ -1467,6 +1509,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     case "整理泡泡":{
                         await TidyUpDynamicBubbles();
                         await resetPullUpInfo();
+
+                        break;
+                    }
+                    case "留言泡泡":{
+                        await CreateDynamicBubbles(
+                            "Notification",
+                            [
+                                {
+                                    "Title":"恐龍康啷今天罷工，不給你用這東西。",
+                                    "Content":"等恐龍康啷來上班時，你就可以用這個酷咚咚了。"
+                                }
+                            ]
+                        )
 
                         break;
                     }

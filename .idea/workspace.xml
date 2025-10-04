@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d57fe96b-7e11-4fc9-9596-6dafe5dbf177" name="Changes" comment="hxx.lol">
+      <change afterPath="$PROJECT_DIR$/function/Login.JSON" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cube/Default.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/cube/Default.JSON" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +53,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;io.github.pandier.intellijdiscordrp.settings.DiscordSettingsConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;two.files.diff.last.used.file&quot;: &quot;D:/Hxx.lol/page/Hxx.JSON&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -232,22 +237,13 @@
       <workItem from="1758886933226" duration="68000" />
       <workItem from="1759068212983" duration="6000" />
       <workItem from="1759138517322" duration="596000" />
-    </task>
-    <task id="LOCAL-00224" summary="hxx.lol">
-      <option name="closed" value="true" />
-      <created>1755180528118</created>
-      <option name="number" value="00224" />
-      <option name="presentableId" value="LOCAL-00224" />
-      <option name="project" value="LOCAL" />
-      <updated>1755180528118</updated>
-    </task>
-    <task id="LOCAL-00225" summary="hxx.lol">
-      <option name="closed" value="true" />
-      <created>1755180534558</created>
-      <option name="number" value="00225" />
-      <option name="presentableId" value="LOCAL-00225" />
-      <option name="project" value="LOCAL" />
-      <updated>1755180534558</updated>
+      <workItem from="1759414808938" duration="640000" />
+      <workItem from="1759505217152" duration="19000" />
+      <workItem from="1759505247140" duration="66000" />
+      <workItem from="1759548345245" duration="12000" />
+      <workItem from="1759548369727" duration="1000" />
+      <workItem from="1759551124336" duration="2627000" />
+      <workItem from="1759567399680" duration="4312000" />
     </task>
     <task id="LOCAL-00226" summary="hxx.lol">
       <option name="closed" value="true" />
@@ -625,7 +621,23 @@
       <option name="project" value="LOCAL" />
       <updated>1758632547415</updated>
     </task>
-    <option name="localTasksCounter" value="273" />
+    <task id="LOCAL-00273" summary="hxx.lol">
+      <option name="closed" value="true" />
+      <created>1759414845315</created>
+      <option name="number" value="00273" />
+      <option name="presentableId" value="LOCAL-00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1759414845315</updated>
+    </task>
+    <task id="LOCAL-00274" summary="hxx.lol">
+      <option name="closed" value="true" />
+      <created>1759414851882</created>
+      <option name="number" value="00274" />
+      <option name="presentableId" value="LOCAL-00274" />
+      <option name="project" value="LOCAL" />
+      <updated>1759414851882</updated>
+    </task>
+    <option name="localTasksCounter" value="275" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
