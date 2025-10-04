@@ -938,7 +938,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     let absIndex = Math.abs(MainIndex - i);
 
                     if(absIndex >= 4)
-                        continue;
+                        break;
 
                     let mixHeight = getHeightOfDynamicBubble(DynamicBubbles[i]);
 
@@ -966,7 +966,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     let absIndex = Math.abs(MainIndex - i);
 
                     if(absIndex >= 4)
-                        continue;
+                        break;
 
                     let mixHeight = getHeightOfDynamicBubble(DynamicBubbles[i]);
 
