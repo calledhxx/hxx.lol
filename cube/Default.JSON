@@ -26,6 +26,18 @@
       }
     },
     {
+      "Side": 1,
+      "Chunk": 4,
+      "Color":"#2f7cd4",
+      "depth":24,
+      "Icon": null,
+      "Name":"登入",
+      "Tag":"Login",
+      "Event":{
+        "Function":"./function/Login.JSON"
+      }
+    },
+    {
       "Side": 2,
       "Chunk": 4,
       "Color":"#9654e8",
@@ -39,8 +51,8 @@
       }
     },
     {
-      "Side": 1,
-      "Chunk": 4,
+      "Side": 3,
+      "Chunk": 2,
       "Color":"#cc8131",
       "depth":24,
       "Icon": null,

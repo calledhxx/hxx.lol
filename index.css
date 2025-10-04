@@ -470,7 +470,6 @@ body{
 
 .DynamicBubbleFrameTitle{
     font-size: 26px;
-    color: #474747;
 
     margin-top: 10px;
 
@@ -481,12 +480,26 @@ body{
 
 .DynamicBubbleFrameContent{
     font-size: 18px;
-    color: #5c5c5c;
 
 
     font-weight:normal;
 }
 
+.DynamicBubbleFrameButton{
+    font-size: 20px;
+    color: #5c5c5c;
+
+    background: #c5c5c5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 10px;
+    margin-right: 10px;
+    width: calc(100% - 20px);
+    height: 40px;
+    border-radius: 40px;
+}
 
 
 .NotificationBubble{
@@ -498,13 +511,16 @@ body{
     min-height: 240px;
 }
 
+.FunctionBubble{
+    min-height: 300px;
+}
+
 .DynamicBubbleControlBar{
     width: 36px;
     height: 36px;
     border-radius: 30px;
 
     background: rgba(244, 244, 244, 0.5);
-    box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.2);
 
     border-style: solid;
     border-width: 2px;
@@ -696,7 +712,6 @@ body{
 
     .DynamicBubbleControlBar{
         background-Color: rgba(39, 39, 39, 0.5);
-        box-Shadow:0 0 10px 10px rgba(51, 51, 51, 0.2);
         border-Color: rgba(50, 50, 50, 0.75);
 
     }
@@ -791,7 +806,6 @@ body{
 
     .DynamicBubbleControlBar{
         background-Color:rgba(244, 244, 244, 0.5);
-        box-Shadow:0 0 10px 10px rgba(255, 255, 255, 0.2);
         border-Color:rgba(207, 207, 207, 0.75);
 
     }
