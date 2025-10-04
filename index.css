@@ -30,8 +30,12 @@ root{
     --fw : 100px;
 }
 
-body{
+html{
+    position: absolute;
+    overflow: hidden;
+}
 
+body{
     height: var(--fh,100vh);
     width: var(--fw,100vw);
     background: #ececec;
