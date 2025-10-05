@@ -1846,11 +1846,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let tX = x - xStartScreen;
             let tY = y - yStartScreen;
 
-            StartAtElement.style.width = `${96 + Math.abs(tX*0.1)}%`;
+            StartAtElement.style.width = `${96 + Math.abs(tX*0.02)}%`;
             StartAtElement.style.height = `${98 + Math.abs(tY*0.4)}%`;
 
             StartAtElement.style.top = `calc(50% + ${tY*0.1}px)`;
-            StartAtElement.style.left = `calc(50% + ${tX*0.05}px)`;
+            StartAtElement.style.left = `calc(50% + ${tX*0.1}px)`;
         }
 
     }
