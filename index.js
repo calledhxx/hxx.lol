@@ -820,8 +820,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                     case"Button":{
                         newDOM = document.createElement("div");
-                        newDOM.classList.add("DynamicBubbleFrameButton");
-                        newDOM.innerText = Content[SectionIndex][index].Text;
+                        let button = document.createElement("div");
+                        button.classList.add("DynamicBubbleFrameButton");
+                        button.innerText = Content[SectionIndex][index].Text;
+                        newDOM.appendChild(button);
+                        newDOM.classList.add("DynamicBubbleFrameButtonCase");
                         break;
                     }
 
@@ -1221,10 +1224,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
             Controlling = true;
         }else if(FinalInfo.FunctionButton && !Dragging && PullUpInfo.MainPullUpIndex !== false){
             mouseOnFunctionButtons.push(StartAtElement = FinalInfo.FunctionButton);
-            FinalInfo.FunctionButton.style.width = "calc(100% - 30px)";
 
-            FinalInfo.FunctionButton.style.marginLeft =
-                FinalInfo.FunctionButton.style.marginRight = "15px";
+            FinalInfo.FunctionButton.style.width = "96%";
+            FinalInfo.FunctionButton.style.height = "98%";
+
+            FinalInfo.FunctionButton.style.zIndex = "1";
+
+            const res = retIfParentMatch(FinalInfo.FunctionButton,0,"DynamicBubble",0);
+            res.Parent.classList.remove("SearchableBubble");
 
             Dragging = true;
         }
@@ -1240,6 +1247,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         if(Locked) return;
 
         let FinalInfo = getFinalElementWitchAtPoint(x,y);
+
+        MidRect = 0;
 
         if(Holding){
             Holding = false;
@@ -1588,13 +1597,20 @@ document.addEventListener("DOMContentLoaded",  async function () {
         for (let i = mouseOnFunctionButtons.length; 0 <= i ;i--){
             if(!mouseOnFunctionButtons[i]) continue;
 
-
             setTimeout(async function(){
-                mouseOnFunctionButtons[i].style.transform = "";
-                mouseOnFunctionButtons[i].style.width = "calc(100% - 20px)"
+                mouseOnFunctionButtons[i].style.transition = "";
 
-                mouseOnFunctionButtons[i].style.marginLeft =
-                    mouseOnFunctionButtons[i].style.marginRight = "10px";
+                mouseOnFunctionButtons[i].style.zIndex = "0";
+
+                StartAtElement.style.width =
+                    StartAtElement.style.height = `100%`;
+
+                StartAtElement.style.top =
+                    StartAtElement.style.left = `50%`;
+
+                const res = retIfParentMatch(mouseOnFunctionButtons[i],0,"DynamicBubble",0);
+                res.Parent.classList.add("SearchableBubble");
+
 
                 mouseOnFunctionButtons.pop();
             },0)
@@ -1679,6 +1695,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let PullUpMoving = 0;
 
+    let MidRect = 0;
+
     let fingerMoving = async function(x,y){
         if(Locked) return;
 
@@ -1717,6 +1735,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         `${(y - yStartScreen > 0 ? (y - yStartScreen)*.2 : 0)+34}px`;
 
                     let MidRect = StartAtElement.getBoundingClientRect();
+
+                    if(!MidRect)
+                        MidRect = StartAtElement.getBoundingClientRect();
 
                     let tX = x - (MidRect.left + MidRect.width/2);
                     let tY = y - (MidRect.top + MidRect.height/2);
@@ -1820,7 +1841,16 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 document.getElementById("DynamicBubbleBase").style.top = `${30 + 50*(y - LastPullUpAtY)/140}px`;
             }
         }else if(Dragging){
-            StartAtElement.style.transform = "none";
+            StartAtElement.style.transition = "none";
+
+            let tX = x - xStartScreen;
+            let tY = y - yStartScreen;
+
+            StartAtElement.style.width = `${96 + Math.abs(tX*0.1)}%`;
+            StartAtElement.style.height = `${98 + Math.abs(tY*0.4)}%`;
+
+            StartAtElement.style.top = `calc(50% + ${tY*0.1}px)`;
+            StartAtElement.style.left = `calc(50% + ${tX*0.05}px)`;
         }
 
     }
