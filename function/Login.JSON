@@ -1,5 +1,27 @@
 [
   {
+    "Title": "登入你的蟑螂？",
+    "Content": "根據蘇東坡定理，你需要先登入，才能使用「留言泡泡」等功能。所以你從以下選項中挑一個你最喜歡的登入方式。"
+  },
+  {
+    "Button": {
+      "Text": "登入你的Google帳號",
+      "Module": ""
+    }
+  },
+  {
+    "Button": {
+      "Text": "登入你的Google帳號",
+      "Module": ""
+    }
+  },
+  {
+    "Button": {
+      "Text": "登入你的Google帳號",
+      "Module": ""
+    }
+  },
+  {
     "Button": {
       "Text": "登入你的Google帳號",
       "Module": ""

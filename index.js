@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let Pushing = 0;
     let Pulling = 0;
     let Controlling = 0;
+    let Dragging = 0;
 
     let Locked = 1;
 
@@ -193,7 +194,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
     function CreateButtons(Cube){
-
         for (let i = 0; i < Cube.Buttons.length; i++) {
             let newOne = document.createElement("div");
             newOne.classList.add("button");
@@ -350,7 +350,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }
 
-    };
+    }
 
 
 
@@ -1079,9 +1079,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let startAt = 0;
 
-    let mouseOnButtons = [];
+    let mouseOnButtons = {};
     let mouseOnBubbles = [];
     let mouseOnControlBars = [];
+    let mouseOnFunctionButtons = [];
 
     let StartAtElement;
 
@@ -1090,6 +1091,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Button":0,
             "Bubble":0,
             "ControlBar":0,
+            "FunctionButton":0,
             "Rotating":0,
         };
 
@@ -1121,6 +1123,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     FinalInfo.ControlBar = ControlBar.Parent;
                     break
                 }
+
+                let FunctionButton = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubbleFrameButton");
+
+                if(FunctionButton.Parent){
+                    FinalInfo.FunctionButton = FunctionButton.Parent;
+                    break
+
+                }
             }
 
 
@@ -1132,17 +1142,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 FinalInfo.Bubble = CheckBubble.Parent;
                 break
             }
-
-
         }
 
-        if(
+
+        FinalInfo.Rotating =
             !FinalInfo.Button &&
             !FinalInfo.Bubble &&
             !FinalInfo.Rotating &&
-            !FinalInfo.ControlBar
-        )
-            FinalInfo.Rotating = true;
+            !FinalInfo.ControlBar &&
+            !FinalInfo.FunctionButton;
 
 
         return FinalInfo;
@@ -1165,7 +1173,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         startAt = Date.now();
 
-        if(!Holding && !Pushing && !Pulling && !Controlling && FinalInfo.Rotating ){
+        if(FinalInfo.Rotating){
             Holding = true;
             TweenUp(false);
 
@@ -1198,19 +1206,27 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             // FinalInfo.Bubble.style.transform = "translateX(-50%) translateY(10px)";
 
-            mouseOnBubbles[mouseOnBubbles.length] = StartAtElement = FinalInfo.Bubble;
+            mouseOnBubbles.push(StartAtElement = FinalInfo.Bubble)
 
             LastPullUpAtY = y;
             PullUpMoving = 0;
             Pulling = true;
         }else if(FinalInfo.ControlBar && !Controlling && PullUpInfo.MainPullUpIndex !== false){
-            mouseOnControlBars[mouseOnControlBars.length] = StartAtElement = FinalInfo.ControlBar;
+            mouseOnControlBars.push(StartAtElement = FinalInfo.ControlBar)
 
             FinalInfo.ControlBar.style.width =
                 FinalInfo.ControlBar.style.height =
                     "34px";
 
             Controlling = true;
+        }else if(FinalInfo.FunctionButton && !Dragging && PullUpInfo.MainPullUpIndex !== false){
+            mouseOnFunctionButtons.push(StartAtElement = FinalInfo.FunctionButton);
+            FinalInfo.FunctionButton.style.width = "calc(100% - 30px)";
+
+            FinalInfo.FunctionButton.style.marginLeft =
+                FinalInfo.FunctionButton.style.marginRight = "15px";
+
+            Dragging = true;
         }
     }
 
@@ -1565,11 +1581,27 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 })
                 LastSelectControlButtonIndex = false;
             }
+        }else if(Dragging){
+            Dragging = false;
+        }
+
+        for (let i = mouseOnFunctionButtons.length; 0 <= i ;i--){
+            if(!mouseOnFunctionButtons[i]) continue;
+
+
+            setTimeout(async function(){
+                mouseOnFunctionButtons[i].style.transform = "";
+                mouseOnFunctionButtons[i].style.width = "calc(100% - 20px)"
+
+                mouseOnFunctionButtons[i].style.marginLeft =
+                    mouseOnFunctionButtons[i].style.marginRight = "10px";
+
+                mouseOnFunctionButtons.pop();
+            },0)
         }
 
 
-
-        for (let i in mouseOnControlBars){
+        for (let i = mouseOnControlBars.length; 0 <= i ;i--){
             if(!mouseOnControlBars[i]) continue;
 
             setTimeout(async function(){
@@ -1599,7 +1631,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 mouseOnControlBars[i].getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
                     `translate(-50%,-50%) rotateZ(0deg)`
 
-                mouseOnControlBars[i] = null;
+                mouseOnControlBars.pop();
+
             },0)
         }
 
@@ -1622,21 +1655,17 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             await sleep(100);
 
-
-
             mouseOnButtons[i] = null;
         }
 
 
 
-        for (let i in mouseOnBubbles){
+        for (let i = mouseOnBubbles.length; 0 <= i;i--){
             if(!mouseOnBubbles[i]) continue;
 
             mouseOnBubbles[i].classList.remove("MouseOnBubble");
 
-            // mouseOnBubbles[i].style.transform = "translateX(-50%) translateY(0)";
-
-            mouseOnBubbles[i] = null;
+            mouseOnBubbles.pop();
         }
     }
 
@@ -1766,6 +1795,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 StartAtElement.style.overflow = "visible";
             }
         }else if(Pulling)
+        {
             if(PullUpInfo.PullUpType === 3 && PullUpInfo.MainPullUpIndex === false){
                 if(y-LastPullUpAtY > 140){
                     PullUpMoving = 1;
@@ -1789,6 +1819,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 document.getElementById("DynamicBubbleBase").style.top = `${30 + 50*(y - LastPullUpAtY)/140}px`;
             }
+        }else if(Dragging){
+            StartAtElement.style.transform = "none";
+        }
+
     }
 
     if(useTouchPad) {
