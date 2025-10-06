@@ -1622,18 +1622,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         for (let i = mouseOnControlBars.length; 0 <= i ;i--){
             if(!mouseOnControlBars[i]) continue;
 
-            setTimeout(async function (){
-                let element = mouseOnControlBars[i];
-
-                await sleep(140);
-                if(!element) return;
-
-                element.style.overflow = "visible"
-                element.style.top = "15px"
-                element.style.right = "15px"
-                element.getElementsByTagName("hr")[0].style.opacity = "1";
-            })
-
             setTimeout(async function(){
                 for (let index = 0; index < mouseOnControlBars[i].getElementsByTagName("div").length; index++) {
                     await sleep(20)
@@ -1642,24 +1630,35 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                     mouseOnControlBars[i].getElementsByTagName("div")[index].style.opacity = "0";
                 }
+
+                mouseOnControlBars[i].style.overflow = "visible"
+                mouseOnControlBars[i].style.top = "15px"
+                mouseOnControlBars[i].style.right = "15px"
+                mouseOnControlBars[i].getElementsByTagName("hr")[0].style.opacity = "1";
+
                 mouseOnControlBars[i].style.transition = "";
+
+
 
                 mouseOnControlBars[i].parentElement.getElementsByClassName("DynamicBubbleTypeTitle")[0].style.filter =
                     mouseOnControlBars[i].parentElement.getElementsByClassName("DynamicBubbleFrame")[0].style.filter =
                         mouseOnControlBars[i].parentElement.getElementsByClassName("DynamicBubbleBottomBar")[0].style.filter = "";
-
-
-
-                await sleep(40);
 
                 mouseOnControlBars[i].style.width =
                     mouseOnControlBars[i].style.height =
                         "28px";
 
                 mouseOnControlBars[i].getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transition =
-                    "all 120ms ease"
+                    ""
                 mouseOnControlBars[i].getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
                     `translate(-50%,-50%) rotateZ(0deg)`
+
+                mouseOnControlBars[i].getElementsByClassName("DynamicBubbleControlBarHandleRope")[0].style.transition =
+                    mouseOnControlBars[i].getElementsByClassName("DynamicBubbleControlBarHandleGrip")[0].style.transition =
+                        "";
+
+                mouseOnControlBars[i].getElementsByClassName("DynamicBubbleControlBarHandleRope")[0].style.height = `18px`;
+                mouseOnControlBars[i].getElementsByClassName("DynamicBubbleControlBarHandleGrip")[0].style.top = `43px`;
 
                 mouseOnControlBars.pop();
 
@@ -1762,6 +1761,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
                         `translate(-50%,-50%) rotateZ(${-(Math.asin(tX/tSlide) * 180/Math.PI)*0.8}deg)`
                     StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transition = "none";
+
+                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleRope")[0].style.transition =
+                        StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleGrip")[0].style.transition =
+                            "none";
+
+                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleRope")[0].style.height = `${18 + tSlide*0.2}px`;
+                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleGrip")[0].style.top = `${43 + tSlide*0.2}px`;
                 }
             }
 
