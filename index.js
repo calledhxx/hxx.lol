@@ -1253,7 +1253,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         MidRect = 0;
 
-        console.log(Holding,Pushing,Pulling,Controlling,Dragging);
 
 
         if(Holding){
