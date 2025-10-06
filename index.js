@@ -1228,6 +1228,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             FinalInfo.FunctionButton.style.width = "96%";
             FinalInfo.FunctionButton.style.height = "98%";
 
+            FinalInfo.FunctionButton.style.fontSize = "17px";
+
             FinalInfo.FunctionButton.style.zIndex = "1";
 
             const res = retIfParentMatch(FinalInfo.FunctionButton,0,"DynamicBubble",0);
@@ -1601,6 +1603,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 mouseOnFunctionButtons[i].style.transition = "";
 
                 mouseOnFunctionButtons[i].style.zIndex = "0";
+                mouseOnFunctionButtons[i].style.fontSize = "18px";
 
                 StartAtElement.style.width =
                     StartAtElement.style.height = `100%`;
@@ -1846,11 +1849,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let tX = x - xStartScreen;
             let tY = y - yStartScreen;
 
-            StartAtElement.style.width = `${96 + Math.abs(tX*0.02)}%`;
-            StartAtElement.style.height = `${98 + Math.abs(tY*0.4)}%`;
+            StartAtElement.style.width = `${96 + Math.abs(tX*0.02) - Math.abs(tY*0.01)}%`;
+            StartAtElement.style.height = `${98 + Math.abs(tY*0.04) - Math.abs(tX*0.02)}%`;
 
-            StartAtElement.style.top = `calc(50% + ${tY*0.1}px)`;
-            StartAtElement.style.left = `calc(50% + ${tX*0.1}px)`;
+            StartAtElement.style.top = `calc(50% + ${tY*0.04}px)`;
+            StartAtElement.style.left = `calc(50% + ${tX*0.04}px)`;
         }
 
     }
