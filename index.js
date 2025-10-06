@@ -1253,6 +1253,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         MidRect = 0;
 
+        console.log(Holding,Pushing,Pulling,Controlling,Dragging);
+
+
         if(Holding){
             Holding = false;
 
@@ -1296,9 +1299,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 await sleep(1);
             }
 
-        }else if(Pushing){
-            Pushing = false;
+        }
 
+        if(Pushing){
+            Pushing = false;
             let FinalElement = FinalInfo.Button;
             let ButtonInfo = Cube.Buttons[FinalElement.id];
 
@@ -1478,7 +1482,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             }
 
-        }else if(Pulling){
+        }
+
+        if(Pulling){
             Pulling = false;
             let ClickOnIndex = false;
 
@@ -1524,7 +1530,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     PullUpMainBubble(ClickOnIndex);
                 }
             }
-        }else if(Controlling && PullUpInfo.MainPullUpIndex !== false){
+        }
+
+        if(Controlling && PullUpInfo.MainPullUpIndex !== false){
             Controlling = false;
 
             if(LastSelectControlButtonIndex !== false){
@@ -1581,9 +1589,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
 
             }
-        }else if(Dragging){
+        }
+
+        if(Dragging){
             Dragging = false;
         }
+
+
 
         for (let i = mouseOnFunctionButtons.length; 0 <= i ;i--){
             if(!mouseOnFunctionButtons[i]) continue;
@@ -1594,15 +1606,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 mouseOnFunctionButtons[i].style.zIndex = "0";
                 mouseOnFunctionButtons[i].style.fontSize = "18px";
 
-                StartAtElement.style.width =
-                    StartAtElement.style.height = `100%`;
+                mouseOnFunctionButtons[i].style.width =
+                    mouseOnFunctionButtons[i].style.height = `100%`;
 
-                StartAtElement.style.top =
-                    StartAtElement.style.left = `50%`;
+                mouseOnFunctionButtons[i].style.top =
+                    mouseOnFunctionButtons[i].style.left = `50%`;
 
                 const res = retIfParentMatch(mouseOnFunctionButtons[i],0,"DynamicBubble",0);
                 res.Parent.classList.add("SearchableBubble");
-
 
                 mouseOnFunctionButtons.pop();
             },0)
