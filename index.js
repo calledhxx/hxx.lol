@@ -1237,6 +1237,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             Dragging = true;
         }
+
     }
 
 
@@ -1579,18 +1580,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     }
                 }
 
-                setTimeout(async function (){
-                    let element = StartAtElement;
-
-                    await sleep(140);
-                    if(!element) return;
-
-                    element.style.overflow = "visible"
-                    element.style.top = "15px"
-                    element.style.right = "15px"
-                    element.getElementsByTagName("hr")[0].style.opacity = "1";
-                })
-                LastSelectControlButtonIndex = false;
             }
         }else if(Dragging){
             Dragging = false;
@@ -1622,6 +1611,18 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         for (let i = mouseOnControlBars.length; 0 <= i ;i--){
             if(!mouseOnControlBars[i]) continue;
+
+            setTimeout(async function (){
+                let element = mouseOnControlBars[i];
+
+                await sleep(140);
+                if(!element) return;
+
+                element.style.overflow = "visible"
+                element.style.top = "15px"
+                element.style.right = "15px"
+                element.getElementsByTagName("hr")[0].style.opacity = "1";
+            })
 
             setTimeout(async function(){
                 for (let index = 0; index < mouseOnControlBars[i].getElementsByTagName("div").length; index++) {
@@ -1655,6 +1656,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             },0)
         }
 
+        LastSelectControlButtonIndex = false;
         ControlBarIsDraw = false;
 
 
