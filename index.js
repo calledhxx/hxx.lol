@@ -869,8 +869,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     }
 
     function PullUpDynamicBubbles(MainIndex){
-
-
         PullUpInfo.ChoseToPullUpIndex = MainIndex;
 
         if(DynamicBubbles.length === 1){
@@ -1707,7 +1705,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let nowCursorAtY = 0;
 
     let PullUpMoving = 0;
-
 
     let fingerMoving = async function(x,y){
         if(Locked) return;
