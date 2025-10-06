@@ -1251,7 +1251,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         let FinalInfo = getFinalElementWitchAtPoint(x,y);
 
-        MidRect = 0;
 
 
 
@@ -1709,7 +1708,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let PullUpMoving = 0;
 
-    let MidRect = 0;
 
     let fingerMoving = async function(x,y){
         if(Locked) return;
@@ -1748,26 +1746,23 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     StartAtElement.style.width = StartAtElement.style.height =
                         `${(y - yStartScreen > 0 ? (y - yStartScreen)*.2 : 0)+34}px`;
 
-                    let MidRect = StartAtElement.getBoundingClientRect();
 
-                    if(!MidRect)
-                        MidRect = StartAtElement.getBoundingClientRect();
 
-                    let tX = x - (MidRect.left + MidRect.width/2);
-                    let tY = y - (MidRect.top + MidRect.height/2);
+                    let tX = x - xStartScreen;
+                    let tY = y - yStartScreen;
 
                     let tSlide = Math.sqrt(tX**2 + tY**2);
 
                     StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
-                        `translate(-50%,-50%) rotateZ(${-(Math.asin(tX/tSlide) * 180/Math.PI)*0.8}deg)`
+                        `translate(-50%,-50%) rotateZ(${-(Math.asin(tX/tSlide) * 180/Math.PI)*0.2}deg)`
                     StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transition = "none";
 
                     StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleRope")[0].style.transition =
                         StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleGrip")[0].style.transition =
                             "none";
 
-                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleRope")[0].style.height = `${18 + tSlide*0.2}px`;
-                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleGrip")[0].style.top = `${43 + tSlide*0.2}px`;
+                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleRope")[0].style.height = `${18 + Math.abs(tY)*0.4}px`;
+                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleGrip")[0].style.top = `${43 + Math.abs(tY)*0.4}px`;
                 }
             }
 
