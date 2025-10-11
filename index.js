@@ -1758,8 +1758,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleGrip")[0].style.transition =
                             "none";
 
-                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleRope")[0].style.height = `${18 + Math.abs(tY)*0.4}px`;
-                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleGrip")[0].style.top = `${43 + Math.abs(tY)*0.4}px`;
+                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleRope")[0].style.height = `${18 + (tY >= 0 ? tY : 0 )*0.4}px`;
+                    StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandleGrip")[0].style.top = `${43 + (tY >= 0 ? tY : 0 )*0.4}px`;
                 }
             }
 
