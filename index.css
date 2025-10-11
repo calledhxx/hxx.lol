@@ -683,14 +683,14 @@ body{
 
 @media (prefers-color-scheme: dark) {
     .MouseOnBubble{
-        background-color: rgba(25, 25, 25, 0.9) !important;
+        background-color: rgba(19, 19, 19, 0.9) !important;
         border-color : rgba(27, 27, 27, 0.9) !important;;
         box-shadow : 0 0 40px 5px rgb(5, 5, 5) !important;;
         translate: 0 10px !important;
     }
 
     body{
-        background-Color: #151515
+        background-Color: #171717
     }
 
     .DynamicBubble{
