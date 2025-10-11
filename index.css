@@ -534,7 +534,6 @@ body{
     height: 36px;
     border-radius: 30px;
 
-    background: rgba(244, 244, 244, 0.5);
 
     border-style: solid;
     border-width: 2px;
@@ -580,7 +579,6 @@ body{
     border-radius: 100%;
 
     background: rgb(186, 186, 186);
-    box-shadow: 0 0 10px 10px rgba(227, 227, 227, 0.73);
 
     border: none;
 
@@ -685,29 +683,29 @@ body{
 
 @media (prefers-color-scheme: dark) {
     .MouseOnBubble{
-        background-color: rgba(32, 32, 32, 0.9) !important;
-        border-color : rgba(34, 34, 34, 0.9) !important;;
-        box-shadow : 0 0 40px 5px rgb(14, 14, 14) !important;;
+        background-color: rgba(25, 25, 25, 0.9) !important;
+        border-color : rgba(27, 27, 27, 0.9) !important;;
+        box-shadow : 0 0 40px 5px rgb(5, 5, 5) !important;;
         translate: 0 10px !important;
     }
 
     body{
-        background-Color: #202020
+        background-Color: #151515
     }
 
     .DynamicBubble{
-        background-Color: rgba(37, 37, 37, 0.7);
+        background-Color: rgba(30, 30, 30, 0.7);
         border-Color: rgba(28, 28, 28, 0.7);
-        box-Shadow:0 0 40px 5px rgb(25, 25, 25);
-        text-Shadow: rgba(67, 67, 67, 0.5) 0 0 20px
+        box-Shadow:0 0 40px 5px rgb(41, 41, 41);
+        text-Shadow: rgba(58, 58, 58, 0.5) 0 0 20px
     }
 
     .blackChunk{
-        background-Color: #1c1c1c;
+        background-Color: #1b1b1b;
     }
 
     .whiteChunk{
-        background-Color: #5e5e5e;
+        background-Color: #4a4a4a;
     }
 
     .DynamicBubbleFrameTitle{
@@ -733,14 +731,13 @@ body{
     }
 
     .DynamicBubbleControlBar{
-        background-Color: rgba(39, 39, 39, 0.5);
-        border-Color: rgba(50, 50, 50, 0.75);
+        background-Color: rgba(28, 28, 28, 0.5);
+        border-Color: rgba(37, 37, 37, 0.75);
 
     }
 
     #DynamicBubbleBase hr{
         background-Color: rgb(60, 60, 60);
-        box-Shadow:0 0 10px 10px rgba(39, 39, 39, 0.73)
     }
 
     .DynamicBubbleControlBarHandleGrip{
@@ -833,14 +830,13 @@ body{
     }
 
     .DynamicBubbleControlBar{
-        background-Color:rgba(244, 244, 244, 0.5);
-        border-Color:rgba(207, 207, 207, 0.75);
+        background-Color: rgba(239, 239, 239, 0.5);
+        border-Color: rgba(216, 216, 216, 0.75);
 
     }
 
     #DynamicBubbleBase hr{
         background-Color:rgb(186, 186, 186);
-        box-Shadow:0 0 10px 10px rgba(227, 227, 227, 0.73) ;
     }
 
     .DynamicBubbleControlBarHandleGrip{
