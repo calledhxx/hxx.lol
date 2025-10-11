@@ -590,7 +590,7 @@ body{
     width: 100%;
     height: 60px;
 
-    transition: all 120ms ease;
+    transition: all 70ms ease;
 
     opacity: 0;
 
@@ -717,8 +717,8 @@ body{
 
     .DynamicBubbleFrameButton{
         color: #b6b6b6;
-        background: rgba(32, 32, 32, 0.6);
-        border-color: rgba(44, 44, 44, 0.64);
+        background: rgba(21, 21, 21, 0.6);
+        border-color: rgba(41, 41, 41, 0.64);
     }
 
     .DynamicBubbleTypeTitle{
