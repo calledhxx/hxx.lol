@@ -600,8 +600,7 @@ body{
 
     font-size: 16px;
 
-    text-shadow: 0 0 20px rgba(0, 0, 0, .3);
-
+    text-shadow: none;
 }
 
 .DynamicBubbleControlBarHandle{
@@ -731,9 +730,7 @@ body{
     }
 
     .DynamicBubbleControlBar{
-        background-Color: rgba(28, 28, 28, 0.5);
         border-Color: rgba(37, 37, 37, 0.75);
-
     }
 
     #DynamicBubbleBase hr{
@@ -830,9 +827,7 @@ body{
     }
 
     .DynamicBubbleControlBar{
-        background-Color: rgba(239, 239, 239, 0.5);
         border-Color: rgba(216, 216, 216, 0.75);
-
     }
 
     #DynamicBubbleBase hr{
