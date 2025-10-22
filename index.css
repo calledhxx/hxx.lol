@@ -693,18 +693,18 @@ body{
     }
 
     .DynamicBubble{
-        background-Color: rgba(39, 39, 39, 0.7);
-        border-Color: rgba(25, 25, 25, 0.7);
-        box-Shadow:0 0 40px 5px rgb(39, 39, 39);
+        background-Color: rgba(30, 30, 30, 0.7);
+        border-Color: rgba(23, 23, 23, 0.7);
+        box-Shadow:0 0 40px 5px rgb(35, 35, 35);
         text-Shadow: rgba(58, 58, 58, 0.5) 0 0 20px
     }
 
     .blackChunk{
-        background-Color: #1b1b1b;
+        background-Color: #131313;
     }
 
     .whiteChunk{
-        background-Color: #4a4a4a;
+        background-Color: #373737;
     }
 
     .DynamicBubbleFrameTitle{
