@@ -1260,8 +1260,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         if(Holding){
             Holding = false;
 
-            let XV = 300 * (x - XVertex)/(Date.now() - XVertexRecordedAtTime);
-            let YV = 300 * (y - YVertex)/(Date.now() - YVertexRecordedAtTime);
+            let XV = 500 * (x - XVertex)/(Date.now() - XVertexRecordedAtTime);
+            let YV = 500 * (y - YVertex)/(Date.now() - YVertexRecordedAtTime);
 
             let IfXVNeg = XV < 0;
             let IfYVNeg = YV < 0;
@@ -1301,12 +1301,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 if(XVStoped && YVStoped)
                     break;
 
-                moving(CubeInfo.LastXMoved + XV/100,CubeInfo.LastYMoved + YV/100);
+                moving(CubeInfo.LastXMoved + XV/500,CubeInfo.LastYMoved + YV/500);
 
-                CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.LastXMoved + XV/100;
-                CubeInfo.LastYMoved = CubeInfo.YMoved = CubeInfo.LastYMoved + YV/100;
+                CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.LastXMoved + XV/500;
+                CubeInfo.LastYMoved = CubeInfo.YMoved = CubeInfo.LastYMoved + YV/500;
 
-                await sleep(10);
+                await sleep(2);
             }
 
 
@@ -1368,7 +1368,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                                 TweenUp(true,0.3);
 
                                 CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 - 360;
-                                CubeInfo.LastYMoved = CubeInfo.YMoved = - 10;
+                                CubeInfo.LastYMoved = CubeInfo.YMoved = 10;
 
 
                                 let TheCube = structuredClone(Content);
@@ -1432,7 +1432,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                                         TweenUp(true,0.3);
 
                                         CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 - 360;
-                                        CubeInfo.LastYMoved = CubeInfo.YMoved = - 10;
+                                        CubeInfo.LastYMoved = CubeInfo.YMoved = 10;
 
 
                                         let TheCube = structuredClone(backTo);
