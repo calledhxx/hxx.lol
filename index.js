@@ -1300,7 +1300,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         if(Pushing){
             Pushing = false;
             let FinalElement = FinalInfo.Button;
-            let ButtonInfo = Cube.Buttons[FinalElement.id];
+            let ButtonInfo = Cube.Buttons[Number(FinalElement.id)];
 
             if(FinalElement === StartAtElement){
                 for (let index in ButtonInfo.Event){
