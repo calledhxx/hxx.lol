@@ -122,10 +122,6 @@ let CubeInfo = {
     "YMoved":0,
     "LastXMoved":0,
     "LastYMoved":0,
-    "LastToX":0,
-    "LastToY":0,
-    "LastDBX":-1,
-    "LastDBY":-1
 }
 
 let DynamicBubbles = [];
@@ -379,6 +375,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
     function moving(x, y) {
+        y = -y;//ive nothing to say....
         let x360Moved = (x%360);
         let y360Moved = (y%360);
 
@@ -1159,6 +1156,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let ToStableValue = useTouchPad ? 3 : 5;
 
+
     let startMove = async function (x,y)
     {
         if(Locked) return;
@@ -1178,8 +1176,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
             Holding = true;
             TweenUp(false);
 
+            XVertex = x;
+            YVertex = y;
+
+            XVertexRecordedAtTime = YVertexRecordedAtTime = Date.now();
+
             CubeInfo.XMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
-            CubeInfo.YMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
+            CubeInfo.YMoved = (y -  yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
         }else if(FinalInfo.Button && !Pushing){
             let FinalElement = FinalInfo.Button;
 
@@ -1244,56 +1247,69 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let LastPullUpAtY = 0;
 
+    let XVertex = 0,YVertex = 0;
+    let XVectorFocus = 0,YVectorFocus = 0;
+    let LastXOnOnMoving = 0,LastYOnOnMoving = 0;
+    let XVertexRecordedAtTime,YVertexRecordedAtTime;
+
     let endMove = async function (x,y){
         if(Locked) return;
 
         let FinalInfo = getFinalElementWitchAtPoint(x,y);
 
-
-
-
         if(Holding){
             Holding = false;
 
-            let totalMs = Date.now() - startAt;
+            let XV = 300 * (x - XVertex)/(Date.now() - XVertexRecordedAtTime);
+            let YV = 300 * (y - YVertex)/(Date.now() - YVertexRecordedAtTime);
 
-            let toX =(CubeInfo.XMoved - CubeInfo.LastXMoved)/(totalMs/200);
-            let toY = (CubeInfo.YMoved - CubeInfo.LastYMoved)/(totalMs/200);
-
-            let dbX = (CubeInfo.XMoved - CubeInfo.LastXMoved) > 0;
-            let dbY = (CubeInfo.YMoved - CubeInfo.LastYMoved) > 0;
-
-            if(CubeInfo.LastDBX===dbX && CubeInfo.LastToX !== 0 && Math.abs(CubeInfo.LastToX) < Math.abs(toX)) toX += CubeInfo.LastToX;
-            if(CubeInfo.LastDBY===dbY && CubeInfo.LastToY !==0 && Math.abs(CubeInfo.LastToY) < Math.abs(toY)) toY+=CubeInfo.LastToY;
-
-            CubeInfo.LastToX = toX;
-            CubeInfo.LastToY = toY;
-
-            CubeInfo.LastDBX = dbX;
-            CubeInfo.LastDBY = dbY;
+            let IfXVNeg = XV < 0;
+            let IfYVNeg = YV < 0;
 
             CubeInfo.LastXMoved = CubeInfo.XMoved;
             CubeInfo.LastYMoved = CubeInfo.YMoved;
 
-            moving(CubeInfo.XMoved,CubeInfo.YMoved);
+            let ms10Past = 0;
 
-            for (let index = 0;;index++){
+            let XVStoped = false;
+            let YVStoped = false;
 
-                if(dbX ? toX > 0 : toX < 0) toX= dbX ? toX-2 : toX+2; else toX = 0;
-                if(dbY ? toY > 0 : toY < 0)  toY= dbY ? toY-2 : toY+2; else toY = 0;
+            while (1){
+                ms10Past++;
 
-                if(
-                    ((dbX ? toX <= 0 : toX >= 0) && (dbY ? toY <= 0 : toY >= 0)) ||
-                    Holding || Pushing
-                ) break;
+                if(Holding || Pushing || Pulling || Controlling || Dragging)
+                    break;
 
-                await moving(CubeInfo.XMoved+toX/50,CubeInfo.YMoved+toY/50);
+                if(!XVStoped) {
+                    if (IfXVNeg)
+                        XV += 20;
+                    else
+                        XV -= 20;
+                }else XV = 0;
 
-                CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved+toX/50;
-                CubeInfo.LastYMoved = CubeInfo.YMoved = CubeInfo.YMoved+toY/50;
+                if(!YVStoped){
+                    if(IfYVNeg)
+                        YV += 20;
+                    else
+                        YV -= 20;
+                }else YV = 0;
 
-                await sleep(1);
+
+                XVStoped = (IfXVNeg ? XV >= 0 : XV <= 0);
+                YVStoped = (IfYVNeg ? YV >= 0 : YV <= 0);
+
+                if(XVStoped && YVStoped)
+                    break;
+
+                moving(CubeInfo.LastXMoved + XV/100,CubeInfo.LastYMoved + YV/100);
+
+                CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.LastXMoved + XV/100;
+                CubeInfo.LastYMoved = CubeInfo.YMoved = CubeInfo.LastYMoved + YV/100;
+
+                await sleep(10);
             }
+
+
 
         }
 
@@ -1706,6 +1722,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let PullUpMoving = 0;
 
+
     let fingerMoving = async function(x,y){
         if(Locked) return;
 
@@ -1713,8 +1730,32 @@ document.addEventListener("DOMContentLoaded",  async function () {
         nowCursorAtY = y;
 
         if(Holding){
+            let CurrentXVectorFocus = (x - LastXOnOnMoving > 0) ? 1 : (x - LastXOnOnMoving === 0) ? 0 : -1;
+            let CurrentYVectorFocus = (y - LastYOnOnMoving > 0) ? 1 : (y - LastYOnOnMoving === 0) ? 0 : -1;
+
             CubeInfo.XMoved = (x - xStartScreen)/ToStableValue + CubeInfo.LastXMoved;
-            CubeInfo.YMoved = (-y +   yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
+            CubeInfo.YMoved = (y -  yStartScreen)/ToStableValue + CubeInfo.LastYMoved;
+
+            if(CurrentXVectorFocus){
+                if(CurrentXVectorFocus !== XVectorFocus){
+                    XVertexRecordedAtTime = Date.now();
+                    XVertex = x;
+                }
+
+                XVectorFocus = CurrentXVectorFocus;
+            }
+
+            if(CurrentYVectorFocus){
+                if(CurrentYVectorFocus !== YVectorFocus){
+                    YVertexRecordedAtTime = Date.now();
+                    YVertex = y;
+                }
+
+                YVectorFocus = CurrentYVectorFocus;
+            }
+
+            LastXOnOnMoving = x;
+            LastYOnOnMoving = y;
 
             moving(CubeInfo.XMoved, CubeInfo.YMoved);
         }else if (Controlling){
@@ -2003,13 +2044,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
     await sleep(740)
 
     await sleep(300);
-    moving(0,-10);
+    moving(0,10);
     await sleep(340);
-    moving(-15,-10);
+    moving(-15,10);
 
-    moving(-15,-10);
+    moving(-15,10);
     CubeInfo.XMoved = -15;
-    CubeInfo.YMoved = -10;
+    CubeInfo.YMoved = 10;
 
     await sleep(100);
 
@@ -2031,12 +2072,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
     TweenUp(false);
 
     for (let j = 0;j<=360/5;j++){
-        moving(-j*5 - 15,-10);
+        moving(-j*5 - 15,10);
         await sleep(0);
     }
 
-    CubeInfo.LastXMoved = CubeInfo.XMoved =  -375;
-    CubeInfo.LastYMoved = CubeInfo.YMoved = -10;
+    CubeInfo.LastXMoved = CubeInfo.XMoved = -375;
+    CubeInfo.LastYMoved = CubeInfo.YMoved = 10;
 
 
     await sleep(240);
