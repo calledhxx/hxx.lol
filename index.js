@@ -1277,7 +1277,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             while (1){
                 ms10Past++;
 
-                if(Holding || Pushing || Pulling || Controlling || Dragging)
+                if(Holding || Pushing )
                     break;
 
                 if(!XVStoped) {
@@ -1310,7 +1310,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
 
-
+            return;
         }
 
         if(Pushing){
