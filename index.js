@@ -154,6 +154,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let Pulling = 0;
     let Controlling = 0;
     let Dragging = 0;
+    let Viewing = 0;
 
     let Locked = 1;
 
@@ -825,6 +826,39 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         break;
                     }
 
+
+                    case"Photos":{
+                        newDOM = document.createElement("div");
+                        newDOM.classList.add("DynamicBubbleFramePhotosCase");
+
+                        for (let PhotoIndex in Content[SectionIndex][index]){
+                            let Photo =  document.createElement("div");
+                            Photo.classList.add("DynamicBubbleFramePhoto");
+
+                            let Img =  document.createElement("Img");
+                            Img.classList.add("DynamicBubbleFramePhotoImage");
+                            Img.src = Content[SectionIndex][index][PhotoIndex].Photo;
+
+                            let Title =  document.createElement("h1");
+                            Title.classList.add("DynamicBubbleFramePhotoTitle");
+                            Title.innerText = Content[SectionIndex][index][PhotoIndex].Title;
+
+                            let Captain =  document.createElement("h6");
+                            Captain.classList.add("DynamicBubbleFramePhotoCaptain");
+                            Captain.innerText = Content[SectionIndex][index][PhotoIndex].Captain;
+
+
+                            newDOM.appendChild(Photo);
+                            Photo.appendChild(Img);
+                            Photo.appendChild(Title);
+                            Photo.appendChild(Captain);
+                        }
+
+
+
+                        break;
+                    }
+
                     default:{
                         //...
                     }
@@ -1090,6 +1124,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Bubble":0,
             "ControlBar":0,
             "FunctionButton":0,
+            "Photos":0,
             "Rotating":0,
         };
 
@@ -1099,7 +1134,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             if(retIfParentMatch(ElementsWitchAtPoint[i],"box",0).Parent) break;
 
             let CheckButton = retIfParentMatch(ElementsWitchAtPoint[i],0,"button");
-
             if(CheckButton.SearchTimes === 1) continue;
 
             if(CheckButton.Parent){
@@ -1129,12 +1163,19 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     break
 
                 }
+
+                let CheckPhoto = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubbleFramePhoto");
+
+                if(CheckPhoto.Parent){
+                    FinalInfo.Photos = CheckPhoto.Parent;
+                    break
+                }
             }
 
 
+
+
             let CheckBubble = retIfParentMatch(ElementsWitchAtPoint[i],0,"DynamicBubble");
-
-
 
             if(CheckBubble.Parent){
                 FinalInfo.Bubble = CheckBubble.Parent;
@@ -1148,6 +1189,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             !FinalInfo.Bubble &&
             !FinalInfo.Rotating &&
             !FinalInfo.ControlBar &&
+            !FinalInfo.Photos &&
             !FinalInfo.FunctionButton;
 
 
@@ -1156,6 +1198,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let ToStableValue = useTouchPad ? 3 : 5;
 
+    let ViewBase = 0;
 
     let startMove = async function (x,y)
     {
@@ -1237,6 +1280,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
             res.Parent.classList.remove("SearchableBubble");
 
             Dragging = true;
+        }else if (FinalInfo.Photos && !Viewing && PullUpInfo.MainPullUpIndex !== false){
+            Viewing = true;
+            StartAtElement = FinalInfo.Photos;
+            let Case = retIfParentMatch(StartAtElement,0,"DynamicBubbleFramePhotosCase");
+            ViewBase = Case.Parent.scrollLeft;
+
+            const res = retIfParentMatch(StartAtElement,0,"DynamicBubble",0);
+            res.Parent.classList.remove("SearchableBubble");
         }
 
     }
@@ -1277,7 +1328,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             while (1){
                 ms10Past++;
 
-                if(Holding || Pushing )
+                if(Holding || Pushing || Pulling || Dragging || Viewing)
                     break;
 
                 if(!XVStoped) {
@@ -1607,6 +1658,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
             Dragging = false;
         }
 
+        if(Viewing){
+            Viewing = false;
+
+            const res = retIfParentMatch(StartAtElement,0,"DynamicBubble",0);
+            res.Parent.classList.add("SearchableBubble");
+        }
+
 
 
         for (let i = mouseOnFunctionButtons.length; 0 <= i ;i--){
@@ -1845,6 +1903,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 StartAtElement.getElementsByTagName("hr")[0].style.opacity = "0";
 
+
                 for (let index = 0; index < StartAtElement.getElementsByTagName("div").length; index++) {
                     let thisElement = StartAtElement.getElementsByTagName("div")[index];
                     let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -1866,6 +1925,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         thisElement.style.backgroundColor = "";
                     }
                 }
+
             }else{
                 StartAtElement.style.overflow = "visible";
             }
@@ -1905,8 +1965,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             StartAtElement.style.top = `calc(50% + ${tY*0.04}px)`;
             StartAtElement.style.left = `calc(50% + ${tX*0.04}px)`;
+        }else if(Viewing){
+            let Case = retIfParentMatch(StartAtElement,0,"DynamicBubbleFramePhotosCase");
+            Case.Parent.scrollLeft = ViewBase - (nowCursorAtX - xStartScreen);
         }
-
     }
 
     if(useTouchPad) {

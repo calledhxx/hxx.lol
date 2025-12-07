@@ -649,6 +649,71 @@ body{
     box-shadow: 0 0 40px 5px rgba(184, 184, 184, 1);
 }
 
+.DynamicBubbleFramePhotosCase{
+    width:  100%;
+    height:  400px;
+
+    overflow:hidden;
+
+    display: flex;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+.DynamicBubbleFramePhoto{
+    height: 100%;
+    width: auto;
+
+    border-radius: 20px;
+    border: 1px solid;
+
+    margin-right: 10px;
+    position: relative;
+
+    cursor: grab;
+    background-color: rgb(32, 32, 32);
+}
+
+.DynamicBubbleFramePhotoImage{
+    height: calc(100% - 70px);
+    width: auto;
+
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.DynamicBubbleFramePhotoTitle{
+    width:  100%;
+    height: 20px;
+
+    font-size: 16px;
+    font-style: normal;
+    color: #b6b6b6;
+
+    margin-top:8px;
+
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.DynamicBubbleFramePhotoCaptain{
+    width:  100%;
+    height: 20px;
+
+    font-size: 12px;
+    font-style: normal;
+    color: #a6a6a6;
+
+    margin-top:5px;
+
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+}
 
 ::-webkit-scrollbar {
     width: 6px;
@@ -668,8 +733,8 @@ body{
     -ms-user-drag: auto;
     user-drag: auto;
 
-    cursor: text;
 }
+
 
 .SearchableBubble {
     cursor: auto;
@@ -743,6 +808,10 @@ body{
 
     .DynamicBubbleControlBarHandleRope{
         background-Color: rgb(60, 60, 60)
+    }
+
+    .DynamicBubbleFramePhoto{
+        border-color: #303030;
     }
 
     .SearchableBubble .DynamicBubbleFrameSection *::selection{
@@ -840,6 +909,10 @@ body{
 
     .DynamicBubbleControlBarHandleRope{
         background-Color:rgb(186, 186, 186)
+    }
+
+    .DynamicBubbleFramePhoto{
+        border-color: #e8e8e8;
     }
 
     .SearchableBubble .DynamicBubbleFrameSection *::selection{
