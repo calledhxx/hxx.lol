@@ -1292,7 +1292,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             StartAtElement.style.translate = "0 -10px";
 
-
             const res = retIfParentMatch(StartAtElement,0,"DynamicBubble",0);
             res.Parent.classList.remove("SearchableBubble");
         }
