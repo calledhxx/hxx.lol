@@ -829,9 +829,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                     case"Photos":{
                         newDOM = document.createElement("div");
-                        newDOM.classList.add("DynamicBubbleFramePhotosCase");
+                        newDOM.classList.add("DynamicBubbleFramePhotosCaseCarrier");
 
                         for (let PhotoIndex in Content[SectionIndex][index]){
+                            let Case =  document.createElement("div");
+                            Case.classList.add("DynamicBubbleFramePhotoCase");
+
                             let Photo =  document.createElement("div");
                             Photo.classList.add("DynamicBubbleFramePhoto");
 
@@ -848,7 +851,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             Captain.innerText = Content[SectionIndex][index][PhotoIndex].Captain;
 
 
-                            newDOM.appendChild(Photo);
+                            newDOM.appendChild(Case);
+                            Case.appendChild(Photo);
                             Photo.appendChild(Img);
                             Photo.appendChild(Title);
                             Photo.appendChild(Captain);
@@ -1283,8 +1287,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }else if (FinalInfo.Photos && !Viewing && PullUpInfo.MainPullUpIndex !== false){
             Viewing = true;
             StartAtElement = FinalInfo.Photos;
-            let Case = retIfParentMatch(StartAtElement,0,"DynamicBubbleFramePhotosCase");
-            ViewBase = Case.Parent.scrollLeft;
+            let Carrier = retIfParentMatch(StartAtElement,0,"DynamicBubbleFramePhotosCaseCarrier");
+            ViewBase = Carrier.Parent.scrollLeft;
+
+            StartAtElement.style.translate = "0 -10px";
+
 
             const res = retIfParentMatch(StartAtElement,0,"DynamicBubble",0);
             res.Parent.classList.remove("SearchableBubble");
@@ -1661,6 +1668,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         if(Viewing){
             Viewing = false;
 
+            StartAtElement.style.translate = "0 0";
+
             const res = retIfParentMatch(StartAtElement,0,"DynamicBubble",0);
             res.Parent.classList.add("SearchableBubble");
         }
@@ -1966,8 +1975,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             StartAtElement.style.top = `calc(50% + ${tY*0.04}px)`;
             StartAtElement.style.left = `calc(50% + ${tX*0.04}px)`;
         }else if(Viewing){
-            let Case = retIfParentMatch(StartAtElement,0,"DynamicBubbleFramePhotosCase");
-            Case.Parent.scrollLeft = ViewBase - (nowCursorAtX - xStartScreen);
+            let Carrier = retIfParentMatch(StartAtElement,0,"DynamicBubbleFramePhotosCaseCarrier");
+            Carrier.Parent.scrollLeft = ViewBase - (nowCursorAtX - xStartScreen);
         }
     }
 
