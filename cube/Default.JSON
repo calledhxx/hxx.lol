@@ -109,6 +109,18 @@
       "Event":{
         "Page":"./page/Style.JSON"
       }
+    },
+    {
+      "Side": 4,
+      "Chunk": 2,
+      "Color":"#de3e68",
+      "depth":24,
+      "Icon": null,
+      "Name":"照片集",
+      "Tag":"Photos",
+      "Event":{
+        "Page":"./page/Photos.JSON"
+      }
     }
   ]
 }
