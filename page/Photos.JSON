@@ -10,17 +10,17 @@
       {
         "Title": "Mita Cos #1",
         "Captain": "後方有剛吃完的兩片必勝客。",
-        "Photo": "https://media.discordapp.net/attachments/977422483516968960/1446912431304478751/SPOILER_IMG_4885.jpg?ex=69365e75&is=69350cf5&hm=7197bfa5b46d2e81aa5cab1869c725847e3101f5ba99fb5167870e26bf6dc74a&=&format=webp&width=706&height=941"
+        "Photo": "./img/Photos/MitaCos1.png"
       },
       {
         "Title": "Mita Cos #2",
         "Captain": "ㄜㄜㄜ，不知道就...對！",
-        "Photo": "https://media.discordapp.net/attachments/977422483516968960/1446911784362573937/SPOILER_IMG_4871.jpg?ex=69365ddb&is=69350c5b&hm=8f6ecd71a693e474134a3114ce747dc425466c2ef41052873d07db7741a400cc&=&format=webp&width=609&height=813"
+        "Photo": "./img/Photos/MitaCos2.png"
       },
       {
         "Title": "Mita Cos #3",
         "Captain": "為什麼當時的我要抓頭髮...？",
-        "Photo": "https://media.discordapp.net/attachments/977422483516968960/1446911785226604806/SPOILER_IMG_4890.jpg?ex=69365ddb&is=69350c5b&hm=2457d5e96728fa6e32a1759ce98615417b625d195dd995b1ac8e3f8fb0a660a8&=&format=webp&width=609&height=813"
+        "Photo": "./img/Photos/MitaCos3.png"
       }
     ]
   }
