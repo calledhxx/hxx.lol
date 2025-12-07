@@ -659,7 +659,7 @@ body{
     justify-content: left;
     align-items: center;
 
-    padding-top: 10px;
+    padding-top: 20px;
     padding-bottom: 10px;
 }
 
@@ -668,7 +668,6 @@ body{
     width: auto;
 
     position: relative;
-
 
     transition:  all 250ms cubic-bezier(0, 0.6, 0.1, 1);
 }
