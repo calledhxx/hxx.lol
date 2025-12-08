@@ -1395,7 +1395,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             },
                             {
                                 "Title":"反饋小尖兵",
-                                "Content":`按鈕名稱與標籤：${ButtonInfo.Name},${ButtonInfo.Tag}\n路徑：${CubePathInString}`
+                                "Content":`反饋原因：ButtonInfo內的Event沒有任何內容。\n按鈕名稱與標籤：${ButtonInfo.Name},${ButtonInfo.Tag}\n路徑：${CubePathInString}`
                             }
                         ]
                     )
