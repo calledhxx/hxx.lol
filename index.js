@@ -1119,6 +1119,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let mouseOnBubbles = [];
     let mouseOnControlBars = [];
     let mouseOnFunctionButtons = [];
+    let mouseOnView = [];
 
     let StartAtElement;
 
@@ -1286,7 +1287,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             Dragging = true;
         }else if (FinalInfo.Photos && !Viewing && PullUpInfo.MainPullUpIndex !== false){
             Viewing = true;
-            StartAtElement = FinalInfo.Photos;
+            mouseOnView.push(StartAtElement = FinalInfo.Photos);
             let Carrier = retIfParentMatch(StartAtElement,0,"DynamicBubbleFramePhotosCaseCarrier");
             ViewBase = Carrier.Parent.scrollLeft;
 
@@ -1294,8 +1295,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             const res = retIfParentMatch(StartAtElement,0,"DynamicBubble",0);
             res.Parent.classList.remove("SearchableBubble");
-        }
+            res.Parent.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "hidden";
 
+            console.log(res.Parent)
+        }
     }
 
 
@@ -1550,7 +1553,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 }
 
             }
-
         }
 
         if(Pulling){
@@ -1666,16 +1668,22 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         if(Viewing){
             Viewing = false;
-
-            StartAtElement.style.translate = "0 0";
-
-            const res = retIfParentMatch(StartAtElement,0,"DynamicBubble",0);
-            res.Parent.classList.add("SearchableBubble");
         }
 
+        for (let ni = 0 ; ni < mouseOnView.length; ni++) {
+            const i = mouseOnView.length - ni - 1;
 
+            if(!mouseOnView[i]) continue;
+            mouseOnView[i].style.translate = "0 0";
 
-        for (let i = mouseOnFunctionButtons.length; 0 <= i ;i--){
+            const res = retIfParentMatch(mouseOnView[i],0,"DynamicBubble",0);
+            res.Parent.classList.add("SearchableBubble");
+            res.Parent.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "auto";
+
+            mouseOnView.pop()
+        }
+        for (let ni = 0 ; ni < mouseOnFunctionButtons.length; ni++) {
+            const i = mouseOnFunctionButtons.length - ni - 1;
             if(!mouseOnFunctionButtons[i]) continue;
 
             setTimeout(async function(){
@@ -1697,8 +1705,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             },0)
         }
 
-
-        for (let i = mouseOnControlBars.length; 0 <= i ;i--){
+        for (let ni = 0 ; ni < mouseOnControlBars.length; ni++) {
+            const i = mouseOnControlBars.length - ni - 1;
             if(!mouseOnControlBars[i]) continue;
 
             setTimeout(async function(){
@@ -1768,8 +1776,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
 
 
-
-        for (let i = mouseOnBubbles.length; 0 <= i;i--){
+        for (let ni = 0 ; ni < mouseOnBubbles.length; ni++) {
+            const i = mouseOnBubbles.length - ni - 1;
             if(!mouseOnBubbles[i]) continue;
 
             mouseOnBubbles[i].classList.remove("MouseOnBubble");
