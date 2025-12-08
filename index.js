@@ -1378,7 +1378,28 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let ButtonInfo = Cube.Buttons[Number(FinalElement.id)];
 
             if(FinalElement === StartAtElement){
-                for (let index in ButtonInfo.Event){
+                if(Object.keys(ButtonInfo.Event).length === 0){
+                    let CubePathInString = "";
+                    CubePath.forEach(function (v){
+                        CubePathInString = CubePathInString + v.Tag +"/";
+                    })
+                    await CreateDynamicBubbles(
+                        "Notification",
+                        [
+                            {
+                                "Title":"怎麼沒反應？？",
+                                "Content":`你剛剛壓下的這顆按鈕沒有任何動靜，似乎是Hxx忘記附魔給他了。之後再來看看吧！`
+                            },
+                            {
+                                "Content":`你也可以回報「反饋小尖兵」所提供的內容給 me@hxx.lol，讓Hxx熬夜趕工把遺漏的部分補完整。(邪惡`
+                            },
+                            {
+                                "Title":"反饋小尖兵",
+                                "Content":`按鈕名稱與標籤：${ButtonInfo.Name},${ButtonInfo.Tag}\n路徑：${CubePathInString}`
+                            }
+                        ]
+                    )
+                }else for (let index in ButtonInfo.Event){
                     let data = ButtonInfo.Event[index];
 
                     switch (index){
