@@ -1297,7 +1297,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             res.Parent.classList.remove("SearchableBubble");
             res.Parent.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "hidden";
 
-            console.log(res.Parent)
         }
     }
 
