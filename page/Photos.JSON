@@ -7,21 +7,6 @@
     "Title":"Mita Cos",
     "Content":"這是我的第一次，沒有什麼亮點。ψ(._. )>",
     "Photos": [
-      {
-        "Title": "Mita Cos #1",
-        "Captain": "後方有剛吃完的兩片必勝客。",
-        "Photo": "./img/Photos/MitaCos1.png"
-      },
-      {
-        "Title": "Mita Cos #2",
-        "Captain": "ㄜㄜㄜ，不知道就...對！",
-        "Photo": "./img/Photos/MitaCos2.png"
-      },
-      {
-        "Title": "Mita Cos #3",
-        "Captain": "為什麼當時的我要抓頭髮...？",
-        "Photo": "./img/Photos/MitaCos3.png"
-      }
     ]
   }
 ]
