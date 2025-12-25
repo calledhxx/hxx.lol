@@ -1336,7 +1336,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             while (1){
                 ms10Past++;
 
-                if(Holding || Pushing || Pulling || Dragging || Viewing)
+                if(Holding || Pushing || Dragging || Viewing)
                     break;
 
                 if(!XVStoped) {

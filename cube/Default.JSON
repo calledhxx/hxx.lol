@@ -119,7 +119,6 @@
       "Name":"照片集",
       "Tag":"Photos",
       "Event":{
-        "Page":"./page/Photos.JSON"
       }
     }
   ]

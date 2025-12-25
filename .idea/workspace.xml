@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d57fe96b-7e11-4fc9-9596-6dafe5dbf177" name="Changes" comment="hxx.lol">
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cube/Default.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/cube/Default.JSON" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Photos/MitaCos1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Photos/MitaCos2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Photos/MitaCos3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/page/Photos.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/page/Photos.JSON" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +34,7 @@
   }
 }</component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;ffffffff&quot;,
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2xS22xHL11i1vuQpWpxAuXTfxK1" />
@@ -275,15 +282,13 @@
       <workItem from="1765109708087" duration="4682000" />
       <workItem from="1765114637168" duration="1913000" />
       <workItem from="1765197332142" duration="2489000" />
-      <workItem from="1765199984917" duration="2066000" />
-    </task>
-    <task id="LOCAL-00260" summary="hxx.lol">
-      <option name="closed" value="true" />
-      <created>1756042361901</created>
-      <option name="number" value="00260" />
-      <option name="presentableId" value="LOCAL-00260" />
-      <option name="project" value="LOCAL" />
-      <updated>1756042361901</updated>
+      <workItem from="1765199984917" duration="2611000" />
+      <workItem from="1765553645502" duration="445000" />
+      <workItem from="1765554373597" duration="507000" />
+      <workItem from="1766060652839" duration="86000" />
+      <workItem from="1766319862427" duration="81000" />
+      <workItem from="1766649026543" duration="631000" />
+      <workItem from="1766670736149" duration="297000" />
     </task>
     <task id="LOCAL-00261" summary="hxx.lol">
       <option name="closed" value="true" />
@@ -669,7 +674,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765201186861</updated>
     </task>
-    <option name="localTasksCounter" value="309" />
+    <task id="LOCAL-00309" summary="hxx.lol">
+      <option name="closed" value="true" />
+      <created>1765202323217</created>
+      <option name="number" value="00309" />
+      <option name="presentableId" value="LOCAL-00309" />
+      <option name="project" value="LOCAL" />
+      <updated>1765202323217</updated>
+    </task>
+    <option name="localTasksCounter" value="310" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
