@@ -43,7 +43,6 @@ body{
     overflow: hidden;
     position: absolute;
 
-    transition: all 320ms ease;
 }
 
 #Hub{
