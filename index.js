@@ -1447,8 +1447,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
                                 Locked = 1;
                                 TweenUp(true,0.3);
 
-                                CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 - 360;
-                                CubeInfo.LastYMoved = CubeInfo.YMoved = 10;
+                                CubeInfo.LastXMoved = CubeInfo.XMoved =
+                                    CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 -
+                                    ((Math.abs(CubeInfo.XMoved)%360 < 180) ? 360 : 720);
+                                CubeInfo.LastYMoved = CubeInfo.YMoved =
+                                    CubeInfo.YMoved - CubeInfo.YMoved%360 + 10;
 
 
                                 let TheCube = structuredClone(Content);
@@ -1511,8 +1514,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
                                         Locked = 1;
                                         TweenUp(true,0.3);
 
-                                        CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 - 360;
-                                        CubeInfo.LastYMoved = CubeInfo.YMoved = 10;
+                                        CubeInfo.LastXMoved = CubeInfo.XMoved =
+                                            CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 -
+                                            ((Math.abs(CubeInfo.XMoved)%360 < 180) ? 360 : 720);
+
+                                        CubeInfo.LastYMoved = CubeInfo.YMoved =
+                                            CubeInfo.YMoved - CubeInfo.YMoved%360 + 10;
 
 
                                         let TheCube = structuredClone(backTo);
