@@ -1311,6 +1311,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let LastXOnOnMoving = 0,LastYOnOnMoving = 0;
     let XVertexRecordedAtTime,YVertexRecordedAtTime;
 
+    let SaftyLocker = 0;
+
     let endMove = async function (x,y){
         if(Locked) return;
 
@@ -1319,8 +1321,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
         if(Holding){
             Holding = false;
 
-            let XV = 500 * (x - XVertex)/(Date.now() - XVertexRecordedAtTime);
-            let YV = 500 * (y - YVertex)/(Date.now() - YVertexRecordedAtTime);
+            let sec = Date.now() - XVertexRecordedAtTime;
+            sec = sec ? sec : 1;
+
+            let XV = 500 * (x - XVertex)/(sec);
+            let YV = 500 * (y - YVertex)/(sec);
 
             let IfXVNeg = XV < 0;
             let IfYVNeg = YV < 0;
@@ -1333,40 +1338,49 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let XVStoped = false;
             let YVStoped = false;
 
-            while (1){
-                ms10Past++;
 
-                if(Holding || Pushing || Dragging || Viewing)
-                    break;
+            if(!SaftyLocker){
+                SaftyLocker = 1;
 
-                if(!XVStoped) {
-                    if (IfXVNeg)
-                        XV += 20;
-                    else
-                        XV -= 20;
-                }else XV = 0;
+                while (1){
+                    ms10Past++;
 
-                if(!YVStoped){
-                    if(IfYVNeg)
-                        YV += 20;
-                    else
-                        YV -= 20;
-                }else YV = 0;
+                    if(Holding || Pushing || Dragging || Viewing)
+                        break;
+
+                    if(!XVStoped) {
+                        if (IfXVNeg)
+                            XV += 20;
+                        else
+                            XV -= 20;
+                    }else XV = 0;
+
+                    if(!YVStoped){
+                        if(IfYVNeg)
+                            YV += 20;
+                        else
+                            YV -= 20;
+                    }else YV = 0;
 
 
-                XVStoped = (IfXVNeg ? XV >= 0 : XV <= 0);
-                YVStoped = (IfYVNeg ? YV >= 0 : YV <= 0);
+                    XVStoped = (IfXVNeg ? XV >= 0 : XV <= 0);
+                    YVStoped = (IfYVNeg ? YV >= 0 : YV <= 0);
 
-                if(XVStoped && YVStoped)
-                    break;
+                    if(XVStoped && YVStoped)
+                        break;
 
-                moving(CubeInfo.LastXMoved + XV/500,CubeInfo.LastYMoved + YV/500);
+                    moving(CubeInfo.LastXMoved + XV/500,CubeInfo.LastYMoved + YV/500);
 
-                CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.LastXMoved + XV/500;
-                CubeInfo.LastYMoved = CubeInfo.YMoved = CubeInfo.LastYMoved + YV/500;
+                    CubeInfo.LastXMoved = CubeInfo.XMoved = CubeInfo.LastXMoved + XV/500;
+                    CubeInfo.LastYMoved = CubeInfo.YMoved = CubeInfo.LastYMoved + YV/500;
 
-                await sleep(2);
+
+                    await sleep(2);
+                }
+
+                SaftyLocker = 0;
             }
+
 
 
             return;
@@ -2131,17 +2145,21 @@ document.addEventListener("DOMContentLoaded",  async function () {
     moving(0,0);
 
     let defaultCube = await loadData("./cube/Default.JSON");
-    SummonCube(defaultCube,true);
 
-
-    for(let i = 0;i<Cube.Buttons.length;i++)
-        Cube.Buttons[i].depth = 0;
-
-    for (let i = 0;i<buttonElements.length;i++)
+    if(defaultCube)
     {
-        buttonElements[i].style.fontSize = "0px";
-        buttonElements[i].style.opacity = "0";
+        SummonCube(defaultCube,true);
+
+        for(let i = 0;i<Cube.Buttons.length;i++)
+            Cube.Buttons[i].depth = 0;
+
+        for (let i = 0;i<buttonElements.length;i++)
+        {
+            buttonElements[i].style.fontSize = "0px";
+            buttonElements[i].style.opacity = "0";
+        }
     }
+
 
     moving(CubeInfo.XMoved, CubeInfo.YMoved);
     TweenUp(true,.14);
@@ -2163,12 +2181,16 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     await sleep(120);
 
-    Cube.Buttons = structuredClone(defaultCube.Buttons);
+    if(defaultCube){
+        Cube.Buttons = structuredClone(defaultCube.Buttons);
 
-    for (let i = 0;i<buttonElements.length;i++){
-        buttonElements[i].style.fontSize = "15px";
-        buttonElements[i].style.opacity = "1";
+        for (let i = 0;i<buttonElements.length;i++){
+            buttonElements[i].style.fontSize = "15px";
+            buttonElements[i].style.opacity = "1";
+        }
     }
+
+
 
     moving(CubeInfo.XMoved, CubeInfo.YMoved);
 
@@ -2187,7 +2209,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     await sleep(240);
 
-    await CreateDynamicBubbles("Notification",[
+    if(!defaultCube)
+        await CreateDynamicBubbles("Notification",[
+            {
+                "Title":"「娃娃大哭」",
+                "Content":"ㄝ... 看起來我們好像沒辦法載入最主要的資料耶，你可重新載入頁面以重式，如果還是不行的話，幫我聯絡：me@hxx.lol"
+            }]);
+    else await CreateDynamicBubbles("Notification",[
         {
             "Title":"你是誰？！",
             "Content":"歡迎來到Hxx的Weblog，這裡存著Hxx很唐的...東西。"
@@ -2219,6 +2247,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Content":"MIT License, open-source library: https://github.com/calledhxx/hxx.lol"
         }
     ])
+
+
 
     Locked = 0;
 });
