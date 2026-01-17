@@ -965,9 +965,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
             DynamicBubbles[MainIndex].getElementsByClassName("DynamicBubbleBottomBar")[0].innerText =
                 "再點擊一次以閱覽泡泡"
 
-            let Horizontal = 200;
+            const Horizontal = 200;
 
-            setTimeout(function (){
+            setTimeout( function (){
                 let Accumulation = 0;
 
                 for (let i = MainIndex - 1; i >= 0; i--){
@@ -993,7 +993,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             });
 
 
-            setTimeout(function (){
+            setTimeout( function (){
                 let Accumulation = 0;
 
                 let LastMixHeight = 0;
