@@ -354,7 +354,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     function TweenUp(db,smoothSec){
         smoothSec = smoothSec ? smoothSec : 0.1;
 
-        document.getElementById("box").style.transition=
+        document.getElementById("cube").style.transition=
             document.getElementById("passZFront").style.transition =
                 document.getElementById("passZBack").style.transition =
                     document.getElementById("passZBack").style.transition =
@@ -390,8 +390,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         let FVisible = false,RVisible = false,LVisible = false,TVisible = false,BVisible = false,BackVisible = false;
 
-        document.getElementById("box").style.width =
-            document.getElementById("box").style.height =
+        document.getElementById("cube").style.width =
+            document.getElementById("cube").style.height =
                 CubeSideSize+"px"
 
         for(let i = 0;i<document.getElementsByClassName("pass").length;i++)
@@ -1136,7 +1136,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let ElementsWitchAtPoint = document.elementsFromPoint(x,y);
 
         for (let i = 0; i < ElementsWitchAtPoint.length; i++) {
-            if(retIfParentMatch(ElementsWitchAtPoint[i],"box",0).Parent) break;
+            if(retIfParentMatch(ElementsWitchAtPoint[i],"cube",0).Parent) break;
 
             let CheckButton = retIfParentMatch(ElementsWitchAtPoint[i],0,"button");
             if(CheckButton.SearchTimes === 1) continue;
