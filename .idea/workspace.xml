@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d57fe96b-7e11-4fc9-9596-6dafe5dbf177" name="Changes" comment="hxx.lol">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,14 +295,23 @@
       <workItem from="1768574331040" duration="32000" />
       <workItem from="1768575015592" duration="174000" />
       <workItem from="1768589364222" duration="931000" />
-    </task>
-    <task id="LOCAL-00266" summary="hxx.lol">
-      <option name="closed" value="true" />
-      <created>1758193663132</created>
-      <option name="number" value="00266" />
-      <option name="presentableId" value="LOCAL-00266" />
-      <option name="project" value="LOCAL" />
-      <updated>1758193663132</updated>
+      <workItem from="1768622491921" duration="668000" />
+      <workItem from="1768750105427" duration="1369000" />
+      <workItem from="1768824663853" duration="598000" />
+      <workItem from="1768829099698" duration="2000" />
+      <workItem from="1768835575414" duration="2000" />
+      <workItem from="1768911542035" duration="640000" />
+      <workItem from="1768999123909" duration="638000" />
+      <workItem from="1769087490737" duration="35000" />
+      <workItem from="1770092748043" duration="12000" />
+      <workItem from="1770094364867" duration="666000" />
+      <workItem from="1770099222224" duration="821000" />
+      <workItem from="1770102769815" duration="90000" />
+      <workItem from="1770110489204" duration="226000" />
+      <workItem from="1770111372001" duration="13000" />
+      <workItem from="1770111407901" duration="1562000" />
+      <workItem from="1770202234227" duration="3000" />
+      <workItem from="1770539418166" duration="352000" />
     </task>
     <task id="LOCAL-00267" summary="hxx.lol">
       <option name="closed" value="true" />
@@ -685,7 +697,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768590291078</updated>
     </task>
-    <option name="localTasksCounter" value="315" />
+    <task id="LOCAL-00315" summary="hxx.lol">
+      <option name="closed" value="true" />
+      <created>1768622808469</created>
+      <option name="number" value="00315" />
+      <option name="presentableId" value="LOCAL-00315" />
+      <option name="project" value="LOCAL" />
+      <updated>1768622808470</updated>
+    </task>
+    <option name="localTasksCounter" value="316" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
