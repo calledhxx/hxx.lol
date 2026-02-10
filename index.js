@@ -2340,7 +2340,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
     ])
 
-
+    CreateDynamicBubbles("Notification",[
+        {
+            "Title":"左上角那個Youtube embed先別理他",
+            "Content":"我還在想要怎麼設計這東西才不會「違規」"
+        }]);
 
     Locked = 0;
 });
