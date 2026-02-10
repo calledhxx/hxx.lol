@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         },
         "Music-GiveControl": async function (){
             if(CurrentVideo === null){
-                let Content = await loadData("./Function/Music.JSON");
+                let Content = await loadData("./function/Music.JSON");
                 if(!Content) return;
 
                 setTimeout(async function (){
