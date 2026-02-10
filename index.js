@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         CreateButtons(structuredClone(CubeData));
     }
 
-    async function ShowCube(Content){
+    async function ShowCube(Content,SavePath){
         Locked = 1;
         TweenUp(true,0.3);
 
@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
         let TheCube = structuredClone(Content);
-        SummonCube(TheCube,true);
+        SummonCube(TheCube,SavePath);
         TweenUp(true,0.3);
 
 
@@ -1611,7 +1611,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             const Content = await loadData(data);
                             if(!Content) break;
 
-                            ShowCube(Content)
+                            ShowCube(Content,true)
 
                             break;
                         }
@@ -1621,7 +1621,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                                     CubePath.splice(CubePath.length-1, 1);
                                     let backTo = structuredClone(CubePath[CubePath.length-1]);
 
-                                    ShowCube(backTo)
+                                    ShowCube(backTo,false)
                                     break;
                                 }
                             }
