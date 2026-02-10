@@ -13,6 +13,43 @@
       "Event": {
         "Action": "Return"
       }
+    },
+
+    {
+      "Side": 1,
+      "Chunk": 3,
+      "Color": "#4287f5",
+      "depth": 24,
+      "Icon": null,
+      "Name": "播放與暫停",
+      "Tag": "PP",
+      "Event": {
+        "Music": "Play/Pause"
+      }
+    },
+    {
+      "Side": 1,
+      "Chunk": 4,
+      "Color": "#883dd9",
+      "depth": 24,
+      "Icon": null,
+      "Name": "下一首",
+      "Tag": "Next",
+      "Event": {
+        "Music": "Next"
+      }
+    },
+    {
+      "Side": 4,
+      "Chunk": 4,
+      "Color": "#f57242",
+      "depth": 24,
+      "Icon": null,
+      "Name": "上一首",
+      "Tag": "Last",
+      "Event": {
+        "Music": "Last"
+      }
     }
   ]
 }

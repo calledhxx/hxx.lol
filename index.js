@@ -140,6 +140,37 @@ let CubePath = [];
 
 let useTouchPad = checkIfMobile();
 
+let tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+
+let firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+let CurrentVideo;
+
+let CurrentMusicIndex = 0;
+const MusicList = [
+    "0UPDBODtxzw",
+    "18Fg6T3tZfI",
+    "6QYcd7RggNU",
+    "Uefu_EU-dW4",
+    "BclvXp0t-G0",
+]
+
+function onYouTubeIframeAPIReady() {
+    CurrentVideo = new YT.Player("MusicPlayer", {
+        height: "200",
+        width: "200",
+        videoId: MusicList[CurrentMusicIndex],
+        playerVars: {
+            autoplay: 0,
+            controls: 0,
+            playsinline: 1
+        }
+    });
+}
+
+
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
 
@@ -1235,140 +1266,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         await TidyUpDynamicBubbles();
         await PullUpDynamicBubbles(DynamicBubbles.length-1);
     }
-    
-    async function SwitchCubeSkin(skin) {
-        Locked = 1;
-        TweenUp(true,0.3);
-
-        for(let i = 0;i<buttonElements.length;i++){
-            buttonElements[i].style.opacity = "0";
-            buttonElements[i].style.fontSize = "0px";
-        }
-
-        for(let i = 0;i<Cube.Buttons.length;i++)
-            Cube.Buttons[i].depth = 0;
-        moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-        await sleep(110)
-        DeleteButtons();
-
-        switch (cubeSkin){
-            case "cube":{
-                TweenUp(true,0.3);
-                cubeElement.style.opacity = "0";
-
-                CubeSideSize = 50;
-
-                CubeInfo.LastXMoved = CubeInfo.XMoved =
-                    CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 -
-                    ((Math.abs(CubeInfo.XMoved)%360 < 180) ? 360 : 720);
-                CubeInfo.LastYMoved = CubeInfo.YMoved =
-                    CubeInfo.YMoved - CubeInfo.YMoved%360 + 10;
-
-
-                moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-
-                cubeElement = document.getElementById("cube");
-
-                break;
-            }
-            case "musicBox":{
-                TweenUp(true,0.3);
-                cubeElement.style.opacity = "0";
-
-                cubeElement = document.getElementById("musicBox");
-
-                cubeElement.getElementsByClassName("cdCarrier")[0].getElementsByTagName("circle")[0].style.opacity
-                    cubeElement.getElementsByClassName("column1Carrier")[0].getElementsByTagName("div")[0].style.opacity =
-                        cubeElement.getElementsByClassName("column2Carrier")[0].getElementsByTagName("div")[0].style.opacity =
-                            cubeElement.getElementsByClassName("column3Carrier")[0].getElementsByTagName("div")[0].style.opacity =
-                                "0";
-                break;
-            }
-            default: break;
-        }
-
-        await sleep(600);
-        cubeSkin = skin;
-
-        switch (skin){
-            case "cube":{
-                cubeElement = document.getElementById("cube");
-                TweenUp(false);
-                CubeSideSize = 50;
-                moving(CubeInfo.XMoved,CubeInfo.YMoved);
-                await sleep(150)
-                TweenUp(true,0.3);
-                CubeSideSize = 270;
-                cubeElement.style.opacity = "1";
-
-                moving(CubeInfo.XMoved,CubeInfo.YMoved);
-                await sleep(320);
-                TweenUp(true,0.2);
-                CubeSideSize = 220;
-                moving(CubeInfo.XMoved,CubeInfo.YMoved);
-                await sleep(210);
-
-                TweenUp(false);
-
-                break;
-            }
-            case "musicBox":{
-                cubeElement = document.getElementById("musicBox");
-                TweenUp(false);
-
-                CubeSideSize = 220;
-
-                CubeInfo.LastXMoved = CubeInfo.XMoved = -15;
-                CubeInfo.LastYMoved = CubeInfo.YMoved = 10;
-
-                moving(CubeInfo.XMoved,CubeInfo.YMoved);
-                await sleep(150)
-
-                TweenUp(true,0.3);
-
-                moving(CubeInfo.XMoved,CubeInfo.YMoved);
-                cubeElement.style.opacity = "1";
-                await sleep(100);
-
-                TweenUp(false);
-
-                cubeElement.getElementsByClassName("cdCarrier")[0].getElementsByTagName("circle")[0].style.opacity
-                    cubeElement.getElementsByClassName("column1Carrier")[0].getElementsByTagName("div")[0].style.opacity =
-                        cubeElement.getElementsByClassName("column2Carrier")[0].getElementsByTagName("div")[0].style.opacity =
-                            cubeElement.getElementsByClassName("column3Carrier")[0].getElementsByTagName("div")[0].style.opacity =
-                                "1";
-                break;
-            }
-            default: break;
-        }
-
-        CreateButtons(Cube = structuredClone(CubePath[CubePath.length - 1]));
-        TweenUp(true,0.3);
-
-        for(let i = 0;i<buttonElements.length;i++){
-            buttonElements[i].style.opacity = "0";
-            buttonElements[i].style.fontSize = "0px";
-        }
-
-        for(let i = 0;i<Cube.Buttons.length;i++)
-            Cube.Buttons[i].depth = 0;
-        moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-        await sleep(360);
-
-        for(let i = 0;i<buttonElements.length;i++){
-            buttonElements[i].style.opacity = "1";
-            buttonElements[i].style.fontSize = "15px";
-        }
-
-        for(let i = 0;i<Cube.Buttons.length;i++)
-            Cube.Buttons[i].depth = 24;
-        moving(CubeInfo.XMoved,CubeInfo.YMoved);
-        await sleep(300);
-        Locked = 0;
-    }
 
     let startAt = 0;
 
@@ -1730,6 +1627,53 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             }
 
                             break;
+                        }
+                        case "Music":{
+                            switch (data){
+                                case "Play/Pause":{
+
+                                    switch (CurrentVideo.getPlayerState()){
+                                        case YT.PlayerState.PAUSED:
+                                        case YT.PlayerState.ENDED:
+                                        case YT.PlayerState.CUED:
+                                            CurrentVideo.playVideo(); break;
+
+                                        case YT.PlayerState.PLAYING:
+                                            CurrentVideo.pauseVideo(); break;
+                                    }
+
+                                    break;
+                                }
+                                case "Next":{
+                                    CurrentMusicIndex =
+                                        CurrentMusicIndex < MusicList.length - 1
+                                            ? CurrentMusicIndex+1
+                                            : 0;
+
+                                    CurrentVideo.cueVideoById(MusicList[CurrentMusicIndex]);
+
+                                    await sleep(150);
+                                    CurrentVideo.playVideo();
+
+                                    break;
+                                }
+                                case "Last":{
+                                    if(CurrentVideo.getCurrentTime() <= 3){
+                                        CurrentMusicIndex =
+                                            0 < CurrentMusicIndex
+                                                ? CurrentMusicIndex-1
+                                                : MusicList.length - 1;
+
+                                        CurrentVideo.cueVideoById(MusicList[CurrentMusicIndex]);
+                                    }else
+                                        CurrentVideo.cueVideoById(MusicList[CurrentMusicIndex]);
+
+                                    await sleep(150);
+                                    CurrentVideo.playVideo();
+
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
@@ -2193,6 +2137,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             fingerMoving(m.clientX,m.clientY);
         });
     }
+
     function retIfParentMatch(e,id,cname,info){
         if(!info)
             info = {
@@ -2257,7 +2202,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         return Content;
     }
-
 
     //
     //
