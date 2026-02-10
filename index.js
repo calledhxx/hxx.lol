@@ -11,6 +11,42 @@ function checkIfMobile() {
     return check;
 }; //i forgot wheres it from,but... oh it's https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
 
+let waitUntilLoad = function (){
+    return new Promise(function (resolve, reject) {
+        HTTPService.addEventListener("loadend",function (){
+            resolve(HTTPService.response);
+        })
+        HTTPService.addEventListener("error", (err) => {
+            reject(err);
+        });
+    });
+}
+
+async function loadData(Path){
+    let Content = null;
+
+    try {
+        HTTPService.open("GET",Path);
+        HTTPService.send();
+        Content = JSON.parse(await waitUntilLoad());
+    } catch (err) {
+        await CreateDynamicBubbles(
+            "Notification",
+            [
+                {
+                    "Title": "好噁心的錯誤",
+                    "Content": `你...你...做了什麼？？竟然導致我的寶貝出現錯誤！... 噓！我聽到他奄奄一息的氣聲：「${err}」`
+                },
+                {
+                    "Content": "我們做個交易，要是你能將他說的那句話告訴 me@hxx.lol，這件事我們就當作沒發生過。哼！(還請多多見諒！)"
+                }
+            ]
+        );
+    }
+
+    return Content;
+}
+
 let Cube = {};
 
 const ControlButtons = [
@@ -121,6 +157,9 @@ let CubeInfo = {
 }
 
 let DynamicBubbles = [];
+let BubbleFunctions = {};
+
+let FunctionButtons = {};
 
 function setView(){
 
@@ -146,9 +185,9 @@ tag.src = "https://www.youtube.com/iframe_api";
 let firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-let CurrentVideo;
+let CurrentVideo = null;
 
-let CurrentMusicIndex = 0;
+let CurrentMusicIndex = -1;
 const MusicList = [
     "0UPDBODtxzw",
     "18Fg6T3tZfI",
@@ -158,21 +197,64 @@ const MusicList = [
 ]
 
 function onYouTubeIframeAPIReady() {
-    CurrentVideo = new YT.Player("MusicPlayer", {
-        height: "200",
-        width: "200",
-        videoId: MusicList[CurrentMusicIndex],
-        playerVars: {
-            autoplay: 0,
-            controls: 0,
-            playsinline: 1
-        }
-    });
+    CurrentMusicIndex = 0;
 }
 
 
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
+
+
+    let ModuleFunction = {
+        "Music-Next": async function (){
+            CurrentMusicIndex =
+                CurrentMusicIndex < MusicList.length - 1
+                    ? CurrentMusicIndex+1
+                    : 0;
+
+            CurrentVideo.cueVideoById(MusicList[CurrentMusicIndex]);
+
+            await sleep(150);
+            CurrentVideo.playVideo();
+        },
+        "Music-Last": async function (){
+            if(CurrentVideo.getCurrentTime() <= 3){
+                CurrentMusicIndex =
+                    0 < CurrentMusicIndex
+                        ? CurrentMusicIndex-1
+                        : MusicList.length - 1;
+
+                CurrentVideo.cueVideoById(MusicList[CurrentMusicIndex]);
+            }else
+                CurrentVideo.cueVideoById(MusicList[CurrentMusicIndex]);
+
+            await sleep(150);
+            CurrentVideo.playVideo();
+        },
+        "Music-PlayAndPause": async function (){
+            switch (CurrentVideo.getPlayerState()){
+                case YT.PlayerState.PAUSED:
+                case YT.PlayerState.ENDED:
+                case YT.PlayerState.CUED:
+                    CurrentVideo.playVideo(); break;
+
+                case YT.PlayerState.PLAYING:
+                    CurrentVideo.pauseVideo(); break;
+            }
+        },
+        "Music-GiveControl": async function (){
+            if(CurrentVideo === null){
+                let Content = await loadData("./Function/Music.JSON");
+                if(!Content) return;
+
+                setTimeout(async function (){
+                    await CreateDynamicBubbles(
+                        "Function",
+                        Content
+                    )});
+            }
+        },
+    }
 
     let xStartScreen = 0,yStartScreen = 0;
 
@@ -270,6 +352,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
         TweenUp(false);
 
         Locked = 0;
+
+        if(Content.Module)
+            ModuleFunction[Content.Module]();
+
     }
 
     function DeleteButtons() {
@@ -338,9 +424,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             newOne.appendChild(newBottomSide);
 
             newFrontSide.appendChild(frontMain);
-
-
-
 
             newRightSide.appendChild(document.createElement("div"));
             newLeftSide.appendChild(document.createElement("div"));
@@ -440,7 +523,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     DynamicBubbles[i].style.height = "160px";
                 else if(DynamicBubbles[i].classList.contains("PageBubble"))
                     DynamicBubbles[i].style.height = "330px";
-
+                else if(DynamicBubbles[i].classList.contains("FunctionBubble"))
+                    DynamicBubbles[i].style.height = "360px";
             }
         }
 
@@ -866,8 +950,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         let Base = document.getElementById("DynamicBubbleBase");
 
+        let TheDate = performance.now().toString();
         let newBubble = document.createElement("div");
         newBubble.classList.add("DynamicBubble");
+        newBubble.id = TheDate;
 
         let newBubbleTypeTitle = document.createElement("h1");
         newBubbleTypeTitle.classList.add("DynamicBubbleTypeTitle");
@@ -934,7 +1020,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }
 
-
         let newControlBarHandle = document.createElement("h2");
         newControlBarHandle.classList.add("DynamicBubbleControlBarHandle");
 
@@ -948,7 +1033,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         newControlBarMiddleContent.appendChild(newControlBarHandle);
 
-
+        let MusicPlayer = null;
 
         for(let SectionIndex = 0;SectionIndex<Content.length; SectionIndex++){
             let newSection = document.createElement("div");
@@ -976,9 +1061,16 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         newDOM = document.createElement("div");
                         let button = document.createElement("div");
                         button.classList.add("DynamicBubbleFrameButton");
+                        let buttonDate = performance.now().toString();
+                        console.log(buttonDate);
+                        button.id = buttonDate;
                         button.innerText = Content[SectionIndex][index].Text;
                         newDOM.appendChild(button);
                         newDOM.classList.add("DynamicBubbleFrameButtonCase");
+
+                        FunctionButtons[buttonDate] = Content[SectionIndex][index].Module;
+
+                        await sleep(1);
                         break;
                     }
 
@@ -1014,7 +1106,31 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             Photo.appendChild(Captain);
                         }
 
+                        break;
+                    }
 
+                    case"Music":{
+                        newDOM = document.createElement("div");
+                        newDOM.classList.add("DynamicBubbleFrameMusicPlayerCase");
+
+                        let Player =  document.createElement("div");
+                        MusicPlayer = Player;
+
+                        newDOM.appendChild(Player);
+
+                        BubbleFunctions[newBubble.id] = {
+                            "close":function(){
+                                CurrentVideo.destroy();
+                                CurrentVideo = null;
+
+                                if(CubePath[CubePath.length - 1].Tag === "Music"){
+                                    CubePath.splice(CubePath.length-1, 1);
+                                    let backTo = structuredClone(CubePath[CubePath.length-1]);
+
+                                    ShowCube(backTo,false)
+                                }
+                            }
+                        }
 
                         break;
                     }
@@ -1040,8 +1156,20 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         Base.appendChild(newBubble);
 
+        if(MusicPlayer && CurrentVideo === null)
+            CurrentVideo = new YT.Player(MusicPlayer, {
+                height: '180',
+                width: '360',
+                videoId: MusicList[CurrentMusicIndex],
+                playerVars: {
+                    autoplay: 0,
+                    controls: 0,
+                    playsinline: 1
+                }
+            });
 
 
+        await sleep(1);
         await TidyUpDynamicBubbles();
     };
 
@@ -1252,6 +1380,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let toDel = DynamicBubbles[MainIndex];
         DynamicBubbles.splice(MainIndex,1);
 
+        if(
+            toDel.classList.contains("FunctionBubble")
+            &&
+            BubbleFunctions[toDel.id]
+        )
+            BubbleFunctions[toDel.id].close();
+
+
         setTimeout(async function(){
             toDel.style.opacity = "0";
             toDel.style.height = "0";
@@ -1259,8 +1395,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             await sleep(340);
             toDel.remove();
         },120);
-
-
 
         resetPullUpInfo();
         await TidyUpDynamicBubbles();
@@ -1594,15 +1728,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
                                     Content
                                 )
 
-                                await CreateDynamicBubbles(
-                                    "Notification",
-                                    [
-                                        {
-                                            "Title":"恐龍康啷今天罷工，不給你用這東西。",
-                                            "Content":"等恐龍康啷來上班時，你就可以用這個酷咚咚了。"
-                                        }
-                                    ]
-                                )
+                                // await CreateDynamicBubbles(
+                                //     "Notification",
+                                //     [
+                                //         {
+                                //             "Title":"恐龍康啷今天罷工，不給你用這東西。",
+                                //             "Content":"等恐龍康啷來上班時，你就可以用這個酷咚咚了。"
+                                //         }
+                                //     ]
+                                // )
                             })
 
                             break;
@@ -1629,6 +1763,14 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             break;
                         }
                         case "Music":{
+                            if(CurrentMusicIndex === -1)
+                                CreateDynamicBubbles(
+                                    "Notification",[
+                                        {
+                                            "Title":"好像有點小錯誤",
+                                            "Content":"喔...輝常不好意思，網站的Youtube影片撥放器還沒載入完畢，你可以重新載入頁面看看。"
+                                        }]
+                                )
                             switch (data){
                                 case "Play/Pause":{
 
@@ -1790,6 +1932,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         if(Dragging){
             Dragging = false;
+
+            if(FinalInfo.FunctionButton)
+                if(FunctionButtons[FinalInfo.FunctionButton.id])
+                    ModuleFunction[FunctionButtons[FinalInfo.FunctionButton.id]]();
+
         }
 
         if(Viewing){
@@ -1850,8 +1997,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 mouseOnControlBars[i].getElementsByTagName("hr")[0].style.opacity = "1";
 
                 mouseOnControlBars[i].style.transition = "";
-
-
 
                 mouseOnControlBars[i].parentElement.getElementsByClassName("DynamicBubbleTypeTitle")[0].style.filter =
                     mouseOnControlBars[i].parentElement.getElementsByClassName("DynamicBubbleFrame")[0].style.filter =
@@ -2167,41 +2312,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     }
 
-    let waitUntilLoad = function (){
-        return new Promise(function (resolve, reject) {
-            HTTPService.addEventListener("loadend",function (){
-                resolve(HTTPService.response);
-            })
-            HTTPService.addEventListener("error", (err) => {
-                reject(err);
-            });
-        });
-    }
-
-    async function loadData(Path){
-        let Content = null;
-
-        try {
-            HTTPService.open("GET",Path);
-            HTTPService.send();
-            Content = JSON.parse(await waitUntilLoad());
-        } catch (err) {
-            await CreateDynamicBubbles(
-                "Notification",
-                [
-                    {
-                        "Title": "好噁心的錯誤",
-                        "Content": `你...你...做了什麼？？竟然導致我的寶貝出現錯誤！... 噓！我聽到他奄奄一息的氣聲：「${err}」`
-                    },
-                    {
-                        "Content": "我們做個交易，要是你能將他說的那句話告訴 me@hxx.lol，這件事我們就當作沒發生過。哼！(還請多多見諒！)"
-                    }
-                ]
-            );
-        }
-
-        return Content;
-    }
 
     //
     //
@@ -2340,12 +2450,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Content":"MIT License, open-source library: https://github.com/calledhxx/hxx.lol"
         }
     ])
-
-    CreateDynamicBubbles("Notification",[
-        {
-            "Title":"左上角那個Youtube embed先別理他",
-            "Content":"我還在想要怎麼設計這東西才不會「違規」"
-        }]);
 
     Locked = 0;
 });

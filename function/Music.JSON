@@ -1,0 +1,33 @@
+[
+  {
+    "Title": "唱片播放機",
+    "Content": "這裡都存著Hxx喜歡聽的音樂，你可以透過以下按鈕或是音樂盒上的按鈕去與該播放機互動。"
+  },
+  {
+    "Music": true
+  },
+  {
+    "Button": {
+      "Text": "在Youtube上開啟",
+      "Module": null
+    }
+  },
+  {
+    "Button": {
+      "Text": "播放與暫停",
+      "Module": "Music-PlayAndPause"
+    }
+  },
+  {
+    "Button": {
+      "Text": "下一首歌曲",
+      "Module": "Music-Next"
+    }
+  },
+  {
+    "Button": {
+      "Text": "上一首歌曲",
+      "Module": "Music-Last"
+    }
+  }
+]
