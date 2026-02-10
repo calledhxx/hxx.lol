@@ -2222,6 +2222,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     //
     //### START OVER HERE ###
 
+    //矯正他們的排序... 其實我不知道這樣有沒有用
     cubeSkin = "musicBox";
     cubeElement = document.getElementById(cubeSkin);
     moving(0,0);
