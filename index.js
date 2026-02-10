@@ -1390,6 +1390,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
         )
             BubbleFunctions[toDel.id].close();
 
+        for (let i = 0 ; i < toDel.getElementsByClassName("DynamicBubbleFrameButton").length; i++)
+            FunctionButtons[toDel.getElementsByClassName("DynamicBubbleFrameButton")[i].id] = null;
 
         setTimeout(async function(){
             toDel.style.opacity = "0";
