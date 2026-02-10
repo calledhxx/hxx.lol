@@ -96,6 +96,41 @@ body{
     flex-wrap: wrap;
 }
 
+.passZFront{
+    transform: rotateX(0deg) rotateY(180deg);
+    z-index: 0;
+}
+
+.passZBack{
+    transform: rotateX(0deg) rotateY(0deg) ;
+
+    z-index: 0;
+}
+
+
+.passXFront{
+    transform: rotateX(0deg) rotateY(90deg) ;
+
+    z-index: 0;
+}
+
+.passXBack{
+    transform: rotateX(0deg) rotateY(270deg);
+
+    z-index: 0;
+}
+
+.passYFront{
+    transform: rotateX(90deg) rotateY(0deg);
+
+    z-index: 0;
+}
+
+.passYBack{
+    transform: rotateX(270deg) rotateY(0deg);
+
+    z-index: 0;
+}
 
 .chunk{
     width: 50%;
@@ -117,47 +152,70 @@ body{
     background: #cfcfcf;
 }
 
-
-
-
-#passZFront{
-    transform: rotateX(0deg) rotateY(180deg);
-
-    z-index: 3;
+.invisibleChunk{
+    background: rgba(0, 0, 0, 0);
 }
 
-#passZBack{
-    transform: rotateX(0deg) rotateY(0deg) ;
+.decoration{
+    position: absolute;
 
-    z-index: 0;
+    width: 100%;
+    height: 100%;
 }
 
-
-#passXFront{
-    transform: rotateX(0deg) rotateY(90deg) ;
-
-    z-index: 0;
+.cdCarrier{
 }
 
-#passXBack{
-    transform: rotateX(0deg) rotateY(270deg);
+.cdCarrier div{
+    width: 90%;
+    height: 90%;
 
-    z-index: 0;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
 }
 
-#passYFront{
-    transform: rotateX(90deg) rotateY(0deg);
+.decoration *{
+    transition: all 320ms ease;
 
-    z-index: 0;
 }
 
-#passYBack{
-    transform: rotateX(270deg) rotateY(0deg);
-
-    z-index: 0;
+.cdCarrier circle{
+    fill: none;
+    stroke-width: 80;
+    stroke: #0e0e0e;
 }
+.column1Carrier div{
+    background: #2c2c2c;
+    width: 15px;
+    height: 40px;
 
+    position: absolute;
+    transform: translate(-50%, 0);
+    left: 50%;
+    bottom:50%;
+}
+.column2Carrier div{
+    background: #2c2c2c;
+    width: 15px;
+    height: calc(50% + 45px);
 
+    position: absolute;
+    transform: translate(-50%, 0);
+    left: 50%;
+    bottom:0;
+}
+.column3Carrier div{
+    background: #2c2c2c;
+    width: 15px;
+    height: 20px;
+
+    position: absolute;
+    transform: translate(-50%, 0);
+    left: 50%;
+    bottom:50%;
+}
 
 
 .button{
