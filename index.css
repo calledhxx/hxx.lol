@@ -898,6 +898,19 @@ body{
         text-shadow: none !important;
     }
 
+    .cdCarrier circle{
+        stroke: #0e0e0e;
+    }
+    .column1Carrier div{
+        background: #2c2c2c;
+    }
+    .column2Carrier div{
+        background: #2c2c2c;
+    }
+    .column3Carrier div{
+        background: #2c2c2c;
+    }
+
     ::-webkit-scrollbar-track {
         box-shadow: 0 0 2px rgba(35, 35, 35, 0.85);
         background-color: rgba(41, 41, 41, 0.73);
@@ -1000,6 +1013,19 @@ body{
         color: #ececec;
         background-color: rgba(50, 50, 50, 0.8);
         text-shadow: none !important;
+    }
+
+    .cdCarrier circle{
+        stroke: #252525;
+    }
+    .column1Carrier div{
+        background: #404040;
+    }
+    .column2Carrier div{
+        background: #404040;
+    }
+    .column3Carrier div{
+        background: #404040;
     }
 
     ::-webkit-scrollbar-track {
