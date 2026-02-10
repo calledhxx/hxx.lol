@@ -489,7 +489,7 @@ body{
 }
 
 .DynamicBubbleFrame{
-    width: 100%;
+    width: calc(100% - 8px);
     height: calc(100% - 20px - 10px - 20px - 30px);
 
     overflow: hidden;
