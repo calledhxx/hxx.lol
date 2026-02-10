@@ -1,6 +1,7 @@
 {
   "Tag": "Music",
   "Skin": "musicBox",
+  "Module": "Music-GiveControl",
   "Buttons": [
     {
       "Side": 4,

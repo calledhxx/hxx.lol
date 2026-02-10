@@ -573,10 +573,31 @@ body{
     position: relative;
 }
 
+.DynamicBubbleFrameMusicPlayerCase{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+
+    backdrop-filter: blur(2px) url(#liquid_glass_filter);
+    box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.13),
+            inset 0 -1px 0 rgba(255,255,255,0.06),
+            inset 6px 6px 16px rgba(255,255,255,0.03),
+            0 10px 28px rgba(0,0,0,0.35);
+
+    border-radius: 40px;
+}
+
+.DynamicBubbleFrameMusicPlayerCase *{
+    border-radius: 40px;
+
+    padding: 10px;
+}
+
 
 .NotificationBubble{
     min-height: 120px;
-
 }
 
 .PageBubble{
@@ -591,7 +612,6 @@ body{
     width: 36px;
     height: 36px;
     border-radius: 30px;
-
 
 
     backdrop-filter: blur(2px) url(#liquid_glass_filter);
@@ -810,6 +830,9 @@ body{
 
 }
 
+#MusicPlayer{
+    border-radius: 20px;
+}
 
 .SearchableBubble {
     cursor: auto;
