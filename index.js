@@ -1065,7 +1065,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         let button = document.createElement("div");
                         button.classList.add("DynamicBubbleFrameButton");
                         let buttonDate = performance.now().toString();
-                        console.log(buttonDate);
                         button.id = buttonDate;
                         button.innerText = Content[SectionIndex][index].Text;
                         newDOM.appendChild(button);
