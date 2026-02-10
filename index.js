@@ -11,11 +11,7 @@ function checkIfMobile() {
     return check;
 }; //i forgot wheres it from,but... oh it's https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
 
-const APIWays = {
-    "CREATE-MESSAGE":"localhost:443/leave-a-bubble-message"
-}
-
-let Cube = [];
+let Cube = {};
 
 const ControlButtons = [
     {
@@ -158,8 +154,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let Locked = 1;
 
-    let buttonElements = [];
+    let cubeElement = document.getElementById('cube');
+    let cubeSkin = "cube";
 
+    let buttonElements = [];
+    
     function SummonCube(CubeData,SavePath){
 
         DeleteButtons();
@@ -167,9 +166,79 @@ document.addEventListener("DOMContentLoaded",  async function () {
         if(SavePath) CubePath[CubePath.length] = structuredClone(CubeData);
         Cube = structuredClone(CubeData);
 
-
-
         CreateButtons(structuredClone(CubeData));
+    }
+
+    async function ShowCube(Content){
+        Locked = 1;
+        TweenUp(true,0.3);
+
+        CubeInfo.LastXMoved = CubeInfo.XMoved =
+            CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 -
+            ((Math.abs(CubeInfo.XMoved)%360 < 180) ? 360 : 720);
+        CubeInfo.LastYMoved = CubeInfo.YMoved =
+            CubeInfo.YMoved - CubeInfo.YMoved%360 + 10;
+
+
+        let TheCube = structuredClone(Content);
+        SummonCube(TheCube,true);
+        TweenUp(true,0.3);
+
+
+        for(let i = 0;i<buttonElements.length;i++){
+            buttonElements[i].style.opacity = "0";
+            buttonElements[i].style.fontSize = "0px";
+        }
+
+        for(let i = 0;i<Cube.Buttons.length;i++)
+            Cube.Buttons[i].depth = 0;
+        moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+        CubeSideSize = 50;
+        moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+        cubeElement.style.opacity = "0";
+
+        await sleep(185);
+
+        TweenUp(false);
+
+        cubeSkin = Content.Skin;
+        cubeElement = document.getElementById(cubeSkin);
+
+        moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+        cubeElement.style.opacity = "1";
+
+        TweenUp(true,0.3);
+
+        await sleep(185);
+
+        CubeSideSize = 270;
+        moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+        await sleep(300)
+
+        CubeSideSize = 220;
+        moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+        await sleep(300);
+
+        Cube.Buttons = structuredClone(Content.Buttons);
+
+        await sleep(100);
+        for(let i = 0;i<buttonElements.length;i++){
+            buttonElements[i].style.opacity = "1";
+            buttonElements[i].style.fontSize = "15px";
+        }
+        Cube.Buttons =  structuredClone(Content.Buttons);
+
+        moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+        await sleep(300);
+        TweenUp(false);
+
+        Locked = 0;
     }
 
     function DeleteButtons() {
@@ -186,8 +255,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         Cube.Buttons = [];
         buttonElements = [];
-
-
     }
 
     function CreateButtons(Cube){
@@ -281,7 +348,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
     }
 
-
     async function TidyUpDynamicBubbles(){
         if(PullUpInfo.MainPullUpIndex!==false)
             DynamicBubbles[PullUpInfo.MainPullUpIndex].classList.remove("SearchableBubble");
@@ -349,34 +415,27 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     }
 
-
-
     function TweenUp(db,smoothSec){
         smoothSec = smoothSec ? smoothSec : 0.1;
 
-        document.getElementById("cube").style.transition=
-            document.getElementById("passZFront").style.transition =
-                document.getElementById("passZBack").style.transition =
-                    document.getElementById("passZBack").style.transition =
-                        document.getElementById("passXFront").style.transition =
-                            document.getElementById("passXBack").style.transition =
-                                document.getElementById("passYFront").style.transition =
-                                    document.getElementById("passYBack").style.transition = db ?`all ${smoothSec}s ease` : "";
+        cubeElement.style.transition = db ?`all ${smoothSec}s ease` : "";
+
+        for (let i = 0; i < cubeElement.children.length; i++)
+            cubeElement.children[i].style.transition = cubeElement.style.transition;
 
         for (let i = 0;i<buttonElements.length; i++){
-            buttonElements[i].style.transition = document.getElementById("passZFront").style.transition;
+            buttonElements[i].style.transition = cubeElement.getElementsByClassName("passZFront")[0].style.transition;
             for (let j = 0; j<buttonElements[i].children.length; j++) {
-                buttonElements[i].children[j].style.transition = document.getElementById("passZFront").style.transition;
+                buttonElements[i].children[j].style.transition = cubeElement.getElementsByClassName("passZFront")[0].style.transition;
                 for (let  c= 0; c<buttonElements[i].children[j].children.length; c++)
-                    buttonElements[i].children[j].children[c].style.transition = document.getElementById("passZFront").style.transition;
+                    buttonElements[i].children[j].children[c].style.transition = cubeElement.getElementsByClassName("passZFront")[0].style.transition;
 
             }
         }
     }
 
-
     function moving(x, y) {
-        y = -y;//ive nothing to say....
+        y = -y;//ive nothing to say...
         let x360Moved = (x%360);
         let y360Moved = (y%360);
 
@@ -388,82 +447,151 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let YtoFXnFZDeg =
             (Math.abs(y360Moved)>180) ? 180-(Math.abs(y360Moved)-180) : Math.abs(y360Moved);
 
-        let FVisible = false,RVisible = false,LVisible = false,TVisible = false,BVisible = false,BackVisible = false;
+        let toFXDegForMB =
+            (Math.abs((x-90+45+10)%360)>180) ? 180-(Math.abs((x-90+45+10)%360)-180) : Math.abs((x-90+45+10)%360);
 
-        document.getElementById("cube").style.width =
-            document.getElementById("cube").style.height =
-                CubeSideSize+"px"
+        if(cubeSkin === "musicBox")
+            if(toFYDeg < 90){
+                if(toFXDegForMB < 90){
+                    cubeElement.getElementsByClassName("cdCarrier")[0].style.zIndex = "4";
+                    cubeElement.getElementsByClassName("column1Carrier")[0].style.zIndex = "1";
+                    cubeElement.getElementsByClassName("column2Carrier")[0].style.zIndex = "2";
+                    cubeElement.getElementsByClassName("column3Carrier")[0].style.zIndex = "3";
+                }else{
+                    cubeElement.getElementsByClassName("cdCarrier")[0].style.zIndex = "3";
+                    cubeElement.getElementsByClassName("column1Carrier")[0].style.zIndex = "4";
+                    cubeElement.getElementsByClassName("column2Carrier")[0].style.zIndex = "2";
+                    cubeElement.getElementsByClassName("column3Carrier")[0].style.zIndex = "1";
+                }
+            }else{
+                if(toFXDegForMB < 90){
+                    cubeElement.getElementsByClassName("cdCarrier")[0].style.zIndex = "1";
+                    cubeElement.getElementsByClassName("column1Carrier")[0].style.zIndex = "0";
+                    cubeElement.getElementsByClassName("column2Carrier")[0].style.zIndex = "4";
+                    cubeElement.getElementsByClassName("column3Carrier")[0].style.zIndex = "3";
+                }else{
+                    cubeElement.getElementsByClassName("cdCarrier")[0].style.zIndex = "1";
+                    cubeElement.getElementsByClassName("column1Carrier")[0].style.zIndex = "4";
+                    cubeElement.getElementsByClassName("column2Carrier")[0].style.zIndex = "3";
+                    cubeElement.getElementsByClassName("column3Carrier")[0].style.zIndex = "2";
+                }
+            }
+
+        let FVisible = false,RVisible = false,LVisible = false,TVisible = false,BVisible = false,BackVisible = false;
 
         for(let i = 0;i<document.getElementsByClassName("pass").length;i++)
             document.getElementsByClassName("pass")[i].style.width =
                 document.getElementsByClassName("pass")[i].style.height =
                     CubeSideSize+"px"
 
-        document.getElementById("passZFront").style.transform =
+        cubeElement.style.width =
+            cubeElement.style.height =
+                CubeSideSize+"px"
+
+        cubeElement.getElementsByClassName("passZFront")[0].style.transform =
             `rotateX(${0+y}deg) rotateY(${180+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
 
 
-        document.getElementById("passZBack").style.transform =
+        cubeElement.getElementsByClassName("passZBack")[0].style.transform =
             `rotateX(${0+y}deg) rotateY(${0+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
 
 
         if(
             YtoFXnFZDeg < 90 ? toFZDeg < 90 : toFZDeg > 90
         ){
-            document.getElementById("passZFront").style.opacity = "1";
-            document.getElementById("passZBack").style.opacity = "0";
+            cubeElement.getElementsByClassName("passZFront")[0].style.opacity = "1";
+            cubeElement.getElementsByClassName("passZBack")[0].style.opacity = "0";
             FVisible = true;
             BackVisible = false;
         }else {
-            document.getElementById("passZFront").style.opacity = "0";
-            document.getElementById("passZBack").style.opacity = "1";
+            cubeElement.getElementsByClassName("passZFront")[0].style.opacity = "0";
+            cubeElement.getElementsByClassName("passZBack")[0].style.opacity = "1";
             FVisible = false;
             BackVisible = true;
         }
 
 
-        document.getElementById("passXFront").style.transform =
+        cubeElement.getElementsByClassName("passXFront")[0].style.transform =
             `rotateX(${0+y}deg) rotateY(${90+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
 
 
-        document.getElementById("passXBack").style.transform =
+        cubeElement.getElementsByClassName("passXBack")[0].style.transform =
             `rotateX(${0+y}deg) rotateY(${270+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
+
+        if(cubeSkin === "musicBox"){
+            cubeElement.getElementsByClassName("column1Carrier")[0].style.transform =
+                `rotateX(${0+y}deg) rotateY(${315+10+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
+
+            cubeElement.getElementsByClassName("column3Carrier")[0].style.transform =
+                `rotateX(${0+y}deg) rotateY(${315+10+x}deg) translateX(0) translateY(-20px) translateZ(45px)`
+        }
 
         if(
             YtoFXnFZDeg < 90 ? toFXDeg < 90 : toFXDeg > 90
         ){
-            document.getElementById("passXFront").style.opacity = "1";
-            document.getElementById("passXBack").style.opacity = "0";
+            cubeElement.getElementsByClassName("passXFront")[0].style.opacity = "1";
+            cubeElement.getElementsByClassName("passXBack")[0].style.opacity = "0";
             LVisible = true;
             RVisible = false;
         }else {
-            document.getElementById("passXFront").style.opacity = "0";
-            document.getElementById("passXBack").style.opacity = "1";
+            cubeElement.getElementsByClassName("passXFront")[0].style.opacity = "0";
+            cubeElement.getElementsByClassName("passXBack")[0].style.opacity = "1";
             LVisible = false;
             RVisible = true;
         }
 
-
-        document.getElementById("passYFront").style.transform =
+        cubeElement.getElementsByClassName("passYFront")[0].style.transform =
             `rotateX(${90+y}deg) rotateZ(${0-x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px`
 
+        if(cubeSkin === "cube"){
+            cubeElement.getElementsByClassName("passYBack")[0].style.transform =
+                `rotateX(${270+y}deg) rotateZ(${0+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
+        }else if(cubeSkin === "musicBox"){
+            cubeElement.getElementsByClassName("passYBack")[0].style.transform =
+                `rotateX(${270+y}deg) rotateZ(${0+x}deg) translateX(0) translateY(0) translateZ(0)`
 
+            cubeElement.getElementsByClassName("cdCarrier")[0].style.transform =
+                `rotateX(${270+y}deg) rotateZ(${0+x}deg) translateX(0) translateY(0) translateZ(-20px)`
 
-        document.getElementById("passYBack").style.transform =
-            `rotateX(${270+y}deg) rotateZ(${0+x}deg) translateX(0) translateY(0) translateZ(-${(CubeSideSize/2)}px)`
+            cubeElement.getElementsByClassName("column2Carrier")[0].style.transform =
+                `rotateX(${270+y}deg) rotateZ(${135+180+10+x}deg) translateX(0) translateY(0) translateZ(-40px)`
+        }
+
 
         if(
             toFYDeg < 90
         ){
-            document.getElementById("passYFront").style.opacity = "1";
-            document.getElementById("passYBack").style.opacity = "0";
+            cubeElement.getElementsByClassName("passYFront")[0].style.opacity = "1";
+            cubeElement.getElementsByClassName("passYBack")[0].style.opacity = "0";
+
             BVisible = true;
             TVisible = false;
         }else {
-            document.getElementById("passYFront").style.opacity = "0";
-            document.getElementById("passYBack").style.opacity = "1";
+            cubeElement.getElementsByClassName("passYFront")[0].style.opacity = "0";
+            cubeElement.getElementsByClassName("passYBack")[0].style.opacity = "1";
+
             BVisible = false;
             TVisible = true;
+        }
+
+        let iai = (a)=>a?Number(a):0;
+
+        if(toFYDeg < 90){
+            cubeElement.getElementsByClassName("passZFront")[0].style.zIndex =
+                cubeElement.getElementsByClassName("passZBack")[0].style.zIndex =
+                    cubeElement.getElementsByClassName("passYFront")[0].style.zIndex =
+                        cubeElement.getElementsByClassName("passYBack")[0].style.zIndex =
+                            cubeElement.getElementsByClassName("passXFront")[0].style.zIndex =
+                                cubeElement.getElementsByClassName("passXBack")[0].style.zIndex =
+                                    "5";
+        }else{
+            cubeElement.getElementsByClassName("passZFront")[0].style.zIndex =
+                cubeElement.getElementsByClassName("passZBack")[0].style.zIndex =
+                    cubeElement.getElementsByClassName("passYFront")[0].style.zIndex =
+                        cubeElement.getElementsByClassName("passYBack")[0].style.zIndex =
+                            cubeElement.getElementsByClassName("passXFront")[0].style.zIndex =
+                                cubeElement.getElementsByClassName("passXBack")[0].style.zIndex =
+                                    "0";
         }
 
 
@@ -556,7 +684,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
 
 
-
             x += addDegX;
             y += addDegY;
 
@@ -565,7 +692,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
 
             toFZDeg = (Math.abs(x360Moved)>180) ? 180-(Math.abs(x360Moved)-180) : Math.abs(x360Moved);
-
 
             toFXDeg =
                 (Math.abs((x-90)%360)>180) ? 180-(Math.abs((x-90)%360)-180) : Math.abs((x-90)%360);
@@ -608,7 +734,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             buttonElements[i].getElementsByClassName("buttonTopSide")[0].children[0].style.height =
                 buttonElements[i].getElementsByClassName("buttonBottomSide")[0].children[0].style.height =
                     buttonElements[i].getElementsByClassName("buttonLeftSide")[0].children[0].style.width =
-                        buttonElements[i].getElementsByClassName("buttonRightSide")[0].children[0].style.width = String(Cube.Buttons[i].depth)+"px";
+                        buttonElements[i].getElementsByClassName("buttonRightSide")[0].children[0].style.width =
+                            String(Cube.Buttons[i].depth)+"px";
 
 
             buttonElements[i].style.width =
@@ -690,8 +817,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 buttonElements[i].getElementsByClassName("buttonBottomSide")[0].style.opacity = "0";
                 buttonElements[i].getElementsByClassName("buttonTopSide")[0].style.opacity = "1";
             }
-
-
 
             x = orgx;
             y = orgy;
@@ -888,7 +1013,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         await TidyUpDynamicBubbles();
     };
-
 
     function getHeightOfDynamicBubble(Bubble){
         let result = 0;
@@ -1111,7 +1235,140 @@ document.addEventListener("DOMContentLoaded",  async function () {
         await TidyUpDynamicBubbles();
         await PullUpDynamicBubbles(DynamicBubbles.length-1);
     }
+    
+    async function SwitchCubeSkin(skin) {
+        Locked = 1;
+        TweenUp(true,0.3);
 
+        for(let i = 0;i<buttonElements.length;i++){
+            buttonElements[i].style.opacity = "0";
+            buttonElements[i].style.fontSize = "0px";
+        }
+
+        for(let i = 0;i<Cube.Buttons.length;i++)
+            Cube.Buttons[i].depth = 0;
+        moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+        await sleep(110)
+        DeleteButtons();
+
+        switch (cubeSkin){
+            case "cube":{
+                TweenUp(true,0.3);
+                cubeElement.style.opacity = "0";
+
+                CubeSideSize = 50;
+
+                CubeInfo.LastXMoved = CubeInfo.XMoved =
+                    CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 -
+                    ((Math.abs(CubeInfo.XMoved)%360 < 180) ? 360 : 720);
+                CubeInfo.LastYMoved = CubeInfo.YMoved =
+                    CubeInfo.YMoved - CubeInfo.YMoved%360 + 10;
+
+
+                moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+
+                cubeElement = document.getElementById("cube");
+
+                break;
+            }
+            case "musicBox":{
+                TweenUp(true,0.3);
+                cubeElement.style.opacity = "0";
+
+                cubeElement = document.getElementById("musicBox");
+
+                cubeElement.getElementsByClassName("cdCarrier")[0].getElementsByTagName("circle")[0].style.opacity
+                    cubeElement.getElementsByClassName("column1Carrier")[0].getElementsByTagName("div")[0].style.opacity =
+                        cubeElement.getElementsByClassName("column2Carrier")[0].getElementsByTagName("div")[0].style.opacity =
+                            cubeElement.getElementsByClassName("column3Carrier")[0].getElementsByTagName("div")[0].style.opacity =
+                                "0";
+                break;
+            }
+            default: break;
+        }
+
+        await sleep(600);
+        cubeSkin = skin;
+
+        switch (skin){
+            case "cube":{
+                cubeElement = document.getElementById("cube");
+                TweenUp(false);
+                CubeSideSize = 50;
+                moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                await sleep(150)
+                TweenUp(true,0.3);
+                CubeSideSize = 270;
+                cubeElement.style.opacity = "1";
+
+                moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                await sleep(320);
+                TweenUp(true,0.2);
+                CubeSideSize = 220;
+                moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                await sleep(210);
+
+                TweenUp(false);
+
+                break;
+            }
+            case "musicBox":{
+                cubeElement = document.getElementById("musicBox");
+                TweenUp(false);
+
+                CubeSideSize = 220;
+
+                CubeInfo.LastXMoved = CubeInfo.XMoved = -15;
+                CubeInfo.LastYMoved = CubeInfo.YMoved = 10;
+
+                moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                await sleep(150)
+
+                TweenUp(true,0.3);
+
+                moving(CubeInfo.XMoved,CubeInfo.YMoved);
+                cubeElement.style.opacity = "1";
+                await sleep(100);
+
+                TweenUp(false);
+
+                cubeElement.getElementsByClassName("cdCarrier")[0].getElementsByTagName("circle")[0].style.opacity
+                    cubeElement.getElementsByClassName("column1Carrier")[0].getElementsByTagName("div")[0].style.opacity =
+                        cubeElement.getElementsByClassName("column2Carrier")[0].getElementsByTagName("div")[0].style.opacity =
+                            cubeElement.getElementsByClassName("column3Carrier")[0].getElementsByTagName("div")[0].style.opacity =
+                                "1";
+                break;
+            }
+            default: break;
+        }
+
+        CreateButtons(Cube = structuredClone(CubePath[CubePath.length - 1]));
+        TweenUp(true,0.3);
+
+        for(let i = 0;i<buttonElements.length;i++){
+            buttonElements[i].style.opacity = "0";
+            buttonElements[i].style.fontSize = "0px";
+        }
+
+        for(let i = 0;i<Cube.Buttons.length;i++)
+            Cube.Buttons[i].depth = 0;
+        moving(CubeInfo.XMoved,CubeInfo.YMoved);
+
+        await sleep(360);
+
+        for(let i = 0;i<buttonElements.length;i++){
+            buttonElements[i].style.opacity = "1";
+            buttonElements[i].style.fontSize = "15px";
+        }
+
+        for(let i = 0;i<Cube.Buttons.length;i++)
+            Cube.Buttons[i].depth = 24;
+        moving(CubeInfo.XMoved,CubeInfo.YMoved);
+        await sleep(300);
+        Locked = 0;
+    }
 
     let startAt = 0;
 
@@ -1311,7 +1568,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let LastXOnOnMoving = 0,LastYOnOnMoving = 0;
     let XVertexRecordedAtTime,YVertexRecordedAtTime;
 
-    let SaftyLocker = 0;
+    let SafetyLocker = 0;
 
     let endMove = async function (x,y){
         if(Locked) return;
@@ -1339,8 +1596,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
             let YVStoped = false;
 
 
-            if(!SaftyLocker){
-                SaftyLocker = 1;
+            if(!SafetyLocker){
+                SafetyLocker = 1;
 
                 while (1){
                     ms10Past++;
@@ -1378,7 +1635,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     await sleep(2);
                 }
 
-                SaftyLocker = 0;
+                SafetyLocker = 0;
             }
 
 
@@ -1457,133 +1714,17 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             const Content = await loadData(data);
                             if(!Content) break;
 
-                            setTimeout(async function (){
-                                Locked = 1;
-                                TweenUp(true,0.3);
-
-                                CubeInfo.LastXMoved = CubeInfo.XMoved =
-                                    CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 -
-                                    ((Math.abs(CubeInfo.XMoved)%360 < 180) ? 360 : 720);
-                                CubeInfo.LastYMoved = CubeInfo.YMoved =
-                                    CubeInfo.YMoved - CubeInfo.YMoved%360 + 10;
-
-
-                                let TheCube = structuredClone(Content);
-                                SummonCube(TheCube,true);
-                                TweenUp(true,0.3);
-
-
-                                for(let i = 0;i<buttonElements.length;i++){
-                                    buttonElements[i].style.opacity = "0";
-                                    FinalElement.style.fontSize = "0px";
-                                }
-
-                                for(let i = 0;i<Cube.Buttons.length;i++)
-                                    Cube.Buttons[i].depth = 0;
-                                moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-
-                                CubeSideSize = 50;
-                                moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-                                await sleep(370);
-
-                                CubeSideSize = 270;
-                                moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-                                await sleep(300)
-
-                                CubeSideSize = 220;
-                                moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-                                await sleep(300);
-
-                                Cube.Buttons = structuredClone(Content.Buttons);
-
-                                await sleep(100);
-                                for(let i = 0;i<buttonElements.length;i++){
-                                    buttonElements[i].style.opacity = "1";
-                                    FinalElement.style.fontSize = "15px";
-                                }
-                                Cube.Buttons =  structuredClone(Content.Buttons);
-
-                                moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-                                await sleep(300);
-                                TweenUp(false);
-
-                                Locked = 0;
-                            })
-
+                            ShowCube(Content)
 
                             break;
                         }
                         case "Action":{
                             switch (data){
                                 case "Return":{
-                                    setTimeout(async function () {
-                                        CubePath.splice(CubePath.length-1, 1);
-                                        let backTo = structuredClone(CubePath[CubePath.length-1]);
+                                    CubePath.splice(CubePath.length-1, 1);
+                                    let backTo = structuredClone(CubePath[CubePath.length-1]);
 
-                                        Locked = 1;
-                                        TweenUp(true,0.3);
-
-                                        CubeInfo.LastXMoved = CubeInfo.XMoved =
-                                            CubeInfo.XMoved - CubeInfo.XMoved%360 - 15 -
-                                            ((Math.abs(CubeInfo.XMoved)%360 < 180) ? 360 : 720);
-
-                                        CubeInfo.LastYMoved = CubeInfo.YMoved =
-                                            CubeInfo.YMoved - CubeInfo.YMoved%360 + 10;
-
-
-                                        let TheCube = structuredClone(backTo);
-                                        SummonCube(TheCube,false);
-                                        TweenUp(true,0.3);
-
-
-                                        for(let i = 0;i<buttonElements.length;i++){
-                                            buttonElements[i].style.opacity = "0";
-                                            FinalElement.style.fontSize = "0px";
-                                        }
-
-                                        for(let i = 0;i<Cube.Buttons.length;i++)
-                                            Cube.Buttons[i].depth = 0;
-                                        moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-
-                                        CubeSideSize = 50;
-                                        moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-                                        await sleep(370);
-
-                                        CubeSideSize = 270;
-                                        moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-                                        await sleep(300)
-
-                                        CubeSideSize = 220;
-                                        moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-                                        await sleep(300);
-
-                                        Cube.Buttons = structuredClone(backTo.Buttons);
-
-                                        await sleep(100);
-                                        for(let i = 0;i<buttonElements.length;i++){
-                                            buttonElements[i].style.opacity = "1";
-                                            FinalElement.style.fontSize = "15px";
-                                        }
-                                        Cube.Buttons =  structuredClone(backTo.Buttons);
-
-                                        moving(CubeInfo.XMoved,CubeInfo.YMoved);
-
-                                        await sleep(300);
-                                        TweenUp(false);
-
-                                        Locked = 0;
-                                    })
-
-
+                                    ShowCube(backTo)
                                     break;
                                 }
                             }
@@ -1827,7 +1968,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
     }
 
-
     let ControlBarPullUpAtX = 0;
     let ControlBarPullUpAtY = 0;
     let AlreadyInRecording = 0;
@@ -2050,8 +2190,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             startMove(m.clientX,m.clientY);
         });
         document.addEventListener("mousemove", function (m) {
-
-
             fingerMoving(m.clientX,m.clientY);
         });
     }
@@ -2140,11 +2278,23 @@ document.addEventListener("DOMContentLoaded",  async function () {
     //
     //### START OVER HERE ###
 
+    cubeSkin = "musicBox";
+    cubeElement = document.getElementById(cubeSkin);
+    moving(0,0);
+
+    cubeSkin = "cube";
+    cubeElement = document.getElementById(cubeSkin);
+    moving(0,0);
 
     TweenUp(true,.14);
     moving(0,0);
 
     let defaultCube = await loadData("./cube/Default.JSON");
+
+    cubeSkin = defaultCube.Skin;
+    cubeElement = document.getElementById(cubeSkin);
+    cubeElement.style.opacity = "1";
+    moving(0,0);
 
     if(defaultCube)
     {
@@ -2189,8 +2339,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             buttonElements[i].style.opacity = "1";
         }
     }
-
-
 
     moving(CubeInfo.XMoved, CubeInfo.YMoved);
 
