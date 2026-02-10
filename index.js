@@ -254,6 +254,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     )});
             }
         },
+        "Music-JumpToYoutube": async function (){
+            window.open(CurrentVideo.getVideoUrl(), "_blank");
+        }
     }
 
     let xStartScreen = 0,yStartScreen = 0;
