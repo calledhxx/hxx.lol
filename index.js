@@ -1393,7 +1393,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         let ElementsWitchAtPoint = document.elementsFromPoint(x,y);
 
         for (let i = 0; i < ElementsWitchAtPoint.length; i++) {
-            if(retIfParentMatch(ElementsWitchAtPoint[i],"cube",0).Parent) break;
+            if(retIfParentMatch(ElementsWitchAtPoint[i],cubeSkin,0).Parent) break;
 
             let CheckButton = retIfParentMatch(ElementsWitchAtPoint[i],0,"button");
             if(CheckButton.SearchTimes === 1) continue;
