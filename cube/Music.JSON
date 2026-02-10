@@ -1,0 +1,18 @@
+{
+  "Tag": "Music",
+  "Skin": "musicBox",
+  "Buttons": [
+    {
+      "Side": 4,
+      "Chunk": 3,
+      "Color": "#d95b90",
+      "depth": 24,
+      "Icon": null,
+      "Name": "返回",
+      "Tag": "Return",
+      "Event": {
+        "Action": "Return"
+      }
+    }
+  ]
+}

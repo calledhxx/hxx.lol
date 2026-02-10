@@ -76,6 +76,18 @@
       }
     },
     {
+      "Side": 5,
+      "Chunk": 1,
+      "Color":"#bc8cff",
+      "depth":24,
+      "Icon": null,
+      "Name":"音樂",
+      "Tag":"Music",
+      "Event":{
+        "Cube":"./cube/Music.JSON"
+      }
+    },
+    {
       "Side": 2,
       "Chunk": 1,
       "Color":"#ebad3b",
