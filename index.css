@@ -518,7 +518,7 @@ body{
 .DynamicBubbleFrameSection{
     padding-left: 20px;
     padding-right: 20px;
-    width: calc(100% - 20px - 20px);
+    width: calc(100% - 20px - 20px + 8px);
     height: auto;
 
 
@@ -594,7 +594,6 @@ body{
 
     padding: 10px;
 }
-
 
 .NotificationBubble{
     min-height: 120px;
@@ -836,6 +835,14 @@ body{
 
 .SearchableBubble {
     cursor: auto;
+}
+
+.DynamicBubbleFrameMusicPlayerGlass{
+    width:  100%;
+    height: 100%;
+    position: absolute;
+
+    z-index: 3;
 }
 
 
