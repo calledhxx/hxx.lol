@@ -1115,9 +1115,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         newDOM = document.createElement("div");
                         newDOM.classList.add("DynamicBubbleFrameMusicPlayerCase");
 
+                        let Glass =  document.createElement("div");
+                        Glass.classList.add("DynamicBubbleFrameMusicPlayerGlass");
+
                         let Player =  document.createElement("div");
                         MusicPlayer = Player;
 
+                        newDOM.appendChild(Glass);
                         newDOM.appendChild(Player);
 
                         BubbleFunctions[newBubble.id] = {
@@ -1766,60 +1770,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                             break;
                         }
-                        case "Music":{
-                            if(CurrentMusicIndex === -1)
-                                CreateDynamicBubbles(
-                                    "Notification",[
-                                        {
-                                            "Title":"好像有點小錯誤",
-                                            "Content":"喔...輝常不好意思，網站的Youtube影片撥放器還沒載入完畢，你可以重新載入頁面看看。"
-                                        }]
-                                )
-                            switch (data){
-                                case "Play/Pause":{
+                        case "Module":{
+                            ModuleFunction[data]();
 
-                                    switch (CurrentVideo.getPlayerState()){
-                                        case YT.PlayerState.PAUSED:
-                                        case YT.PlayerState.ENDED:
-                                        case YT.PlayerState.CUED:
-                                            CurrentVideo.playVideo(); break;
-
-                                        case YT.PlayerState.PLAYING:
-                                            CurrentVideo.pauseVideo(); break;
-                                    }
-
-                                    break;
-                                }
-                                case "Next":{
-                                    CurrentMusicIndex =
-                                        CurrentMusicIndex < MusicList.length - 1
-                                            ? CurrentMusicIndex+1
-                                            : 0;
-
-                                    CurrentVideo.cueVideoById(MusicList[CurrentMusicIndex]);
-
-                                    await sleep(150);
-                                    CurrentVideo.playVideo();
-
-                                    break;
-                                }
-                                case "Last":{
-                                    if(CurrentVideo.getCurrentTime() <= 3){
-                                        CurrentMusicIndex =
-                                            0 < CurrentMusicIndex
-                                                ? CurrentMusicIndex-1
-                                                : MusicList.length - 1;
-
-                                        CurrentVideo.cueVideoById(MusicList[CurrentMusicIndex]);
-                                    }else
-                                        CurrentVideo.cueVideoById(MusicList[CurrentMusicIndex]);
-
-                                    await sleep(150);
-                                    CurrentVideo.playVideo();
-
-                                    break;
-                                }
-                            }
+                            break;
                         }
                     }
                 }
@@ -1937,7 +1891,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         if(Dragging){
             Dragging = false;
 
-            if(FinalInfo.FunctionButton)
+            if(FinalInfo.FunctionButton && FinalInfo.FunctionButton === StartAtElement)
                 if(FunctionButtons[FinalInfo.FunctionButton.id])
                     ModuleFunction[FunctionButtons[FinalInfo.FunctionButton.id]]();
 

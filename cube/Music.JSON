@@ -25,7 +25,7 @@
       "Name": "播放與暫停",
       "Tag": "PP",
       "Event": {
-        "Music": "Play/Pause"
+        "Module": "Music-PlayAndPause"
       }
     },
     {
@@ -37,7 +37,8 @@
       "Name": "下一首",
       "Tag": "Next",
       "Event": {
-        "Music": "Next"
+        "Module": "Music-Next"
+
       }
     },
     {
@@ -49,7 +50,8 @@
       "Name": "上一首",
       "Tag": "Last",
       "Event": {
-        "Music": "Last"
+        "Module": "Music-Last"
+
       }
     }
   ]
