@@ -189,11 +189,10 @@ let CurrentVideo = null;
 
 let CurrentMusicIndex = -1;
 const MusicList = [
-    "0UPDBODtxzw",
-    "18Fg6T3tZfI",
-    "6QYcd7RggNU",
-    "Uefu_EU-dW4",
-    "BclvXp0t-G0",
+    "94CegRuTZNA",
+    "yCOL1e2DVkA",
+    "i0mnf58E7oo",
+    "DQXPnwxnbbo",
 ]
 
 function onYouTubeIframeAPIReady() {
@@ -1113,16 +1112,21 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                     case"Music":{
                         newDOM = document.createElement("div");
-                        newDOM.classList.add("DynamicBubbleFrameMusicPlayerCase");
+                        newDOM.classList.add("DynamicBubbleFrameMusicPlayerMedia");
 
                         let Glass =  document.createElement("div");
                         Glass.classList.add("DynamicBubbleFrameMusicPlayerGlass");
 
+                        let PlayerCase =  document.createElement("div");
+                        PlayerCase.classList.add("DynamicBubbleFrameMusicPlayerCase");
+
                         let Player =  document.createElement("div");
+                        Player.classList.add("DynamicBubbleFrameMusicPlayer");
                         MusicPlayer = Player;
 
                         newDOM.appendChild(Glass);
-                        newDOM.appendChild(Player);
+                        newDOM.appendChild(PlayerCase);
+                        PlayerCase.appendChild(Player);
 
                         BubbleFunctions[newBubble.id] = {
                             "close":function(){
@@ -1164,8 +1168,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         if(MusicPlayer && CurrentVideo === null)
             CurrentVideo = new YT.Player(MusicPlayer, {
-                height: '180',
-                width: '360',
+                height: '570',
+                width: '570',
                 videoId: MusicList[CurrentMusicIndex],
                 playerVars: {
                     autoplay: 0,
