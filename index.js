@@ -433,7 +433,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             newLeftSide.children[0].textContent = Cube.Buttons[i].Name;
             newRightSide.children[0].textContent = Cube.Buttons[i].Tag;
 
-            newOne.style.color = "#"+hex(Cube.Buttons[i].Color,"121212",1);
+            newOne.style.color = "#"+hex(Cube.Buttons[i].Color,"1A1A1A",1);
 
             let pads = [
                 newRightSide.children[0],
