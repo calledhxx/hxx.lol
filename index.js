@@ -59,10 +59,6 @@ const ControlButtons = [
         "IMPORTANT?":false
     },
     {
-        "Name":"留言泡泡",
-        "IMPORTANT?":false
-    },
-    {
         "Name":"消滅泡泡",
         "IMPORTANT?":true
     },
@@ -198,7 +194,6 @@ const MusicList = [
 function onYouTubeIframeAPIReady() {
     CurrentMusicIndex = 0;
 }
-
 
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
@@ -1177,7 +1172,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     playsinline: 1
                 }
             });
-
 
         await sleep(1);
         await TidyUpDynamicBubbles();
