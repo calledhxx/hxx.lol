@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let Pulling = 0;
     let Controlling = 0;
     let Dragging = 0;
-    let Viewing = 0;
+    let Viewing = 0; //當初是吃錯藥還是怎樣？
 
     let Locked = 1;
 
@@ -1577,6 +1577,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             const res = retIfParentMatch(FinalInfo.FunctionButton,0,"DynamicBubble",0);
             res.Parent.classList.remove("SearchableBubble");
+            res.Parent.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "hidden";
 
             Dragging = true;
         }else if (FinalInfo.Photos && !Viewing && PullUpInfo.MainPullUpIndex !== false){
@@ -1929,6 +1930,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                 const res = retIfParentMatch(mouseOnFunctionButtons[i],0,"DynamicBubble",0);
                 res.Parent.classList.add("SearchableBubble");
+                res.Parent.getElementsByClassName("DynamicBubbleFrame")[0].style.overflowY = "auto";
 
                 mouseOnFunctionButtons.pop();
             },0)
