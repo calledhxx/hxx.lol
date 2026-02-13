@@ -183,17 +183,6 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 let CurrentVideo = null;
 
-let CurrentMusicIndex = -1;
-const MusicList = [
-    "94CegRuTZNA",
-    "yCOL1e2DVkA",
-    "i0mnf58E7oo",
-    "DQXPnwxnbbo",
-]
-
-function onYouTubeIframeAPIReady() {
-    CurrentMusicIndex = 0;
-}
 
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
@@ -201,31 +190,18 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
     let ModuleFunction = {
         "Music-Next": async function (){
-            CurrentMusicIndex =
-                CurrentMusicIndex < MusicList.length - 1
-                    ? CurrentMusicIndex+1
-                    : 0;
+            if(!CurrentVideo) return;
 
-            CurrentVideo.cueVideoById(MusicList[CurrentMusicIndex]);
-
-            await sleep(150);
-            CurrentVideo.playVideo();
+            CurrentVideo.nextVideo();
         },
         "Music-Last": async function (){
-            if(CurrentVideo.getCurrentTime() <= 3){
-                CurrentMusicIndex =
-                    0 < CurrentMusicIndex
-                        ? CurrentMusicIndex-1
-                        : MusicList.length - 1;
+            if(!CurrentVideo) return;
 
-                CurrentVideo.cueVideoById(MusicList[CurrentMusicIndex]);
-            }else
-                CurrentVideo.cueVideoById(MusicList[CurrentMusicIndex]);
-
-            await sleep(150);
-            CurrentVideo.playVideo();
+            CurrentVideo.previousVideo();
         },
         "Music-PlayAndPause": async function (){
+            if(!CurrentVideo) return;
+
             switch (CurrentVideo.getPlayerState()){
                 case YT.PlayerState.PAUSED:
                 case YT.PlayerState.ENDED:
@@ -235,6 +211,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 case YT.PlayerState.PLAYING:
                     CurrentVideo.pauseVideo(); break;
             }
+        },
+        "Music-JumpToYoutube": async function (){
+            if(!CurrentVideo) return;
+
+            window.open(CurrentVideo.getVideoUrl(), "_blank");
         },
         "Music-GiveControl": async function (){
             if(CurrentVideo === null){
@@ -248,9 +229,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     )});
             }
         },
-        "Music-JumpToYoutube": async function (){
-            window.open(CurrentVideo.getVideoUrl(), "_blank");
-        }
     }
 
     let xStartScreen = 0,yStartScreen = 0;
@@ -1165,12 +1143,12 @@ document.addEventListener("DOMContentLoaded",  async function () {
             CurrentVideo = new YT.Player(MusicPlayer, {
                 height: '570',
                 width: '570',
-                videoId: MusicList[CurrentMusicIndex],
                 playerVars: {
-                    autoplay: 0,
+                    listType: 'playlist',
+                    list: 'PL3PTi1UZlseqiFJFtYMe2KrYlj36dXffn',
                     controls: 0,
                     playsinline: 1
-                }
+                },
             });
 
         await sleep(1);
@@ -2269,7 +2247,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
 
     }
-
 
     //
     //
