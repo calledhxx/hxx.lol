@@ -187,7 +187,6 @@ let CurrentVideo = null;
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
 
-
     let ModuleFunction = {
         "Music-Next": async function (){
             if(!CurrentVideo) return;
@@ -1102,7 +1101,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         PlayerCase.appendChild(Player);
 
                         BubbleFunctions[newBubble.id] = {
-                            "close":function(){
+                            "clear":function(){
                                 CurrentVideo.destroy();
                                 CurrentVideo = null;
 
@@ -1366,8 +1365,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
             toDel.classList.contains("FunctionBubble")
             &&
             BubbleFunctions[toDel.id]
+            &&
+            BubbleFunctions[toDel.id].clear
         )
-            BubbleFunctions[toDel.id].close();
+            BubbleFunctions[toDel.id].clear();
 
         for (let i = 0 ; i < toDel.getElementsByClassName("DynamicBubbleFrameButton").length; i++)
             FunctionButtons[toDel.getElementsByClassName("DynamicBubbleFrameButton")[i].id] = null;
@@ -1595,7 +1596,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
             Holding = false;
 
             let sec = Date.now() - XVertexRecordedAtTime;
-            sec = sec ? sec : 1;
+            sec = sec ? sec : 2;
 
             let XV = 500 * (x - XVertex)/(sec);
             let YV = 500 * (y - YVertex)/(sec);

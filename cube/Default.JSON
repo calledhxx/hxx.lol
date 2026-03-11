@@ -7,7 +7,7 @@
       "Chunk": 1,
       "Color":"#d13333",
       "depth":24,
-      "Icon": "./img/IMG_0537.GIF",
+      "Icon": "./img/a_2bbeb5a15c8a28a989616f0637233a23.GIF",
       "Name":"黃太妃",
       "Tag":"Hxx",
       "Event":{
@@ -24,19 +24,6 @@
       "Tag":"Friends",
       "Event":{
         "Cube":"./cube/Friendship.JSON"
-      }
-    },
-    {
-      "Side": 2,
-      "Chunk": 4,
-      "Color":"#9654e8",
-      "depth":24,
-      "Icon": null,
-      "Name":"影集心得",
-      "Tag":"Thoughts",
-      "Event":{
-        "Cube":"./cube/Thoughts.JSON",
-        "Page": "./page/ThoughtsIntro.JSON"
       }
     },
     {
@@ -109,17 +96,6 @@
       "Tag":"Style",
       "Event":{
         "Page":"./page/Style.JSON"
-      }
-    },
-    {
-      "Side": 4,
-      "Chunk": 2,
-      "Color":"#de3e68",
-      "depth":24,
-      "Icon": null,
-      "Name":"照片集",
-      "Tag":"Photos",
-      "Event":{
       }
     }
   ]
