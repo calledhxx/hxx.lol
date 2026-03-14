@@ -154,7 +154,6 @@ let CubeInfo = {
 
 let DynamicBubbles = [];
 let BubbleFunctions = {};
-
 let FunctionButtons = {};
 
 function setView(){
@@ -1367,11 +1366,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
             BubbleFunctions[toDel.id]
             &&
             BubbleFunctions[toDel.id].clear
-        )
+        ){
             BubbleFunctions[toDel.id].clear();
+            delete BubbleFunctions[toDel.id];
+        }
 
         for (let i = 0 ; i < toDel.getElementsByClassName("DynamicBubbleFrameButton").length; i++)
-            FunctionButtons[toDel.getElementsByClassName("DynamicBubbleFrameButton")[i].id] = null;
+            delete FunctionButtons[toDel.getElementsByClassName("DynamicBubbleFrameButton")[i].id];
 
         setTimeout(async function(){
             toDel.style.opacity = "0";
@@ -1980,7 +1981,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             await sleep(100);
 
-            mouseOnButtons[i] = null;
+            delete mouseOnButtons[i];
         }
 
 
