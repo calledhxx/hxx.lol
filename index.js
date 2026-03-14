@@ -1051,6 +1051,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         newDOM = document.createElement("div");
                         newDOM.classList.add("DynamicBubbleFramePhotosCaseCarrier");
 
+
                         for (let PhotoIndex in Content[SectionIndex][index]){
                             let Case =  document.createElement("div");
                             Case.classList.add("DynamicBubbleFramePhotoCase");
@@ -1082,6 +1083,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     }
 
                     case"Music":{
+                        if(BubbleType !== "Function"){
+                            console.error("一定要是Function才能有Music項目!!!")
+                            return;
+                        }
                         newDOM = document.createElement("div");
                         newDOM.classList.add("DynamicBubbleFrameMusicPlayerMedia");
 
@@ -2192,6 +2197,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }else if(Viewing){
             let Carrier = retIfParentMatch(StartAtElement,0,"DynamicBubbleFramePhotosCaseCarrier");
             Carrier.Parent.scrollLeft = ViewBase - (nowCursorAtX - xStartScreen);
+
+
+            if(ViewBase - (nowCursorAtX - xStartScreen) <= 0){
+                ViewBase = (nowCursorAtX - xStartScreen)
+            }else if(ViewBase - (nowCursorAtX - xStartScreen) >= Carrier.Parent.scrollWidth - Carrier.Parent.clientHeight){
+                ViewBase = Carrier.Parent.scrollWidth - Carrier.Parent.clientHeight + (nowCursorAtX - xStartScreen)
+            }
         }
     }
 

@@ -2,5 +2,19 @@
   {
     "Title":"友列：太陽魚傳",
     "Content":"7Sunfish，俗名太陽魚，是第7位太陽魚家族的掌門人。"
+  },
+  {
+    "Photos": [
+      {
+        "Title": "太陽魚的經典大頭照",
+        "Captain": "雖然名稱上是魚，但其實是隻貓貓。",
+        "Photo": "./img/7Sunfish.png"
+      },
+      {
+        "Title": "太陽魚近日的頭貼",
+        "Captain": "不知道這隻角色是什麼，但看起來酷酷的。",
+        "Photo": "./img/5e15f67295b964d4a0a4ac6311f147d4.png"
+      }
+    ]
   }
 ]
