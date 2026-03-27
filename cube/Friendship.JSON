@@ -148,6 +148,7 @@
       "Name": "紅茶",
       "Tag": "BlackTea",
       "Event": {
+        "Page": "./page/FriendshipGroup/BlackTea.JSON"
       }
     },
     {
@@ -159,6 +160,19 @@
       "Name": "小雪",
       "Tag": "Snow",
       "Event": {
+        "Page": "./page/FriendshipGroup/Snow.JSON"
+      }
+    },
+    {
+      "Side": 3,
+      "Chunk": 2,
+      "Color": "#3c72d6",
+      "depth": 24,
+      "Icon": "./img/a1c9439a3c06b54f40da14fb084a03c7.png",
+      "Name": "企鵝",
+      "Tag": "PinGu",
+      "Event": {
+        "Page": "./page/FriendshipGroup/Pingu.JSON"
       }
     }
   ]
