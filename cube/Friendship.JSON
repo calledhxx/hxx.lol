@@ -126,6 +126,40 @@
         "Page": "./page/FriendshipGroup/Sponge.JSON"
 
       }
+    },
+    {
+      "Side": 3,
+      "Chunk": 4,
+      "Color": "#d1b6a1",
+      "depth": 24,
+      "Icon": "./img/339d81abdcfa574123742f486057cbe4.png",
+      "Name": "貓箱",
+      "Tag": "CatBox",
+      "Event": {
+        "Page": "./page/FriendshipGroup/CatBox.JSON"
+      }
+    },
+    {
+      "Side": 3,
+      "Chunk": 1,
+      "Color": "#d4b1ab",
+      "depth": 24,
+      "Icon": "./img/5e6a9a8ec28e4a2a001a673a50ac8f06.png",
+      "Name": "紅茶",
+      "Tag": "BlackTea",
+      "Event": {
+      }
+    },
+    {
+      "Side": 3,
+      "Chunk": 3,
+      "Color": "#a2d492",
+      "depth": 24,
+      "Icon": "./img/a464236b835088be1ee901cbeb1ad931.png",
+      "Name": "小雪",
+      "Tag": "Snow",
+      "Event": {
+      }
     }
   ]
 }
