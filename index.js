@@ -946,7 +946,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         newControlBar.classList.add("DynamicBubbleControlBar");
 
 
-
         let newControlBarMiddleContent = document.createElement("hr");
         newControlBar.appendChild(newControlBarMiddleContent);
         newBubble.style.top = "-300px";
@@ -1123,6 +1122,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             }
                         }
 
+                        break;
+                    }
+
+                    case"BigText":{
+                        newDOM = document.createElement("h1");
+                        newDOM.classList.add("DynamicBubbleFrameBigText");
+                        newDOM.innerText = Content[SectionIndex][index];
                         break;
                     }
 
@@ -2400,6 +2406,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
             "Content":"網站錯誤或意見回報：me@hxx.lol。"
         },
         {
+            "Title":"累積的瀏覽量",
+            "BigText": JSON.parse(await (await fetch("https://proxy.2677929.xyz/https://api.countify.xyz/get-total/hxx_lol", {method: "GET"})).text()).count.toString()
+        },
+        {
             "Title":"版權宣告",
             "Content":"Copyright © from 2024 to PRESENT @CalledHxx. All rights reserved."
         },
@@ -2418,6 +2428,10 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         }
     ])
+
+    await fetch("https://corsproxy.io/?https://api.countify.xyz/increment/hxx_lol", {
+        method: "POST"
+    });
 
     Locked = 0;
 });

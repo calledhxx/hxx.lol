@@ -538,7 +538,6 @@ body{
 .DynamicBubbleFrameContent{
     font-size: 18px;
 
-
     font-weight:normal;
 }
 
@@ -573,6 +572,14 @@ body{
     width: calc(100% - 20px);
     height: 40px;
     position: relative;
+}
+
+.DynamicBubbleFrameBigText{
+    font-size: 88px;
+    font-weight:bold;
+    width: 100%;
+    text-align: center;
+
 }
 
 .DynamicBubbleFrameMusicPlayerMedia{
@@ -897,6 +904,9 @@ body{
     .DynamicBubbleFramePhotoCaptain {
         color: #a6a6a6;
     }
+    .DynamicBubbleFrameBigText{
+        color: #dddddd;
+    }
 
     body{
         background-Color: #171717
@@ -1012,6 +1022,10 @@ body{
         color: #474747;
     }
     .DynamicBubbleFramePhotoCaptain {
+        color: #575757;
+    }
+
+    .DynamicBubbleFrameBigText{
         color: #575757;
     }
 
