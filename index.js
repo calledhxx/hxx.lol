@@ -226,6 +226,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
                     )});
             }
         },
+
+        "Link": async function (link){
+            if(link)
+                window.open(link, "_blank");
+        },
     }
 
     let xStartScreen = 0,yStartScreen = 0;
@@ -1755,8 +1760,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             break;
                         }
                         case "Modules":{
-                            for (let i = 0;i<data.length;i++)
-                                ModuleFunction[data[i].function](data[i].argument);
+                            if(data)
+                                for (let i = 0;i<data.length;i++)
+                                    ModuleFunction[data[i].function](data[i].argument);
 
                             break;
                         }
