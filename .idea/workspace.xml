@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d57fe96b-7e11-4fc9-9596-6dafe5dbf177" name="Changes" comment="hxx.lol">
+      <change afterPath="$PROJECT_DIR$/img/339d81abdcfa574123742f486057cbe4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/5e6a9a8ec28e4a2a001a673a50ac8f06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/a464236b835088be1ee901cbeb1ad931.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/page/FriendshipGroup/CatBox.JSON" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page/Hxx.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/page/Hxx.JSON" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cube/Friendship.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/cube/Friendship.JSON" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +68,8 @@
       <recent name="D:\Hxx.lol\file\image" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Hxx.lol\img\Photos" />
       <recent name="D:\Hxx.lol\img" />
+      <recent name="D:\Hxx.lol\img\Photos" />
       <recent name="D:\Hxx.lol\soundeffect" />
     </key>
   </component>
@@ -330,23 +333,7 @@
       <workItem from="1774160312312" duration="612000" />
       <workItem from="1774595350651" duration="2071000" />
       <workItem from="1774611306031" duration="1809000" />
-      <workItem from="1774619524737" duration="308000" />
-    </task>
-    <task id="LOCAL-00291" summary="hxx.lol">
-      <option name="closed" value="true" />
-      <created>1760202924536</created>
-      <option name="number" value="00291" />
-      <option name="presentableId" value="LOCAL-00291" />
-      <option name="project" value="LOCAL" />
-      <updated>1760202924536</updated>
-    </task>
-    <task id="LOCAL-00292" summary="hxx.lol">
-      <option name="closed" value="true" />
-      <created>1760203479290</created>
-      <option name="number" value="00292" />
-      <option name="presentableId" value="LOCAL-00292" />
-      <option name="project" value="LOCAL" />
-      <updated>1760203479290</updated>
+      <workItem from="1774619524737" duration="1744000" />
     </task>
     <task id="LOCAL-00293" summary="hxx.lol">
       <option name="closed" value="true" />
@@ -724,7 +711,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774597395696</updated>
     </task>
-    <option name="localTasksCounter" value="340" />
+    <task id="LOCAL-00340" summary="hxx.lol">
+      <option name="closed" value="true" />
+      <created>1774620004949</created>
+      <option name="number" value="00340" />
+      <option name="presentableId" value="LOCAL-00340" />
+      <option name="project" value="LOCAL" />
+      <updated>1774620004949</updated>
+    </task>
+    <task id="LOCAL-00341" summary="hxx.lol">
+      <option name="closed" value="true" />
+      <created>1774620219491</created>
+      <option name="number" value="00341" />
+      <option name="presentableId" value="LOCAL-00341" />
+      <option name="project" value="LOCAL" />
+      <updated>1774620219491</updated>
+    </task>
+    <option name="localTasksCounter" value="342" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
