@@ -9,25 +9,45 @@
   {
     "Button": {
       "Text": "在Youtube上開啟",
-      "Module": "Music-JumpToYoutube"
+      "Modules": [
+        {
+          "function": "Music-JumpToYoutube",
+          "argument": null
+        }
+      ]
     }
   },
   {
     "Button": {
       "Text": "播放與暫停",
-      "Module": "Music-PlayAndPause"
+      "Modules": [
+        {
+          "function": "Music-PlayAndPause",
+          "argument": null
+        }
+      ]
     }
   },
   {
     "Button": {
       "Text": "下一首歌曲",
-      "Module": "Music-Next"
+      "Modules": [
+        {
+          "function": "Music-Next",
+          "argument": null
+        }
+      ]
     }
   },
   {
     "Button": {
       "Text": "上一首歌曲",
-      "Module": "Music-Last"
+      "Modules": [
+        {
+          "function": "Music-Last",
+          "argument": null
+        }
+      ]
     }
   }
 ]
