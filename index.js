@@ -182,7 +182,6 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 let CurrentVideo = null;
 
-
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
 
@@ -326,8 +325,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         Locked = 0;
 
-        if(Content.Module)
-            ModuleFunction[Content.Module]();
+        if(Content.Modules)
+            for(let i = 0;i<Content.Modules.length;i++)
+                ModuleFunction[Content.Modules[i].function](Content.Modules[i].argument);
 
     }
 
@@ -1040,7 +1040,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         newDOM.appendChild(button);
                         newDOM.classList.add("DynamicBubbleFrameButtonCase");
 
-                        FunctionButtons[buttonDate] = Content[SectionIndex][index].Module;
+                        FunctionButtons[buttonDate] = Content[SectionIndex][index].Modules;
 
                         await sleep(1);
                         break;
@@ -1754,8 +1754,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                             break;
                         }
-                        case "Module":{
-                            ModuleFunction[data]();
+                        case "Modules":{
+                            for (let i = 0;i<data.length;i++)
+                                ModuleFunction[data[i].function](data[i].argument);
 
                             break;
                         }
@@ -1877,7 +1878,8 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             if(FinalInfo.FunctionButton && FinalInfo.FunctionButton === StartAtElement)
                 if(FunctionButtons[FinalInfo.FunctionButton.id])
-                    ModuleFunction[FunctionButtons[FinalInfo.FunctionButton.id]]();
+                    for(let i = 0;i<FunctionButtons[FinalInfo.FunctionButton.id].length;i++)
+                        ModuleFunction[FunctionButtons[FinalInfo.FunctionButton.id][i].function](FunctionButtons[FinalInfo.FunctionButton.id][i].argument);
 
         }
 

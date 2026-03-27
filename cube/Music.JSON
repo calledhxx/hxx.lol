@@ -1,7 +1,12 @@
 {
   "Tag": "Music",
   "Skin": "musicBox",
-  "Module": "Music-GiveControl",
+  "Modules": [
+    {
+      "function": "Music-GiveControl",
+      "argument": null
+    }
+  ],
   "Buttons": [
     {
       "Side": 4,
@@ -25,7 +30,12 @@
       "Name": "播放與暫停",
       "Tag": "PP",
       "Event": {
-        "Module": "Music-PlayAndPause"
+        "Modules": [
+          {
+            "function": "Music-PlayAndPause",
+            "argument": null
+          }
+        ]
       }
     },
     {
@@ -37,7 +47,12 @@
       "Name": "下一首",
       "Tag": "Next",
       "Event": {
-        "Module": "Music-Next"
+        "Modules": [
+          {
+            "function": "Music-Next",
+            "argument": null
+          }
+        ]
 
       }
     },
@@ -50,7 +65,12 @@
       "Name": "上一首",
       "Tag": "Last",
       "Event": {
-        "Module": "Music-Last"
+        "Modules": [
+          {
+            "function": "Music-Last",
+            "argument": null
+          }
+        ]
 
       }
     }
