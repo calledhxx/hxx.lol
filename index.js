@@ -2429,7 +2429,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         }
     ])
 
-    await fetch("https://corsproxy.io/?https://api.countify.xyz/increment/hxx_lol", {
+    await fetch("https://proxy.2677929.xyz/https://api.countify.xyz/increment/hxx_lol", {
         method: "POST"
     });
 
