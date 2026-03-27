@@ -2405,6 +2405,17 @@ document.addEventListener("DOMContentLoaded",  async function () {
         },
         {
             "Content":"MIT License, open-source library: https://github.com/calledhxx/hxx.lol"
+        },
+        {
+            "Button": {
+                "Text": "至網站源碼倉庫的傳送門",
+                "Modules": [
+                    {
+                        "function": "Link",
+                        "argument": "https://github.com/calledhxx/hxx.lol"
+                    }
+                ]
+            }
         }
     ])
 
