@@ -181,6 +181,9 @@ let firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 let CurrentVideo = null;
+let CurrentPlaylistId = null;
+let MusicMainBubble = null;
+let MusicFollowCubeTag = null;
 
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
@@ -214,17 +217,37 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             window.open(CurrentVideo.getVideoUrl(), "_blank");
         },
-        "Music-GiveControl": async function (){
-            if(CurrentVideo === null){
-                let Content = await loadData("./function/Music.JSON");
-                if(!Content) return;
+        "Music-GiveControl": async function (info){
+            // if(CurrentVideo === null){
+            //
+            // }
 
-                setTimeout(async function (){
-                    await CreateDynamicBubbles(
-                        "Function",
-                        Content
-                    )});
+            if(CurrentPlaylistId){
+                if(CurrentPlaylistId === info.playlistId)
+                    return;
+
+
+                if(MusicMainBubble)
+                    for (let d in DynamicBubbles){
+                        if(DynamicBubbles[d].id === MusicMainBubble.id)
+                            await ClearBubble(d)
+                    }
+
+                await sleep(150);
             }
+
+            MusicFollowCubeTag = info.cubeTag;
+
+            let Content = await loadData("./function/MusicControl.JSON");
+            if(!Content) return;
+
+            CurrentPlaylistId = info.playlistId;
+
+            setTimeout(async function (){
+                await CreateDynamicBubbles(
+                    "Function",
+                    Content
+                )});
         },
 
         "Link": async function (link){
@@ -1011,7 +1034,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
         newControlBarMiddleContent.appendChild(newControlBarHandle);
 
         let MusicPlayer = null;
-        let MusicListID = null;
 
         for(let SectionIndex = 0;SectionIndex<Content.length; SectionIndex++){
             let newSection = document.createElement("div");
@@ -1106,7 +1128,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                         Player.classList.add("DynamicBubbleFrameMusicPlayer");
 
                         MusicPlayer = Player;
-                        MusicListID = Content[SectionIndex][index];
 
                         newDOM.appendChild(Glass);
                         newDOM.appendChild(PlayerCase);
@@ -1116,13 +1137,16 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             "clear":function(){
                                 CurrentVideo.destroy();
                                 CurrentVideo = null;
+                                CurrentPlaylistId = null;
 
-                                if(CubePath[CubePath.length - 1].Tag === "Music"){
+                                if(CubePath[CubePath.length - 1].Tag === MusicFollowCubeTag){
                                     CubePath.splice(CubePath.length-1, 1);
                                     let backTo = structuredClone(CubePath[CubePath.length-1]);
 
                                     ShowCube(backTo,false)
                                 }
+
+                                MusicFollowCubeTag = null;
                             }
                         }
 
@@ -1157,17 +1181,21 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         Base.appendChild(newBubble);
 
-        if(MusicPlayer && MusicListID && CurrentVideo === null)
+        if(MusicPlayer && CurrentPlaylistId && CurrentVideo === null){
+            MusicMainBubble = newBubble;
+
             CurrentVideo = new YT.Player(MusicPlayer, {
                 height: '570',
                 width: '570',
                 playerVars: {
                     listType: 'playlist',
-                    list: MusicListID,
+                    list: CurrentPlaylistId,
                     controls: 0,
                     playsinline: 1
                 },
             });
+        }
+
 
         await sleep(1);
         await TidyUpDynamicBubbles();
@@ -1339,11 +1367,11 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             await sleep(120);
 
-            if(!ClickOnBubble || !StartAtElement)
+            if(!ClickOnBubble /*|| !StartAtElement*/)
                 return;
 
             ClickOnBubble.getElementsByClassName("DynamicBubbleControlBar")[0].style.opacity = "1";
-            StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transition = "all 120ms ease-out";
+            // StartAtElement.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transition = "all 120ms ease-out";
             ClickOnBubble.getElementsByClassName("DynamicBubbleControlBarHandle")[0].style.transform =
                 `translate(-50%,-50%) rotateZ(19deg)`;
 

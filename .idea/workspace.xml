@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d57fe96b-7e11-4fc9-9596-6dafe5dbf177" name="Changes" comment="hxx.lol">
+      <change afterPath="$PROJECT_DIR$/cube/Playlist.JSON" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function/Music.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/function/Music.JSON" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cube/Default.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/cube/Default.JSON" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cube/Music.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/cube/Music.JSON" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function/Music.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/function/MusicControl.JSON" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,28 +41,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Node.js.index.js.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Hxx.lol/page/FriendshipGroup&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;D:/Hxx.lol/page/Hxx.JSON&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.index.js.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/Hxx.lol/cube",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "two.files.diff.last.used.file": "D:/Hxx.lol/page/Hxx.JSON",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Hxx.lol\page\FriendshipGroup" />
       <recent name="D:\Hxx.lol\cube" />
+      <recent name="D:\Hxx.lol\page\FriendshipGroup" />
       <recent name="D:\Hxx.lol\page" />
       <recent name="D:\Hxx.lol" />
       <recent name="D:\Hxx.lol\file\image" />
@@ -334,15 +337,7 @@
       <workItem from="1774630901962" duration="637000" />
       <workItem from="1774779123449" duration="237000" />
       <workItem from="1774780115571" duration="610000" />
-      <workItem from="1774795012453" duration="345000" />
-    </task>
-    <task id="LOCAL-00302" summary="hxx.lol">
-      <option name="closed" value="true" />
-      <created>1765114696881</created>
-      <option name="number" value="00302" />
-      <option name="presentableId" value="LOCAL-00302" />
-      <option name="project" value="LOCAL" />
-      <updated>1765114696881</updated>
+      <workItem from="1774795012453" duration="2558000" />
     </task>
     <task id="LOCAL-00303" summary="hxx.lol">
       <option name="closed" value="true" />
@@ -728,7 +723,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774779358967</updated>
     </task>
-    <option name="localTasksCounter" value="351" />
+    <task id="LOCAL-00351" summary="hxx.lol">
+      <option name="closed" value="true" />
+      <created>1774795380276</created>
+      <option name="number" value="00351" />
+      <option name="presentableId" value="LOCAL-00351" />
+      <option name="project" value="LOCAL" />
+      <updated>1774795380276</updated>
+    </task>
+    <option name="localTasksCounter" value="352" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

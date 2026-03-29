@@ -4,7 +4,10 @@
   "Modules": [
     {
       "function": "Music-GiveControl",
-      "argument": null
+      "argument": {
+        "playlistId": "PL3PTi1UZlseqiFJFtYMe2KrYlj36dXffn",
+        "cubeTag":"Music"
+      }
     }
   ],
   "Buttons": [

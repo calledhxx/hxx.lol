@@ -63,6 +63,18 @@
       }
     },
     {
+      "Side": 1,
+      "Chunk": 4,
+      "Color":"#ffaa6e",
+      "depth":24,
+      "Icon": null,
+      "Name":"主歌單",
+      "Tag":"Playlist",
+      "Event":{
+        "Cube":"./cube/Playlist.JSON"
+      }
+    },
+    {
       "Side": 2,
       "Chunk": 1,
       "Color":"#ebad3b",
