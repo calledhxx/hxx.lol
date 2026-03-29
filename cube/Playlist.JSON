@@ -1,12 +1,12 @@
 {
-  "Tag": "Music",
+  "Tag": "Playlist",
   "Skin": "musicBox",
   "Modules": [
     {
       "function": "Music-GiveControl",
       "argument": {
-        "playlistId": "PL3PTi1UZlseqiFJFtYMe2KrYlj36dXffn",
-        "cubeTag":"Music"
+        "playlistId": "PL3PTi1UZlsepJ_EcBzKV3KzmoGRxQzyJ8",
+        "cubeTag":"Playlist"
       }
     }
   ],
@@ -14,7 +14,7 @@
     {
       "Side": 4,
       "Chunk": 3,
-      "Color": "#d95b90",
+      "Color": "#5a4bfa",
       "depth": 24,
       "Icon": null,
       "Name": "返回",
