@@ -1011,6 +1011,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
         newControlBarMiddleContent.appendChild(newControlBarHandle);
 
         let MusicPlayer = null;
+        let MusicListID = null;
 
         for(let SectionIndex = 0;SectionIndex<Content.length; SectionIndex++){
             let newSection = document.createElement("div");
@@ -1091,6 +1092,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                             console.error("一定要是Function才能有Music項目!!!")
                             return;
                         }
+
                         newDOM = document.createElement("div");
                         newDOM.classList.add("DynamicBubbleFrameMusicPlayerMedia");
 
@@ -1102,7 +1104,9 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                         let Player =  document.createElement("div");
                         Player.classList.add("DynamicBubbleFrameMusicPlayer");
+
                         MusicPlayer = Player;
+                        MusicListID = Content[SectionIndex][index];
 
                         newDOM.appendChild(Glass);
                         newDOM.appendChild(PlayerCase);
@@ -1153,13 +1157,13 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         Base.appendChild(newBubble);
 
-        if(MusicPlayer && CurrentVideo === null)
+        if(MusicPlayer && MusicListID && CurrentVideo === null)
             CurrentVideo = new YT.Player(MusicPlayer, {
                 height: '570',
                 width: '570',
                 playerVars: {
                     listType: 'playlist',
-                    list: 'PL3PTi1UZlseqiFJFtYMe2KrYlj36dXffn',
+                    list: MusicListID,
                     controls: 0,
                     playsinline: 1
                 },
