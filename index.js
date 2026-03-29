@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 await sleep(150);
             }
 
-            MusicFollowCubeTag = info.cubeTag;
+            MusicFollowCubeTag = info.followTag;
 
             let Content = await loadData("./function/MusicControl.JSON");
             if(!Content) return;
@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
     let cubeSkin = "cube";
 
     let buttonElements = [];
-    
+
     function SummonCube(CubeData,SavePath){
 
         DeleteButtons();

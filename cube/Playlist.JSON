@@ -6,7 +6,7 @@
       "function": "Music-GiveControl",
       "argument": {
         "playlistId": "PL3PTi1UZlsepJ_EcBzKV3KzmoGRxQzyJ8",
-        "cubeTag":"Playlist"
+        "followTag":"Playlist"
       }
     }
   ],
