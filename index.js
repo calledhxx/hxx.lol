@@ -2381,53 +2381,58 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 "Title":"「娃娃大哭」",
                 "Content":"ㄝ... 看起來我們好像沒辦法載入最主要的資料耶，你可重新載入頁面以重式，如果還是不行的話，幫我聯絡：me@hxx.lol"
             }]);
-    else await CreateDynamicBubbles("Notification",[
-        {
-            "Title":"你是誰？！",
-            "Content":"歡迎來到Hxx的Weblog，這裡存著Hxx很唐的...東西。"
-        },
-        {
-            "Content":"眼前的方塊是這網站的核心，方塊上有許多按鈕，你可以轉動方塊選擇你想按的按鈕。按鈕裡面有...這是秘密，不跟你講。:-S"
-        },
-        {
-            "Content":"而你在閱讀的這東西叫做Dynamic Bubble ，動態泡泡，是不是特別動態，特別動感(▀̿Ĺ̯▀̿ ̿)"
-        },
-        {
-            "Content":"喔對了，看到右上角的把手了嗎？向下拉他就「有機會」帶你離開這顆泡泡喔。"
-        },
-        {
-            "Content":"還有丫，蘇東坡沒有講過這句話：蘇波哀東的笑容。"
-        },
-        {
-            "Title":"極端的東西！",
-            "Content":"某些瀏覽器或裝置會限制或影響網站程式的流暢度，導致畫面卡頓。這時候你就要大展鴻圖，關公都點頭，有料!。"
-        },
-        {
-            "Content":"網站錯誤或意見回報：me@hxx.lol。"
-        },
-        {
-            "Title":"累積的瀏覽量",
-            "BigText": JSON.parse(await (await fetch("https://proxy.2677929.xyz/https://api.countify.xyz/get-total/hxx_lol", {method: "GET"})).text()).count.toString()
-        },
-        {
-            "Title":"版權宣告",
-            "Content":"Copyright © from 2024 to PRESENT @CalledHxx. All rights reserved."
-        },
-        {
-            "Content":"MIT License, open-source library: https://github.com/calledhxx/hxx.lol"
-        },
-        {
-            "Button": {
-                "Text": "至網站源碼倉庫的傳送門",
-                "Modules": [
-                    {
-                        "function": "Link",
-                        "argument": "https://github.com/calledhxx/hxx.lol"
-                    }
-                ]
+    else {
+        const data = JSON.parse(await (await fetch("https://proxy.2677929.xyz/https://api.countify.xyz/get-total/hxx_lol", {method: "GET"})).text());
+
+        await CreateDynamicBubbles("Notification",[
+            {
+                "Title":"你是誰？！",
+                "Content":"歡迎來到Hxx的Weblog，這裡存著Hxx很唐的...東西。"
+            },
+            {
+                "Content":"眼前的方塊是這網站的核心，方塊上有許多按鈕，你可以轉動方塊選擇你想按的按鈕。按鈕裡面有...這是秘密，不跟你講。:-S"
+            },
+            {
+                "Content":"而你在閱讀的這東西叫做Dynamic Bubble ，動態泡泡，是不是特別動態，特別動感(▀̿Ĺ̯▀̿ ̿)"
+            },
+            {
+                "Content":"喔對了，看到右上角的把手了嗎？向下拉他就「有機會」帶你離開這顆泡泡喔。"
+            },
+            {
+                "Content":"還有丫，蘇東坡沒有講過這句話：蘇波哀東的笑容。"
+            },
+            {
+                "Title":"極端的東西！",
+                "Content":"某些瀏覽器或裝置會限制或影響網站程式的流暢度，導致畫面卡頓。這時候你就要大展鴻圖，關公都點頭，有料!。"
+            },
+            {
+                "Content":"網站錯誤或意見回報：me@hxx.lol。"
+            },
+            {
+                "Title":"累積的瀏覽量",
+                "BigText": data.count.toString(),
+                "Content": `數據更新時間：${data.last_updated.toString()}`,
+            },
+            {
+                "Title":"版權宣告",
+                "Content":"Copyright © from 2024 to PRESENT @CalledHxx. All rights reserved."
+            },
+            {
+                "Content":"MIT License, open-source library: https://github.com/calledhxx/hxx.lol"
+            },
+            {
+                "Button": {
+                    "Text": "至網站源碼倉庫的傳送門",
+                    "Modules": [
+                        {
+                            "function": "Link",
+                            "argument": "https://github.com/calledhxx/hxx.lol"
+                        }
+                    ]
+                }
             }
-        }
-    ])
+        ])
+    }
 
     await fetch("https://proxy.2677929.xyz/https://api.countify.xyz/increment/hxx_lol", {
         method: "POST"
