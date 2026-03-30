@@ -180,68 +180,70 @@ tag.src = "https://www.youtube.com/iframe_api";
 let firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-let CurrentVideo = null;
-let CurrentPlaylistId = null;
-let MusicMainBubble = null;
-let MusicFollowCubeTag = null;
+let MusicInfo = {
+    "VideoInstance":null,
+    "PlaylistId":null,
+    "MusicControlBubble":null,
+    "MusicFollowCubeTag":null
+};
 
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
 
     let ModuleFunction = {
         "Music-Next": async function (){
-            if(!CurrentVideo) return;
+            if(!MusicInfo.VideoInstance) return;
 
-            CurrentVideo.nextVideo();
+            MusicInfo.VideoInstance.nextVideo();
         },
         "Music-Last": async function (){
-            if(!CurrentVideo) return;
+            if(!MusicInfo.VideoInstance) return;
 
-            CurrentVideo.previousVideo();
+            MusicInfo.VideoInstance.previousVideo();
         },
         "Music-PlayAndPause": async function (){
-            if(!CurrentVideo) return;
+            if(!MusicInfo.VideoInstance) return;
 
-            switch (CurrentVideo.getPlayerState()){
+            switch (MusicInfo.VideoInstance.getPlayerState()){
                 case YT.PlayerState.PAUSED:
                 case YT.PlayerState.ENDED:
                 case YT.PlayerState.CUED:
-                    CurrentVideo.playVideo(); break;
+                    MusicInfo.VideoInstance.playVideo(); break;
 
                 case YT.PlayerState.PLAYING:
-                    CurrentVideo.pauseVideo(); break;
+                    MusicInfo.VideoInstance.pauseVideo(); break;
             }
         },
         "Music-JumpToYoutube": async function (){
-            if(!CurrentVideo) return;
+            if(!MusicInfo.VideoInstance) return;
 
-            window.open(CurrentVideo.getVideoUrl(), "_blank");
+            window.open(MusicInfo.VideoInstance.getVideoUrl(), "_blank");
         },
         "Music-GiveControl": async function (info){
-            // if(CurrentVideo === null){
+            // if(MusicInfo.VideoInstance === null){
             //
             // }
 
-            if(CurrentPlaylistId){
-                if(CurrentPlaylistId === info.playlistId)
+            if(MusicInfo.PlaylistId){
+                if(MusicInfo.PlaylistId === info.playlistId)
                     return;
 
 
-                if(MusicMainBubble)
+                if(MusicInfo.MusicControlBubble)
                     for (let d in DynamicBubbles){
-                        if(DynamicBubbles[d].id === MusicMainBubble.id)
+                        if(DynamicBubbles[d].id === MusicInfo.MusicControlBubble.id)
                             await ClearBubble(d)
                     }
 
                 await sleep(150);
             }
 
-            MusicFollowCubeTag = info.followTag;
+            MusicInfo.MusicFollowCubeTag = info.followTag;
 
             let Content = await loadData("./function/MusicControl.JSON");
             if(!Content) return;
 
-            CurrentPlaylistId = info.playlistId;
+            MusicInfo.PlaylistId = info.playlistId;
 
             setTimeout(async function (){
                 await CreateDynamicBubbles(
@@ -1135,18 +1137,18 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
                         BubbleFunctions[newBubble.id] = {
                             "clear":function(){
-                                CurrentVideo.destroy();
-                                CurrentVideo = null;
-                                CurrentPlaylistId = null;
+                                MusicInfo.VideoInstance.destroy();
+                                MusicInfo.VideoInstance = null;
+                                MusicInfo.PlaylistId = null;
 
-                                if(CubePath[CubePath.length - 1].Tag === MusicFollowCubeTag){
+                                if(CubePath[CubePath.length - 1].Tag === MusicInfo.MusicFollowCubeTag){
                                     CubePath.splice(CubePath.length-1, 1);
                                     let backTo = structuredClone(CubePath[CubePath.length-1]);
 
                                     ShowCube(backTo,false)
                                 }
 
-                                MusicFollowCubeTag = null;
+                                MusicInfo.MusicFollowCubeTag = null;
                             }
                         }
 
@@ -1181,15 +1183,15 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
         Base.appendChild(newBubble);
 
-        if(MusicPlayer && CurrentPlaylistId && CurrentVideo === null){
-            MusicMainBubble = newBubble;
+        if(MusicPlayer && MusicInfo.PlaylistId && MusicInfo.VideoInstance === null){
+            MusicInfo.MusicControlBubble = newBubble;
 
-            CurrentVideo = new YT.Player(MusicPlayer, {
+            MusicInfo.VideoInstance = new YT.Player(MusicPlayer, {
                 height: '570',
                 width: '570',
                 playerVars: {
                     listType: 'playlist',
-                    list: CurrentPlaylistId,
+                    list: MusicInfo.PlaylistId,
                     controls: 0,
                     playsinline: 1
                 },
