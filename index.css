@@ -561,25 +561,25 @@ body{
             inset 0 1px 0 rgba(255,255,255,0.13),
             inset 0 -1px 0 rgba(255,255,255,0.06),
             inset 6px 6px 16px rgba(255,255,255,0.03),
-            0 10px 28px rgba(0,0,0,0.35);
+            0 0px 14px rgba(0,0,0,0.35);
 
     cursor:  pointer;
+
 }
 
 .DynamicBubbleFrameButtonCase{
-    margin-left: 10px;
-    margin-right: 10px;
     width: calc(100% - 20px);
     height: 40px;
     position: relative;
+
+    margin: 12px 10px 12px 10px;
 }
 
 .DynamicBubbleFrameBigText{
     font-size: 88px;
-    font-weight:bold;
+    font-weight: bolder;
     width: 100%;
     text-align: center;
-
 }
 
 .DynamicBubbleFrameMusicPlayerMedia{
