@@ -2445,7 +2445,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             {
                 "Title":"累積的瀏覽量",
                 "BigText": data.count.toString(),
-                "Content": `數據更新時間：${data.last_updated.toString()}`,
             },
             {
                 "Title":"版權宣告",
