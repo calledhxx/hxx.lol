@@ -98,6 +98,19 @@
       "Event":{
         "Page":"./page/Style.JSON"
       }
+    },
+
+    {
+      "Side": 1,
+      "Chunk": 4,
+      "Color":"#b31010",
+      "depth":24,
+      "Icon": "./img/IMG_0537.GIF",
+      "Name":"Ruby",
+      "Tag":"Ruby",
+      "Event":{
+        "Cube":"./cube/Ruby.JSON"
+      }
     }
   ]
 }

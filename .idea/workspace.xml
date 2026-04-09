@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d57fe96b-7e11-4fc9-9596-6dafe5dbf177" name="Changes" comment="hxx.lol">
+      <change afterPath="$PROJECT_DIR$/cube/Ruby.JSON" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/500x500.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page/Todo.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/page/Todo.JSON" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cube/Default.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/cube/Default.JSON" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -339,15 +338,10 @@
       <workItem from="1774795012453" duration="2789000" />
       <workItem from="1774880380036" duration="63000" />
       <workItem from="1774880512972" duration="278000" />
-      <workItem from="1775654821032" duration="609000" />
-    </task>
-    <task id="LOCAL-00307" summary="hxx.lol">
-      <option name="closed" value="true" />
-      <created>1765199189378</created>
-      <option name="number" value="00307" />
-      <option name="presentableId" value="LOCAL-00307" />
-      <option name="project" value="LOCAL" />
-      <updated>1765199189378</updated>
+      <workItem from="1775654821032" duration="888000" />
+      <workItem from="1775657276736" duration="3000" />
+      <workItem from="1775738769701" duration="4000" />
+      <workItem from="1775747933764" duration="312000" />
     </task>
     <task id="LOCAL-00308" summary="hxx.lol">
       <option name="closed" value="true" />
@@ -733,7 +727,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774880757086</updated>
     </task>
-    <option name="localTasksCounter" value="356" />
+    <task id="LOCAL-00356" summary="hxx.lol">
+      <option name="closed" value="true" />
+      <created>1775655446879</created>
+      <option name="number" value="00356" />
+      <option name="presentableId" value="LOCAL-00356" />
+      <option name="project" value="LOCAL" />
+      <updated>1775655446879</updated>
+    </task>
+    <option name="localTasksCounter" value="357" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
