@@ -1,0 +1,18 @@
+{
+  "Tag": "Ruby",
+  "Skin": "cube",
+  "Buttons": [
+    {
+      "Side": 1,
+      "Chunk": 1,
+      "Color":"#b31010",
+      "depth":24,
+      "Icon": "",
+      "Name":"返回",
+      "Tag":"Return",
+      "Event":{
+        "Action":"Return"
+      }
+    }
+  ]
+}
