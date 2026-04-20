@@ -2416,8 +2416,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 "Content":"ㄝ... 看起來我們好像沒辦法載入最主要的資料耶，你可重新載入頁面以重式，如果還是不行的話，幫我聯絡：me@hxx.lol"
             }]);
     else {
-        const data = JSON.parse(await (await fetch("https://proxy.2677929.xyz/https://api.countify.xyz/get-total/hxx_lol", {method: "GET"})).text());
-
         await CreateDynamicBubbles("Notification",[
             {
                 "Title":"你是誰？！",
@@ -2443,10 +2441,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
                 "Content":"網站錯誤或意見回報：me@hxx.lol。"
             },
             {
-                "Title":"累積的瀏覽量",
-                "BigText": data.count.toString(),
-            },
-            {
                 "Title":"版權宣告",
                 "Content":"Copyright © from 2024 to PRESENT @CalledHxx. All rights reserved."
             },
@@ -2466,10 +2460,6 @@ document.addEventListener("DOMContentLoaded",  async function () {
             }
         ])
     }
-
-    await fetch("https://proxy.2677929.xyz/https://api.countify.xyz/increment/hxx_lol", {
-        method: "POST"
-    });
 
     Locked = 0;
 });
