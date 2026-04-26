@@ -126,54 +126,56 @@
         "Page": "./page/FriendshipGroup/Sponge.JSON"
 
       }
-    },
-    {
-      "Side": 3,
-      "Chunk": 4,
-      "Color": "#d1b6a1",
-      "depth": 24,
-      "Icon": "./img/339d81abdcfa574123742f486057cbe4.png",
-      "Name": "貓箱",
-      "Tag": "CatBox",
-      "Event": {
-        "Page": "./page/FriendshipGroup/CatBox.JSON"
-      }
-    },
-    {
-      "Side": 3,
-      "Chunk": 1,
-      "Color": "#d4b1ab",
-      "depth": 24,
-      "Icon": "./img/5e6a9a8ec28e4a2a001a673a50ac8f06.png",
-      "Name": "紅茶",
-      "Tag": "BlackTea",
-      "Event": {
-        "Page": "./page/FriendshipGroup/BlackTea.JSON"
-      }
-    },
-    {
-      "Side": 3,
-      "Chunk": 3,
-      "Color": "#a2d492",
-      "depth": 24,
-      "Icon": "./img/a464236b835088be1ee901cbeb1ad931.png",
-      "Name": "小雪",
-      "Tag": "Snow",
-      "Event": {
-        "Page": "./page/FriendshipGroup/Snow.JSON"
-      }
-    },
-    {
-      "Side": 3,
-      "Chunk": 2,
-      "Color": "#6588cf",
-      "depth": 24,
-      "Icon": "./img/a1c9439a3c06b54f40da14fb084a03c7.png",
-      "Name": "企鵝",
-      "Tag": "PinGu",
-      "Event": {
-        "Page": "./page/FriendshipGroup/Pingu.JSON"
-      }
     }
+  ],
+  "Hide": [
+{
+  "Side": 3,
+  "Chunk": 4,
+  "Color": "#d1b6a1",
+  "depth": 24,
+  "Icon": "./img/339d81abdcfa574123742f486057cbe4.png",
+  "Name": "貓箱",
+  "Tag": "CatBox",
+  "Event": {
+    "Page": "./page/FriendshipGroup/CatBox.JSON"
+  }
+},
+{
+"Side": 3,
+"Chunk": 1,
+"Color": "#d4b1ab",
+"depth": 24,
+"Icon": "./img/5e6a9a8ec28e4a2a001a673a50ac8f06.png",
+"Name": "紅茶",
+"Tag": "BlackTea",
+"Event": {
+"Page": "./page/FriendshipGroup/BlackTea.JSON"
+}
+},
+{
+"Side": 3,
+"Chunk": 3,
+"Color": "#a2d492",
+"depth": 24,
+"Icon": "./img/a464236b835088be1ee901cbeb1ad931.png",
+"Name": "小雪",
+"Tag": "Snow",
+"Event": {
+"Page": "./page/FriendshipGroup/Snow.JSON"
+}
+},
+{
+"Side": 3,
+"Chunk": 2,
+"Color": "#6588cf",
+"depth": 24,
+"Icon": "./img/a1c9439a3c06b54f40da14fb084a03c7.png",
+"Name": "企鵝",
+"Tag": "PinGu",
+"Event": {
+"Page": "./page/FriendshipGroup/Pingu.JSON"
+}
+}
   ]
 }
