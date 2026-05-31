@@ -1845,7 +1845,7 @@ document.addEventListener("DOMContentLoaded",  async function () {
 
             }else if(FinalInfo.Bubble === StartAtElement){
                 if(!PullUpInfo.PullUpType)
-                    PullUpDynamicBubbles(ClickOnIndex);
+                    PullUpDynamicBubbles(DynamicBubbles.length-1);
                 else if(PullUpInfo.PullUpType === 3 && !PullUpMoving)
                 {
                     if(ClickOnIndex !== PullUpInfo.ChoseToPullUpIndex){

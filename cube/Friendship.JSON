@@ -126,7 +126,9 @@
         "Page": "./page/FriendshipGroup/Sponge.JSON"
 
       }
-    },
+    }
+  ],
+  "Hide": [
     {
       "Side": 3,
       "Chunk": 4,
@@ -175,7 +177,5 @@
         "Page": "./page/FriendshipGroup/Pingu.JSON"
       }
     }
-  ],
-  "Hide": [
   ]
 }
