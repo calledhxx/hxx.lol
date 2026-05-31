@@ -22,31 +22,6 @@ let waitUntilLoad = function (){
     });
 }
 
-async function loadData(Path){
-    let Content = null;
-
-    try {
-        HTTPService.open("GET",Path);
-        HTTPService.send();
-        Content = JSON.parse(await waitUntilLoad());
-    } catch (err) {
-        await CreateDynamicBubbles(
-            "Notification",
-            [
-                {
-                    "Title": "好噁心的錯誤",
-                    "Content": `你...你...做了什麼？？竟然導致我的寶貝出現錯誤！... 噓！我聽到他奄奄一息的氣聲：「${err}」`
-                },
-                {
-                    "Content": "我們做個交易，要是你能將他說的那句話告訴 me@hxx.lol，這件事我們就當作沒發生過。哼！(還請多多見諒！)"
-                }
-            ]
-        );
-    }
-
-    return Content;
-}
-
 let Cube = {};
 
 const ControlButtons = [
@@ -189,6 +164,31 @@ let MusicInfo = {
 
 document.addEventListener("DOMContentLoaded",  async function () {
     setView();
+
+    async function loadData(Path){
+        let Content = null;
+
+        try {
+            HTTPService.open("GET",Path);
+            HTTPService.send();
+            Content = JSON.parse(await waitUntilLoad());
+        } catch (err) {
+            await CreateDynamicBubbles(
+                "Notification",
+                [
+                    {
+                        "Title": "好噁心的錯誤",
+                        "Content": `你...你...做了什麼？？竟然導致我的寶貝出現錯誤！... 噓！我聽到他奄奄一息的氣聲：「${err}」`
+                    },
+                    {
+                        "Content": "我們做個交易，要是你能將他說的那句話告訴 me@hxx.lol，這件事我們就當作沒發生過。哼！(還請多多見諒！)"
+                    }
+                ]
+            );
+        }
+
+        return Content;
+    }
 
     let ModuleFunction = {
         "Music-Next": async function (){
