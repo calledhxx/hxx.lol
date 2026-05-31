@@ -98,6 +98,18 @@
       "Event":{
         "Page":"./page/Style.JSON"
       }
+    },
+    {
+      "Side": 1,
+      "Chunk": 4,
+      "Color":"#55c999",
+      "depth":24,
+      "Icon": null,
+      "Name":"漫展",
+      "Tag":"FF46",
+      "Event":{
+        "Page":"./page/FF4626.JSON"
+      }
     }
   ]
 }
