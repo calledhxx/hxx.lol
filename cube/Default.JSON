@@ -63,18 +63,7 @@
       }
     },
 
-    {
-      "Side": 2,
-      "Chunk": 1,
-      "Color":"#ebad3b",
-      "depth":24,
-      "Icon": null,
-      "Name":"待辦事項",
-      "Tag":"Todo",
-      "Event":{
-        "Page":"./page/Todo.JSON"
-      }
-    },
+
     {
       "Side": 6,
       "Chunk": 4,
@@ -87,18 +76,7 @@
         "Page":"./page/Rock.JSON"
       }
     },
-    {
-      "Side": 4,
-      "Chunk": 3,
-      "Color":"#55c999",
-      "depth":24,
-      "Icon": null,
-      "Name":"江南風格",
-      "Tag":"Style",
-      "Event":{
-        "Page":"./page/Style.JSON"
-      }
-    },
+
     {
       "Side": 1,
       "Chunk": 4,
