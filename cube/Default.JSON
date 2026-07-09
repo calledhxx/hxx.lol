@@ -4,6 +4,18 @@
   "Buttons": [
     {
       "Side": 1,
+      "Chunk": 3,
+      "Color":"#d13333",
+      "depth":24,
+      "Icon": "./img/IMG_0537.GIF",
+      "Name":"展",
+      "Tag":"Darling",
+      "Event":{
+        "Page":"./page/MyDressUpDarling.JSON"
+      }
+    },
+    {
+      "Side": 1,
       "Chunk": 1,
       "Color":"#d13333",
       "depth":24,
