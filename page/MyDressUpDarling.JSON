@@ -4,7 +4,7 @@
       {
         "Title": "t",
         "Captain": "c",
-        "Photo": "./img/IMG_8731.JPEG"
+        "Photo": "./img/IMG_8731.jpeg"
       },
       {
         "Title": "t",
@@ -13,17 +13,115 @@
       }
     ]
   },
-    {
+  {
     "Photos": [
       {
         "Title": "t",
         "Captain": "c",
-        "Photo": "./img/IMG_8732.JPEG"
+        "Photo": "./img/IMG_8732.jpeg"
       },
       {
         "Title": "t",
         "Captain": "c",
         "Photo": "./img/IMG_8737.jpeg"
+      }
+    ]
+  },
+  {
+    "Photos": [
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8733.jpeg"
+      },
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8739.jpeg"
+      }
+    ]
+  },
+  {
+    "Photos": [
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8734.jpeg"
+      },
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8738.jpeg"
+      }
+    ]
+  },
+  {
+    "Photos": [
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8736.jpeg"
+      },
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8740.jpeg"
+      }
+    ]
+  },
+  {
+    "Photos": [
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8742.jpeg"
+      },
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8744.jpeg"
+      }
+    ]
+  },
+  {
+    "Photos": [
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8748.jpeg"
+      },
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8751.jpeg"
+      }
+    ]
+  },
+  {
+    "Photos": [
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8749.jpeg"
+      },
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8752.jpeg"
+      }
+    ]
+  },
+  {
+    "Photos": [
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8750.jpeg"
+      },
+      {
+        "Title": "t",
+        "Captain": "c",
+        "Photo": "./img/IMG_8753.jpeg"
       }
     ]
   }
